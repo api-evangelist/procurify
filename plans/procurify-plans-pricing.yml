@@ -1,0 +1,65 @@
+name: Procurify Plans and Pricing
+description: >
+  Procurify offers flexible, modular pricing based on features and support
+  needs. Pricing is quote-based and not publicly listed; customers start with
+  the core Procurify Platform (Purchasing) and add capabilities as needed.
+  API access is available to customers and requires contacting a Procurify
+  representative to obtain OAuth 2.0 client credentials.
+specificationVersion: "0.1"
+url: https://www.procurify.com/pricing/
+plans:
+  - name: Procurify Platform + Purchasing
+    description: >
+      Base platform offering that includes purchase requests and approvals,
+      vendor management and catalogs, purchase orders, receiving, approvals
+      workflows, budget management, analytics and spend insights, integrations
+      (accounting software, ERP systems, PunchOut catalogs), mobile app, and
+      24/5 support with dedicated Customer Success Manager.
+    type: custom
+    pricing:
+      model: quote-based
+      notes: >
+        Pricing is based on features and support needs. No per-user pricing.
+        Implementation fees apply as a one-time cost. Contact sales for quote.
+    features:
+      - Purchase requests and approvals workflows
+      - Vendor management and vendor catalogs
+      - Purchase orders and receiving
+      - Budget management and spend visibility
+      - Analytics and spend insights
+      - Accounting software integrations (NetSuite, QuickBooks)
+      - PunchOut catalog support (Amazon Business)
+      - Mobile app (iOS and Android)
+      - 24/5 support with dedicated Success Manager
+      - REST API access (requires setup with Procurify representative)
+    addons:
+      - name: Accounts Payable
+        description: >
+          Invoice processing, three-way matching, bill payments, and AP
+          automation capabilities.
+      - name: Contracts
+        description: >
+          Contract upload, spend tracking against contracts, and renewal alerts.
+      - name: Expense and Card
+        description: >
+          Receipt capture, expense requests, virtual and physical spending
+          cards for employees.
+  - name: API Access
+    description: >
+      API access is available as part of all Procurify platform subscriptions.
+      Customers must contact a Procurify representative to enable API access
+      and receive OAuth 2.0 client credentials. Procurify does not offer
+      self-service API key generation outside of the Settings > Integrations
+      workflow available to users with the appropriate permissions.
+    type: included
+    pricing:
+      model: included-with-platform
+      notes: >
+        No separate API pricing tier. API access is bundled into the platform
+        subscription; Procurify does not support webhooks.
+    features:
+      - OAuth 2.0 client credentials authentication
+      - REST API with JSON request and response bodies
+      - Access to all documented API resource endpoints
+      - OpenAPI specification available for testing
+      - In-house technical team support for API onboarding

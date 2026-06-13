@@ -1,0 +1,82 @@
+aid: procurify
+name: Procurify
+description: >
+  Procurify is an intelligent spend management and procure-to-pay platform that
+  provides organizations with unprecedented visibility and control over business
+  spend. The platform offers a RESTful API that enables developers to integrate
+  procurement workflows — including purchase requests, approvals, purchase
+  orders, vendor management, and budget tracking — into their own systems and
+  processes. Authentication is handled via OAuth 2.0 client credentials flow,
+  with tokens scoped to the requesting domain and user. The API supports core
+  spend management resources such as requisitions, purchase orders, accounts
+  payable, receipts, account codes, vendors, and catalog items, all returning
+  and consuming JSON. Procurify does not support webhooks; all integrations are
+  pull-based through the REST endpoints documented at developer.procurify.com.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/procurify/refs/heads/main/apis.yml
+created: 2026-06-13
+modified: 2026-06-13
+specificationVersion: "0.19"
+tags:
+  - Spend Management
+  - Procurement
+  - Purchase Orders
+  - Accounts Payable
+  - Vendor Management
+  - Budget Tracking
+  - Procure-to-Pay
+  - ERP Integration
+apis:
+  - aid: procurify:procurify-api
+    name: Procurify API
+    description: >
+      RESTful API for managing spend management workflows including purchase
+      requests, approvals, purchase orders, vendor management, accounts
+      payable, receipts, budget tracking, and catalog management.
+    humanURL: https://developer.procurify.com/
+    baseURL: https://api.procurify.com/
+    tags:
+      - Spend Management
+      - Purchase Orders
+      - Procurement
+      - Accounts Payable
+      - Vendor Management
+    properties:
+      - type: Documentation
+        url: https://developer.procurify.com/
+      - type: OpenAPI
+        url: https://developer.procurify.com/openapi.json
+    contact:
+      - FN: Procurify Support
+        email: support@procurify.com
+common:
+  - type: Website
+    url: https://www.procurify.com/
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: GitHubOrg
+    url: https://github.com/procurify
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/procurify
+  - type: Blog
+    url: https://www.procurify.com/blog/
+  - type: Pricing
+    url: https://www.procurify.com/pricing/
+  - type: StatusPage
+    url: https://status.procurify.com/
+  - type: X
+    url: https://x.com/procurify
+  - type: Plans
+    url: plans/procurify-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/procurify-rate-limits.yml
+  - type: FinOps
+    url: finops/procurify-finops.yml
+  - type: KnowledgeBase
+    url: https://success.procurify.com/en/articles/9002277-does-procurify-offer-api
+  - type: Integrations
+    url: https://www.procurify.com/procure-to-pay/integrations/api/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

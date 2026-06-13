@@ -1,0 +1,103 @@
+name: Procurify FinOps Framework
+description: >
+  Procurify is an intelligent spend management platform aligned with FinOps
+  principles for procurement and operational expenditure (OpEx) visibility and
+  control. The platform enables organizations to implement FOCUS-aligned spend
+  tracking by providing structured data on purchase orders, vendor spend,
+  budget actuals versus commitments, and accounts payable. Its REST API exposes
+  these resources programmatically, enabling integration into FinOps toolchains
+  and cloud financial management workflows.
+specificationVersion: "1.0"
+url: https://www.procurify.com/
+focusVersion: "1.0"
+capabilities:
+  - name: Spend Visibility
+    description: >
+      Procurify provides real-time visibility into business spend across
+      departments, locations, vendors, and account codes. The API exposes
+      purchase orders, requisitions, order items, and AP bills enabling
+      organizations to aggregate and analyze spend data across the enterprise.
+    focusDimensions:
+      - BilledCost
+      - ListCost
+      - EffectiveCost
+    apiEndpoints:
+      - /api/v3/purchase-orders/
+      - /api/v3/requisitions/
+      - /api/v3/ap/bills/
+      - /api/v3/order-items/
+  - name: Budget Management
+    description: >
+      Procurify supports budget allocation by department and account code,
+      with actuals tracked against approved budgets. This enables commitment
+      tracking and encumbrance accounting aligned with FinOps budgeting
+      capabilities.
+    focusDimensions:
+      - CommittedCost
+      - BilledCost
+    apiEndpoints:
+      - /api/v3/account-codes/
+      - /api/v3/departments/
+      - /api/v3/accounts/
+  - name: Vendor Management
+    description: >
+      Vendor master data, spend by vendor, and vendor catalog pricing are
+      accessible via API. This supports FinOps rate optimization practices
+      by enabling teams to analyze vendor spend and negotiate better terms.
+    focusDimensions:
+      - ListUnitPrice
+      - ContractedUnitPrice
+    apiEndpoints:
+      - /api/v3/vendors/
+      - /api/v3/catalog/
+  - name: Accounts Payable and Payment Tracking
+    description: >
+      The AP module tracks bills, payment methods, and payment history,
+      providing the data needed for cash flow forecasting and period-close
+      reconciliation within FinOps workflows.
+    focusDimensions:
+      - BilledCost
+      - EffectiveCost
+    apiEndpoints:
+      - /api/v3/ap/bills/
+      - /api/v3/ap/payments/
+      - /api/v3/ap/payment-methods/
+  - name: Receipt and Expense Tracking
+    description: >
+      Receipt line items and expense transactions are tracked through the
+      Receipts and Public transaction endpoints, enabling reconciliation of
+      actuals against purchase orders for complete procure-to-pay FinOps cycles.
+    focusDimensions:
+      - BilledCost
+    apiEndpoints:
+      - /api/v3/receipts/
+      - /api/v3/public/transactions/
+domains:
+  - name: Procurement Spend
+    description: OpEx procurement spend including goods and services purchased via PO
+    type: operational-expenditure
+  - name: Vendor Spend
+    description: Spend aggregated and tracked at the vendor level
+    type: operational-expenditure
+  - name: Accounts Payable
+    description: Invoices and payments to vendors for goods and services received
+    type: operational-expenditure
+integrations:
+  - name: NetSuite
+    type: accounting-erp
+    description: >
+      Procurify integrates with Oracle NetSuite for GL account code sync,
+      PO export, and bill payment reconciliation.
+  - name: QuickBooks
+    type: accounting
+    description: >
+      Integration with QuickBooks Online for expense and AP data sync.
+  - name: Amazon Business PunchOut
+    type: catalog
+    description: >
+      PunchOut catalog integration enabling purchases from Amazon Business
+      within the Procurify procurement workflow.
+  - name: Slack
+    type: collaboration
+    description: >
+      Notifications and approval actions via Slack integration.

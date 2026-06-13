@@ -1,0 +1,47 @@
+name: Procurify API Rate Limits
+description: >
+  Procurify does not publicly disclose specific numerical rate limits in its
+  developer documentation. The documentation notes that requests which are too
+  large or take too long may result in timeouts, and that repeated offenses can
+  lead to suspension of API access. Customers should contact support if they
+  experience timeout issues. Tokens issued via the OAuth 2.0 client credentials
+  flow expire after 24 hours and must be refreshed.
+specificationVersion: "0.1"
+url: https://developer.procurify.com/
+limits:
+  - name: Token Expiry
+    description: >
+      OAuth 2.0 bearer tokens issued via the client credentials grant expire
+      after 24 hours. Clients must request a new token upon expiry.
+    scope: token
+    window: 86400
+    windowUnit: seconds
+    limit: 1
+    notes: >
+      Tokens are scoped to domain and email. A new client credentials request
+      is required for each 24-hour period or whenever the token expires.
+  - name: Request Size and Timeout
+    description: >
+      Requests that are too large or time out will be flagged. Repeated
+      timeouts may result in suspension of API access. Procurify advises
+      contacting support immediately if large requests cause timeout issues.
+    scope: request
+    limit: unspecified
+    notes: >
+      No specific byte or row limit is published. Developers should paginate
+      large data sets and avoid bulk requests that may exceed server limits.
+  - name: General Rate Limiting
+    description: >
+      Procurify does not publicly publish specific rate limit thresholds
+      (requests per second, per minute, or per day). Limits are enforced
+      server-side. Developers experiencing throttling should contact
+      support@procurify.com for guidance.
+    scope: api
+    limit: unspecified
+    notes: >
+      Contact support@procurify.com to understand applicable limits for
+      your integration use case.
+contact:
+  - FN: Procurify Support
+    email: support@procurify.com
+    url: https://success.procurify.com/
