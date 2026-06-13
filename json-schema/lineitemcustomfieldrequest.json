@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LineItemCustomFieldRequest",
+  "type": "object",
+  "description": "Serializer used when custom fields are provided in a request. E.g JSON request with:\n\"custom_fields\": [\n    {\n    \"custom_field_name\": \"string\",\n    \"custom_field_value\": \"string\"\n    },\n    ...\n]",
+  "properties": {
+    "custom_field_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "custom_field_value": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "custom_field_name",
+    "custom_field_value"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "path": "/api/v3/ap/bills/mark-as-paid/",
+  "method": "POST",
+  "operationId": "ap_bills_mark_as_paid_create",
+  "summary": "Mark Bills as Paid",
+  "tags": [
+    "ap"
+  ],
+  "requestExamples": {
+    "ExampleInput": {
+      "bill_uuids": [
+        "3cda5ef4ac1a401bb6619e4a5d87c10d",
+        "c2f2ad5bbbf345f3bdc66d1a18fbbec5"
+      ],
+      "payment_date": "2025-01-21"
+    }
+  }
+}

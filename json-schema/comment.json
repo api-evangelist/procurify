@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Comment",
+  "type": "object",
+  "properties": {
+    "userprofile": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UserSummary"
+        }
+      ],
+      "readOnly": true
+    },
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "comment": {
+      "type": "string",
+      "readOnly": true
+    },
+    "submit_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Date/time submitted"
+    }
+  }
+}

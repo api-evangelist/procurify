@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PermissionRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "codename": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "tier": {
+      "type": "string",
+      "description": "Get the tier for this permission from PermissionMeta.\nReturns \"Basic\" if PermissionMeta doesn't exist, otherwise returns the tier label (\"Basic\" or \"Pro\").",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "codename"
+  ]
+}

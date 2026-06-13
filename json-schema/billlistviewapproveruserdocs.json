@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BillListViewApproverUserDocs",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "lastName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "profile_image": {
+      "type": "string",
+      "nullable": true
+    },
+    "approval_delegatee": {
+      "$ref": "#/components/schemas/ApprovalDelegateeSlimDocs"
+    }
+  },
+  "required": [
+    "approval_delegatee"
+  ]
+}

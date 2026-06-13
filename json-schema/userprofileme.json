@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserProfileMe",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "domains": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DomainSwitching"
+        }
+      ],
+      "readOnly": true
+    },
+    "headquarter_logo": {
+      "type": "string",
+      "readOnly": true
+    },
+    "systemaccess_cache": {},
+    "approval_delegatee": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ApprovalDelegateeDocs"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true,
+      "type": "object"
+    },
+    "is_approval_delegatee": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "department": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DepartmentLocationRead"
+        }
+      ],
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "readOnly": true,
+      "nullable": true
+    },
+    "firstName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "lastName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 254
+    },
+    "position": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 100
+    },
+    "phone": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 30
+    },
+    "address": {
+      "type": "string",
+      "nullable": true
+    },
+    "notifications": {
+      "type": "boolean"
+    },
+    "is_active": {
+      "type": "boolean"
+    },
+    "pending_invite": {
+      "type": "boolean"
+    },
+    "role": {
+      "nullable": true,
+      "minimum": -2147483648,
+      "maximum": 2147483647,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/RoleEnum"
+        },
+        {
+          "$ref": "#/components/schemas/NullEnum"
+        }
+      ],
+      "type": "integer"
+    },
+    "mobile": {
+      "type": "boolean"
+    },
+    "profile_image": {
+      "type": "string",
+      "nullable": true
+    },
+    "slack_user_id": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "is_sso_enabled": {
+      "type": "boolean"
+    },
+    "last_changed_by": {
+      "type": "integer",
+      "nullable": true,
+      "title": "Last changed by user"
+    },
+    "user": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "email",
+    "systemaccess_cache",
+    "user"
+  ]
+}

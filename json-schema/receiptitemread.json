@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ReceiptItemRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "pass_quantity": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,10}(?:\\.\\d{0,5})?$"
+    },
+    "fail_quantity": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,10}(?:\\.\\d{0,5})?$"
+    },
+    "order_item": {
+      "type": "integer"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "is_edited": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "created_by": {
+      "$ref": "#/components/schemas/SimpleUserProfile"
+    },
+    "total_quantity": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,10}(?:\\.\\d{0,5})?$",
+      "nullable": true,
+      "readOnly": true
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date",
+      "nullable": true
+    }
+  },
+  "required": [
+    "created_by",
+    "order_item"
+  ]
+}

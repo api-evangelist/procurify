@@ -1,0 +1,22 @@
+{
+  "path": "/api/v2/ap/vendor-payment-methods/",
+  "method": "POST",
+  "operationId": "ap_vendor_payment_methods_create",
+  "summary": "Create Vendor Payment Method",
+  "tags": [
+    "ap"
+  ],
+  "requestExamples": {
+    "VendorPaymentMethodPayloadExample": {
+      "vendor": 10,
+      "name": "Technology Inc ACH 98G395E",
+      "type": 2,
+      "data": {
+        "company_name": "ABC Technology Inc",
+        "account_number": "****0021",
+        "routing_number": "****7892"
+      },
+      "currency": 3
+    }
+  }
+}

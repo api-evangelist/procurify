@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MasterLogger",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "user": {
+      "$ref": "#/components/schemas/UserSummary"
+    },
+    "next_approver": {
+      "$ref": "#/components/schemas/UserSummary"
+    },
+    "next_approvers": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "nextApprover": {
+      "$ref": "#/components/schemas/UserSummary"
+    },
+    "approval_delegation": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ApprovalDelegationRead"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "dateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "action": {
+      "nullable": true,
+      "minimum": -2147483648,
+      "maximum": 2147483647,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/ActionEnum"
+        },
+        {
+          "$ref": "#/components/schemas/NullEnum"
+        }
+      ],
+      "type": "integer"
+    },
+    "line_qty_pass": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,10}(?:\\.\\d{0,5})?$",
+      "nullable": true
+    },
+    "line_qty_fail": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,10}(?:\\.\\d{0,5})?$",
+      "nullable": true
+    },
+    "order": {
+      "type": "integer",
+      "nullable": true
+    },
+    "lineItem": {
+      "type": "integer",
+      "nullable": true
+    },
+    "PO": {
+      "type": "integer",
+      "title": "Procurify PO Number",
+      "nullable": true
+    },
+    "inventoryItem": {
+      "type": "integer",
+      "nullable": true
+    },
+    "stocking_parent": {
+      "type": "integer",
+      "nullable": true
+    }
+  },
+  "required": [
+    "approval_delegation",
+    "nextApprover",
+    "next_approver",
+    "user"
+  ]
+}

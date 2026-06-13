@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/catalog-items/",
+  "method": "GET",
+  "operationId": "catalog_items_list",
+  "summary": "Get All Catalog Items",
+  "tags": [
+    "catalog"
+  ]
+}

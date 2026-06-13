@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/users/{id}/",
+  "method": "PUT",
+  "operationId": "users_update",
+  "summary": "Update User",
+  "tags": [
+    "users"
+  ]
+}

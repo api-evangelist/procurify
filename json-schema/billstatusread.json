@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BillStatusRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "user": {
+      "$ref": "#/components/schemas/UserSummary"
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/BillStatusEnum"
+        }
+      ],
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "bill": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "bill",
+    "date",
+    "status",
+    "user"
+  ]
+}

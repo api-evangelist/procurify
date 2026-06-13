@@ -1,0 +1,181 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PatchedOptimizedVendorRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the vendor",
+      "maxLength": 150
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "addressLineOne": {
+      "type": "string",
+      "nullable": true,
+      "title": "Address line 1",
+      "description": "First line of address",
+      "maxLength": 300
+    },
+    "addressLineTwo": {
+      "type": "string",
+      "nullable": true,
+      "title": "Address line 2",
+      "description": "Second line of address",
+      "maxLength": 300
+    },
+    "postalCode": {
+      "type": "string",
+      "nullable": true,
+      "title": "Postal Code",
+      "description": "Postal or Zip code of the vendor",
+      "maxLength": 20
+    },
+    "city": {
+      "type": "string",
+      "nullable": true,
+      "description": "City of the vendor",
+      "maxLength": 50
+    },
+    "state_province": {
+      "type": "string",
+      "nullable": true,
+      "title": "State/Province",
+      "description": "State or Province of the vendor",
+      "maxLength": 40
+    },
+    "country": {
+      "type": "string",
+      "nullable": true,
+      "description": "Country of the vendor",
+      "maxLength": 80
+    },
+    "phoneOne": {
+      "type": "string",
+      "nullable": true,
+      "description": "Primary phone no. of the vendor",
+      "maxLength": 20
+    },
+    "phoneTwo": {
+      "type": "string",
+      "nullable": true,
+      "description": "Secondary phone no. of the vendor",
+      "maxLength": 20
+    },
+    "fax": {
+      "type": "string",
+      "nullable": true,
+      "description": "Fax no. of the vendor",
+      "maxLength": 20
+    },
+    "email": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "email",
+        "minLength": 1
+      }
+    },
+    "comments": {
+      "type": "string",
+      "nullable": true,
+      "description": "Notes about the vendor"
+    },
+    "contact": {
+      "type": "string",
+      "nullable": true,
+      "description": "Contact person of the vendor",
+      "maxLength": 50
+    },
+    "url": {
+      "type": "string",
+      "nullable": true,
+      "description": "Website of the vendor",
+      "maxLength": 200
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "External id of the vendor",
+      "maxLength": 100
+    },
+    "currency": {
+      "type": "integer",
+      "nullable": true
+    },
+    "payment_term_ref": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaymentTermRequest"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "shipping_term_ref": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ShippingTermRequest"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "payment_method_ref": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaymentMethodRequest"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "shipping_method_ref": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ShippingMethodRequest"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "tax": {
+      "type": "integer",
+      "nullable": true
+    },
+    "type": {
+      "$ref": "#/components/schemas/VendorTypeEnum"
+    },
+    "default_payment_method": {
+      "type": "integer",
+      "nullable": true
+    },
+    "is_1099_eligible": {
+      "type": "boolean",
+      "nullable": true,
+      "title": "1099 Eligible?"
+    },
+    "overall_score": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,2}(?:\\.\\d{0,3})?$",
+      "nullable": true
+    },
+    "is_auto_email_po_enabled": {
+      "type": "boolean"
+    },
+    "po_pdf_labels": {
+      "type": "string",
+      "description": "Placeholder for a KVStore value",
+      "maxLength": 200
+    },
+    "email_configurations": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/EmailConfigurationRequest"
+      }
+    }
+  }
+}

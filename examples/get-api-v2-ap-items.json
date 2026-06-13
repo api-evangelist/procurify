@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/ap/items/",
+  "method": "GET",
+  "operationId": "ap_items_list",
+  "summary": "Get Unbilled/Billed Items",
+  "tags": [
+    "ap"
+  ]
+}

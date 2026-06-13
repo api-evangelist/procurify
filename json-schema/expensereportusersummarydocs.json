@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExpenseReportUserSummaryDocs",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "firstName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "lastName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 254
+    },
+    "position": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 100
+    },
+    "profile_image": {
+      "type": "string",
+      "nullable": true
+    },
+    "approval_delegatee": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ApprovalDelegateeDocs"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "expected_return_date": {
+      "type": "string",
+      "format": "date",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "approval_delegatee",
+    "email"
+  ]
+}

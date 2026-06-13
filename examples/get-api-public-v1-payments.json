@@ -1,0 +1,9 @@
+{
+  "path": "/api/public/v1/payments/",
+  "method": "GET",
+  "operationId": "public_v1_payments_list",
+  "summary": "List Payments",
+  "tags": [
+    "public"
+  ]
+}

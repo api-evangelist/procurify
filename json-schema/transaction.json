@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Transaction",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "note": {
+      "type": "string",
+      "description": "User provided additional text about this transaction"
+    },
+    "vendor": {
+      "$ref": "#/components/schemas/TransactionVendor"
+    },
+    "currency": {
+      "type": "string",
+      "description": "The currency that this transaction was handled in"
+    },
+    "amount": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The value in the base unit of currency that this transaction was charged at"
+    },
+    "vendor_currency": {
+      "type": "string",
+      "description": "The currency this transaction was created"
+    },
+    "vendor_amount": {
+      "type": "string",
+      "nullable": true,
+      "readOnly": true,
+      "description": "The value in the base unit of currency that this transaction was charged at by the vendor"
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TransactionStatusEnum"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true,
+      "description": "\n* capture: Deducting purchase amount from account balance\n* precapture: Funds reserved due to card usage\n* refund: Refunding the purchase amount back to account balance",
+      "type": "object"
+    },
+    "authorization_status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AuthorizationStatusEnum"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true,
+      "description": "\n* reversed: Previously approved and held funds have been released\n* pending: Funds have been approved for a transaction and are currently held\n* closed: Look at `status` for more details, the authorization is no longer relevant",
+      "type": "object"
+    },
+    "authorization_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date that this transaction was initially authorized at"
+    },
+    "transaction_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date that this transaction was captured"
+    },
+    "allocation_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date that this transaction was allocated to a fund"
+    },
+    "card": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TransationCard"
+        }
+      ],
+      "description": "The card this transaction was created with"
+    },
+    "receipt_attachments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "readOnly": true,
+      "description": "User provided images of receipts about this transactions"
+    },
+    "fund": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TransactionFund"
+        }
+      ],
+      "description": "The fund this transaction is allocated to"
+    },
+    "account": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TransactionAccount"
+        }
+      ],
+      "nullable": true,
+      "description": "The chart-of-accounts entry assigned to this transaction by the cardholder or reconciler/accountant. Null when no account has been assigned.",
+      "type": "object"
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TransactionTypeEnum"
+        }
+      ],
+      "readOnly": true,
+      "description": "\n* spend: A transaction that has occurred on the issuing network\n* credit: A transaction about allocating fund usage from selecting a fund in Procurify\n"
+    },
+    "reconciliation_status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReconciliationStatusEnum"
+        }
+      ],
+      "readOnly": true,
+      "description": "\n* pending: Transaction has not yet been reconciled\n* reviewed: Transaction has been reviewed during reconciliation"
+    },
+    "cardholder": {
+      "$ref": "#/components/schemas/TransactionCardholder"
+    },
+    "linked_authorization": {
+      "type": "string",
+      "description": "Any transactions which share the same linked_authorization value are part of the same lifecycle for a transaction"
+    },
+    "custom_fields": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TransactionCustomField"
+      },
+      "description": "A list of any custom fields provided for this transaction"
+    }
+  },
+  "required": [
+    "account",
+    "allocation_datetime",
+    "authorization_datetime",
+    "card",
+    "cardholder",
+    "currency",
+    "custom_fields",
+    "fund",
+    "id",
+    "linked_authorization",
+    "note",
+    "transaction_datetime",
+    "vendor",
+    "vendor_currency"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ApprovalWorkflow",
+  "type": "object",
+  "properties": {
+    "is_complete": {
+      "type": "boolean"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "can_self_approve": {
+      "type": "boolean"
+    },
+    "can_peer_review": {
+      "type": "boolean"
+    },
+    "current_step": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ApprovalWorkflowCurrentStep"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "next_step": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ApprovalWorkflowNextStep"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    }
+  },
+  "required": [
+    "can_peer_review",
+    "can_self_approve",
+    "current_step",
+    "is_complete",
+    "next_step",
+    "updated_at"
+  ]
+}

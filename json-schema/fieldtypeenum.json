@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FieldTypeEnum",
+  "enum": [
+    "t",
+    "a",
+    "i",
+    "f",
+    "b",
+    "m",
+    "d",
+    "h"
+  ],
+  "type": "string",
+  "description": "* `t` - Text\n* `a` - Large Text Field\n* `i` - Integer\n* `f` - Floating point decimal\n* `b` - Boolean (Yes/No)\n* `m` - Dropdown Choices\n* `d` - Date\n* `h` - Date Time"
+}

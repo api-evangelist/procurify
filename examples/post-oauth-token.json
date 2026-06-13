@@ -1,0 +1,23 @@
+{
+  "path": "/oauth/token",
+  "method": "POST",
+  "operationId": "api_account_code_retrieve",
+  "summary": "Authenticate with OAuth",
+  "tags": [
+    "oauth"
+  ],
+  "requestExample": {
+    "client_id": "~your_client_id~",
+    "client_secret": "~your_client_secret~",
+    "audience": "https://api.procurify.com/",
+    "grant_type": "client_credentials"
+  },
+  "responseExamples": {
+    "200": {
+      "access_token": "~your-access-token~",
+      "scope": "urn:procurify-api:domain:~your_domain~ urn:procurify-api:email:~your_email~",
+      "expires_in": 86400,
+      "token_type": "Bearer"
+    }
+  }
+}

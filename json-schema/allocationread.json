@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AllocationRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "amount": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$",
+      "title": "Allocated Amount"
+    },
+    "account": {
+      "$ref": "#/components/schemas/SpendAccountRead"
+    }
+  },
+  "required": [
+    "account",
+    "amount"
+  ]
+}

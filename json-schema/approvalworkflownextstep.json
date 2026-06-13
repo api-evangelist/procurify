@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ApprovalWorkflowNextStep",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "integer"
+    },
+    "step_number": {
+      "type": "integer"
+    },
+    "group_id": {
+      "type": "integer"
+    },
+    "group_name": {
+      "type": "string"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": {}
+      }
+    }
+  },
+  "required": [
+    "group_id",
+    "group_name",
+    "options",
+    "status",
+    "step_number"
+  ]
+}

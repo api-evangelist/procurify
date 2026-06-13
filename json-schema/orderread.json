@@ -1,0 +1,201 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OrderRead",
+  "type": "object",
+  "properties": {
+    "num": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "branch": {
+      "$ref": "#/components/schemas/Branch"
+    },
+    "user": {
+      "$ref": "#/components/schemas/UserSummary"
+    },
+    "department": {
+      "$ref": "#/components/schemas/DepartmentSummary"
+    },
+    "currency": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CurrencySummary"
+        }
+      ],
+      "readOnly": true
+    },
+    "total_cost_in_base_currency": {
+      "type": "number",
+      "format": "float",
+      "readOnly": true
+    },
+    "logs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MasterLogger"
+      }
+    },
+    "item_count": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "ip_address": {
+      "type": "string",
+      "nullable": true
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "description": {
+      "type": "string",
+      "nullable": true
+    },
+    "dateRequired": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dateModified": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "lineCount": {
+      "type": "integer",
+      "maximum": 2147483647,
+      "minimum": -2147483648,
+      "nullable": true
+    },
+    "purchasedCount": {
+      "type": "integer",
+      "maximum": 2147483647,
+      "minimum": -2147483648
+    },
+    "totalPrice": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,14}(?:\\.\\d{0,2})?$",
+      "nullable": true
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/OrderStatusEnum"
+        }
+      ],
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "next_approver": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UserSummary"
+        }
+      ],
+      "readOnly": true
+    },
+    "next_approvers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/UserSummary"
+      }
+    },
+    "approval_delegatee": {
+      "type": "integer",
+      "nullable": true
+    },
+    "punchout_group": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PunchOutReadDocs"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true,
+      "type": "object"
+    },
+    "punchout_shipping_address": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AddressDocs"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true,
+      "type": "object"
+    },
+    "punchout_items_rejected": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "punchout_supplier_name": {
+      "type": "string",
+      "readOnly": true,
+      "nullable": true
+    },
+    "punchout_supplier_icon": {
+      "type": "string",
+      "readOnly": true,
+      "nullable": true
+    },
+    "punchout_vendor_reference": {
+      "type": "integer",
+      "nullable": true,
+      "readOnly": true
+    },
+    "punchout_is_retriable": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "punchout_order_purchase_order_id": {
+      "type": "integer",
+      "readOnly": true,
+      "nullable": true
+    },
+    "has_blanket_order_items": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "approval_workflow": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ApprovalWorkflow"
+        }
+      ],
+      "readOnly": true
+    },
+    "denial_reason": {
+      "nullable": true,
+      "minimum": 0,
+      "maximum": 4294967295,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/DenialReasonEnum"
+        },
+        {
+          "$ref": "#/components/schemas/NullEnum"
+        }
+      ],
+      "type": "integer"
+    },
+    "denial_comment": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 300
+    }
+  },
+  "required": [
+    "branch",
+    "dateRequired",
+    "department",
+    "logs",
+    "next_approvers",
+    "user",
+    "uuid"
+  ]
+}

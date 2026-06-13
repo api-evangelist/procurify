@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CatalogItemReadSerializerWithQuantity",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "image": {
+      "type": "string"
+    },
+    "unitType": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "pref_vendor": {
+      "$ref": "#/components/schemas/VendorRead"
+    },
+    "account_code": {
+      "$ref": "#/components/schemas/AccountCodeRead"
+    },
+    "internalSKU": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "description": {
+      "type": "string",
+      "nullable": true
+    },
+    "product_url": {
+      "type": "string",
+      "nullable": true
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencySummary"
+    },
+    "price": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$"
+    },
+    "rfo_lock": {
+      "type": "boolean"
+    },
+    "departments": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "readOnly": true
+    },
+    "custom_fields": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CustomFieldValueRead"
+      },
+      "readOnly": true
+    },
+    "requested_count": {
+      "type": "integer",
+      "maximum": 2147483647,
+      "minimum": -2147483648
+    },
+    "last_requested_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "selected_account": {
+      "type": "object",
+      "additionalProperties": {},
+      "readOnly": true
+    },
+    "quantity": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "account_code",
+    "currency",
+    "name",
+    "pref_vendor",
+    "quantity"
+  ]
+}

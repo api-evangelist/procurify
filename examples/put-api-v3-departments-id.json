@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/departments/{id}/",
+  "method": "PUT",
+  "operationId": "departments_update",
+  "summary": "Update Department",
+  "tags": [
+    "departments"
+  ]
+}

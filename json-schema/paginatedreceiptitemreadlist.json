@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaginatedReceiptItemReadList",
+  "type": "object",
+  "properties": {
+    "pagination": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "example": 10
+        },
+        "next": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": null
+        },
+        "previous": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": null
+        },
+        "page_size": {
+          "type": "integer",
+          "example": 10
+        },
+        "num_pages": {
+          "type": "integer",
+          "example": 1
+        },
+        "current_page": {
+          "type": "integer",
+          "example": 1
+        }
+      }
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ReceiptItemRead"
+      }
+    }
+  }
+}

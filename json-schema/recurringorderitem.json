@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RecurringOrderItem",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "frequency": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FrequencyEnum"
+        }
+      ],
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "duration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DurationEnum"
+        }
+      ],
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "duration_quantity": {
+      "type": "integer",
+      "maximum": 4294967295,
+      "minimum": 1,
+      "format": "int64"
+    },
+    "recurring_price": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$"
+    },
+    "periods_count": {
+      "type": "integer",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "duration",
+    "duration_quantity",
+    "frequency",
+    "recurring_price"
+  ]
+}

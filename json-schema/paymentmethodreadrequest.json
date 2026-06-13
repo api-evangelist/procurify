@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentMethodReadRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaymentMethodTypeEnum"
+        }
+      ],
+      "title": "Payment Method",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "data": {},
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRequest"
+    }
+  },
+  "required": [
+    "currency",
+    "data"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentSimpleDocs",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "user": {
+      "type": "integer",
+      "title": "Payment User"
+    },
+    "approver": {
+      "type": "integer",
+      "nullable": true,
+      "title": "Current Approver"
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaymentStatusEnum"
+        }
+      ],
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "currency": {
+      "type": "integer"
+    },
+    "amount": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$"
+    },
+    "payment_method": {
+      "type": "integer",
+      "nullable": true
+    },
+    "payment_date": {
+      "type": "string",
+      "format": "date",
+      "nullable": true
+    },
+    "memo": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "reference_number": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "is_processed": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "currency",
+    "user"
+  ]
+}

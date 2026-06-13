@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InviteFunctionalUserRequest",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "minLength": 1
+    },
+    "send_invitation_email": {
+      "type": "boolean",
+      "default": true
+    },
+    "first_name": {
+      "type": "string",
+      "default": ""
+    },
+    "last_name": {
+      "type": "string",
+      "default": ""
+    },
+    "phone": {
+      "type": "string",
+      "default": ""
+    },
+    "position": {
+      "type": "string",
+      "default": ""
+    },
+    "role_id": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0
+    },
+    "all_locations": {
+      "type": "boolean",
+      "default": false
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/LocationIdValidationSerializersRequest"
+      },
+      "default": []
+    },
+    "home_department": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0
+    },
+    "home_location": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0
+    }
+  },
+  "required": [
+    "email"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/purchase_order/revise/{procurify_PO}/",
+  "method": "PUT",
+  "operationId": "purchase_order_revise_update",
+  "summary": "Revise a Purchase Order",
+  "tags": [
+    "purchase-orders"
+  ]
+}

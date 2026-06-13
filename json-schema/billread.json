@@ -1,0 +1,312 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BillRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "user": {
+      "$ref": "#/components/schemas/UserSummary"
+    },
+    "vendor": {
+      "$ref": "#/components/schemas/VendorRead"
+    },
+    "approval_chain": {
+      "type": "integer",
+      "readOnly": true,
+      "nullable": true
+    },
+    "approver": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ApproverRead"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ItemReadSerializer_v2"
+      }
+    },
+    "costs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BillCostRead"
+      }
+    },
+    "invoice_attachments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Attachment"
+      }
+    },
+    "bill_statuses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BillStatusRead"
+      }
+    },
+    "currency": {
+      "$ref": "#/components/schemas/Currency"
+    },
+    "comments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Comment"
+      },
+      "readOnly": true
+    },
+    "version_choices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/VersionChoicesDocs"
+      },
+      "readOnly": true
+    },
+    "tax_amount": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "inclusive_tax_amount": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "exclusive_tax_amount": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "subtotal_cost": {
+      "type": "number",
+      "format": "double",
+      "description": "This amount does not include any tax or shipping_amount",
+      "readOnly": true
+    },
+    "total_cost": {
+      "type": "number",
+      "format": "double",
+      "description": "This amount should not contain any tax or shipping, but include bill cost",
+      "readOnly": true
+    },
+    "total_cost_with_tax": {
+      "type": "number",
+      "format": "double",
+      "description": "Make sure full tax amount is added",
+      "readOnly": true
+    },
+    "converted_total_cost": {
+      "type": "number",
+      "format": "double",
+      "description": "Total cost converted to base currency.",
+      "readOnly": true
+    },
+    "next_approver_choices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ApproverRead"
+      },
+      "nullable": true,
+      "readOnly": true
+    },
+    "locked": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "bill_payment": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/APBillPaymentDocs"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true,
+      "type": "object"
+    },
+    "creditcard": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "creditcard_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "last_export_user": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SimpleUserSummary"
+        }
+      ],
+      "readOnly": true
+    },
+    "last_export_date": {
+      "type": "string",
+      "format": "date",
+      "readOnly": true
+    },
+    "vendor_name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "vendor_contact": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "vendor_address_one": {
+      "type": "string",
+      "title": "Vendor Address Line One",
+      "maxLength": 300
+    },
+    "vendor_address_two": {
+      "type": "string",
+      "title": "Vendor Address Line Two",
+      "maxLength": 300
+    },
+    "vendor_postal_code": {
+      "type": "string",
+      "maxLength": 10
+    },
+    "vendor_city": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "vendor_state_province": {
+      "type": "string",
+      "title": "Vendor State/Province",
+      "maxLength": 40
+    },
+    "vendor_country": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "last_modified_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Modified"
+    },
+    "submitted_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "invoice_number": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "invoice_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "title": "Bill Invoice Date"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "title": "Bill Due Date"
+    },
+    "payment_terms": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "version": {
+      "type": "integer",
+      "maximum": 4294967295,
+      "minimum": 0,
+      "format": "int64"
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/BillStatusEnum"
+        }
+      ],
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/BillTypeEnum"
+        }
+      ],
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "note": {
+      "type": "string"
+    },
+    "gl_post_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "group": {
+      "type": "integer",
+      "nullable": true
+    },
+    "payment_method": {
+      "type": "integer",
+      "nullable": true,
+      "title": "Bill Payment Method"
+    },
+    "payment_method_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "added_purchase_orders": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BillPurchaseOrderDocs"
+      },
+      "readOnly": true,
+      "description": "List of purchase orders of the added bill items."
+    },
+    "shipping_amount": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "invoice_uuid": {
+      "type": "string",
+      "readOnly": true
+    },
+    "invoice_total": {
+      "type": "number",
+      "format": "double",
+      "maximum": 10000000000000,
+      "minimum": -10000000000000,
+      "exclusiveMaximum": true,
+      "exclusiveMinimum": true,
+      "readOnly": true
+    },
+    "creator": {
+      "$ref": "#/components/schemas/UserSummary"
+    }
+  },
+  "required": [
+    "bill_statuses",
+    "costs",
+    "creator",
+    "currency",
+    "invoice_attachments",
+    "items",
+    "user",
+    "uuid",
+    "vendor"
+  ]
+}

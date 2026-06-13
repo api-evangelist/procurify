@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/custom-fields/order-items/",
+  "method": "GET",
+  "operationId": "custom_fields_order_items_list",
+  "summary": "Get Active/Inactive Order Item Custom Fields",
+  "tags": [
+    "custom-fields"
+  ]
+}

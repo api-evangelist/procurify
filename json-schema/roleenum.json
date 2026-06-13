@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RoleEnum",
+  "enum": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "type": "integer",
+  "description": "* `0` - User\n* `1` - Approver\n* `2` - Purchaser\n* `3` - Receiver\n* `4` - Administrator\n* `5` - EKA\n* `6` - Accounting\n* `7` - Superuser\n* `8` - Accounts Payable\n* `9` - FNG Approver\n* `10` - FNG Controller"
+}

@@ -1,0 +1,197 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ItemReadSerializer_v2",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "orderitem": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/OrderItemRead"
+        }
+      ],
+      "readOnly": true,
+      "description": "Purchase order item origin (if exists)."
+    },
+    "expense": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ExpenseRead"
+        }
+      ],
+      "nullable": true,
+      "description": "Expense line item origin (if exists).",
+      "type": "object"
+    },
+    "bill": {
+      "type": "integer",
+      "nullable": true
+    },
+    "vendor": {
+      "$ref": "#/components/schemas/VendorRead"
+    },
+    "sku": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "po": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PODocs"
+        }
+      ],
+      "readOnly": true,
+      "description": "Purchase order origin (if originated from PO item or PO misc. costs)."
+    },
+    "unit": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "quantity": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$",
+      "title": "Item Quantity",
+      "readOnly": true,
+      "description": "Item quantity, only applicable to bill by quantity."
+    },
+    "currency": {
+      "$ref": "#/components/schemas/Currency"
+    },
+    "total_cost": {
+      "type": "number",
+      "format": "double",
+      "description": "Item total cost without tax amount.",
+      "readOnly": true
+    },
+    "received_on": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "description": "Last received datetime of the related purchase order item."
+    },
+    "packing_slips": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Attachment"
+      },
+      "readOnly": true
+    },
+    "cost_allocations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CostAllocationRead"
+      }
+    },
+    "archived": {
+      "type": "boolean"
+    },
+    "expense_report": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ExpenseReportDocs"
+        }
+      ],
+      "readOnly": true
+    },
+    "same_unit_cost": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "creditcard_item": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreditCardItemRead"
+        }
+      ],
+      "nullable": true,
+      "description": "Credit card item origin (if exists).",
+      "type": "object"
+    },
+    "is_edited": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "unit_cost_diff_log": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UnitCostDiffLogDocs"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true,
+      "type": "object"
+    },
+    "tax_name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "tax_percentage": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,8}(?:\\.\\d{0,8})?$",
+      "nullable": true
+    },
+    "tax_amount": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "tax_is_inclusive": {
+      "type": "boolean"
+    },
+    "tax": {
+      "type": "integer",
+      "nullable": true
+    },
+    "total_cost_with_tax": {
+      "type": "number",
+      "format": "double",
+      "description": "Item total cost with tax amount.",
+      "readOnly": true
+    },
+    "shipping_amount": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$",
+      "nullable": true
+    },
+    "unit_cost": {
+      "type": "number",
+      "format": "float",
+      "readOnly": true,
+      "description": "Unit cost of the item, applicable to bill by quantity items only."
+    },
+    "custom_fields": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CustomFieldValueRead"
+      },
+      "readOnly": true
+    },
+    "type": {
+      "type": "string"
+    },
+    "bill_by_cost": {
+      "type": "boolean",
+      "readOnly": true,
+      "description": "Item billing method is bill by cost (true) or bill by quantity (false)."
+    }
+  },
+  "required": [
+    "cost_allocations",
+    "creditcard_item",
+    "currency",
+    "description",
+    "expense",
+    "type",
+    "vendor"
+  ]
+}

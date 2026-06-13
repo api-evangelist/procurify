@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/locations/",
+  "method": "POST",
+  "operationId": "locations_create",
+  "summary": "Create New Location",
+  "tags": [
+    "locations"
+  ]
+}

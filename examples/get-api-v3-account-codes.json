@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/account-codes/",
+  "method": "GET",
+  "operationId": "account_codes_list",
+  "summary": "Get Account Codes",
+  "tags": [
+    "account-codes"
+  ]
+}

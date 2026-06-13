@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AdjustmentTypeEnum",
+  "enum": [
+    "percent",
+    "amount",
+    0,
+    1
+  ],
+  "description": "* `percent` - percent\n* `amount` - amount\n* `0` - 0\n* `1` - 1"
+}

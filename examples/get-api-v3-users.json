@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/users/",
+  "method": "GET",
+  "operationId": "users_list",
+  "summary": "List Users",
+  "tags": [
+    "users"
+  ]
+}

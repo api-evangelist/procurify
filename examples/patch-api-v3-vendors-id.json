@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/vendors/{id}/",
+  "method": "PATCH",
+  "operationId": "vendors_partial_update",
+  "summary": "Partial Update Vendor",
+  "tags": [
+    "vendors"
+  ]
+}

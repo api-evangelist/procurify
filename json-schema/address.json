@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Address",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "addressLineOne": {
+      "type": "string",
+      "title": "Address line 1",
+      "maxLength": 300
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "postalCode": {
+      "type": "string",
+      "title": "Postal Code",
+      "maxLength": 20
+    },
+    "state_province": {
+      "type": "string",
+      "title": "State/Province",
+      "maxLength": 40
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 80
+    }
+  },
+  "required": [
+    "addressLineOne",
+    "city",
+    "country",
+    "name",
+    "postalCode"
+  ]
+}

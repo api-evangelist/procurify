@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransationCardStatusEnum",
+  "enum": [
+    "pending",
+    "active",
+    "inactive",
+    "canceled",
+    "lost",
+    "stolen"
+  ],
+  "type": "string"
+}

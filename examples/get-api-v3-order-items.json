@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/order-items/",
+  "method": "GET",
+  "operationId": "order_items_list",
+  "summary": "Get list of all order items",
+  "tags": [
+    "order-items"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PurchaseOrderBillingHistory",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "number": {
+      "type": "string"
+    },
+    "has_unbilled_unreceived_items": {
+      "type": "boolean"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PurchaseOrderBillingHistoryItem"
+      }
+    }
+  },
+  "required": [
+    "has_unbilled_unreceived_items",
+    "id",
+    "items",
+    "number"
+  ]
+}

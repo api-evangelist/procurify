@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/locations/{id}/",
+  "method": "GET",
+  "operationId": "locations_retrieve",
+  "summary": "Get Location by ID",
+  "tags": [
+    "locations"
+  ]
+}

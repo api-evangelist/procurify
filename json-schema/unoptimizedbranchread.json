@@ -1,0 +1,170 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnoptimizedBranchRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "External id",
+      "maxLength": 100
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "nullable": true,
+      "maxLength": 200
+    },
+    "logo": {
+      "type": "string"
+    },
+    "language": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LanguageEnum"
+        }
+      ],
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "multipleLocations": {
+      "type": "boolean"
+    },
+    "locationTimezone": {
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/LocationTimezoneEnum"
+        },
+        {
+          "$ref": "#/components/schemas/BlankEnum"
+        },
+        {
+          "$ref": "#/components/schemas/NullEnum"
+        }
+      ],
+      "type": "integer"
+    },
+    "userLimit": {
+      "type": "integer",
+      "maximum": 4294967295,
+      "minimum": 0,
+      "format": "int64"
+    },
+    "budgetOvertureToggle": {
+      "type": "boolean"
+    },
+    "purchase_filtering": {
+      "type": "boolean"
+    },
+    "catalog_permission": {
+      "type": "boolean"
+    },
+    "separate_expense_approval": {
+      "type": "boolean"
+    },
+    "standalone_travel_approval": {
+      "type": "boolean"
+    },
+    "phoneOne": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "phoneTwo": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 20
+    },
+    "fax": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 20
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "nullable": true,
+      "maxLength": 254
+    },
+    "fiscalYearEndDay": {
+      "type": "integer",
+      "maximum": 4294967295,
+      "minimum": 0,
+      "format": "int64",
+      "nullable": true
+    },
+    "fiscalYearEndMonth": {
+      "type": "integer",
+      "maximum": 4294967295,
+      "minimum": 0,
+      "format": "int64",
+      "nullable": true
+    },
+    "timezone": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimezoneEnum"
+        }
+      ],
+      "maximum": 10000,
+      "exclusiveMaximum": true,
+      "minimum": -10000,
+      "exclusiveMinimum": true
+    },
+    "beginDate": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "nullable": true
+    },
+    "ported": {
+      "type": "boolean"
+    },
+    "port_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "fields_cache": {
+      "type": "string",
+      "nullable": true
+    },
+    "activated": {
+      "type": "boolean"
+    },
+    "setup_stage": {
+      "$ref": "#/components/schemas/SetupStageEnum"
+    },
+    "localCurrency": {
+      "type": "integer"
+    },
+    "contactPerson": {
+      "type": "integer",
+      "nullable": true
+    },
+    "buyerAddress": {
+      "type": "integer",
+      "nullable": true
+    },
+    "shippingAddress": {
+      "type": "integer",
+      "nullable": true
+    }
+  },
+  "required": [
+    "localCurrency",
+    "name",
+    "phoneOne"
+  ]
+}

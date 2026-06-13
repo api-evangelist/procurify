@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/departments/",
+  "method": "GET",
+  "operationId": "departments_list",
+  "summary": "List Departments",
+  "tags": [
+    "departments"
+  ]
+}

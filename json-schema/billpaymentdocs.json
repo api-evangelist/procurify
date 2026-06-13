@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BillPaymentDocs",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "bill": {
+      "$ref": "#/components/schemas/BillDocs"
+    },
+    "user": {
+      "$ref": "#/components/schemas/UserDocs"
+    },
+    "payment_method": {
+      "$ref": "#/components/schemas/BillPaymentVendorPaymentMethodRead"
+    },
+    "amount": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$",
+      "title": "Payment Amount"
+    },
+    "transaction": {
+      "type": "integer",
+      "nullable": true
+    }
+  },
+  "required": [
+    "bill",
+    "payment_method",
+    "user"
+  ]
+}

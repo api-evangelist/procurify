@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NestedVendorRequest",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "requester": {
+      "type": "string",
+      "readOnly": true
+    },
+    "submitted_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "next_approver": {
+      "type": "string",
+      "readOnly": true
+    },
+    "permissions": {
+      "type": "object",
+      "additionalProperties": {},
+      "readOnly": true
+    }
+  },
+  "required": [
+    "submitted_date"
+  ]
+}

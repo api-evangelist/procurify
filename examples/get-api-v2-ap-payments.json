@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/ap/payments/",
+  "method": "GET",
+  "operationId": "ap_payments_list",
+  "summary": "Get Payments",
+  "tags": [
+    "ap"
+  ]
+}

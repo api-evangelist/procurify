@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentTypeEnum",
+  "enum": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "type": "integer",
+  "description": "* `0` - Other - CreditCard\n* `1` - Other - Cash\n* `2` - Other - Cheque\n* `3` - Other\n* `4` - Credit Card"
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MarkBillsAsPaid",
+  "type": "object",
+  "properties": {
+    "bill_uuids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "bill_group_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "default": []
+    },
+    "payment_date": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "bill_uuids",
+    "payment_date"
+  ]
+}

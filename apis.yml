@@ -47,6 +47,12 @@ apis:
         url: https://developer.procurify.com/
       - type: OpenAPI
         url: https://developer.procurify.com/openapi.json
+      - type: OpenAPI
+        url: openapi/procurify-procurify-api-openapi.yml
+      - type: JSONSchema
+        url: json-schema/
+      - type: Examples
+        url: examples/
     contact:
       - FN: Procurify Support
         email: support@procurify.com
@@ -77,6 +83,10 @@ common:
     url: https://success.procurify.com/en/articles/9002277-does-procurify-offer-api
   - type: Integrations
     url: https://www.procurify.com/procure-to-pay/integrations/api/
+  - type: Vocabulary
+    url: vocabulary/procurify-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/procurify-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

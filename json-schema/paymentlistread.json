@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentListRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "bill_payments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BillPaymentDocs"
+      },
+      "nullable": true,
+      "readOnly": true
+    },
+    "payment_method_type": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "payment_method": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CompanyPaymentMethodRead"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "payment_date": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "readOnly": true
+    },
+    "amount": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$"
+    },
+    "total_amount_with_tax": {
+      "type": "string",
+      "readOnly": true
+    },
+    "tax_amount": {
+      "type": "string",
+      "readOnly": true
+    },
+    "inclusive_tax_amount": {
+      "type": "string",
+      "readOnly": true
+    },
+    "exclusive_tax_amount": {
+      "type": "string",
+      "readOnly": true
+    },
+    "currency": {
+      "$ref": "#/components/schemas/Currency"
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaymentStatusEnum"
+        }
+      ],
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "ach_number": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "next_approver_choices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ApproverRead"
+      },
+      "readOnly": true
+    }
+  },
+  "required": [
+    "currency",
+    "payment_method"
+  ]
+}

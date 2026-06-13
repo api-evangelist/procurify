@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/ap/payments/{id}/approver-choices/",
+  "method": "GET",
+  "operationId": "ap_payments_approver_choices_retrieve",
+  "summary": "Get Approver Choices",
+  "tags": [
+    "ap"
+  ]
+}

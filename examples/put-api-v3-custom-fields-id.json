@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/custom-fields/{id}/",
+  "method": "PUT",
+  "operationId": "custom_fields_update",
+  "summary": "Update Order Item Custom Field Dropdown Choices",
+  "tags": [
+    "custom-fields"
+  ]
+}

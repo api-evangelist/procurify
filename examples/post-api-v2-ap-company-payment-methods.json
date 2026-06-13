@@ -1,0 +1,20 @@
+{
+  "path": "/api/v2/ap/company-payment-methods/",
+  "method": "POST",
+  "operationId": "ap_company_payment_methods_create",
+  "summary": "Create Company Payment Method",
+  "tags": [
+    "ap"
+  ],
+  "requestExamples": {
+    "CompanyPaymentMethodPayloadExample": {
+      "name": "Bank Account",
+      "type": 0,
+      "data": {
+        "description": "Bank Account description"
+      },
+      "gl_code": "9000",
+      "currency": 3
+    }
+  }
+}

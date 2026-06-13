@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EmailConfigurationRequest",
+  "type": "object",
+  "properties": {
+    "auto_po": {
+      "type": "boolean"
+    },
+    "payment_remittance": {
+      "type": "boolean"
+    }
+  }
+}

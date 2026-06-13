@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RequisitionCreateRequest",
+  "type": "object",
+  "properties": {
+    "required_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "location_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "department_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "line_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RequisitionLineCreateRequest"
+      }
+    }
+  },
+  "required": [
+    "department_name",
+    "line_items",
+    "location_name",
+    "required_date"
+  ]
+}

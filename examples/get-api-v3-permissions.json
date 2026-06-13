@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/permissions/",
+  "method": "GET",
+  "operationId": "permissions_list",
+  "summary": "Get Available User Permissions",
+  "tags": [
+    "permissions"
+  ]
+}

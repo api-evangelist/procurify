@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OrderItemStatusEnum",
+  "enum": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "type": "integer",
+  "description": "* `0` - Purchase Pending\n* `1` - Purchaser In-Use\n* `2` - Receive Pending\n* `3` - Received\n* `4` - Rejected for Purchase\n* `5` - Partial Received\n* `6` - Fulfilled\n* `7` - Approval Denied\n* `8` - Request Draft"
+}

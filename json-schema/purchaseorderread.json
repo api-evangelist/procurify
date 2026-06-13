@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PurchaseOrderRead",
+  "type": "object",
+  "properties": {
+    "number": {
+      "type": "string",
+      "readOnly": true
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "purchaser": {
+      "$ref": "#/components/schemas/SimpleUserSummary"
+    },
+    "vendor_name": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 150
+    }
+  },
+  "required": [
+    "purchaser",
+    "uuid"
+  ]
+}

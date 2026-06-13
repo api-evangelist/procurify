@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DepartmentRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "branch": {
+      "$ref": "#/components/schemas/LocationSimple"
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "External id",
+      "maxLength": 100
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "punchout_email": {
+      "type": "string",
+      "nullable": true
+    },
+    "is_active_for_account_code": {
+      "type": "boolean",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "branch",
+    "name"
+  ]
+}

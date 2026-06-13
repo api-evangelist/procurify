@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LocationView",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "nullable": true,
+      "maxLength": 200
+    },
+    "logo": {
+      "type": "string"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/Currency"
+    },
+    "phoneOne": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "fax": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 20
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "nullable": true,
+      "maxLength": 254
+    },
+    "primary_billing_address": {
+      "$ref": "#/components/schemas/Address"
+    },
+    "primary_shipping_address": {
+      "$ref": "#/components/schemas/Address"
+    },
+    "shipping_addresses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Address"
+      },
+      "readOnly": true
+    },
+    "language": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LanguageEnum"
+        }
+      ],
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "locationTimezone": {
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/LocationTimezoneEnum"
+        },
+        {
+          "$ref": "#/components/schemas/BlankEnum"
+        },
+        {
+          "$ref": "#/components/schemas/NullEnum"
+        }
+      ],
+      "type": "integer"
+    },
+    "headquarter": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "department_count": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "External id",
+      "maxLength": 100
+    },
+    "legal_entity": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LegalEntitySummary"
+        }
+      ],
+      "readOnly": true,
+      "nullable": true,
+      "type": "object"
+    }
+  },
+  "required": [
+    "currency",
+    "name",
+    "phoneOne",
+    "primary_billing_address",
+    "primary_shipping_address"
+  ]
+}

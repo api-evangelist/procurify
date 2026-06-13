@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnoptimizedDepartmentRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "branch": {
+      "$ref": "#/components/schemas/UnoptimizedBranchRead"
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "External id",
+      "maxLength": 100
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "punchout_email": {
+      "type": "string",
+      "format": "email",
+      "nullable": true,
+      "description": "PunchOut Email",
+      "maxLength": 254
+    },
+    "active": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "branch",
+    "name"
+  ]
+}

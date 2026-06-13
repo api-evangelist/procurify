@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CreditCardRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "number": {
+      "type": "string",
+      "pattern": "^[0-9]{4}$",
+      "maxLength": 19
+    },
+    "vendor": {
+      "$ref": "#/components/schemas/SimpleVendor"
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreditCardTypeEnum"
+        }
+      ],
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "currency": {
+      "$ref": "#/components/schemas/Currency"
+    },
+    "balance": {
+      "type": "integer",
+      "maximum": 2147483647,
+      "minimum": -2147483648,
+      "nullable": true
+    },
+    "assignees": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SimpleUserSummary"
+      }
+    },
+    "last_reconciliation_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Comments:\n    This field may be incorrect depending on what types of\n    edit we allow our users.  Fix later.",
+      "readOnly": true
+    },
+    "last_reconciliation_balance": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "session": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SessionCreate"
+        }
+      ],
+      "readOnly": true
+    },
+    "gl_code": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "last_statement_date": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "assignees",
+    "currency",
+    "vendor"
+  ]
+}

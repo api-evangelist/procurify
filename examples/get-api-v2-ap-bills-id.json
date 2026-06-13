@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/ap/bills/{id}/",
+  "method": "GET",
+  "operationId": "ap_bills_retrieve",
+  "summary": "Get Bill by ID",
+  "tags": [
+    "ap"
+  ]
+}

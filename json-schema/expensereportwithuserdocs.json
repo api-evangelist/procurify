@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExpenseReportWithUserDocs",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "user": {
+      "$ref": "#/components/schemas/ExpenseReportUserSummaryDocs"
+    }
+  },
+  "required": [
+    "id",
+    "user",
+    "uuid"
+  ]
+}

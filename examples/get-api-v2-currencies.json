@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/currencies/",
+  "method": "GET",
+  "operationId": "currencies_list",
+  "summary": "Get Active/Inactive Currencies",
+  "tags": [
+    "currencies"
+  ]
+}

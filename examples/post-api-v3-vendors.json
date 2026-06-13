@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/vendors/",
+  "method": "POST",
+  "operationId": "vendors_create",
+  "summary": "Create Vendor",
+  "tags": [
+    "vendors"
+  ]
+}

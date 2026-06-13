@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AccountTypeEnum",
+  "enum": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "type": "integer",
+  "description": "* `0` - Assets\n* `1` - Liability\n* `2` - Expense\n* `3` - Income\n* `4` - Equity\n* `5` - Other"
+}

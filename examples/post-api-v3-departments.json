@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/departments/",
+  "method": "POST",
+  "operationId": "departments_create",
+  "summary": "Create New Department",
+  "tags": [
+    "departments"
+  ]
+}

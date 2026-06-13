@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/accounts/",
+  "method": "GET",
+  "operationId": "accounts_list",
+  "summary": "Get Accounts",
+  "tags": [
+    "accounts"
+  ]
+}

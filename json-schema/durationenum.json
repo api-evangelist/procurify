@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DurationEnum",
+  "enum": [
+    0,
+    1
+  ],
+  "type": "integer",
+  "description": "* `0` - YEARS\n* `1` - MONTHS"
+}

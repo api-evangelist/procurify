@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CreditCardStatusEnum",
+  "enum": [
+    "pending",
+    "active",
+    "inactive",
+    "canceled",
+    "lost",
+    "stolen"
+  ],
+  "type": "string",
+  "description": "* `pending` - Pending\n* `active` - Active\n* `inactive` - Inactive\n* `canceled` - Canceled\n* `lost` - Lost\n* `stolen` - Stolen"
+}

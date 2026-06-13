@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PurchaseOrderStateEnum",
+  "enum": [
+    0,
+    1,
+    3,
+    4,
+    5
+  ],
+  "type": "integer",
+  "description": "* `0` - Purchased\n* `1` - Cancelled\n* `3` - Closed\n* `4` - Paid\n* `5` - Reopened"
+}

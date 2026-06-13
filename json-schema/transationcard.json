@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransationCard",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string"
+    },
+    "last_four_digits": {
+      "type": "string"
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TransationCardStatusEnum"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true,
+      "description": "\n* pending: Card has been created but is not yet active. It cannot authorize transactions\n* active: Card has been active and is ready for use\n* inactive: Card has been locked and can no longer authorize transactions\n* canceled: Card has been canceled and can no longer authorize transactions\n* lost: Card has been reported lost and can no longer authorize transactions\n* stolen: Card has been reported stolen and no longer authorize transactions",
+      "type": "object"
+    }
+  },
+  "required": [
+    "last_four_digits",
+    "uuid"
+  ]
+}

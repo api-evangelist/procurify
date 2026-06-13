@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentStatusEnum",
+  "enum": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "type": "integer",
+  "description": "* `0` - Draft\n* `1` - Confirmed\n* `2` - Approved\n* `3` - Denied\n* `4` - Void\n* `5` - Paid\n* `6` - Partially Paid\n* `7` - Processing\n* `8` - Failed\n* `9` - Scheduled"
+}

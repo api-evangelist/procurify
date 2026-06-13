@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ApprovalDelegatee",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "profile_image": {
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "required": [
+    "email",
+    "firstName",
+    "id",
+    "lastName"
+  ]
+}

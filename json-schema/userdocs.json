@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserDocs",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "firstName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "lastName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 254
+    },
+    "position": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 100
+    },
+    "profile_image": {
+      "type": "string",
+      "nullable": true
+    },
+    "approval_delegatee": {
+      "type": "integer",
+      "nullable": true,
+      "readOnly": true
+    }
+  },
+  "required": [
+    "email"
+  ]
+}

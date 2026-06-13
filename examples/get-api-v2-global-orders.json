@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/global/orders/",
+  "method": "GET",
+  "operationId": "global_orders_list",
+  "summary": "Get All Orders",
+  "tags": [
+    "requisitions"
+  ]
+}

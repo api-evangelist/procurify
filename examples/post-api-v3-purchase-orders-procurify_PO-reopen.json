@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/purchase-orders/{procurify_PO}/reopen/",
+  "method": "POST",
+  "operationId": "purchase_orders_reopen_create",
+  "summary": "Reopen a Purchase Order",
+  "tags": [
+    "purchase-orders"
+  ]
+}

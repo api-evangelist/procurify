@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PriceModifierDocs",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number",
+      "format": "double"
+    },
+    "type": {
+      "$ref": "#/components/schemas/PriceModifierDocsTypeEnum"
+    }
+  },
+  "required": [
+    "type",
+    "value"
+  ]
+}

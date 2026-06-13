@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LocationCreateUpsertRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 150
+    },
+    "url": {
+      "type": "string",
+      "nullable": true
+    },
+    "logo": {
+      "type": "string",
+      "nullable": true
+    },
+    "currency": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phoneOne": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20
+    },
+    "fax": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 20
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "nullable": true,
+      "maxLength": 254
+    },
+    "primary_billing_address": {
+      "$ref": "#/components/schemas/AddressRequest"
+    },
+    "primary_shipping_address": {
+      "$ref": "#/components/schemas/AddressRequest"
+    },
+    "shipping_addresses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AddressRequest"
+      }
+    },
+    "language": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LanguageEnum"
+        }
+      ],
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "locationTimezone": {
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/LocationTimezoneEnum"
+        },
+        {
+          "$ref": "#/components/schemas/BlankEnum"
+        },
+        {
+          "$ref": "#/components/schemas/NullEnum"
+        }
+      ],
+      "type": "integer"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "External id",
+      "maxLength": 100
+    },
+    "legal_entity": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "currency",
+    "name",
+    "phoneOne",
+    "primary_billing_address",
+    "primary_shipping_address",
+    "shipping_addresses"
+  ]
+}

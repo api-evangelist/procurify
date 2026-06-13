@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/vendors/{id}/",
+  "method": "PUT",
+  "operationId": "vendors_update",
+  "summary": "Update Vendor",
+  "tags": [
+    "vendors"
+  ]
+}

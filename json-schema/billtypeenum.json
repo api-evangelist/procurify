@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BillTypeEnum",
+  "enum": [
+    0,
+    1,
+    2
+  ],
+  "type": "integer",
+  "description": "* `0` - Order\n* `1` - Expense\n* `2` - Creditcard"
+}

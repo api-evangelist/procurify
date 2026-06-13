@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RequisitionLineCreateRequest",
+  "type": "object",
+  "properties": {
+    "item_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "vendor_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "account_code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unit_price": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$"
+    },
+    "quantity": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,10}(?:\\.\\d{0,5})?$"
+    },
+    "unit": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 30
+    },
+    "currency_code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "custom_fields": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/LineItemCustomFieldRequest"
+      }
+    }
+  },
+  "required": [
+    "account_code",
+    "currency_code",
+    "custom_fields",
+    "item_name",
+    "quantity",
+    "unit",
+    "unit_price",
+    "vendor_name"
+  ]
+}

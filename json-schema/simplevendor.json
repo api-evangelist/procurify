@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SimpleVendor",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the vendor",
+      "maxLength": 150
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "addressLineOne": {
+      "type": "string",
+      "nullable": true,
+      "title": "Address line 1",
+      "description": "First line of address",
+      "maxLength": 300
+    },
+    "addressLineTwo": {
+      "type": "string",
+      "nullable": true,
+      "title": "Address line 2",
+      "description": "Second line of address",
+      "maxLength": 300
+    },
+    "postalCode": {
+      "type": "string",
+      "nullable": true,
+      "title": "Postal Code",
+      "description": "Postal or Zip code of the vendor",
+      "maxLength": 20
+    },
+    "city": {
+      "type": "string",
+      "nullable": true,
+      "description": "City of the vendor",
+      "maxLength": 50
+    },
+    "state_province": {
+      "type": "string",
+      "nullable": true,
+      "title": "State/Province",
+      "description": "State or Province of the vendor",
+      "maxLength": 40
+    },
+    "country": {
+      "type": "string",
+      "nullable": true,
+      "description": "Country of the vendor",
+      "maxLength": 80
+    },
+    "overall_score": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,2}(?:\\.\\d{0,3})?$",
+      "readOnly": true
+    },
+    "is_auto_email_po_enabled": {
+      "type": "boolean",
+      "description": "Represents whether the AutoEmail PO feature is turned on for this Vendor"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

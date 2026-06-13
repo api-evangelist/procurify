@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CreditCardRequest",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "is_active": {
+      "type": "boolean"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "number": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[0-9]{4}$",
+      "maxLength": 19
+    },
+    "balance": {
+      "type": "integer",
+      "maximum": 2147483647,
+      "minimum": -2147483648,
+      "nullable": true
+    },
+    "gl_code": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreditCardTypeEnum"
+        }
+      ],
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "category": {
+      "nullable": true,
+      "minimum": -2147483648,
+      "maximum": 2147483647,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/CategoryEnum"
+        },
+        {
+          "$ref": "#/components/schemas/NullEnum"
+        }
+      ],
+      "type": "integer"
+    },
+    "external_id": {
+      "type": "string",
+      "description": "External id of the Credit Card",
+      "maxLength": 100
+    },
+    "status": {
+      "nullable": true,
+      "description": "The status of the Credit Card\n\n* `pending` - Pending\n* `active` - Active\n* `inactive` - Inactive\n* `canceled` - Canceled\n* `lost` - Lost\n* `stolen` - Stolen",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/CreditCardStatusEnum"
+        },
+        {
+          "$ref": "#/components/schemas/BlankEnum"
+        },
+        {
+          "$ref": "#/components/schemas/NullEnum"
+        }
+      ],
+      "type": "integer"
+    },
+    "require_activation": {
+      "type": "boolean",
+      "title": "Require new activation?",
+      "description": "Does this card require new activation?"
+    },
+    "last_changed_by": {
+      "type": "integer",
+      "nullable": true,
+      "title": "Last changed by user"
+    },
+    "vendor": {
+      "type": "integer"
+    },
+    "payment_method": {
+      "type": "integer",
+      "nullable": true
+    },
+    "currency": {
+      "type": "integer"
+    },
+    "creator": {
+      "type": "integer",
+      "nullable": true,
+      "title": "Card Issuer"
+    },
+    "assignees": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CreditCardAssigneeRequest"
+      }
+    }
+  },
+  "required": [
+    "assignees",
+    "currency",
+    "uuid",
+    "vendor"
+  ]
+}

@@ -1,0 +1,5962 @@
+vocabulary: procurify
+name: Procurify API Vocabulary
+description: Vocabulary terms derived from the Procurify spend management and procure-to-pay
+  API
+url: https://developer.procurify.com/
+version: 1.0.0
+terms:
+- name: APBillPaymentDocs
+  description: Procurify APBillPaymentDocs resource
+  type: object
+  properties:
+  - id
+  - payment
+  - payment_method
+  - amount
+  - transaction
+- name: APCreditCard
+  description: Procurify APCreditCard resource
+  type: object
+  properties:
+  - id
+  - uuid
+  - is_active
+  - created_at
+  - updated_at
+  - name
+  - number
+  - balance
+  - gl_code
+  - type
+  - category
+  - external_id
+  - status
+  - require_activation
+  - last_changed_by
+  - vendor
+  - payment_method
+  - currency
+  - creator
+- name: Account
+  description: Procurify Account resource
+  type: object
+  properties:
+  - id
+  - account_code
+  - department
+  - warning_indicator
+  - start_datetime
+  - end_datetime
+  - budget
+  - budget_used_approved
+  - budget_used_purchased
+  - balance_approved
+  - balance_purchased
+  - active
+- name: AccountCodeCreateRequest
+  description: Procurify AccountCodeCreateRequest resource
+  type: object
+  properties:
+  - code
+  - description
+  - parent
+  - account_type
+  - departments
+- name: AccountCodeRead
+  description: Procurify AccountCodeRead resource
+  type: object
+  properties:
+  - id
+  - applied_accounts_count
+  - code
+  - code_length
+  - description
+  - account_type
+  - active
+  - parent
+- name: AccountCodeReadSerializerSingleCreate
+  description: Procurify AccountCodeReadSerializerSingleCreate resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: AccountCodeReadSerializerSingleUpdate
+  description: Procurify AccountCodeReadSerializerSingleUpdate resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: AccountCodeUpdateRequest
+  description: Procurify AccountCodeUpdateRequest resource
+  type: object
+  properties:
+  - code
+  - description
+  - account_type
+  - parent
+- name: AccountRead
+  description: Procurify AccountRead resource
+  type: object
+  properties:
+  - id
+  - account_code
+  - department
+  - warning_indicator
+  - budget_used_approved
+  - budget_used_purchased
+  - start_datetime
+  - end_datetime
+  - budget
+  - balance_approved
+  - balance_purchased
+  - active
+- name: AccountTypeEnum
+  description: '* `0` - Assets
+
+    * `1` - Liability
+
+    * `2` - Expense
+
+    * `3` - Income
+
+    * `4` - Equity
+
+    * `5` - Other'
+  type: integer
+- name: ActionEnum
+  description: '* `0` - Request
+
+    * `1` - FinalApproval
+
+    * `2` - ApprovalDenied
+
+    * `3` - ApproveAndPassOn
+
+    * `4` - Purchase
+
+    * `5` - RejectLineItems
+
+    * `6` - UpdateOnReceive
+
+    * `7` - MarkOrderReceived
+
+    * `8` - ClosePO
+
+    * `9` - UnmarkOrderReceived
+
+    * `10` - OpenPO
+
+    * `11` - RequestLineItem
+
+    * `12` - UndoReceiveLog
+
+    * `13` - CancelPO
+
+    * `14` - StockLineItem
+
+    * `15` - TransactionApproved
+
+    * `16` - TransactionDenied
+
+    * `17` - TransactionPartiallyDenied
+
+    * `18` - TransactionAllocation
+
+    * `19` - OrderPurchased
+
+    * `20` - RecordPO'
+  type: integer
+- name: Address
+  description: Procurify Address resource
+  type: object
+  properties:
+  - id
+  - name
+  - addressLineOne
+  - city
+  - postalCode
+  - state_province
+  - country
+- name: AddressAssociationEnum
+  description: '* `1` - Billing
+
+    * `2` - Shipping
+
+    * `3` - Vendor
+
+    * `4` - General
+
+    * `5` - User
+
+    * `6` - Travel
+
+    * `7` - Private'
+  type: integer
+- name: AddressDocs
+  description: Procurify AddressDocs resource
+  type: object
+  properties:
+  - id
+  - name
+- name: AddressRequest
+  description: Procurify AddressRequest resource
+  type: object
+  properties:
+  - name
+  - addressLineOne
+  - city
+  - postalCode
+  - state_province
+  - country
+- name: AddressSummary
+  description: Procurify AddressSummary resource
+  type: object
+  properties:
+  - id
+  - is_active
+  - created_at
+  - updated_at
+  - name
+  - addressAssociation
+  - addressLineOne
+  - addressLineTwo
+  - postalCode
+  - city
+  - state_province
+  - country
+  - last_changed_by
+- name: Adjustment
+  description: Procurify Adjustment resource
+  type: object
+  properties:
+  - id
+  - type
+  - value
+  - name
+- name: AdjustmentTypeEnum
+  description: '* `percent` - percent
+
+    * `amount` - amount
+
+    * `0` - 0
+
+    * `1` - 1'
+  type: object
+- name: AllocationRead
+  description: Procurify AllocationRead resource
+  type: object
+  properties:
+  - id
+  - amount
+  - account
+- name: ApiNestedEditDeletePurchaseOrderDetail
+  description: Procurify ApiNestedEditDeletePurchaseOrderDetail resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: ApprovalDelegatee
+  description: Procurify ApprovalDelegatee resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+  - email
+  - profile_image
+- name: ApprovalDelegateeDocs
+  description: Procurify ApprovalDelegateeDocs resource
+  type: object
+  properties:
+  - id
+  - department
+  - firstName
+  - lastName
+  - email
+- name: ApprovalDelegateeSlimDocs
+  description: Procurify ApprovalDelegateeSlimDocs resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+- name: ApprovalDelegationRead
+  description: Procurify ApprovalDelegationRead resource
+  type: object
+  properties:
+  - approval_delegatee
+  - expected_return_date
+  - delegator
+  - setter
+- name: ApprovalWorkflow
+  description: Procurify ApprovalWorkflow resource
+  type: object
+  properties:
+  - is_complete
+  - updated_at
+  - can_self_approve
+  - can_peer_review
+  - current_step
+  - next_step
+- name: ApprovalWorkflowApprover
+  description: Procurify ApprovalWorkflowApprover resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+  - email
+  - profile_image
+  - approval_delegatee
+- name: ApprovalWorkflowApproverGroup
+  description: Procurify ApprovalWorkflowApproverGroup resource
+  type: object
+  properties:
+  - approvers
+  - is_pooled
+  - level
+  - group_id
+  - group_name
+- name: ApprovalWorkflowCurrentStep
+  description: Procurify ApprovalWorkflowCurrentStep resource
+  type: object
+  properties:
+  - status
+  - step_number
+  - group_id
+  - group_name
+  - approver
+- name: ApprovalWorkflowNextStep
+  description: Procurify ApprovalWorkflowNextStep resource
+  type: object
+  properties:
+  - status
+  - step_number
+  - group_id
+  - group_name
+  - options
+- name: ApproverChoicesMetadataApproverReadDocs
+  description: Procurify ApproverChoicesMetadataApproverReadDocs resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: ApproverChoicesMetadataDocs
+  description: Procurify ApproverChoicesMetadataDocs resource
+  type: object
+  properties:
+  - permissions
+  - summary
+- name: ApproverRead
+  description: Procurify ApproverRead resource
+  type: object
+  properties:
+  - id
+  - user
+  - amount_limit
+  - item_variance_amount_limit
+  - item_variance_percentage_limit
+  - approval_level
+- name: ApproverReadDocs
+  description: Procurify ApproverReadDocs resource
+  type: object
+  properties:
+  - id
+  - user
+  - amount_limit
+  - item_variance_amount_limit
+  - item_variance_percentage_limit
+  - approval_level
+  - bill_amount_limit
+- name: Attachment
+  description: Procurify Attachment resource
+  type: object
+  properties:
+  - id
+  - uuid
+  - file
+  - name
+  - user
+  - description
+  - mimetype
+  - length
+  - sha1_hash
+  - created_at
+- name: AuthorizationStatusEnum
+  description: Procurify AuthorizationStatusEnum resource
+  type: string
+- name: BillCostRead
+  description: Procurify BillCostRead resource
+  type: object
+  properties:
+  - id
+  - cost_allocation
+  - name
+  - amount
+  - bill
+  - cost
+  - currency
+- name: BillDocs
+  description: Procurify BillDocs resource
+  type: object
+  properties:
+  - id
+  - uuid
+  - vendor
+  - tax_amount
+  - vendor_name
+  - due_date
+  - status
+  - type
+  - group
+- name: BillItemsMetadataDocs
+  description: Procurify BillItemsMetadataDocs resource
+  type: object
+  properties:
+  - summary
+  - pagination
+- name: BillItemsSummaryDocs
+  description: Procurify BillItemsSummaryDocs resource
+  type: object
+  properties:
+  - total_items
+  - total_cost
+- name: BillListViewApproverUserDocs
+  description: Procurify BillListViewApproverUserDocs resource
+  type: object
+  properties:
+  - firstName
+  - lastName
+  - profile_image
+  - approval_delegatee
+- name: BillMetadataBillRead
+  description: Procurify BillMetadataBillRead resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: BillMetadataListSimpleBill
+  description: Procurify BillMetadataListSimpleBill resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: BillPaymentDocs
+  description: Procurify BillPaymentDocs resource
+  type: object
+  properties:
+  - id
+  - bill
+  - user
+  - payment_method
+  - amount
+  - transaction
+- name: BillPaymentVendorPaymentMethodRead
+  description: Procurify BillPaymentVendorPaymentMethodRead resource
+  type: object
+  properties:
+  - id
+  - vendor
+  - name
+  - type
+  - data
+  - currency
+- name: BillPurchaseOrderDocs
+  description: Procurify BillPurchaseOrderDocs resource
+  type: object
+  properties:
+  - id
+  - number
+  - currency
+  - total_amount
+- name: BillRead
+  description: Procurify BillRead resource
+  type: object
+  properties:
+  - id
+  - uuid
+  - user
+  - vendor
+  - approval_chain
+  - approver
+  - items
+  - costs
+  - invoice_attachments
+  - bill_statuses
+  - currency
+  - comments
+  - version_choices
+  - tax_amount
+  - inclusive_tax_amount
+  - exclusive_tax_amount
+  - subtotal_cost
+  - total_cost
+  - total_cost_with_tax
+  - converted_total_cost
+  - next_approver_choices
+  - locked
+  - bill_payment
+  - creditcard
+  - creditcard_name
+  - last_export_user
+  - last_export_date
+  - vendor_name
+  - vendor_contact
+  - vendor_address_one
+  - vendor_address_two
+  - vendor_postal_code
+  - vendor_city
+  - vendor_state_province
+  - vendor_country
+  - last_modified_datetime
+  - submitted_date
+  - invoice_number
+  - invoice_date
+  - due_date
+  - payment_terms
+  - version
+  - status
+  - type
+  - active
+  - note
+  - gl_post_date
+  - group
+  - payment_method
+  - payment_method_name
+  - added_purchase_orders
+  - shipping_amount
+  - invoice_uuid
+  - invoice_total
+  - creator
+- name: BillStatusEnum
+  description: '* `0` - Draft
+
+    * `1` - Confirmed
+
+    * `2` - Approved
+
+    * `3` - Denied
+
+    * `6` - Payment Confirmed
+
+    * `7` - Payment Approved
+
+    * `8` - Payment Limbo
+
+    * `4` - Paid
+
+    * `5` - Withdrawn'
+  type: integer
+- name: BillStatusRead
+  description: Procurify BillStatusRead resource
+  type: object
+  properties:
+  - id
+  - user
+  - date
+  - status
+  - bill
+- name: BillSummaryDocs
+  description: Procurify BillSummaryDocs resource
+  type: object
+  properties:
+  - has_multiple_currency
+  - total_cost
+- name: BillTypeEnum
+  description: '* `0` - Order
+
+    * `1` - Expense
+
+    * `2` - Creditcard'
+  type: integer
+- name: BlankEnum
+  description: Procurify BlankEnum resource
+  type: object
+- name: BlanketOrderItemRead
+  description: Procurify BlanketOrderItemRead resource
+  type: object
+  properties:
+  - price
+  - quantity
+  - amount
+- name: Branch
+  description: Procurify Branch resource
+  type: object
+  properties:
+  - id
+  - external_id
+  - name
+  - url
+  - logo
+  - language
+  - multipleLocations
+  - locationTimezone
+  - userLimit
+  - budgetOvertureToggle
+  - purchase_filtering
+  - catalog_permission
+  - separate_expense_approval
+  - standalone_travel_approval
+  - phoneOne
+  - phoneTwo
+  - fax
+  - email
+  - fiscalYearEndDay
+  - fiscalYearEndMonth
+  - beginDate
+  - ported
+  - port_date
+  - active
+  - activated
+  - setup_stage
+  - localCurrency
+  - contactPerson
+  - buyerAddress
+  - shippingAddress
+- name: BranchSummary
+  description: Procurify BranchSummary resource
+  type: object
+  properties:
+  - id
+  - name
+- name: BreakdownDocs
+  description: Procurify BreakdownDocs resource
+  type: object
+  properties:
+  - score
+  - weight
+- name: CatalogItemBundleRead
+  description: Procurify CatalogItemBundleRead resource
+  type: object
+  properties:
+  - id
+  - name
+  - description
+  - image
+  - active
+  - items
+  - items_count
+- name: CatalogItemRead
+  description: Procurify CatalogItemRead resource
+  type: object
+  properties:
+  - id
+  - name
+  - image
+  - unitType
+  - pref_vendor
+  - account_code
+  - internalSKU
+  - description
+  - product_url
+  - currency
+  - price
+  - rfo_lock
+  - departments
+  - custom_fields
+  - requested_count
+  - last_requested_date
+  - selected_account
+- name: CatalogItemReadSerializerSingleCreate
+  description: Procurify CatalogItemReadSerializerSingleCreate resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: CatalogItemReadSerializerSingleUpdate
+  description: Procurify CatalogItemReadSerializerSingleUpdate resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: CatalogItemReadSerializerWithQuantity
+  description: Procurify CatalogItemReadSerializerWithQuantity resource
+  type: object
+  properties:
+  - id
+  - name
+  - image
+  - unitType
+  - pref_vendor
+  - account_code
+  - internalSKU
+  - description
+  - product_url
+  - currency
+  - price
+  - rfo_lock
+  - departments
+  - custom_fields
+  - requested_count
+  - last_requested_date
+  - selected_account
+  - quantity
+- name: CatalogItemUpsertRequest
+  description: Procurify CatalogItemUpsertRequest resource
+  type: object
+  properties:
+  - id
+  - name
+  - image
+  - unitType
+  - pref_vendor
+  - account_code
+  - internalSKU
+  - description
+  - product_url
+  - currency
+  - price
+  - rfo_lock
+  - departments
+  - custom_fields
+- name: CategoryEnum
+  description: '* `0` - Physical
+
+    * `1` - Virtual'
+  type: integer
+- name: ChartOfAccountsAccount
+  description: Procurify ChartOfAccountsAccount resource
+  type: object
+  properties:
+  - id
+  - account_code
+  - department
+  - start_datetime
+  - end_datetime
+  - budget
+  - budget_used_approved
+  - budget_used_purchased
+  - balance_approved
+  - balance_purchased
+  - active
+- name: Comment
+  description: Procurify Comment resource
+  type: object
+  properties:
+  - userprofile
+  - id
+  - comment
+  - submit_date
+- name: CompanyPaymentMethod
+  description: Procurify CompanyPaymentMethod resource
+  type: object
+  properties:
+  - id
+  - name
+  - type
+  - data
+  - currency
+  - gl_code
+- name: CompanyPaymentMethodRead
+  description: Procurify CompanyPaymentMethodRead resource
+  type: object
+  properties:
+  - id
+  - name
+  - type
+  - data
+  - currency
+  - gl_code
+- name: CompanyPaymentMethodRequest
+  description: Procurify CompanyPaymentMethodRequest resource
+  type: object
+  properties:
+  - name
+  - type
+  - data
+  - currency
+  - gl_code
+- name: CostAllocationRead
+  description: Procurify CostAllocationRead resource
+  type: object
+  properties:
+  - id
+  - budget
+  - object_id
+  - amount
+  - currency
+  - created_on
+- name: CostDetails
+  description: Procurify CostDetails resource
+  type: object
+  properties:
+  - subtotal
+  - total_cost
+  - total_cost_in_base_currency
+  - tax_amount
+- name: CreditCard
+  description: Procurify CreditCard resource
+  type: object
+  properties:
+  - id
+  - uuid
+  - is_active
+  - created_at
+  - updated_at
+  - name
+  - number
+  - balance
+  - gl_code
+  - type
+  - category
+  - external_id
+  - status
+  - require_activation
+  - last_changed_by
+  - vendor
+  - payment_method
+  - currency
+  - currency_name
+  - creator
+  - assignees
+- name: CreditCardAssignee
+  description: Procurify CreditCardAssignee resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+  - email
+  - profile_image
+- name: CreditCardAssigneeRequest
+  description: Procurify CreditCardAssigneeRequest resource
+  type: object
+  properties:
+  - firstName
+  - lastName
+  - email
+  - profile_image
+- name: CreditCardItemRead
+  description: Procurify CreditCardItemRead resource
+  type: object
+  properties:
+  - id
+  - creditcard
+  - po
+  - expense
+  - creditcard_is_editable
+  - matched_statement_items
+- name: CreditCardRead
+  description: Procurify CreditCardRead resource
+  type: object
+  properties:
+  - id
+  - name
+  - number
+  - vendor
+  - type
+  - currency
+  - balance
+  - assignees
+  - last_reconciliation_date
+  - last_reconciliation_balance
+  - session
+  - gl_code
+  - last_statement_date
+- name: CreditCardRequest
+  description: Procurify CreditCardRequest resource
+  type: object
+  properties:
+  - uuid
+  - is_active
+  - name
+  - number
+  - balance
+  - gl_code
+  - type
+  - category
+  - external_id
+  - status
+  - require_activation
+  - last_changed_by
+  - vendor
+  - payment_method
+  - currency
+  - creator
+  - assignees
+- name: CreditCardStatusEnum
+  description: '* `pending` - Pending
+
+    * `active` - Active
+
+    * `inactive` - Inactive
+
+    * `canceled` - Canceled
+
+    * `lost` - Lost
+
+    * `stolen` - Stolen'
+  type: string
+- name: CreditCardTypeEnum
+  description: '* `0` - other-credit-card
+
+    * `1` - Visa
+
+    * `2` - Mastercard
+
+    * `3` - American Express
+
+    * `4` - Discover
+
+    * `5` - JCB
+
+    * `6` - Diner''s Club
+
+    * `7` - Procurify'
+  type: integer
+- name: Currency
+  description: Procurify Currency resource
+  type: object
+  properties:
+  - id
+  - name
+  - description
+  - rate
+  - base
+  - active
+- name: CurrencyRequest
+  description: Procurify CurrencyRequest resource
+  type: object
+  properties:
+  - name
+  - description
+  - rate
+  - base
+  - active
+- name: CurrencySummary
+  description: Procurify CurrencySummary resource
+  type: object
+  properties:
+  - id
+  - name
+  - rate
+  - base
+- name: CustomFieldRead
+  description: Procurify CustomFieldRead resource
+  type: object
+  properties:
+  - id
+  - name
+  - content_type
+  - default_value
+  - is_required
+  - field_choices
+  - field_type
+  - field_label
+  - is_active
+- name: CustomFieldReadSerializerSingle
+  description: Procurify CustomFieldReadSerializerSingle resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: CustomFieldUpdateRequest
+  description: Procurify CustomFieldUpdateRequest resource
+  type: object
+  properties:
+  - name
+  - default_value
+  - is_required
+  - field_type
+  - field_choices
+- name: CustomFieldValueRead
+  description: Procurify CustomFieldValueRead resource
+  type: object
+  properties:
+  - id
+  - value
+  - field
+- name: DenialReasonEnum
+  description: '* `1` - Other
+
+    * `2` - Over budget
+
+    * `3` - Unapproved vendor
+
+    * `4` - Duplicate request
+
+    * `5` - Policy violation
+
+    * `6` - Incorrect specs
+
+    * `7` - Per request
+
+    * `8` - Missing information
+
+    * `9` - Incorrect timing
+
+    * `10` - Process not followed'
+  type: integer
+- name: DepartmentIdValidationRequest
+  description: Procurify DepartmentIdValidationRequest resource
+  type: object
+  properties:
+  - id
+- name: DepartmentLocationRead
+  description: Procurify DepartmentLocationRead resource
+  type: object
+  properties:
+  - id
+  - branch
+  - external_id
+  - name
+  - active
+  - punchout_email
+  - is_active_for_account_code
+- name: DepartmentRead
+  description: Procurify DepartmentRead resource
+  type: object
+  properties:
+  - id
+  - branch
+  - external_id
+  - name
+  - active
+  - punchout_email
+  - is_active_for_account_code
+- name: DepartmentReadSerializerSingleCreate
+  description: Procurify DepartmentReadSerializerSingleCreate resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: DepartmentReadSerializerSingleUpdate
+  description: Procurify DepartmentReadSerializerSingleUpdate resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: DepartmentSummary
+  description: Procurify DepartmentSummary resource
+  type: object
+  properties:
+  - id
+  - branch
+  - external_id
+  - name
+  - punchout_email
+  - active
+- name: DepartmentUpsertRequest
+  description: Procurify DepartmentUpsertRequest resource
+  type: object
+  properties:
+  - branch
+  - external_id
+  - name
+  - active
+  - punchout_email
+- name: DomainSwitching
+  description: Procurify DomainSwitching resource
+  type: object
+  properties:
+  - active
+  - procurify_domains
+- name: DurationEnum
+  description: '* `0` - YEARS
+
+    * `1` - MONTHS'
+  type: integer
+- name: EmailConfiguration
+  description: Procurify EmailConfiguration resource
+  type: object
+  properties:
+  - auto_po
+  - payment_remittance
+- name: EmailConfigurationRequest
+  description: Procurify EmailConfigurationRequest resource
+  type: object
+  properties:
+  - auto_po
+  - payment_remittance
+- name: ExpenseDocs
+  description: Procurify ExpenseDocs resource
+  type: object
+  properties:
+  - merchant
+  - notes
+  - expenseReport
+- name: ExpenseLineCreditCard
+  description: Procurify ExpenseLineCreditCard resource
+  type: object
+  properties:
+  - id
+  - name
+  - number
+  - type
+- name: ExpenseRead
+  description: Procurify ExpenseRead resource
+  type: object
+  properties:
+  - id
+  - account
+  - localCurrency
+  - expense_type_fields
+  - creditcard
+  - account_id
+  - expenseReport
+  - requester
+  - approver
+  - approved_date
+  - is_active
+  - created_at
+  - updated_at
+  - merchant
+  - transDate
+  - reimburse
+  - expense_type
+  - paymentType
+  - amount
+  - currency_rate_final
+  - exchange_rate_override
+  - tax_name
+  - tax_percentage
+  - tax_amount
+  - tax_is_inclusive
+  - notes
+  - attachment
+  - active
+  - last_changed_by
+  - mileage_preset
+  - tax
+- name: ExpenseReportDocs
+  description: Procurify ExpenseReportDocs resource
+  type: object
+  properties:
+  - id
+  - uuid
+- name: ExpenseReportUserSummaryDocs
+  description: Procurify ExpenseReportUserSummaryDocs resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+  - email
+  - position
+  - profile_image
+  - approval_delegatee
+  - expected_return_date
+- name: ExpenseReportWithUserDocs
+  description: Procurify ExpenseReportWithUserDocs resource
+  type: object
+  properties:
+  - id
+  - uuid
+  - user
+- name: ExpenseTypeEnum
+  description: '* `0` - OTHER
+
+    * `1` - MEALS
+
+    * `2` - MILEAGE
+
+    * `3` - LABOUR
+
+    * `4` - AIRFARE
+
+    * `5` - LODGING'
+  type: integer
+- name: FieldTypeEnum
+  description: '* `t` - Text
+
+    * `a` - Large Text Field
+
+    * `i` - Integer
+
+    * `f` - Floating point decimal
+
+    * `b` - Boolean (Yes/No)
+
+    * `m` - Dropdown Choices
+
+    * `d` - Date
+
+    * `h` - Date Time'
+  type: string
+- name: FlagRead
+  description: Procurify FlagRead resource
+  type: object
+  properties:
+  - color
+  - symbol
+  - object_id
+  - content_type
+- name: FrequencyEnum
+  description: '* `0` - YEARLY
+
+    * `1` - MONTHLY'
+  type: integer
+- name: FulfilmentStatusEnum
+  description: '* `empty` - Empty
+
+    * `partial` - Partial
+
+    * `full` - Full'
+  type: string
+- name: InviteFunctionalUserRequest
+  description: Procurify InviteFunctionalUserRequest resource
+  type: object
+  properties:
+  - email
+  - send_invitation_email
+  - first_name
+  - last_name
+  - phone
+  - position
+  - role_id
+  - all_locations
+  - locations
+  - home_department
+  - home_location
+- name: ItemMetadataItemRead
+  description: Procurify ItemMetadataItemRead resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: ItemReadSerializer_v2
+  description: Procurify ItemReadSerializer_v2 resource
+  type: object
+  properties:
+  - id
+  - orderitem
+  - expense
+  - bill
+  - vendor
+  - sku
+  - description
+  - po
+  - unit
+  - quantity
+  - currency
+  - total_cost
+  - received_on
+  - packing_slips
+  - cost_allocations
+  - archived
+  - expense_report
+  - same_unit_cost
+  - creditcard_item
+  - is_edited
+  - unit_cost_diff_log
+  - tax_name
+  - tax_percentage
+  - tax_amount
+  - tax_is_inclusive
+  - tax
+  - total_cost_with_tax
+  - shipping_amount
+  - unit_cost
+  - custom_fields
+  - type
+  - bill_by_cost
+- name: ItemWriteRequest
+  description: Procurify ItemWriteRequest resource
+  type: object
+  properties:
+  - order_item
+  - pass_quantity
+  - fail_quantity
+- name: LanguageEnum
+  description: '* `1` - English'
+  type: integer
+- name: LegalEntitySummary
+  description: Procurify LegalEntitySummary resource
+  type: object
+  properties:
+  - id
+  - uuid
+  - name
+- name: LineItemCustomFieldRequest
+  description: "Serializer used when custom fields are provided in a request. E.g\
+    \ JSON request with:\n\"custom_fields\": [\n    {\n    \"custom_field_name\":\
+    \ \"string\",\n    \"custom_field_value\": \"string\"\n    },\n    ...\n]"
+  type: object
+  properties:
+  - custom_field_name
+  - custom_field_value
+- name: ListBillsMetadataDocs
+  description: Procurify ListBillsMetadataDocs resource
+  type: object
+  properties:
+  - permissions
+  - summary
+  - pagination
+- name: LocationCreateUpsertRequest
+  description: Procurify LocationCreateUpsertRequest resource
+  type: object
+  properties:
+  - name
+  - url
+  - logo
+  - currency
+  - phoneOne
+  - fax
+  - email
+  - primary_billing_address
+  - primary_shipping_address
+  - shipping_addresses
+  - language
+  - locationTimezone
+  - active
+  - external_id
+  - legal_entity
+- name: LocationIdValidationSerializersRequest
+  description: Procurify LocationIdValidationSerializersRequest resource
+  type: object
+  properties:
+  - id
+  - all_departments
+  - departments
+- name: LocationSimple
+  description: Procurify LocationSimple resource
+  type: object
+  properties:
+  - id
+  - name
+  - headquarter
+- name: LocationTimezoneEnum
+  description: '* `Africa/Abidjan` - Africa/Abidjan
+
+    * `Africa/Accra` - Africa/Accra
+
+    * `Africa/Addis_Ababa` - Africa/Addis_Ababa
+
+    * `Africa/Algiers` - Africa/Algiers
+
+    * `Africa/Asmara` - Africa/Asmara
+
+    * `Africa/Bamako` - Africa/Bamako
+
+    * `Africa/Bangui` - Africa/Bangui
+
+    * `Africa/Banjul` - Africa/Banjul
+
+    * `Africa/Bissau` - Africa/Bissau
+
+    * `Africa/Blantyre` - Africa/Blantyre
+
+    * `Africa/Brazzaville` - Africa/Brazzaville
+
+    * `Africa/Bujumbura` - Africa/Bujumbura
+
+    * `Africa/Cairo` - Africa/Cairo
+
+    * `Africa/Casablanca` - Africa/Casablanca
+
+    * `Africa/Ceuta` - Africa/Ceuta
+
+    * `Africa/Conakry` - Africa/Conakry
+
+    * `Africa/Dakar` - Africa/Dakar
+
+    * `Africa/Dar_es_Salaam` - Africa/Dar_es_Salaam
+
+    * `Africa/Djibouti` - Africa/Djibouti
+
+    * `Africa/Douala` - Africa/Douala
+
+    * `Africa/El_Aaiun` - Africa/El_Aaiun
+
+    * `Africa/Freetown` - Africa/Freetown
+
+    * `Africa/Gaborone` - Africa/Gaborone
+
+    * `Africa/Harare` - Africa/Harare
+
+    * `Africa/Johannesburg` - Africa/Johannesburg
+
+    * `Africa/Juba` - Africa/Juba
+
+    * `Africa/Kampala` - Africa/Kampala
+
+    * `Africa/Khartoum` - Africa/Khartoum
+
+    * `Africa/Kigali` - Africa/Kigali
+
+    * `Africa/Kinshasa` - Africa/Kinshasa
+
+    * `Africa/Lagos` - Africa/Lagos
+
+    * `Africa/Libreville` - Africa/Libreville
+
+    * `Africa/Lome` - Africa/Lome
+
+    * `Africa/Luanda` - Africa/Luanda
+
+    * `Africa/Lubumbashi` - Africa/Lubumbashi
+
+    * `Africa/Lusaka` - Africa/Lusaka
+
+    * `Africa/Malabo` - Africa/Malabo
+
+    * `Africa/Maputo` - Africa/Maputo
+
+    * `Africa/Maseru` - Africa/Maseru
+
+    * `Africa/Mbabane` - Africa/Mbabane
+
+    * `Africa/Mogadishu` - Africa/Mogadishu
+
+    * `Africa/Monrovia` - Africa/Monrovia
+
+    * `Africa/Nairobi` - Africa/Nairobi
+
+    * `Africa/Ndjamena` - Africa/Ndjamena
+
+    * `Africa/Niamey` - Africa/Niamey
+
+    * `Africa/Nouakchott` - Africa/Nouakchott
+
+    * `Africa/Ouagadougou` - Africa/Ouagadougou
+
+    * `Africa/Porto-Novo` - Africa/Porto-Novo
+
+    * `Africa/Sao_Tome` - Africa/Sao_Tome
+
+    * `Africa/Tripoli` - Africa/Tripoli
+
+    * `Africa/Tunis` - Africa/Tunis
+
+    * `Africa/Windhoek` - Africa/Windhoek
+
+    * `America/Adak` - America/Adak
+
+    * `America/Anchorage` - America/Anchorage
+
+    * `America/Anguilla` - America/Anguilla
+
+    * `America/Antigua` - America/Antigua
+
+    * `America/Araguaina` - America/Araguaina
+
+    * `America/Argentina/Buenos_Aires` - America/Argentina/Buenos_Aires
+
+    * `America/Argentina/Catamarca` - America/Argentina/Catamarca
+
+    * `America/Argentina/Cordoba` - America/Argentina/Cordoba
+
+    * `America/Argentina/Jujuy` - America/Argentina/Jujuy
+
+    * `America/Argentina/La_Rioja` - America/Argentina/La_Rioja
+
+    * `America/Argentina/Mendoza` - America/Argentina/Mendoza
+
+    * `America/Argentina/Rio_Gallegos` - America/Argentina/Rio_Gallegos
+
+    * `America/Argentina/Salta` - America/Argentina/Salta
+
+    * `America/Argentina/San_Juan` - America/Argentina/San_Juan
+
+    * `America/Argentina/San_Luis` - America/Argentina/San_Luis
+
+    * `America/Argentina/Tucuman` - America/Argentina/Tucuman
+
+    * `America/Argentina/Ushuaia` - America/Argentina/Ushuaia
+
+    * `America/Aruba` - America/Aruba
+
+    * `America/Asuncion` - America/Asuncion
+
+    * `America/Atikokan` - America/Atikokan
+
+    * `America/Bahia` - America/Bahia
+
+    * `America/Bahia_Banderas` - America/Bahia_Banderas
+
+    * `America/Barbados` - America/Barbados
+
+    * `America/Belem` - America/Belem
+
+    * `America/Belize` - America/Belize
+
+    * `America/Blanc-Sablon` - America/Blanc-Sablon
+
+    * `America/Boa_Vista` - America/Boa_Vista
+
+    * `America/Bogota` - America/Bogota
+
+    * `America/Boise` - America/Boise
+
+    * `America/Cambridge_Bay` - America/Cambridge_Bay
+
+    * `America/Campo_Grande` - America/Campo_Grande
+
+    * `America/Cancun` - America/Cancun
+
+    * `America/Caracas` - America/Caracas
+
+    * `America/Cayenne` - America/Cayenne
+
+    * `America/Cayman` - America/Cayman
+
+    * `America/Chicago` - America/Chicago
+
+    * `America/Chihuahua` - America/Chihuahua
+
+    * `America/Costa_Rica` - America/Costa_Rica
+
+    * `America/Creston` - America/Creston
+
+    * `America/Cuiaba` - America/Cuiaba
+
+    * `America/Curacao` - America/Curacao
+
+    * `America/Danmarkshavn` - America/Danmarkshavn
+
+    * `America/Dawson` - America/Dawson
+
+    * `America/Dawson_Creek` - America/Dawson_Creek
+
+    * `America/Denver` - America/Denver
+
+    * `America/Detroit` - America/Detroit
+
+    * `America/Dominica` - America/Dominica
+
+    * `America/Edmonton` - America/Edmonton
+
+    * `America/Eirunepe` - America/Eirunepe
+
+    * `America/El_Salvador` - America/El_Salvador
+
+    * `America/Fort_Nelson` - America/Fort_Nelson
+
+    * `America/Fortaleza` - America/Fortaleza
+
+    * `America/Glace_Bay` - America/Glace_Bay
+
+    * `America/Godthab` - America/Godthab
+
+    * `America/Goose_Bay` - America/Goose_Bay
+
+    * `America/Grand_Turk` - America/Grand_Turk
+
+    * `America/Grenada` - America/Grenada
+
+    * `America/Guadeloupe` - America/Guadeloupe
+
+    * `America/Guatemala` - America/Guatemala
+
+    * `America/Guayaquil` - America/Guayaquil
+
+    * `America/Guyana` - America/Guyana
+
+    * `America/Halifax` - America/Halifax
+
+    * `America/Havana` - America/Havana
+
+    * `America/Hermosillo` - America/Hermosillo
+
+    * `America/Indiana/Indianapolis` - America/Indiana/Indianapolis
+
+    * `America/Indiana/Knox` - America/Indiana/Knox
+
+    * `America/Indiana/Marengo` - America/Indiana/Marengo
+
+    * `America/Indiana/Petersburg` - America/Indiana/Petersburg
+
+    * `America/Indiana/Tell_City` - America/Indiana/Tell_City
+
+    * `America/Indiana/Vevay` - America/Indiana/Vevay
+
+    * `America/Indiana/Vincennes` - America/Indiana/Vincennes
+
+    * `America/Indiana/Winamac` - America/Indiana/Winamac
+
+    * `America/Inuvik` - America/Inuvik
+
+    * `America/Iqaluit` - America/Iqaluit
+
+    * `America/Jamaica` - America/Jamaica
+
+    * `America/Juneau` - America/Juneau
+
+    * `America/Kentucky/Louisville` - America/Kentucky/Louisville
+
+    * `America/Kentucky/Monticello` - America/Kentucky/Monticello
+
+    * `America/Kralendijk` - America/Kralendijk
+
+    * `America/La_Paz` - America/La_Paz
+
+    * `America/Lima` - America/Lima
+
+    * `America/Los_Angeles` - America/Los_Angeles
+
+    * `America/Lower_Princes` - America/Lower_Princes
+
+    * `America/Maceio` - America/Maceio
+
+    * `America/Managua` - America/Managua
+
+    * `America/Manaus` - America/Manaus
+
+    * `America/Marigot` - America/Marigot
+
+    * `America/Martinique` - America/Martinique
+
+    * `America/Matamoros` - America/Matamoros
+
+    * `America/Mazatlan` - America/Mazatlan
+
+    * `America/Menominee` - America/Menominee
+
+    * `America/Merida` - America/Merida
+
+    * `America/Metlakatla` - America/Metlakatla
+
+    * `America/Mexico_City` - America/Mexico_City
+
+    * `America/Miquelon` - America/Miquelon
+
+    * `America/Moncton` - America/Moncton
+
+    * `America/Monterrey` - America/Monterrey
+
+    * `America/Montevideo` - America/Montevideo
+
+    * `America/Montserrat` - America/Montserrat
+
+    * `America/Nassau` - America/Nassau
+
+    * `America/New_York` - America/New_York
+
+    * `America/Nipigon` - America/Nipigon
+
+    * `America/Nome` - America/Nome
+
+    * `America/Noronha` - America/Noronha
+
+    * `America/North_Dakota/Beulah` - America/North_Dakota/Beulah
+
+    * `America/North_Dakota/Center` - America/North_Dakota/Center
+
+    * `America/North_Dakota/New_Salem` - America/North_Dakota/New_Salem
+
+    * `America/Ojinaga` - America/Ojinaga
+
+    * `America/Panama` - America/Panama
+
+    * `America/Pangnirtung` - America/Pangnirtung
+
+    * `America/Paramaribo` - America/Paramaribo
+
+    * `America/Phoenix` - America/Phoenix
+
+    * `America/Port-au-Prince` - America/Port-au-Prince
+
+    * `America/Port_of_Spain` - America/Port_of_Spain
+
+    * `America/Porto_Velho` - America/Porto_Velho
+
+    * `America/Puerto_Rico` - America/Puerto_Rico
+
+    * `America/Punta_Arenas` - America/Punta_Arenas
+
+    * `America/Rainy_River` - America/Rainy_River
+
+    * `America/Rankin_Inlet` - America/Rankin_Inlet
+
+    * `America/Recife` - America/Recife
+
+    * `America/Regina` - America/Regina
+
+    * `America/Resolute` - America/Resolute
+
+    * `America/Rio_Branco` - America/Rio_Branco
+
+    * `America/Santarem` - America/Santarem
+
+    * `America/Santiago` - America/Santiago
+
+    * `America/Santo_Domingo` - America/Santo_Domingo
+
+    * `America/Sao_Paulo` - America/Sao_Paulo
+
+    * `America/Scoresbysund` - America/Scoresbysund
+
+    * `America/Sitka` - America/Sitka
+
+    * `America/St_Barthelemy` - America/St_Barthelemy
+
+    * `America/St_Johns` - America/St_Johns
+
+    * `America/St_Kitts` - America/St_Kitts
+
+    * `America/St_Lucia` - America/St_Lucia
+
+    * `America/St_Thomas` - America/St_Thomas
+
+    * `America/St_Vincent` - America/St_Vincent
+
+    * `America/Swift_Current` - America/Swift_Current
+
+    * `America/Tegucigalpa` - America/Tegucigalpa
+
+    * `America/Thule` - America/Thule
+
+    * `America/Thunder_Bay` - America/Thunder_Bay
+
+    * `America/Tijuana` - America/Tijuana
+
+    * `America/Toronto` - America/Toronto
+
+    * `America/Tortola` - America/Tortola
+
+    * `America/Vancouver` - America/Vancouver
+
+    * `America/Whitehorse` - America/Whitehorse
+
+    * `America/Winnipeg` - America/Winnipeg
+
+    * `America/Yakutat` - America/Yakutat
+
+    * `America/Yellowknife` - America/Yellowknife
+
+    * `Antarctica/Casey` - Antarctica/Casey
+
+    * `Antarctica/Davis` - Antarctica/Davis
+
+    * `Antarctica/DumontDUrville` - Antarctica/DumontDUrville
+
+    * `Antarctica/Macquarie` - Antarctica/Macquarie
+
+    * `Antarctica/Mawson` - Antarctica/Mawson
+
+    * `Antarctica/McMurdo` - Antarctica/McMurdo
+
+    * `Antarctica/Palmer` - Antarctica/Palmer
+
+    * `Antarctica/Rothera` - Antarctica/Rothera
+
+    * `Antarctica/Syowa` - Antarctica/Syowa
+
+    * `Antarctica/Troll` - Antarctica/Troll
+
+    * `Antarctica/Vostok` - Antarctica/Vostok
+
+    * `Arctic/Longyearbyen` - Arctic/Longyearbyen
+
+    * `Asia/Aden` - Asia/Aden
+
+    * `Asia/Almaty` - Asia/Almaty
+
+    * `Asia/Amman` - Asia/Amman
+
+    * `Asia/Anadyr` - Asia/Anadyr
+
+    * `Asia/Aqtau` - Asia/Aqtau
+
+    * `Asia/Aqtobe` - Asia/Aqtobe
+
+    * `Asia/Ashgabat` - Asia/Ashgabat
+
+    * `Asia/Atyrau` - Asia/Atyrau
+
+    * `Asia/Baghdad` - Asia/Baghdad
+
+    * `Asia/Bahrain` - Asia/Bahrain
+
+    * `Asia/Baku` - Asia/Baku
+
+    * `Asia/Bangkok` - Asia/Bangkok
+
+    * `Asia/Barnaul` - Asia/Barnaul
+
+    * `Asia/Beirut` - Asia/Beirut
+
+    * `Asia/Bishkek` - Asia/Bishkek
+
+    * `Asia/Brunei` - Asia/Brunei
+
+    * `Asia/Chita` - Asia/Chita
+
+    * `Asia/Choibalsan` - Asia/Choibalsan
+
+    * `Asia/Colombo` - Asia/Colombo
+
+    * `Asia/Damascus` - Asia/Damascus
+
+    * `Asia/Dhaka` - Asia/Dhaka
+
+    * `Asia/Dili` - Asia/Dili
+
+    * `Asia/Dubai` - Asia/Dubai
+
+    * `Asia/Dushanbe` - Asia/Dushanbe
+
+    * `Asia/Famagusta` - Asia/Famagusta
+
+    * `Asia/Gaza` - Asia/Gaza
+
+    * `Asia/Hebron` - Asia/Hebron
+
+    * `Asia/Ho_Chi_Minh` - Asia/Ho_Chi_Minh
+
+    * `Asia/Hong_Kong` - Asia/Hong_Kong
+
+    * `Asia/Hovd` - Asia/Hovd
+
+    * `Asia/Irkutsk` - Asia/Irkutsk
+
+    * `Asia/Jakarta` - Asia/Jakarta
+
+    * `Asia/Jayapura` - Asia/Jayapura
+
+    * `Asia/Jerusalem` - Asia/Jerusalem
+
+    * `Asia/Kabul` - Asia/Kabul
+
+    * `Asia/Kamchatka` - Asia/Kamchatka
+
+    * `Asia/Karachi` - Asia/Karachi
+
+    * `Asia/Kathmandu` - Asia/Kathmandu
+
+    * `Asia/Khandyga` - Asia/Khandyga
+
+    * `Asia/Kolkata` - Asia/Kolkata
+
+    * `Asia/Krasnoyarsk` - Asia/Krasnoyarsk
+
+    * `Asia/Kuala_Lumpur` - Asia/Kuala_Lumpur
+
+    * `Asia/Kuching` - Asia/Kuching
+
+    * `Asia/Kuwait` - Asia/Kuwait
+
+    * `Asia/Macau` - Asia/Macau
+
+    * `Asia/Magadan` - Asia/Magadan
+
+    * `Asia/Makassar` - Asia/Makassar
+
+    * `Asia/Manila` - Asia/Manila
+
+    * `Asia/Muscat` - Asia/Muscat
+
+    * `Asia/Nicosia` - Asia/Nicosia
+
+    * `Asia/Novokuznetsk` - Asia/Novokuznetsk
+
+    * `Asia/Novosibirsk` - Asia/Novosibirsk
+
+    * `Asia/Omsk` - Asia/Omsk
+
+    * `Asia/Oral` - Asia/Oral
+
+    * `Asia/Phnom_Penh` - Asia/Phnom_Penh
+
+    * `Asia/Pontianak` - Asia/Pontianak
+
+    * `Asia/Pyongyang` - Asia/Pyongyang
+
+    * `Asia/Qatar` - Asia/Qatar
+
+    * `Asia/Qyzylorda` - Asia/Qyzylorda
+
+    * `Asia/Riyadh` - Asia/Riyadh
+
+    * `Asia/Sakhalin` - Asia/Sakhalin
+
+    * `Asia/Samarkand` - Asia/Samarkand
+
+    * `Asia/Seoul` - Asia/Seoul
+
+    * `Asia/Shanghai` - Asia/Shanghai
+
+    * `Asia/Singapore` - Asia/Singapore
+
+    * `Asia/Srednekolymsk` - Asia/Srednekolymsk
+
+    * `Asia/Taipei` - Asia/Taipei
+
+    * `Asia/Tashkent` - Asia/Tashkent
+
+    * `Asia/Tbilisi` - Asia/Tbilisi
+
+    * `Asia/Tehran` - Asia/Tehran
+
+    * `Asia/Thimphu` - Asia/Thimphu
+
+    * `Asia/Tokyo` - Asia/Tokyo
+
+    * `Asia/Tomsk` - Asia/Tomsk
+
+    * `Asia/Ulaanbaatar` - Asia/Ulaanbaatar
+
+    * `Asia/Urumqi` - Asia/Urumqi
+
+    * `Asia/Ust-Nera` - Asia/Ust-Nera
+
+    * `Asia/Vientiane` - Asia/Vientiane
+
+    * `Asia/Vladivostok` - Asia/Vladivostok
+
+    * `Asia/Yakutsk` - Asia/Yakutsk
+
+    * `Asia/Yangon` - Asia/Yangon
+
+    * `Asia/Yekaterinburg` - Asia/Yekaterinburg
+
+    * `Asia/Yerevan` - Asia/Yerevan
+
+    * `Atlantic/Azores` - Atlantic/Azores
+
+    * `Atlantic/Bermuda` - Atlantic/Bermuda
+
+    * `Atlantic/Canary` - Atlantic/Canary
+
+    * `Atlantic/Cape_Verde` - Atlantic/Cape_Verde
+
+    * `Atlantic/Faroe` - Atlantic/Faroe
+
+    * `Atlantic/Madeira` - Atlantic/Madeira
+
+    * `Atlantic/Reykjavik` - Atlantic/Reykjavik
+
+    * `Atlantic/South_Georgia` - Atlantic/South_Georgia
+
+    * `Atlantic/St_Helena` - Atlantic/St_Helena
+
+    * `Atlantic/Stanley` - Atlantic/Stanley
+
+    * `Australia/Adelaide` - Australia/Adelaide
+
+    * `Australia/Brisbane` - Australia/Brisbane
+
+    * `Australia/Broken_Hill` - Australia/Broken_Hill
+
+    * `Australia/Currie` - Australia/Currie
+
+    * `Australia/Darwin` - Australia/Darwin
+
+    * `Australia/Eucla` - Australia/Eucla
+
+    * `Australia/Hobart` - Australia/Hobart
+
+    * `Australia/Lindeman` - Australia/Lindeman
+
+    * `Australia/Lord_Howe` - Australia/Lord_Howe
+
+    * `Australia/Melbourne` - Australia/Melbourne
+
+    * `Australia/Perth` - Australia/Perth
+
+    * `Australia/Sydney` - Australia/Sydney
+
+    * `Canada/Atlantic` - Canada/Atlantic
+
+    * `Canada/Central` - Canada/Central
+
+    * `Canada/Eastern` - Canada/Eastern
+
+    * `Canada/Mountain` - Canada/Mountain
+
+    * `Canada/Newfoundland` - Canada/Newfoundland
+
+    * `Canada/Pacific` - Canada/Pacific
+
+    * `Europe/Amsterdam` - Europe/Amsterdam
+
+    * `Europe/Andorra` - Europe/Andorra
+
+    * `Europe/Astrakhan` - Europe/Astrakhan
+
+    * `Europe/Athens` - Europe/Athens
+
+    * `Europe/Belgrade` - Europe/Belgrade
+
+    * `Europe/Berlin` - Europe/Berlin
+
+    * `Europe/Bratislava` - Europe/Bratislava
+
+    * `Europe/Brussels` - Europe/Brussels
+
+    * `Europe/Bucharest` - Europe/Bucharest
+
+    * `Europe/Budapest` - Europe/Budapest
+
+    * `Europe/Busingen` - Europe/Busingen
+
+    * `Europe/Chisinau` - Europe/Chisinau
+
+    * `Europe/Copenhagen` - Europe/Copenhagen
+
+    * `Europe/Dublin` - Europe/Dublin
+
+    * `Europe/Gibraltar` - Europe/Gibraltar
+
+    * `Europe/Guernsey` - Europe/Guernsey
+
+    * `Europe/Helsinki` - Europe/Helsinki
+
+    * `Europe/Isle_of_Man` - Europe/Isle_of_Man
+
+    * `Europe/Istanbul` - Europe/Istanbul
+
+    * `Europe/Jersey` - Europe/Jersey
+
+    * `Europe/Kaliningrad` - Europe/Kaliningrad
+
+    * `Europe/Kiev` - Europe/Kiev
+
+    * `Europe/Kirov` - Europe/Kirov
+
+    * `Europe/Lisbon` - Europe/Lisbon
+
+    * `Europe/Ljubljana` - Europe/Ljubljana
+
+    * `Europe/London` - Europe/London
+
+    * `Europe/Luxembourg` - Europe/Luxembourg
+
+    * `Europe/Madrid` - Europe/Madrid
+
+    * `Europe/Malta` - Europe/Malta
+
+    * `Europe/Mariehamn` - Europe/Mariehamn
+
+    * `Europe/Minsk` - Europe/Minsk
+
+    * `Europe/Monaco` - Europe/Monaco
+
+    * `Europe/Moscow` - Europe/Moscow
+
+    * `Europe/Oslo` - Europe/Oslo
+
+    * `Europe/Paris` - Europe/Paris
+
+    * `Europe/Podgorica` - Europe/Podgorica
+
+    * `Europe/Prague` - Europe/Prague
+
+    * `Europe/Riga` - Europe/Riga
+
+    * `Europe/Rome` - Europe/Rome
+
+    * `Europe/Samara` - Europe/Samara
+
+    * `Europe/San_Marino` - Europe/San_Marino
+
+    * `Europe/Sarajevo` - Europe/Sarajevo
+
+    * `Europe/Saratov` - Europe/Saratov
+
+    * `Europe/Simferopol` - Europe/Simferopol
+
+    * `Europe/Skopje` - Europe/Skopje
+
+    * `Europe/Sofia` - Europe/Sofia
+
+    * `Europe/Stockholm` - Europe/Stockholm
+
+    * `Europe/Tallinn` - Europe/Tallinn
+
+    * `Europe/Tirane` - Europe/Tirane
+
+    * `Europe/Ulyanovsk` - Europe/Ulyanovsk
+
+    * `Europe/Uzhgorod` - Europe/Uzhgorod
+
+    * `Europe/Vaduz` - Europe/Vaduz
+
+    * `Europe/Vatican` - Europe/Vatican
+
+    * `Europe/Vienna` - Europe/Vienna
+
+    * `Europe/Vilnius` - Europe/Vilnius
+
+    * `Europe/Volgograd` - Europe/Volgograd
+
+    * `Europe/Warsaw` - Europe/Warsaw
+
+    * `Europe/Zagreb` - Europe/Zagreb
+
+    * `Europe/Zaporozhye` - Europe/Zaporozhye
+
+    * `Europe/Zurich` - Europe/Zurich
+
+    * `GMT` - GMT
+
+    * `Indian/Antananarivo` - Indian/Antananarivo
+
+    * `Indian/Chagos` - Indian/Chagos
+
+    * `Indian/Christmas` - Indian/Christmas
+
+    * `Indian/Cocos` - Indian/Cocos
+
+    * `Indian/Comoro` - Indian/Comoro
+
+    * `Indian/Kerguelen` - Indian/Kerguelen
+
+    * `Indian/Mahe` - Indian/Mahe
+
+    * `Indian/Maldives` - Indian/Maldives
+
+    * `Indian/Mauritius` - Indian/Mauritius
+
+    * `Indian/Mayotte` - Indian/Mayotte
+
+    * `Indian/Reunion` - Indian/Reunion
+
+    * `Pacific/Apia` - Pacific/Apia
+
+    * `Pacific/Auckland` - Pacific/Auckland
+
+    * `Pacific/Bougainville` - Pacific/Bougainville
+
+    * `Pacific/Chatham` - Pacific/Chatham
+
+    * `Pacific/Chuuk` - Pacific/Chuuk
+
+    * `Pacific/Easter` - Pacific/Easter
+
+    * `Pacific/Efate` - Pacific/Efate
+
+    * `Pacific/Enderbury` - Pacific/Enderbury
+
+    * `Pacific/Fakaofo` - Pacific/Fakaofo
+
+    * `Pacific/Fiji` - Pacific/Fiji
+
+    * `Pacific/Funafuti` - Pacific/Funafuti
+
+    * `Pacific/Galapagos` - Pacific/Galapagos
+
+    * `Pacific/Gambier` - Pacific/Gambier
+
+    * `Pacific/Guadalcanal` - Pacific/Guadalcanal
+
+    * `Pacific/Guam` - Pacific/Guam
+
+    * `Pacific/Honolulu` - Pacific/Honolulu
+
+    * `Pacific/Kiritimati` - Pacific/Kiritimati
+
+    * `Pacific/Kosrae` - Pacific/Kosrae
+
+    * `Pacific/Kwajalein` - Pacific/Kwajalein
+
+    * `Pacific/Majuro` - Pacific/Majuro
+
+    * `Pacific/Marquesas` - Pacific/Marquesas
+
+    * `Pacific/Midway` - Pacific/Midway
+
+    * `Pacific/Nauru` - Pacific/Nauru
+
+    * `Pacific/Niue` - Pacific/Niue
+
+    * `Pacific/Norfolk` - Pacific/Norfolk
+
+    * `Pacific/Noumea` - Pacific/Noumea
+
+    * `Pacific/Pago_Pago` - Pacific/Pago_Pago
+
+    * `Pacific/Palau` - Pacific/Palau
+
+    * `Pacific/Pitcairn` - Pacific/Pitcairn
+
+    * `Pacific/Pohnpei` - Pacific/Pohnpei
+
+    * `Pacific/Port_Moresby` - Pacific/Port_Moresby
+
+    * `Pacific/Rarotonga` - Pacific/Rarotonga
+
+    * `Pacific/Saipan` - Pacific/Saipan
+
+    * `Pacific/Tahiti` - Pacific/Tahiti
+
+    * `Pacific/Tarawa` - Pacific/Tarawa
+
+    * `Pacific/Tongatapu` - Pacific/Tongatapu
+
+    * `Pacific/Wake` - Pacific/Wake
+
+    * `Pacific/Wallis` - Pacific/Wallis
+
+    * `US/Alaska` - US/Alaska
+
+    * `US/Arizona` - US/Arizona
+
+    * `US/Central` - US/Central
+
+    * `US/Eastern` - US/Eastern
+
+    * `US/Hawaii` - US/Hawaii
+
+    * `US/Mountain` - US/Mountain
+
+    * `US/Pacific` - US/Pacific
+
+    * `UTC` - UTC'
+  type: string
+- name: LocationView
+  description: Procurify LocationView resource
+  type: object
+  properties:
+  - id
+  - name
+  - url
+  - logo
+  - currency
+  - phoneOne
+  - fax
+  - email
+  - primary_billing_address
+  - primary_shipping_address
+  - shipping_addresses
+  - language
+  - locationTimezone
+  - headquarter
+  - department_count
+  - active
+  - external_id
+  - legal_entity
+- name: LocationViewSerializerSingleCreate
+  description: Procurify LocationViewSerializerSingleCreate resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: LocationViewSerializerSingleRetrieve
+  description: Procurify LocationViewSerializerSingleRetrieve resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: MarkBillsAsPaid
+  description: Procurify MarkBillsAsPaid resource
+  type: object
+  properties:
+  - bill_uuids
+  - bill_group_ids
+  - payment_date
+- name: MarkBillsAsPaidRequest
+  description: Procurify MarkBillsAsPaidRequest resource
+  type: object
+  properties:
+  - bill_uuids
+  - bill_group_ids
+  - payment_date
+- name: MasterLogger
+  description: Procurify MasterLogger resource
+  type: object
+  properties:
+  - id
+  - user
+  - next_approver
+  - next_approvers
+  - nextApprover
+  - approval_delegation
+  - dateTime
+  - action
+  - line_qty_pass
+  - line_qty_fail
+  - order
+  - lineItem
+  - PO
+  - inventoryItem
+  - stocking_parent
+- name: MinimalRoleRead
+  description: Procurify MinimalRoleRead resource
+  type: object
+  properties:
+  - name
+  - type
+- name: Nested
+  description: Procurify Nested resource
+  type: object
+  properties:
+  - id
+  - code
+  - code_length
+  - description
+  - account_type
+  - active
+  - parent
+- name: NestedVendorRequest
+  description: Procurify NestedVendorRequest resource
+  type: object
+  properties:
+  - id
+  - requester
+  - submitted_date
+  - next_approver
+  - permissions
+- name: NestedVendorRequestRequest
+  description: Procurify NestedVendorRequestRequest resource
+  type: object
+  properties:
+  - submitted_date
+- name: NullEnum
+  description: Procurify NullEnum resource
+  type: object
+- name: OptimizedVendor
+  description: Procurify OptimizedVendor resource
+  type: object
+  properties:
+  - id
+  - name
+  - active
+  - addressLineOne
+  - addressLineTwo
+  - postalCode
+  - city
+  - state_province
+  - country
+  - phoneOne
+  - phoneTwo
+  - fax
+  - email
+  - comments
+  - contact
+  - url
+  - external_id
+  - dateModified
+  - currency
+  - payment_term_ref
+  - shipping_term_ref
+  - payment_method_ref
+  - shipping_method_ref
+  - payment_methods
+  - tax
+  - type
+  - default_payment_method
+  - creditcards
+  - is_1099_eligible
+  - overall_score
+  - is_auto_email_po_enabled
+  - po_pdf_labels
+  - vendor_request
+  - email_configurations
+- name: OptimizedVendorRequest
+  description: Procurify OptimizedVendorRequest resource
+  type: object
+  properties:
+  - name
+  - active
+  - addressLineOne
+  - addressLineTwo
+  - postalCode
+  - city
+  - state_province
+  - country
+  - phoneOne
+  - phoneTwo
+  - fax
+  - email
+  - comments
+  - contact
+  - url
+  - external_id
+  - currency
+  - payment_term_ref
+  - shipping_term_ref
+  - payment_method_ref
+  - shipping_method_ref
+  - tax
+  - type
+  - default_payment_method
+  - is_1099_eligible
+  - overall_score
+  - is_auto_email_po_enabled
+  - po_pdf_labels
+  - email_configurations
+- name: OptimizedVendorSerializerSingle
+  description: Procurify OptimizedVendorSerializerSingle resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: OrderItem
+  description: Procurify OrderItem resource
+  type: object
+  properties:
+  - PO
+  - PO_line_num
+  - account
+  - accountCode
+  - active
+  - approved_currency_rate
+  - approved_datetime
+  - approved_price
+  - approved_quantity
+  - approved_shipping_amount
+  - approved_tax_amount
+  - attachments
+  - catalog_item
+  - created_at
+  - currency
+  - dateInvoiced
+  - external_id
+  - hot
+  - id
+  - inventoryItem
+  - is_active
+  - item_attachments
+  - last_changed_by
+  - last_modified
+  - lineComment
+  - name
+  - num
+  - orderNum
+  - order_number
+  - po_note
+  - po_version
+  - pref_vendor
+  - price
+  - purchase_order
+  - purchaser
+  - quantity
+  - receivedFailQty
+  - receivedPassQty
+  - shipping_amount
+  - sku
+  - status
+  - tax_amount
+  - total_cost
+  - unit
+  - updated_at
+  - vendor
+  - receive_method
+  - type
+  - blanket
+- name: OrderItemAttachment
+  description: Procurify OrderItemAttachment resource
+  type: object
+  properties:
+  - id
+  - attachment
+  - upload_datetime
+  - name
+  - type
+  - user
+  - item
+- name: OrderItemAttachmentTypeEnum
+  description: '* `other` - other
+
+    * `invoice` - invoice
+
+    * `packingslip` - packingslip'
+  type: string
+- name: OrderItemPurchaseEdit
+  description: Procurify OrderItemPurchaseEdit resource
+  type: object
+  properties:
+  - id
+  - name
+  - sku
+  - unit
+  - quantity
+  - price
+  - po_note
+  - custom_fields
+  - tax_amount
+  - shipping_amount
+  - receive_method
+- name: OrderItemPurchaseEditRequest
+  description: Procurify OrderItemPurchaseEditRequest resource
+  type: object
+  properties:
+  - id
+  - name
+  - sku
+  - unit
+  - quantity
+  - price
+  - po_note
+  - custom_fields
+  - tax_amount
+  - shipping_amount
+  - receive_method
+- name: OrderItemRead
+  description: Procurify OrderItemRead resource
+  type: object
+  properties:
+  - PO
+  - PO_line_num
+  - account
+  - accountCode
+  - active
+  - approved_currency_rate
+  - approved_datetime
+  - approved_price
+  - approved_quantity
+  - approved_shipping_amount
+  - approved_tax_amount
+  - attachments
+  - catalog_item
+  - created_at
+  - currency
+  - dateInvoiced
+  - external_id
+  - hot
+  - id
+  - inventoryItem
+  - is_active
+  - item_attachments
+  - last_changed_by
+  - last_modified
+  - lineComment
+  - name
+  - num
+  - orderNum
+  - order_number
+  - po_note
+  - po_version
+  - pref_vendor
+  - price
+  - purchase_order
+  - purchaser
+  - quantity
+  - receivedFailQty
+  - receivedPassQty
+  - shipping_amount
+  - sku
+  - status
+  - tax_amount
+  - total_cost
+  - unit
+  - updated_at
+  - vendor
+  - receive_method
+  - type
+  - blanket
+  - comments
+  - confirmation_status
+  - confirmation_status_description
+  - cost_details
+  - custom_fields
+  - date_required
+  - fully_received_actual_receive_date
+  - has_sibling_items
+  - line_comment
+  - logs
+  - order_description
+  - order_status
+  - order_uuid
+  - punchout_supplier_icon
+  - punchout_supplier_name
+  - punchout_system
+  - punchout_vendor_reference
+  - punchout_supplier_can_update_quantity
+  - purchase_order_number
+  - purchase_order_uuid
+  - purchased_currency_rate
+  - recurrence
+  - requester
+  - spend_allocation
+  - submitted_date
+  - taxes
+- name: OrderItemStatusEnum
+  description: '* `0` - Purchase Pending
+
+    * `1` - Purchaser In-Use
+
+    * `2` - Receive Pending
+
+    * `3` - Received
+
+    * `4` - Rejected for Purchase
+
+    * `5` - Partial Received
+
+    * `6` - Fulfilled
+
+    * `7` - Approval Denied
+
+    * `8` - Request Draft'
+  type: integer
+- name: OrderItemTypeEnum
+  description: '* `0` - One Time
+
+    * `1` - Recurring
+
+    * `2` - Blanket'
+  type: integer
+- name: OrderRead
+  description: Procurify OrderRead resource
+  type: object
+  properties:
+  - num
+  - uuid
+  - branch
+  - user
+  - department
+  - currency
+  - total_cost_in_base_currency
+  - logs
+  - item_count
+  - ip_address
+  - date
+  - description
+  - dateRequired
+  - dateModified
+  - lineCount
+  - purchasedCount
+  - totalPrice
+  - status
+  - next_approver
+  - next_approvers
+  - approval_delegatee
+  - punchout_group
+  - punchout_shipping_address
+  - punchout_items_rejected
+  - punchout_supplier_name
+  - punchout_supplier_icon
+  - punchout_vendor_reference
+  - punchout_is_retriable
+  - punchout_order_purchase_order_id
+  - has_blanket_order_items
+  - approval_workflow
+  - denial_reason
+  - denial_comment
+- name: OrderStatusEnum
+  description: '* `0` - Pending
+
+    * `1` - Approved
+
+    * `2` - Denied
+
+    * `3` - Purchased
+
+    * `4` - Cancelled
+
+    * `5` - Received
+
+    * `6` - Draft'
+  type: integer
+- name: PO
+  description: Procurify PO Number
+  type: integer
+- name: PODocs
+  description: Procurify PODocs resource
+  type: object
+  properties:
+  - number
+  - id
+  - uuid
+- name: POWithListPurchaseOrderDocs
+  description: Procurify POWithListPurchaseOrderDocs resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PO_Num
+  description: PO Number
+  type: string
+- name: PO_line_num
+  description: PO_line_num property
+  type: integer
+- name: PaginatedAccountCodeReadList
+  description: Procurify PaginatedAccountCodeReadList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedCatalogItemBundleReadList
+  description: Procurify PaginatedCatalogItemBundleReadList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedCatalogItemReadList
+  description: Procurify PaginatedCatalogItemReadList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedChartOfAccountsAccountList
+  description: Procurify PaginatedChartOfAccountsAccountList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedCompanyPaymentMethodReadList
+  description: Procurify PaginatedCompanyPaymentMethodReadList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedCurrencyList
+  description: Procurify PaginatedCurrencyList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedCustomFieldReadList
+  description: Procurify PaginatedCustomFieldReadList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedDepartmentReadList
+  description: Procurify PaginatedDepartmentReadList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedLocationViewList
+  description: Procurify PaginatedLocationViewList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedOptimizedVendorList
+  description: Procurify PaginatedOptimizedVendorList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedOrderItemList
+  description: Procurify PaginatedOrderItemList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedOrderReadList
+  description: Procurify PaginatedOrderReadList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedPaymentResponseList
+  description: Procurify PaginatedPaymentResponseList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedPermissionGroupReadList
+  description: Procurify PaginatedPermissionGroupReadList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedPermissionReadList
+  description: Procurify PaginatedPermissionReadList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedReceiptItemReadList
+  description: Procurify PaginatedReceiptItemReadList resource
+  type: object
+  properties:
+  - pagination
+  - data
+- name: PaginatedTransactionList
+  description: Procurify PaginatedTransactionList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedUserProfileUnoptimizedList
+  description: Procurify PaginatedUserProfileUnoptimizedList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginatedVendorPaymentMethodReadList
+  description: Procurify PaginatedVendorPaymentMethodReadList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaginationDocs
+  description: Procurify PaginationDocs resource
+  type: object
+  properties:
+  - count
+  - next
+  - previous
+  - page_size
+  - num_pages
+  - current_page
+- name: PatchedOptimizedVendorRequest
+  description: Procurify PatchedOptimizedVendorRequest resource
+  type: object
+  properties:
+  - name
+  - active
+  - addressLineOne
+  - addressLineTwo
+  - postalCode
+  - city
+  - state_province
+  - country
+  - phoneOne
+  - phoneTwo
+  - fax
+  - email
+  - comments
+  - contact
+  - url
+  - external_id
+  - currency
+  - payment_term_ref
+  - shipping_term_ref
+  - payment_method_ref
+  - shipping_method_ref
+  - tax
+  - type
+  - default_payment_method
+  - is_1099_eligible
+  - overall_score
+  - is_auto_email_po_enabled
+  - po_pdf_labels
+  - email_configurations
+- name: PaymentCreator
+  description: Procurify PaymentCreator resource
+  type: object
+  properties:
+  - email
+  - first_name
+  - last_name
+- name: PaymentCurrencyResponse
+  description: Procurify PaymentCurrencyResponse resource
+  type: object
+  properties:
+  - id
+  - name
+- name: PaymentListRead
+  description: Procurify PaymentListRead resource
+  type: object
+  properties:
+  - id
+  - bill_payments
+  - payment_method_type
+  - payment_method
+  - payment_date
+  - amount
+  - total_amount_with_tax
+  - tax_amount
+  - inclusive_tax_amount
+  - exclusive_tax_amount
+  - currency
+  - status
+  - ach_number
+  - next_approver_choices
+- name: PaymentMetadataDocs
+  description: Procurify PaymentMetadataDocs resource
+  type: object
+  properties:
+  - permissions
+  - summary
+  - pagination
+- name: PaymentMetadataPaymentListRead
+  description: Procurify PaymentMetadataPaymentListRead resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PaymentMethod
+  description: Procurify PaymentMethod resource
+  type: object
+  properties:
+  - id
+  - name
+  - description
+  - active
+- name: PaymentMethodDocs
+  description: Procurify PaymentMethodDocs resource
+  type: object
+  properties:
+  - id
+  - vendor
+  - name
+  - type
+  - data
+  - currency
+- name: PaymentMethodRead
+  description: Procurify PaymentMethodRead resource
+  type: object
+  properties:
+  - id
+  - name
+  - type
+  - data
+  - currency
+  - payment_rail
+  - bank_account_country_code
+- name: PaymentMethodReadRequest
+  description: Procurify PaymentMethodReadRequest resource
+  type: object
+  properties:
+  - name
+  - type
+  - data
+  - currency
+- name: PaymentMethodRequest
+  description: Procurify PaymentMethodRequest resource
+  type: object
+  properties:
+  - name
+  - description
+  - active
+- name: PaymentMethodTypeEnum
+  description: '* `0` - OTHER
+
+    * `1` - CHECK
+
+    * `2` - ACH
+
+    * `3` - EFT
+
+    * `4` - WIRE
+
+    * `5` - PROCURIFY_CHECK
+
+    * `6` - PROCURIFY_ACH
+
+    * `7` - PROCURIFY_WIRE
+
+    * `8` - AIRWALLEX'
+  type: integer
+- name: PaymentResponse
+  description: Procurify PaymentResponse resource
+  type: object
+  properties:
+  - id
+  - uuid
+  - payment_source_name
+  - payment_source_type
+  - external_payment_source_id
+  - creator
+  - created_at
+  - updated_at
+  - amount
+  - currency
+  - status
+  - processing_date
+  - direct_debit_bank_account_mask
+  - vendor_name
+  - posted_date
+  - gl_code
+  - vendor_payment_method_country_code
+  - vendor_payment_method_rail
+  - bill_groups
+- name: PaymentResponseStatusEnum
+  description: Procurify PaymentResponseStatusEnum resource
+  type: string
+- name: PaymentSimpleDocs
+  description: Procurify PaymentSimpleDocs resource
+  type: object
+  properties:
+  - id
+  - user
+  - approver
+  - status
+  - currency
+  - amount
+  - payment_method
+  - payment_date
+  - memo
+  - reference_number
+  - is_processed
+- name: PaymentSourceTypeEnum
+  description: Procurify PaymentSourceTypeEnum resource
+  type: string
+- name: PaymentStatusEnum
+  description: '* `0` - Draft
+
+    * `1` - Confirmed
+
+    * `2` - Approved
+
+    * `3` - Denied
+
+    * `4` - Void
+
+    * `5` - Paid
+
+    * `6` - Partially Paid
+
+    * `7` - Processing
+
+    * `8` - Failed
+
+    * `9` - Scheduled'
+  type: integer
+- name: PaymentSummaryDocs
+  description: Procurify PaymentSummaryDocs resource
+  type: object
+  properties:
+  - total_cost
+- name: PaymentTerm
+  description: Procurify PaymentTerm resource
+  type: object
+  properties:
+  - id
+  - name
+  - description
+  - active
+- name: PaymentTermRequest
+  description: Procurify PaymentTermRequest resource
+  type: object
+  properties:
+  - name
+  - description
+  - active
+- name: PaymentTypeEnum
+  description: '* `0` - Other - CreditCard
+
+    * `1` - Other - Cash
+
+    * `2` - Other - Cheque
+
+    * `3` - Other
+
+    * `4` - Credit Card'
+  type: integer
+- name: PendingApprovalsCountDocs
+  description: Procurify PendingApprovalsCountDocs resource
+  type: object
+  properties:
+  - order
+  - expense
+  - travel
+  - bill
+  - payment
+- name: PermissionGroupRead
+  description: Procurify PermissionGroupRead resource
+  type: object
+  properties:
+  - id
+  - name
+  - user_count
+  - permissions
+  - type
+  - tier
+- name: PermissionRead
+  description: Procurify PermissionRead resource
+  type: object
+  properties:
+  - id
+  - codename
+  - tier
+- name: PermissionsApprove
+  description: Procurify PermissionsApprove resource
+  type: object
+  properties:
+  - can_approve
+- name: PermissionsEditDelete
+  description: Procurify PermissionsEditDelete resource
+  type: object
+  properties:
+  - can_edit
+  - can_delete
+- name: PermissionsEditDeleteApprove
+  description: Procurify PermissionsEditDeleteApprove resource
+  type: object
+  properties:
+  - can_edit
+  - can_delete
+  - can_approve
+- name: PriceModifierDocs
+  description: Procurify PriceModifierDocs resource
+  type: object
+  properties:
+  - value
+  - type
+- name: PriceModifierDocsTypeEnum
+  description: '* `amount` - amount
+
+    * `percentage` - percentage'
+  type: string
+- name: ProcurifyDomain
+  description: Procurify ProcurifyDomain resource
+  type: object
+  properties:
+  - subdomain
+  - name
+- name: PunchOutReadDocs
+  description: Procurify PunchOutReadDocs resource
+  type: object
+  properties:
+  - id
+  - name
+- name: PurchaseAgreementStatusEnum
+  description: '* `0` - Open
+
+    * `1` - Pending
+
+    * `2` - Closed
+
+    * `3` - Cancelled
+
+    * `4` - Denied
+
+    * `5` - Draft'
+  type: integer
+- name: PurchaseOrderBillingHistory
+  description: Procurify PurchaseOrderBillingHistory resource
+  type: object
+  properties:
+  - id
+  - number
+  - has_unbilled_unreceived_items
+  - items
+- name: PurchaseOrderBillingHistoryItem
+  description: Procurify PurchaseOrderBillingHistoryItem resource
+  type: object
+  properties:
+  - id
+  - billed_qty
+  - received_qty
+- name: PurchaseOrderBillingHistorySerializerList
+  description: Procurify PurchaseOrderBillingHistorySerializerList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PurchaseOrderContract
+  description: Procurify PurchaseOrderContract resource
+  type: object
+  properties:
+  - id
+  - uuid
+  - name
+- name: PurchaseOrderCountsBreakdown
+  description: Procurify PurchaseOrderCountsBreakdown resource
+  type: object
+  properties:
+  - all
+  - open
+  - partial
+  - closed
+  - cancelled
+  - page
+- name: PurchaseOrderCountsMeta
+  description: Procurify PurchaseOrderCountsMeta resource
+  type: object
+  properties:
+  - purchased
+  - receivable
+- name: PurchaseOrderDetail
+  description: Procurify PurchaseOrderDetail resource
+  type: object
+  properties:
+  - number
+  - uuid
+  - purchaser
+  - procurify_PO
+  - PO_Num
+  - date
+  - buyer_name
+  - buyer_contact
+  - buyer_addressLineOne
+  - buyer_postalCode
+  - buyer_city
+  - buyer_state_province
+  - buyer_country
+  - buyer_address
+  - receiver_name
+  - receiver_contact
+  - receiver_addressLineOne
+  - receiver_postalCode
+  - receiver_city
+  - receiver_state_province
+  - receiver_country
+  - receiver_address
+  - pref_vendor
+  - vendor_name
+  - vendor_contact
+  - vendor_addressLineOne
+  - vendor_postalCode
+  - vendor_city
+  - vendor_state_province
+  - vendor_country
+  - payment_terms
+  - shipping_terms
+  - shipping_method
+  - promise_date
+  - subtotal
+  - freight
+  - tax
+  - discount
+  - other
+  - total
+  - comment
+  - purchased_currency
+  - purchased_currency_rate
+  - active
+  - state
+  - fulfilment_status
+  - disclaimer_description
+  - disclaimer_text
+  - recorded_date
+  - closed_date
+  - last_modified
+  - staged_for_export
+  - version
+  - item_count
+  - most_recent_version
+  - punchout_system
+  - purchase_agreement
+  - purchase_agreement_status
+  - punchout_vendor_reference
+  - punchout_supplier_icon
+  - punchout_supplier_name
+  - has_blanket_order_items
+  - expiry_date
+  - contract
+  - order_items
+  - creditcard_is_editable
+  - custom_fields
+  - creditcard
+  - payment_term
+  - shipping_term
+  - cost_details
+  - punchout_is_retriable
+- name: PurchaseOrderDetailSerializerSingle
+  description: Procurify PurchaseOrderDetailSerializerSingle resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PurchaseOrderDocs
+  description: Procurify PurchaseOrderDocs resource
+  type: object
+  properties:
+  - number
+  - uuid
+  - purchaser
+  - procurify_PO
+  - PO_Num
+  - date
+  - buyer_name
+  - buyer_contact
+  - buyer_addressLineOne
+  - buyer_postalCode
+  - buyer_city
+  - buyer_state_province
+  - buyer_country
+  - buyer_address
+  - receiver_name
+  - receiver_contact
+  - receiver_addressLineOne
+  - receiver_postalCode
+  - receiver_city
+  - receiver_state_province
+  - receiver_country
+  - receiver_address
+  - pref_vendor
+  - vendor_name
+  - vendor_contact
+  - vendor_addressLineOne
+  - vendor_postalCode
+  - vendor_city
+  - vendor_state_province
+  - vendor_country
+  - payment_terms
+  - shipping_terms
+  - shipping_method
+  - promise_date
+  - subtotal
+  - freight
+  - tax
+  - discount
+  - other
+  - total
+  - comment
+  - purchased_currency
+  - purchased_currency_rate
+  - active
+  - state
+  - fulfilment_status
+  - disclaimer_description
+  - disclaimer_text
+  - recorded_date
+  - closed_date
+  - last_modified
+  - staged_for_export
+  - version
+  - item_count
+  - most_recent_version
+  - punchout_system
+  - purchase_agreement
+  - purchase_agreement_status
+  - punchout_vendor_reference
+  - punchout_supplier_icon
+  - punchout_supplier_name
+  - has_blanket_order_items
+  - expiry_date
+  - contract
+- name: PurchaseOrderLineItemRead
+  description: Procurify PurchaseOrderLineItemRead resource
+  type: object
+  properties:
+  - PO
+  - PO_line_num
+  - account
+  - accountCode
+  - active
+  - approved_currency_rate
+  - approved_datetime
+  - approved_price
+  - approved_quantity
+  - approved_shipping_amount
+  - approved_tax_amount
+  - attachments
+  - catalog_item
+  - created_at
+  - currency
+  - dateInvoiced
+  - external_id
+  - hot
+  - id
+  - inventoryItem
+  - is_active
+  - item_attachments
+  - last_changed_by
+  - last_modified
+  - lineComment
+  - name
+  - num
+  - orderNum
+  - order_number
+  - po_note
+  - po_version
+  - pref_vendor
+  - price
+  - purchase_order
+  - purchaser
+  - quantity
+  - receivedFailQty
+  - receivedPassQty
+  - shipping_amount
+  - sku
+  - status
+  - tax_amount
+  - total_cost
+  - unit
+  - updated_at
+  - vendor
+  - receive_method
+  - type
+  - blanket
+  - comments
+  - confirmation_status
+  - confirmation_status_description
+  - cost_details
+  - custom_fields
+  - date_required
+  - fully_received_actual_receive_date
+  - has_sibling_items
+  - line_comment
+  - logs
+  - order_description
+  - order_status
+  - order_uuid
+  - punchout_supplier_icon
+  - punchout_supplier_name
+  - punchout_system
+  - punchout_vendor_reference
+  - punchout_supplier_can_update_quantity
+  - purchase_order_number
+  - purchase_order_uuid
+  - purchased_currency_rate
+  - recurrence
+  - requester
+  - spend_allocation
+  - submitted_date
+  - taxes
+  - receive_log_count
+  - approval_history
+  - flags
+  - approved_total_cost
+- name: PurchaseOrderListMeta
+  description: Procurify PurchaseOrderListMeta resource
+  type: object
+  properties:
+  - counts
+  - pagination
+- name: PurchaseOrderRead
+  description: Procurify PurchaseOrderRead resource
+  type: object
+  properties:
+  - number
+  - uuid
+  - purchaser
+  - vendor_name
+- name: PurchaseOrderReadDocs
+  description: Procurify PurchaseOrderReadDocs resource
+  type: object
+  properties:
+  - id
+  - PO_Num
+  - date
+  - discount
+  - freight
+  - fulfilment_status
+  - item_count
+  - last_modified
+  - number
+  - other
+  - pref_vendor
+  - procurify_PO
+  - promise_date
+  - punchout_system
+  - purchase_agreement
+  - purchase_agreement_status
+  - purchased_currency
+  - purchased_currency_rate
+  - purchaser
+  - state
+  - subtotal
+  - total
+  - uuid
+  - version
+  - punchout_items_rejected
+  - total_amount
+  - currency
+  - email_status
+  - email_status_updated_at
+  - punchout_supplier_name
+  - punchout_supplier_icon
+  - punchout_vendor_reference
+  - punchout_is_retriable
+  - has_blanket_order_items
+  - expiry_date
+- name: PurchaseOrderReadDocsSerializerSingle
+  description: Procurify PurchaseOrderReadDocsSerializerSingle resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: PurchaseOrderStateEnum
+  description: '* `0` - Purchased
+
+    * `1` - Cancelled
+
+    * `3` - Closed
+
+    * `4` - Paid
+
+    * `5` - Reopened'
+  type: integer
+- name: PurchaseOrderUpdate
+  description: Procurify PurchaseOrderUpdate resource
+  type: object
+  properties:
+  - order_items
+  - PO_Num
+  - buyer_name
+  - buyer_contact
+  - buyer_addressLineOne
+  - buyer_postalCode
+  - buyer_city
+  - buyer_state_province
+  - buyer_country
+  - buyer_address
+  - comment
+  - receiver_name
+  - receiver_contact
+  - receiver_addressLineOne
+  - receiver_postalCode
+  - receiver_city
+  - receiver_state_province
+  - receiver_country
+  - receiver_address
+  - promise_date
+  - freight
+  - discount
+  - tax
+  - other
+  - disclaimer_description
+  - disclaimer_text
+  - payment_term_ref
+  - shipping_term_ref
+  - payment_method_ref
+  - shipping_method_ref
+  - creditcard
+  - version
+  - expiry_date
+  - contract
+- name: PurchaseOrderUpdateRequest
+  description: Procurify PurchaseOrderUpdateRequest resource
+  type: object
+  properties:
+  - order_items
+  - custom_fields
+  - PO_Num
+  - buyer_name
+  - buyer_contact
+  - buyer_addressLineOne
+  - buyer_postalCode
+  - buyer_city
+  - buyer_state_province
+  - buyer_country
+  - buyer_address
+  - comment
+  - receiver_name
+  - receiver_contact
+  - receiver_addressLineOne
+  - receiver_postalCode
+  - receiver_city
+  - receiver_state_province
+  - receiver_country
+  - receiver_address
+  - promise_date
+  - freight
+  - discount
+  - tax
+  - other
+  - disclaimer_description
+  - disclaimer_text
+  - payment_term_ref
+  - shipping_term_ref
+  - payment_method_ref
+  - shipping_method_ref
+  - creditcard
+  - version
+  - expiry_date
+  - contract
+- name: PurchaseOrderUpdateSerializerSingle
+  description: Procurify PurchaseOrderUpdateSerializerSingle resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: ReceiptItemRead
+  description: Procurify ReceiptItemRead resource
+  type: object
+  properties:
+  - id
+  - pass_quantity
+  - fail_quantity
+  - order_item
+  - created_at
+  - is_edited
+  - created_by
+  - total_quantity
+  - received_at
+- name: ReceiveMethodEnum
+  description: '* `0` - Quantity
+
+    * `1` - Currency amount'
+  type: integer
+- name: ReconciliationStatusEnum
+  description: Procurify ReconciliationStatusEnum resource
+  type: string
+- name: RecurringOrderItem
+  description: Procurify RecurringOrderItem resource
+  type: object
+  properties:
+  - id
+  - start_date
+  - frequency
+  - duration
+  - duration_quantity
+  - recurring_price
+  - periods_count
+- name: RequisitionCreateRequest
+  description: Procurify RequisitionCreateRequest resource
+  type: object
+  properties:
+  - required_date
+  - location_name
+  - department_name
+  - line_items
+- name: RequisitionLineCreateRequest
+  description: Procurify RequisitionLineCreateRequest resource
+  type: object
+  properties:
+  - item_name
+  - vendor_name
+  - account_code
+  - unit_price
+  - quantity
+  - unit
+  - currency_code
+  - custom_fields
+- name: RequisitionRead
+  description: Procurify RequisitionRead resource
+  type: object
+  properties:
+  - uuid
+- name: RequisitionReadSerializerSingle
+  description: Procurify RequisitionReadSerializerSingle resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: RoleEnum
+  description: '* `0` - User
+
+    * `1` - Approver
+
+    * `2` - Purchaser
+
+    * `3` - Receiver
+
+    * `4` - Administrator
+
+    * `5` - EKA
+
+    * `6` - Accounting
+
+    * `7` - Superuser
+
+    * `8` - Accounts Payable
+
+    * `9` - FNG Approver
+
+    * `10` - FNG Controller'
+  type: integer
+- name: SessionCreate
+  description: Procurify SessionCreate resource
+  type: object
+  properties:
+  - creditcard
+  - balance
+  - statement_date
+- name: SetupStageEnum
+  description: '* `COMP` - Company
+
+    * `DEPT` - Department
+
+    * `USER` - User
+
+    * `COA` - Chart_of_Accounts
+
+    * `BDGT` - Budget_Control
+
+    * `APPR` - Approver
+
+    * `FIN` - Finished'
+  type: string
+- name: ShippingMethod
+  description: Procurify ShippingMethod resource
+  type: object
+  properties:
+  - id
+  - name
+  - description
+  - active
+- name: ShippingMethodRequest
+  description: Procurify ShippingMethodRequest resource
+  type: object
+  properties:
+  - name
+  - description
+  - active
+- name: ShippingTerm
+  description: Procurify ShippingTerm resource
+  type: object
+  properties:
+  - id
+  - name
+  - description
+  - active
+- name: ShippingTermRequest
+  description: Procurify ShippingTermRequest resource
+  type: object
+  properties:
+  - name
+  - description
+  - active
+- name: SimpleAPVendor
+  description: Procurify SimpleAPVendor resource
+  type: object
+  properties:
+  - id
+  - name
+- name: SimpleBill
+  description: Procurify SimpleBill resource
+  type: object
+  properties:
+  - id
+  - status
+  - version
+  - locked
+  - currency
+  - uuid
+  - items
+  - vendor
+  - due_date
+  - total_cost_with_tax
+  - invoice_date
+  - next_approver_choices
+  - last_export_user
+  - last_modified_datetime
+  - last_export_date
+  - submitted_date
+  - gl_post_date
+  - invoice_number
+  - group
+  - type
+  - user
+  - approver
+  - past_due
+  - invoice_created
+  - invoice_uuid
+  - invoice_total
+  - creator
+- name: SimpleCurrency
+  description: Procurify SimpleCurrency resource
+  type: object
+  properties:
+  - id
+  - name
+  - rate
+- name: SimpleDepartment
+  description: Procurify SimpleDepartment resource
+  type: object
+  properties:
+  - id
+  - name
+  - location
+- name: SimpleExpenseReport
+  description: Procurify SimpleExpenseReport resource
+  type: object
+  properties:
+  - id
+  - uuid
+- name: SimpleLocation
+  description: Procurify SimpleLocation resource
+  type: object
+  properties:
+  - id
+  - name
+  - headquarter
+- name: SimpleRoleRead
+  description: Procurify SimpleRoleRead resource
+  type: object
+  properties:
+  - id
+  - name
+  - type
+- name: SimpleUser
+  description: Procurify SimpleUser resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+  - email
+  - profile_image
+- name: SimpleUserProfile
+  description: Procurify SimpleUserProfile resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+  - email
+  - role
+  - profile_image
+- name: SimpleUserSummary
+  description: Procurify SimpleUserSummary resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+  - email
+  - position
+  - profile_image
+  - approval_delegatee
+  - expected_return_date
+- name: SimpleVendor
+  description: Procurify SimpleVendor resource
+  type: object
+  properties:
+  - id
+  - name
+  - active
+  - addressLineOne
+  - addressLineTwo
+  - postalCode
+  - city
+  - state_province
+  - country
+  - overall_score
+  - is_auto_email_po_enabled
+- name: SingleBillMetadataDocs
+  description: Procurify SingleBillMetadataDocs resource
+  type: object
+  properties:
+  - permissions
+  - summary
+- name: SpendAccountRead
+  description: Procurify SpendAccountRead resource
+  type: object
+  properties:
+  - id
+  - account_code
+  - department
+  - active
+- name: StatementItem
+  description: Procurify StatementItem resource
+  type: object
+  properties:
+  - id
+  - creditcard
+  - statement
+  - match
+  - date
+  - description
+  - amount
+  - duplicate_of
+- name: TimezoneEnum
+  description: '* `-11.0` - (GMT -11:00) Midway Island, Samoa
+
+    * `-10.0` - (GMT -10:00) Hawaii
+
+    * `-9.0` - (GMT -9:00) Alaska
+
+    * `-8.0` - (GMT -8:00) Pacific Time (US &amp; Canada)
+
+    * `-7.0` - (GMT -7:00) Mountain Time (US &amp; Canada)
+
+    * `-6.0` - (GMT -6:00) Central Time (US &amp; Canada), Mexico City
+
+    * `-5.0` - (GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima
+
+    * `-4.0` - (GMT -4:00) Atlantic Time (Canada), Caracas, La Paz
+
+    * `-3.5` - (GMT -3:30) Newfoundland
+
+    * `-3.0` - (GMT -3:00) Brazil, Buenos Aires, Georgetown
+
+    * `-2.0` - (GMT -2:00) Mid-Atlantic
+
+    * `-1.0` - (GMT -1:00) Azores, Cape Verde Islands
+
+    * `0.0` - (GMT) Western Europe Time, London, Lisbon, Casablanca
+
+    * `1.0` - (GMT +1:00) Brussels, Copenhagen, Madrid, Paris
+
+    * `2.0` - (GMT +2:00) Kaliningrad, South Africa
+
+    * `3.0` - (GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg
+
+    * `3.5` - (GMT +3:30) Tehran
+
+    * `4.0` - (GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi
+
+    * `4.5` - (GMT +4:30) Kabul
+
+    * `5.0` - (GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent
+
+    * `5.5` - (GMT +5:30) Bombay, Calcutta, Madras, New Delhi
+
+    * `5.75` - (GMT +5:45) Kathmandu
+
+    * `6.0` - (GMT +6:00) Almaty, Dhaka, Colombo
+
+    * `7.0` - (GMT +7:00) Bangkok, Hanoi, Jakarta
+
+    * `8.0` - (GMT +8:00) Beijing, Perth, Singapore, Hong Kong
+
+    * `9.0` - (GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk
+
+    * `9.5` - (GMT +9:30) Adelaide, Darwin
+
+    * `10.0` - (GMT +10:00) Eastern Australia, Guam, Vladivostok
+
+    * `11.0` - (GMT +11:00) Magadan, Solomon Islands, New Caledonia
+
+    * `12.0` - (GMT +12:00) Auckland, Wellington, Fiji, Kamchatka'
+  type: number
+- name: Transaction
+  description: Procurify Transaction resource
+  type: object
+  properties:
+  - id
+  - note
+  - vendor
+  - currency
+  - amount
+  - vendor_currency
+  - vendor_amount
+  - status
+  - authorization_status
+  - authorization_datetime
+  - transaction_datetime
+  - allocation_datetime
+  - card
+  - receipt_attachments
+  - fund
+  - account
+  - type
+  - reconciliation_status
+  - cardholder
+  - linked_authorization
+  - custom_fields
+- name: TransactionAccount
+  description: Procurify TransactionAccount resource
+  type: object
+  properties:
+  - account_code
+  - account_code_description
+  - department
+  - department_branch
+- name: TransactionCardholder
+  description: Procurify TransactionCardholder resource
+  type: object
+  properties:
+  - uuid
+  - first_name
+  - last_name
+  - status
+- name: TransactionCardholderStatusEnum
+  description: Procurify TransactionCardholderStatusEnum resource
+  type: string
+- name: TransactionCustomField
+  description: Procurify TransactionCustomField resource
+  type: object
+  properties:
+  - name
+  - value
+  - type
+- name: TransactionCustomFieldTypeEnum
+  description: Procurify TransactionCustomFieldTypeEnum resource
+  type: string
+- name: TransactionFund
+  description: Procurify TransactionFund resource
+  type: object
+  properties:
+  - uuid
+  - title
+  - reason
+  - status
+  - date_created
+  - amount
+  - account
+- name: TransactionFundStatusEnum
+  description: Procurify TransactionFundStatusEnum resource
+  type: string
+- name: TransactionStatusEnum
+  description: Procurify TransactionStatusEnum resource
+  type: string
+- name: TransactionTypeEnum
+  description: Procurify TransactionTypeEnum resource
+  type: string
+- name: TransactionVendor
+  description: Procurify TransactionVendor resource
+  type: object
+  properties:
+  - name
+  - category
+  - city
+  - state
+  - country
+  - postal_code
+- name: TransationCard
+  description: Procurify TransationCard resource
+  type: object
+  properties:
+  - uuid
+  - last_four_digits
+  - status
+- name: TransationCardStatusEnum
+  description: Procurify TransationCardStatusEnum resource
+  type: string
+- name: UnitCostDiffLogDocs
+  description: Procurify UnitCostDiffLogDocs resource
+  type: object
+  properties:
+  - changed_by
+  - changed_date
+  - original_unit_cost
+  - original_currency_label
+- name: UnoptimizedAccountCodeserializer
+  description: Procurify UnoptimizedAccountCodeserializer resource
+  type: object
+  properties:
+  - id
+  - code
+  - code_length
+  - description
+  - account_type
+  - active
+  - parent
+- name: UnoptimizedBranchRead
+  description: Procurify UnoptimizedBranchRead resource
+  type: object
+  properties:
+  - id
+  - external_id
+  - name
+  - url
+  - logo
+  - language
+  - multipleLocations
+  - locationTimezone
+  - userLimit
+  - budgetOvertureToggle
+  - purchase_filtering
+  - catalog_permission
+  - separate_expense_approval
+  - standalone_travel_approval
+  - phoneOne
+  - phoneTwo
+  - fax
+  - email
+  - fiscalYearEndDay
+  - fiscalYearEndMonth
+  - timezone
+  - beginDate
+  - ported
+  - port_date
+  - active
+  - fields_cache
+  - activated
+  - setup_stage
+  - localCurrency
+  - contactPerson
+  - buyerAddress
+  - shippingAddress
+- name: UnoptimizedDepartmentRead
+  description: Procurify UnoptimizedDepartmentRead resource
+  type: object
+  properties:
+  - id
+  - branch
+  - external_id
+  - name
+  - punchout_email
+  - active
+- name: UserDocs
+  description: Procurify UserDocs resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+  - email
+  - position
+  - profile_image
+  - approval_delegatee
+- name: UserProfileMe
+  description: Procurify UserProfileMe resource
+  type: object
+  properties:
+  - id
+  - domains
+  - headquarter_logo
+  - systemaccess_cache
+  - approval_delegatee
+  - is_approval_delegatee
+  - department
+  - created_at
+  - updated_at
+  - uuid
+  - firstName
+  - lastName
+  - email
+  - position
+  - phone
+  - address
+  - notifications
+  - is_active
+  - pending_invite
+  - role
+  - mobile
+  - profile_image
+  - slack_user_id
+  - is_sso_enabled
+  - last_changed_by
+  - user
+- name: UserProfileMeSerializerSingle
+  description: Procurify UserProfileMeSerializerSingle resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: UserProfileRead
+  description: Procurify UserProfileRead resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+  - email
+  - department
+- name: UserProfileUnoptimized
+  description: Procurify UserProfileUnoptimized resource
+  type: object
+  properties:
+  - id
+  - firstName
+  - lastName
+  - user
+  - email
+  - department
+  - location
+  - profile_image
+  - is_active
+  - phone
+  - position
+  - role
+  - approval_delegatee
+  - pending_approvals_count
+  - expected_return_date
+- name: UserProfileUnoptimizedSerializerList
+  description: Procurify UserProfileUnoptimizedSerializerList resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: UserProfileUnoptimizedSerializerSingle
+  description: Procurify UserProfileUnoptimizedSerializerSingle resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: UserProfileUpsertRequest
+  description: Procurify UserProfileUpsertRequest resource
+  type: object
+  properties:
+  - id
+  - user
+  - email
+  - firstName
+  - lastName
+  - location
+  - department
+  - position
+  - phone
+  - profile_image
+  - is_sso_enabled
+  - mark_for_skip
+  - mark_for_delete
+- name: UserSummary
+  description: Procurify UserSummary resource
+  type: object
+  properties:
+  - id
+  - department
+  - created_at
+  - updated_at
+  - firstName
+  - lastName
+  - email
+  - position
+  - phone
+  - address
+  - notifications
+  - is_active
+  - mobile
+  - profile_image
+  - slack_user_id
+  - is_sso_enabled
+  - last_changed_by
+  - user
+  - approval_delegatee
+  - expected_return_date
+- name: Vendor
+  description: Procurify Vendor resource
+  type: object
+  properties:
+  - id
+  - name
+  - active
+  - addressLineOne
+  - addressLineTwo
+  - postalCode
+  - city
+  - state_province
+  - country
+  - phoneOne
+  - phoneTwo
+  - fax
+  - email
+  - comments
+  - contact
+  - url
+  - external_id
+  - dateModified
+  - currency
+  - payment_term_ref
+  - shipping_term_ref
+  - payment_method_ref
+  - shipping_method_ref
+  - payment_methods
+  - tax
+  - type
+  - default_payment_method
+  - creditcards
+  - is_1099_eligible
+  - overall_score
+  - is_auto_email_po_enabled
+  - po_pdf_labels
+  - email_configurations
+- name: VendorBreakdownDocs
+  description: Procurify VendorBreakdownDocs resource
+  type: object
+  properties:
+  - speed
+  - accuracy
+  - quality
+  - cost
+- name: VendorDetail
+  description: Procurify VendorDetail resource
+  type: object
+  properties:
+  - id
+  - name
+  - active
+  - addressLineOne
+  - addressLineTwo
+  - postalCode
+  - city
+  - state_province
+  - country
+  - phoneOne
+  - phoneTwo
+  - fax
+  - email
+  - comments
+  - contact
+  - url
+  - external_id
+  - dateModified
+  - currency
+  - payment_term_ref
+  - shipping_term_ref
+  - payment_method_ref
+  - shipping_method_ref
+  - payment_methods
+  - tax
+  - type
+  - default_payment_method
+  - creditcards
+  - is_1099_eligible
+  - overall_score
+  - is_auto_email_po_enabled
+  - po_pdf_labels
+  - email_configurations
+  - performance
+  - vendor_request
+- name: VendorDetailSerializerSingleCreate
+  description: Procurify VendorDetailSerializerSingleCreate resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: VendorDetailSerializerSingleRetrieve
+  description: Procurify VendorDetailSerializerSingleRetrieve resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: VendorDocs
+  description: Procurify VendorDocs resource
+  type: object
+  properties:
+  - id
+  - name
+- name: VendorPaymentMethodFlightTime
+  description: Procurify VendorPaymentMethodFlightTime resource
+  type: object
+  properties:
+  - min
+  - max
+- name: VendorPaymentMethodRead
+  description: Procurify VendorPaymentMethodRead resource
+  type: object
+  properties:
+  - id
+  - vendor
+  - name
+  - type
+  - data
+  - currency
+  - payment_rail
+  - bank_account_country_code
+  - flight_time
+  - transaction_fee
+- name: VendorPaymentMethodRequest
+  description: Procurify VendorPaymentMethodRequest resource
+  type: object
+  properties:
+  - vendor
+  - name
+  - type
+  - data
+  - currency
+- name: VendorPaymentMethodTransactionFee
+  description: Procurify VendorPaymentMethodTransactionFee resource
+  type: object
+  properties:
+  - type
+  - value
+- name: VendorPerformance
+  description: Procurify VendorPerformance resource
+  type: object
+  properties:
+  - overall_score
+  - average_delivery_time
+  - breakdown
+- name: VendorRead
+  description: Procurify VendorRead resource
+  type: object
+  properties:
+  - id
+  - name
+  - active
+  - addressLineOne
+  - addressLineTwo
+  - postalCode
+  - city
+  - state_province
+  - country
+  - phoneOne
+  - phoneTwo
+  - fax
+  - email
+  - comments
+  - contact
+  - url
+  - external_id
+  - dateModified
+  - currency
+  - payment_term_ref
+  - shipping_term_ref
+  - payment_method_ref
+  - shipping_method_ref
+  - payment_methods
+  - tax
+  - type
+  - default_payment_method
+  - creditcards
+  - is_1099_eligible
+  - overall_score
+  - is_auto_email_po_enabled
+  - po_pdf_labels
+  - email_configurations
+- name: VendorSerializerSingle
+  description: Procurify VendorSerializerSingle resource
+  type: object
+  properties:
+  - metadata
+  - data
+- name: VendorTypeEnum
+  description: '* `2` - amazon punchout
+
+    * `3` - preferred
+
+    * `4` - regular
+
+    * `6` - credit card provider
+
+    * `7` - checkout'
+  type: integer
+- name: VersionChoicesDocs
+  description: Procurify VersionChoicesDocs resource
+  type: object
+  properties:
+  - pk
+  - version
+- name: account
+  description: account property
+  type: string
+- name: accountCode
+  description: accountCode property
+  type: string
+- name: account_code
+  description: account_code property
+  type: string
+- name: account_code_description
+  description: account_code_description property
+  type: string
+- name: account_id
+  description: account_id property
+  type: integer
+- name: account_type
+  description: account_type property
+  type: string
+- name: accuracy
+  description: accuracy property
+  type: string
+- name: ach_number
+  description: ach_number property
+  type: integer
+- name: action
+  description: action property
+  type: integer
+- name: activated
+  description: activated property
+  type: boolean
+- name: active
+  description: active property
+  type: boolean
+- name: added_purchase_orders
+  description: List of purchase orders of the added bill items.
+  type: array
+- name: address
+  description: address property
+  type: string
+- name: addressAssociation
+  description: addressAssociation property
+  type: string
+- name: addressLineOne
+  description: Address line 1
+  type: string
+- name: addressLineTwo
+  description: Address line 2
+  type: string
+- name: all
+  description: all property
+  type: integer
+- name: all_departments
+  description: all_departments property
+  type: boolean
+- name: all_locations
+  description: all_locations property
+  type: boolean
+- name: allocation_datetime
+  description: The date that this transaction was allocated to a fund
+  type: string
+- name: amount
+  description: Payment Amount
+  type: string
+- name: amount_limit
+  description: amount_limit property
+  type: string
+- name: applied_accounts_count
+  description: applied_accounts_count property
+  type: integer
+- name: approval_chain
+  description: approval_chain property
+  type: integer
+- name: approval_delegatee
+  description: approval_delegatee property
+  type: string
+- name: approval_delegation
+  description: approval_delegation property
+  type: object
+- name: approval_history
+  description: approval_history property
+  type: array
+- name: approval_level
+  description: approval_level property
+  type: integer
+- name: approval_workflow
+  description: approval_workflow property
+  type: string
+- name: approved_currency_rate
+  description: approved_currency_rate property
+  type: string
+- name: approved_date
+  description: approved_date property
+  type: string
+- name: approved_datetime
+  description: approved_datetime property
+  type: string
+- name: approved_price
+  description: approved_price property
+  type: string
+- name: approved_quantity
+  description: approved_quantity property
+  type: string
+- name: approved_shipping_amount
+  description: approved_shipping_amount property
+  type: string
+- name: approved_tax_amount
+  description: approved_tax_amount property
+  type: string
+- name: approved_total_cost
+  description: approved_total_cost property
+  type: string
+- name: approver
+  description: approver property
+  type: string
+- name: approvers
+  description: approvers property
+  type: array
+- name: archived
+  description: archived property
+  type: boolean
+- name: assignees
+  description: assignees property
+  type: array
+- name: attachment
+  description: attachment property
+  type: string
+- name: attachments
+  description: attachments property
+  type: string
+- name: authorization_datetime
+  description: The date that this transaction was initially authorized at
+  type: string
+- name: authorization_status
+  description: '
+
+    * reversed: Previously approved and held funds have been released
+
+    * pending: Funds have been approved for a transaction and are currently held
+
+    * closed: Look at `status` for more details, the authorization is no longer relevant'
+  type: object
+- name: auto_po
+  description: auto_po property
+  type: boolean
+- name: average_delivery_time
+  description: average_delivery_time property
+  type: string
+- name: balance
+  description: balance property
+  type: integer
+- name: balance_approved
+  description: balance_approved property
+  type: string
+- name: balance_purchased
+  description: balance_purchased property
+  type: string
+- name: bank_account_country_code
+  description: bank_account_country_code property
+  type: string
+- name: base
+  description: base property
+  type: boolean
+- name: beginDate
+  description: beginDate property
+  type: string
+- name: bill
+  description: bill property
+  type: integer
+- name: bill_amount_limit
+  description: bill_amount_limit property
+  type: string
+- name: bill_by_cost
+  description: Item billing method is bill by cost (true) or bill by quantity (false).
+  type: boolean
+- name: bill_group_ids
+  description: bill_group_ids property
+  type: array
+- name: bill_groups
+  description: List of bill group IDs associated with the payment.
+  type: array
+- name: bill_payment
+  description: bill_payment property
+  type: object
+- name: bill_payments
+  description: bill_payments property
+  type: array
+- name: bill_statuses
+  description: bill_statuses property
+  type: array
+- name: bill_uuids
+  description: bill_uuids property
+  type: array
+- name: billed_qty
+  description: billed_qty property
+  type: string
+- name: blanket
+  description: blanket property
+  type: string
+- name: branch
+  description: branch property
+  type: string
+- name: breakdown
+  description: breakdown property
+  type: string
+- name: budget
+  description: budget property
+  type: string
+- name: budgetOvertureToggle
+  description: budgetOvertureToggle property
+  type: boolean
+- name: budget_used_approved
+  description: budget_used_approved property
+  type: string
+- name: budget_used_purchased
+  description: budget_used_purchased property
+  type: string
+- name: buyerAddress
+  description: buyerAddress property
+  type: integer
+- name: buyer_address
+  description: buyer_address property
+  type: string
+- name: buyer_addressLineOne
+  description: Address line
+  type: string
+- name: buyer_city
+  description: buyer_city property
+  type: string
+- name: buyer_contact
+  description: buyer_contact property
+  type: string
+- name: buyer_country
+  description: Country
+  type: string
+- name: buyer_name
+  description: buyer_name property
+  type: string
+- name: buyer_postalCode
+  description: Postal Code
+  type: string
+- name: buyer_state_province
+  description: State/Province
+  type: string
+- name: can_approve
+  description: can_approve property
+  type: boolean
+- name: can_delete
+  description: can_delete property
+  type: boolean
+- name: can_edit
+  description: can_edit property
+  type: boolean
+- name: can_peer_review
+  description: can_peer_review property
+  type: boolean
+- name: can_self_approve
+  description: can_self_approve property
+  type: boolean
+- name: cancelled
+  description: cancelled property
+  type: integer
+- name: card
+  description: The card this transaction was created with
+  type: string
+- name: cardholder
+  description: cardholder property
+  type: string
+- name: catalog_item
+  description: catalog_item property
+  type: integer
+- name: catalog_permission
+  description: catalog_permission property
+  type: boolean
+- name: category
+  description: category property
+  type: integer
+- name: changed_by
+  description: changed_by property
+  type: string
+- name: changed_date
+  description: changed_date property
+  type: string
+- name: city
+  description: city property
+  type: string
+- name: closed
+  description: closed property
+  type: integer
+- name: closed_date
+  description: closed_date property
+  type: string
+- name: code
+  description: code property
+  type: string
+- name: code_length
+  description: code_length property
+  type: integer
+- name: codename
+  description: codename property
+  type: string
+- name: color
+  description: color property
+  type: string
+- name: comment
+  description: comment property
+  type: string
+- name: comments
+  description: comments property
+  type: array
+- name: confirmation_status
+  description: confirmation_status property
+  type: integer
+- name: confirmation_status_description
+  description: confirmation_status_description property
+  type: string
+- name: contact
+  description: Contact person of the vendor
+  type: string
+- name: contactPerson
+  description: contactPerson property
+  type: integer
+- name: content_type
+  description: content_type property
+  type: integer
+- name: contract
+  description: contract property
+  type: string
+- name: converted_total_cost
+  description: Total cost converted to base currency.
+  type: number
+- name: cost
+  description: Cost Class
+  type: integer
+- name: cost_allocation
+  description: cost_allocation property
+  type: string
+- name: cost_allocations
+  description: cost_allocations property
+  type: array
+- name: cost_details
+  description: cost_details property
+  type: object
+- name: costs
+  description: costs property
+  type: array
+- name: count
+  description: count property
+  type: integer
+- name: country
+  description: country property
+  type: string
+- name: counts
+  description: counts property
+  type: string
+- name: created_at
+  description: created_at property
+  type: string
+- name: created_by
+  description: created_by property
+  type: string
+- name: created_on
+  description: created_on property
+  type: string
+- name: creator
+  description: Card Issuer
+  type: integer
+- name: creditcard
+  description: creditcard property
+  type: integer
+- name: creditcard_is_editable
+  description: creditcard_is_editable property
+  type: boolean
+- name: creditcard_item
+  description: Credit card item origin (if exists).
+  type: object
+- name: creditcard_name
+  description: creditcard_name property
+  type: string
+- name: creditcards
+  description: creditcards property
+  type: array
+- name: currency
+  description: currency property
+  type: integer
+- name: currency_code
+  description: currency_code property
+  type: string
+- name: currency_name
+  description: currency_name property
+  type: string
+- name: currency_rate_final
+  description: currency_rate_final property
+  type: string
+- name: current_page
+  description: current_page property
+  type: integer
+- name: current_step
+  description: current_step property
+  type: object
+- name: custom_field_name
+  description: custom_field_name property
+  type: string
+- name: custom_field_value
+  description: custom_field_value property
+  type: string
+- name: custom_fields
+  description: custom_fields property
+  type: array
+- name: data
+  description: data property
+  type: string
+- name: date
+  description: date property
+  type: string
+- name: dateInvoiced
+  description: dateInvoiced property
+  type: string
+- name: dateModified
+  description: dateModified property
+  type: string
+- name: dateRequired
+  description: dateRequired property
+  type: string
+- name: dateTime
+  description: dateTime property
+  type: string
+- name: date_created
+  description: date_created property
+  type: string
+- name: date_required
+  description: date_required property
+  type: string
+- name: default_payment_method
+  description: default_payment_method property
+  type: integer
+- name: default_value
+  description: default_value property
+  type: string
+- name: delegator
+  description: delegator property
+  type: string
+- name: denial_comment
+  description: denial_comment property
+  type: string
+- name: denial_reason
+  description: denial_reason property
+  type: integer
+- name: department
+  description: department property
+  type: string
+- name: department_branch
+  description: department_branch property
+  type: string
+- name: department_count
+  description: department_count property
+  type: integer
+- name: department_name
+  description: department_name property
+  type: string
+- name: departments
+  description: departments property
+  type: array
+- name: description
+  description: description property
+  type: string
+- name: direct_debit_bank_account_mask
+  description: Last 4 digits of direct debit account.
+  type: string
+- name: disclaimer_description
+  description: disclaimer_description property
+  type: string
+- name: disclaimer_text
+  description: disclaimer_text property
+  type: string
+- name: discount
+  description: discount property
+  type: string
+- name: domains
+  description: domains property
+  type: string
+- name: due_date
+  description: Bill Due Date
+  type: string
+- name: duplicate_of
+  description: duplicate_of property
+  type: integer
+- name: duration
+  description: duration property
+  type: string
+- name: duration_quantity
+  description: duration_quantity property
+  type: integer
+- name: email
+  description: email property
+  type: string
+- name: email_configurations
+  description: email_configurations property
+  type: object
+- name: email_status
+  description: email_status property
+  type: string
+- name: email_status_updated_at
+  description: email_status_updated_at property
+  type: string
+- name: end_datetime
+  description: end_datetime property
+  type: string
+- name: exchange_rate_override
+  description: exchange_rate_override property
+  type: boolean
+- name: exclusive_tax_amount
+  description: exclusive_tax_amount property
+  type: number
+- name: expected_return_date
+  description: expected_return_date property
+  type: string
+- name: expense
+  description: expense property
+  type: string
+- name: expenseReport
+  description: expenseReport property
+  type: string
+- name: expense_report
+  description: expense_report property
+  type: string
+- name: expense_type
+  description: expense_type property
+  type: string
+- name: expense_type_fields
+  description: expense_type_fields property
+  type: string
+- name: expiry_date
+  description: expiry_date property
+  type: string
+- name: external_id
+  description: External id of the Credit Card
+  type: string
+- name: external_payment_source_id
+  description: External bank account ID
+  type: integer
+- name: fail_quantity
+  description: fail_quantity property
+  type: string
+- name: fax
+  description: fax property
+  type: string
+- name: field
+  description: field property
+  type: string
+- name: field_choices
+  description: field_choices property
+  type: array
+- name: field_label
+  description: field_label property
+  type: string
+- name: field_type
+  description: field_type property
+  type: string
+- name: fields_cache
+  description: fields_cache property
+  type: string
+- name: file
+  description: file property
+  type: string
+- name: firstName
+  description: firstName property
+  type: string
+- name: first_name
+  description: first_name property
+  type: string
+- name: fiscalYearEndDay
+  description: fiscalYearEndDay property
+  type: integer
+- name: fiscalYearEndMonth
+  description: fiscalYearEndMonth property
+  type: integer
+- name: flags
+  description: flags property
+  type: array
+- name: flight_time
+  description: flight_time property
+  type: string
+- name: freight
+  description: freight property
+  type: string
+- name: frequency
+  description: frequency property
+  type: string
+- name: fulfilment_status
+  description: fulfilment_status property
+  type: string
+- name: fully_received_actual_receive_date
+  description: fully_received_actual_receive_date property
+  type: string
+- name: fund
+  description: The fund this transaction is allocated to
+  type: string
+- name: gl_code
+  description: gl_code property
+  type: string
+- name: gl_post_date
+  description: gl_post_date property
+  type: string
+- name: group
+  description: group property
+  type: integer
+- name: group_id
+  description: group_id property
+  type: integer
+- name: group_name
+  description: group_name property
+  type: string
+- name: has_blanket_order_items
+  description: has_blanket_order_items property
+  type: boolean
+- name: has_multiple_currency
+  description: has_multiple_currency property
+  type: boolean
+- name: has_sibling_items
+  description: has_sibling_items property
+  type: boolean
+- name: has_unbilled_unreceived_items
+  description: has_unbilled_unreceived_items property
+  type: boolean
+- name: headquarter
+  description: headquarter property
+  type: boolean
+- name: headquarter_logo
+  description: headquarter_logo property
+  type: string
+- name: home_department
+  description: home_department property
+  type: integer
+- name: home_location
+  description: home_location property
+  type: integer
+- name: hot
+  description: hot property
+  type: boolean
+- name: id
+  description: id property
+  type: integer
+- name: image
+  description: image property
+  type: string
+- name: inclusive_tax_amount
+  description: inclusive_tax_amount property
+  type: number
+- name: internalSKU
+  description: internalSKU property
+  type: string
+- name: inventoryItem
+  description: inventoryItem property
+  type: integer
+- name: invoice_attachments
+  description: invoice_attachments property
+  type: array
+- name: invoice_created
+  description: invoice_created property
+  type: boolean
+- name: invoice_date
+  description: Bill Invoice Date
+  type: string
+- name: invoice_number
+  description: invoice_number property
+  type: string
+- name: invoice_total
+  description: invoice_total property
+  type: number
+- name: invoice_uuid
+  description: invoice_uuid property
+  type: string
+- name: ip_address
+  description: ip_address property
+  type: string
+- name: is_1099_eligible
+  description: 1099 Eligible?
+  type: boolean
+- name: is_active
+  description: is_active property
+  type: boolean
+- name: is_active_for_account_code
+  description: is_active_for_account_code property
+  type: boolean
+- name: is_approval_delegatee
+  description: is_approval_delegatee property
+  type: boolean
+- name: is_auto_email_po_enabled
+  description: is_auto_email_po_enabled property
+  type: boolean
+- name: is_complete
+  description: is_complete property
+  type: boolean
+- name: is_edited
+  description: is_edited property
+  type: boolean
+- name: is_pooled
+  description: is_pooled property
+  type: boolean
+- name: is_processed
+  description: is_processed property
+  type: boolean
+- name: is_required
+  description: is_required property
+  type: boolean
+- name: is_sso_enabled
+  description: is_sso_enabled property
+  type: boolean
+- name: item
+  description: item property
+  type: integer
+- name: item_attachments
+  description: item_attachments property
+  type: array
+- name: item_count
+  description: item_count property
+  type: integer
+- name: item_name
+  description: item_name property
+  type: string
+- name: item_variance_amount_limit
+  description: item_variance_amount_limit property
+  type: string
+- name: item_variance_percentage_limit
+  description: item_variance_percentage_limit property
+  type: string
+- name: items
+  description: items property
+  type: array
+- name: items_count
+  description: items_count property
+  type: integer
+- name: language
+  description: language property
+  type: string
+- name: lastName
+  description: lastName property
+  type: string
+- name: last_changed_by
+  description: Last changed by user
+  type: integer
+- name: last_export_date
+  description: last_export_date property
+  type: string
+- name: last_export_user
+  description: last_export_user property
+  type: string
+- name: last_four_digits
+  description: last_four_digits property
+  type: string
+- name: last_modified
+  description: last_modified property
+  type: string
+- name: last_modified_datetime
+  description: Last Modified
+  type: string
+- name: last_name
+  description: last_name property
+  type: string
+- name: last_reconciliation_balance
+  description: last_reconciliation_balance property
+  type: number
+- name: last_reconciliation_date
+  description: "Comments:\n    This field may be incorrect depending on what types\
+    \ of\n    edit we allow our users.  Fix later."
+  type: string
+- name: last_requested_date
+  description: last_requested_date property
+  type: string
+- name: last_statement_date
+  description: last_statement_date property
+  type: string
+- name: legal_entity
+  description: legal_entity property
+  type: integer
+- name: length
+  description: length property
+  type: integer
+- name: level
+  description: level property
+  type: integer
+- name: lineComment
+  description: lineComment property
+  type: string
+- name: lineCount
+  description: lineCount property
+  type: integer
+- name: lineItem
+  description: lineItem property
+  type: integer
+- name: line_comment
+  description: line_comment property
+  type: string
+- name: line_items
+  description: line_items property
+  type: array
+- name: line_qty_fail
+  description: line_qty_fail property
+  type: string
+- name: line_qty_pass
+  description: line_qty_pass property
+  type: string
+- name: linked_authorization
+  description: Any transactions which share the same linked_authorization value are
+    part of the same lifecycle for a transaction
+  type: string
+- name: localCurrency
+  description: localCurrency property
+  type: integer
+- name: location
+  description: location property
+  type: string
+- name: locationTimezone
+  description: locationTimezone property
+  type: integer
+- name: location_name
+  description: location_name property
+  type: string
+- name: locations
+  description: locations property
+  type: array
+- name: locked
+  description: locked property
+  type: boolean
+- name: logo
+  description: logo property
+  type: string
+- name: logs
+  description: logs property
+  type: array
+- name: mark_for_delete
+  description: mark_for_delete property
+  type: boolean
+- name: mark_for_skip
+  description: mark_for_skip property
+  type: boolean
+- name: match
+  description: match property
+  type: integer
+- name: matched_statement_items
+  description: matched_statement_items property
+  type: array
+- name: max
+  description: The maximum number of days for the payment to be in flight
+  type: integer
+- name: memo
+  description: memo property
+  type: string
+- name: merchant
+  description: merchant property
+  type: string
+- name: metadata
+  description: metadata property
+  type: object
+- name: mileage_preset
+  description: mileage_preset property
+  type: integer
+- name: mimetype
+  description: mimetype property
+  type: string
+- name: min
+  description: The minimum number of days for the payment to be in flight
+  type: integer
+- name: mobile
+  description: mobile property
+  type: boolean
+- name: most_recent_version
+  description: most_recent_version property
+  type: integer
+- name: multipleLocations
+  description: multipleLocations property
+  type: boolean
+- name: name
+  description: name property
+  type: string
+- name: next
+  description: next property
+  type: string
+- name: nextApprover
+  description: nextApprover property
+  type: string
+- name: next_approver
+  description: next_approver property
+  type: string
+- name: next_approver_choices
+  description: next_approver_choices property
+  type: array
+- name: next_approvers
+  description: next_approvers property
+  type: array
+- name: next_step
+  description: next_step property
+  type: object
+- name: note
+  description: note property
+  type: string
+- name: notes
+  description: notes property
+  type: string
+- name: notifications
+  description: notifications property
+  type: boolean
+- name: num
+  description: num property
+  type: string
+- name: num_pages
+  description: num_pages property
+  type: integer
+- name: number
+  description: number property
+  type: string
+- name: object_id
+  description: object_id property
+  type: integer
+- name: open
+  description: open property
+  type: integer
+- name: options
+  description: options property
+  type: array
+- name: order
+  description: order property
+  type: integer
+- name: orderNum
+  description: orderNum property
+  type: integer
+- name: order_description
+  description: order_description property
+  type: string
+- name: order_item
+  description: The ID of an order item that you wish to create a receipt for. This
+    will be the id property found in the PO or Order Items responses for this item.
+  type: integer
+- name: order_items
+  description: order_items property
+  type: array
+- name: order_number
+  description: order_number property
+  type: integer
+- name: order_status
+  description: order_status property
+  type: integer
+- name: order_uuid
+  description: order_uuid property
+  type: string
+- name: orderitem
+  description: Purchase order item origin (if exists).
+  type: string
+- name: original_currency_label
+  description: original_currency_label property
+  type: string
+- name: original_unit_cost
+  description: original_unit_cost property
+  type: number
+- name: other
+  description: other property
+  type: string
+- name: overall_score
+  description: overall_score property
+  type: string
+- name: packing_slips
+  description: packing_slips property
+  type: array
+- name: page
+  description: page property
+  type: integer
+- name: page_size
+  description: page_size property
+  type: integer
+- name: pagination
+  description: pagination property
+  type: string
+- name: parent
+  description: parent property
+  type: integer
+- name: partial
+  description: partial property
+  type: integer
+- name: pass_quantity
+  description: pass_quantity property
+  type: string
+- name: past_due
+  description: past_due property
+  type: boolean
+- name: payment
+  description: payment property
+  type: string
+- name: paymentType
+  description: paymentType property
+  type: string
+- name: payment_date
+  description: payment_date property
+  type: string
+- name: payment_method
+  description: payment_method property
+  type: string
+- name: payment_method_name
+  description: payment_method_name property
+  type: string
+- name: payment_method_ref
+  description: payment_method_ref property
+  type: object
+- name: payment_method_type
+  description: payment_method_type property
+  type: integer
+- name: payment_methods
+  description: payment_methods property
+  type: array
+- name: payment_rail
+  description: payment_rail property
+  type: string
+- name: payment_remittance
+  description: payment_remittance property
+  type: boolean
+- name: payment_source_name
+  description: payment_source_name property
+  type: string
+- name: payment_source_type
+  description: '
+
+    * direct_debit: Payment is paid from a direct debit account
+
+    * financial_account: Payment is paid from a financial account
+
+    * external: Payment is paid outside of Procurify'
+  type: object
+- name: payment_term
+  description: payment_term property
+  type: string
+- name: payment_term_ref
+  description: payment_term_ref property
+  type: object
+- name: payment_terms
+  description: payment_terms property
+  type: string
+- name: pending_approvals_count
+  description: pending_approvals_count property
+  type: string
+- name: pending_invite
+  description: pending_invite property
+  type: boolean
+- name: performance
+  description: performance property
+  type: object
+- name: periods_count
+  description: periods_count property
+  type: integer
+- name: permissions
+  description: permissions property
+  type: string
+- name: phone
+  description: phone property
+  type: string
+- name: phoneOne
+  description: phoneOne property
+  type: string
+- name: phoneTwo
+  description: phoneTwo property
+  type: string
+- name: pk
+  description: pk property
+  type: integer
+- name: po
+  description: po property
+  type: string
+- name: po_note
+  description: Comment
+  type: string
+- name: po_pdf_labels
+  description: Placeholder for a KVStore value
+  type: string
+- name: po_version
+  description: po_version property
+  type: integer
+- name: port_date
+  description: port_date property
+  type: string
+- name: ported
+  description: ported property
+  type: boolean
+- name: position
+  description: position property
+  type: string
+- name: postalCode
+  description: Postal Code
+  type: string
+- name: postal_code
+  description: postal_code property
+  type: string
+- name: posted_date
+  description: posted_date property
+  type: string
+- name: pref_vendor
+  description: pref_vendor property
+  type: string
+- name: previous
+  description: previous property
+  type: string
+- name: price
+  description: price property
+  type: string
+- name: primary_billing_address
+  description: primary_billing_address property
+  type: string
+- name: primary_shipping_address
+  description: primary_shipping_address property
+  type: string
+- name: processing_date
+  description: processing_date property
+  type: string
+- name: procurify_PO
+  description: Procurify PO Number
+  type: integer
+- name: procurify_domains
+  description: procurify_domains property
+  type: array
+- name: product_url
+  description: product_url property
+  type: string
+- name: profile_image
+  description: profile_image property
+  type: string
+- name: promise_date
+  description: promise_date property
+  type: string
+- name: punchout_email
+  description: punchout_email property
+  type: string
+- name: punchout_group
+  description: punchout_group property
+  type: object
+- name: punchout_is_retriable
+  description: punchout_is_retriable property
+  type: boolean
+- name: punchout_items_rejected
+  description: punchout_items_rejected property
+  type: boolean
+- name: punchout_order_purchase_order_id
+  description: punchout_order_purchase_order_id property
+  type: integer
+- name: punchout_shipping_address
+  description: punchout_shipping_address property
+  type: object
+- name: punchout_supplier_can_update_quantity
+  description: punchout_supplier_can_update_quantity property
+  type: boolean
+- name: punchout_supplier_icon
+  description: punchout_supplier_icon property
+  type: string
+- name: punchout_supplier_name
+  description: punchout_supplier_name property
+  type: string
+- name: punchout_system
+  description: punchout_system property
+  type: integer
+- name: punchout_vendor_reference
+  description: punchout_vendor_reference property
+  type: integer
+- name: purchase_agreement
+  description: purchase_agreement property
+  type: integer
+- name: purchase_agreement_status
+  description: purchase_agreement_status property
+  type: object
+- name: purchase_filtering
+  description: purchase_filtering property
+  type: boolean
+- name: purchase_order
+  description: Procurify PO Number
+  type: integer
+- name: purchase_order_number
+  description: purchase_order_number property
+  type: string
+- name: purchase_order_uuid
+  description: purchase_order_uuid property
+  type: string
+- name: purchased
+  description: purchased property
+  type: string
+- name: purchasedCount
+  description: purchasedCount property
+  type: integer
+- name: purchased_currency
+  description: purchased_currency property
+  type: string
+- name: purchased_currency_rate
+  description: purchased_currency_rate property
+  type: string
+- name: purchaser
+  description: purchaser property
+  type: integer
+- name: quality
+  description: quality property
+  type: string
+- name: quantity
+  description: quantity property
+  type: number
+- name: rate
+  description: rate property
+  type: string
+- name: reason
+  description: reason property
+  type: string
+- name: receipt_attachments
+  description: User provided images of receipts about this transactions
+  type: array
+- name: receivable
+  description: receivable property
+  type: string
+- name: receive_log_count
+  description: receive_log_count property
+  type: integer
+- name: receive_method
+  description: receive_method property
+  type: string
+- name: receivedFailQty
+  description: Received Fail Quantity
+  type: string
+- name: receivedPassQty
+  description: Received Pass Quantity
+  type: string
+- name: received_at
+  description: received_at property
+  type: string
+- name: received_on
+  description: Last received datetime of the related purchase order item.
+  type: string
+- name: received_qty
+  description: received_qty property
+  type: string
+- name: receiver_address
+  description: receiver_address property
+  type: string
+- name: receiver_addressLineOne
+  description: Address line
+  type: string
+- name: receiver_city
+  description: receiver_city property
+  type: string
+- name: receiver_contact
+  description: receiver_contact property
+  type: string
+- name: receiver_country
+  description: Country
+  type: string
+- name: receiver_name
+  description: receiver_name property
+  type: string
+- name: receiver_postalCode
+  description: Postal Code
+  type: string
+- name: receiver_state_province
+  description: State/Province
+  type: string
+- name: reconciliation_status
+  description: '
+
+    * pending: Transaction has not yet been reconciled
+
+    * reviewed: Transaction has been reviewed during reconciliation'
+  type: string
+- name: recorded_date
+  description: recorded_date property
+  type: string
+- name: recurrence
+  description: recurrence property
+  type: object
+- name: recurring_price
+  description: recurring_price property
+  type: string
+- name: reference_number
+  description: reference_number property
+  type: string
+- name: reimburse
+  description: reimburse property
+  type: boolean
+- name: requested_count
+  description: requested_count property
+  type: integer
+- name: requester
+  description: requester property
+  type: string
+- name: require_activation
+  description: Does this card require new activation?
+  type: boolean
+- name: required_date
+  description: required_date property
+  type: string
+- name: rfo_lock
+  description: rfo_lock property
+  type: boolean
+- name: role
+  description: role property
+  type: string
+- name: role_id
+  description: role_id property
+  type: integer
+- name: same_unit_cost
+  description: same_unit_cost property
+  type: boolean
+- name: score
+  description: score property
+  type: number
+- name: selected_account
+  description: selected_account property
+  type: object
+- name: send_invitation_email
+  description: send_invitation_email property
+  type: boolean
+- name: separate_expense_approval
+  description: separate_expense_approval property
+  type: boolean
+- name: session
+  description: session property
+  type: string
+- name: setter
+  description: setter property
+  type: string
+- name: setup_stage
+  description: setup_stage property
+  type: string
+- name: sha1_hash
+  description: sha1_hash property
+  type: string
+- name: shippingAddress
+  description: shippingAddress property
+  type: integer
+- name: shipping_addresses
+  description: shipping_addresses property
+  type: array
+- name: shipping_amount
+  description: shipping_amount property
+  type: number
+- name: shipping_method
+  description: shipping_method property
+  type: string
+- name: shipping_method_ref
+  description: shipping_method_ref property
+  type: object
+- name: shipping_term
+  description: shipping_term property
+  type: string
+- name: shipping_term_ref
+  description: shipping_term_ref property
+  type: object
+- name: shipping_terms
+  description: shipping_terms property
+  type: string
+- name: sku
+  description: sku property
+  type: string
+- name: slack_user_id
+  description: slack_user_id property
+  type: string
+- name: speed
+  description: speed property
+  type: string
+- name: spend_allocation
+  description: spend_allocation property
+  type: array
+- name: staged_for_export
+  description: staged_for_export property
+  type: boolean
+- name: standalone_travel_approval
+  description: standalone_travel_approval property
+  type: boolean
+- name: start_date
+  description: start_date property
+  type: string
+- name: start_datetime
+  description: start_datetime property
+  type: string
+- name: state
+  description: state property
+  type: integer
+- name: state_province
+  description: State/Province
+  type: string
+- name: statement
+  description: statement property
+  type: integer
+- name: statement_date
+  description: statement_date property
+  type: string
+- name: status
+  description: 'The status of the Credit Card
+
+
+    * `pending` - Pending
+
+    * `active` - Active
+
+    * `inactive` - Inactive
+
+    * `canceled` - Canceled
+
+    * `lost` - Lost
+
+    * `stolen` - Stolen'
+  type: integer
+- name: step_number
+  description: step_number property
+  type: integer
+- name: stocking_parent
+  description: stocking_parent property
+  type: integer
+- name: subdomain
+  description: subdomain property
+  type: string
+- name: submit_date
+  description: Date/time submitted
+  type: string
+- name: submitted_date
+  description: submitted_date property
+  type: string
+- name: subtotal
+  description: subtotal property
+  type: string
+- name: subtotal_cost
+  description: This amount does not include any tax or shipping_amount
+  type: number
+- name: summary
+  description: summary property
+  type: string
+- name: symbol
+  description: symbol property
+  type: string
+- name: systemaccess_cache
+  description: systemaccess_cache property
+  type: string
+- name: tax
+  description: tax property
+  type: integer
+- name: tax_amount
+  description: tax_amount property
+  type: number
+- name: tax_is_inclusive
+  description: tax_is_inclusive property
+  type: boolean
+- name: tax_name
+  description: tax_name property
+  type: string
+- name: tax_percentage
+  description: tax_percentage property
+  type: string
+- name: taxes
+  description: taxes property
+  type: array
+- name: tier
+  description: tier property
+  type: string
+- name: timezone
+  description: timezone property
+  type: string
+- name: title
+  description: title property
+  type: string
+- name: total
+  description: Total Cost
+  type: string
+- name: totalPrice
+  description: totalPrice property
+  type: string
+- name: total_amount
+  description: total_amount property
+  type: string
+- name: total_amount_with_tax
+  description: total_amount_with_tax property
+  type: string
+- name: total_cost
+  description: total_cost property
+  type: number
+- name: total_cost_in_base_currency
+  description: total_cost_in_base_currency property
+  type: string
+- name: total_cost_with_tax
+  description: Make sure full tax amount is added
+  type: number
+- name: total_items
+  description: total_items property
+  type: integer
+- name: total_quantity
+  description: total_quantity property
+  type: string
+- name: transDate
+  description: transDate property
+  type: string
+- name: transaction
+  description: transaction property
+  type: integer
+- name: transaction_datetime
+  description: The date that this transaction was captured
+  type: string
+- name: transaction_fee
+  description: transaction_fee property
+  type: string
+- name: travel
+  description: travel property
+  type: integer
+- name: type
+  description: type property
+  type: string
+- name: unit
+  description: unit property
+  type: string
+- name: unitType
+  description: unitType property
+  type: string
+- name: unit_cost
+  description: Unit cost of the item, applicable to bill by quantity items only.
+  type: number
+- name: unit_cost_diff_log
+  description: unit_cost_diff_log property
+  type: object
+- name: unit_price
+  description: unit_price property
+  type: string
+- name: updated_at
+  description: updated_at property
+  type: string
+- name: upload_datetime
+  description: upload_datetime property
+  type: string
+- name: url
+  description: url property
+  type: string
+- name: user
+  description: user property
+  type: string
+- name: userLimit
+  description: userLimit property
+  type: integer
+- name: user_count
+  description: user_count property
+  type: integer
+- name: userprofile
+  description: userprofile property
+  type: string
+- name: uuid
+  description: uuid property
+  type: string
+- name: value
+  description: value property
+  type: string
+- name: vendor
+  description: vendor property
+  type: integer
+- name: vendor_addressLineOne
+  description: Address line
+  type: string
+- name: vendor_address_one
+  description: Vendor Address Line One
+  type: string
+- name: vendor_address_two
+  description: Vendor Address Line Two
+  type: string
+- name: vendor_amount
+  description: The value in the base unit of currency that this transaction was charged
+    at by the vendor
+  type: string
+- name: vendor_city
+  description: vendor_city property
+  type: string
+- name: vendor_contact
+  description: vendor_contact property
+  type: string
+- name: vendor_country
+  description: vendor_country property
+  type: string
+- name: vendor_currency
+  description: The currency this transaction was created
+  type: string
+- name: vendor_name
+  description: vendor_name property
+  type: string
+- name: vendor_payment_method_country_code
+  description: ISO 3166 country codes
+  type: string
+- name: vendor_payment_method_rail
+  description: 'Rails supported: ACH, FEDWIRE, PAPER_CHECK, LOCAL, etc.'
+  type: string
+- name: vendor_postalCode
+  description: Postal Code
+  type: string
+- name: vendor_postal_code
+  description: vendor_postal_code property
+  type: string
+- name: vendor_request
+  description: vendor_request property
+  type: string
+- name: vendor_state_province
+  description: Vendor State/Province
+  type: string
+- name: version
+  description: version property
+  type: integer
+- name: version_choices
+  description: version_choices property
+  type: array
+- name: warning_indicator
+  description: warning_indicator property
+  type: boolean
+- name: weight
+  description: weight property
+  type: string

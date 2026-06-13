@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CustomFieldUpdateRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "default_value": {
+      "type": "string",
+      "maxLength": 5000
+    },
+    "is_required": {
+      "type": "boolean"
+    },
+    "field_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "field_choices": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    }
+  },
+  "required": [
+    "field_type",
+    "name"
+  ]
+}

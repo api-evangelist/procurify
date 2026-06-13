@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MinimalRoleRead",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "type": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "name",
+    "type"
+  ]
+}

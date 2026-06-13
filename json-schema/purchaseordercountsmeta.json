@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PurchaseOrderCountsMeta",
+  "type": "object",
+  "properties": {
+    "purchased": {
+      "$ref": "#/components/schemas/PurchaseOrderCountsBreakdown"
+    },
+    "receivable": {
+      "$ref": "#/components/schemas/PurchaseOrderCountsBreakdown"
+    }
+  }
+}

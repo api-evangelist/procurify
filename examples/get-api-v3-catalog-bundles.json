@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/catalog-bundles/",
+  "method": "GET",
+  "operationId": "catalog_bundles_list",
+  "summary": "Get All Catalog Bundles",
+  "tags": [
+    "catalog"
+  ]
+}

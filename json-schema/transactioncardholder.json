@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransactionCardholder",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TransactionCardholderStatusEnum"
+        }
+      ],
+      "readOnly": true,
+      "description": "\n* inactive: Cardholder is still awaiting activation\n* active: Cardholder is ready to use issuing\n* required_information: Cardholder must provide extra information\n* deleted: Cardholder has been deleted and can no longer use issuing\n* disabled: Cardholder has been disabled and can no longer use issuing"
+    }
+  },
+  "required": [
+    "first_name",
+    "last_name",
+    "uuid"
+  ]
+}

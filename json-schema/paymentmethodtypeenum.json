@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentMethodTypeEnum",
+  "enum": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "type": "integer",
+  "description": "* `0` - OTHER\n* `1` - CHECK\n* `2` - ACH\n* `3` - EFT\n* `4` - WIRE\n* `5` - PROCURIFY_CHECK\n* `6` - PROCURIFY_ACH\n* `7` - PROCURIFY_WIRE\n* `8` - AIRWALLEX"
+}

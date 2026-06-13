@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SimpleBill",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/BillStatusEnum"
+        }
+      ],
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "version": {
+      "type": "integer",
+      "maximum": 4294967295,
+      "minimum": 0,
+      "format": "int64"
+    },
+    "locked": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "currency": {
+      "$ref": "#/components/schemas/SimpleCurrency"
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "readOnly": true
+    },
+    "vendor": {
+      "$ref": "#/components/schemas/SimpleAPVendor"
+    },
+    "due_date": {
+      "type": "string",
+      "readOnly": true,
+      "nullable": true
+    },
+    "total_cost_with_tax": {
+      "type": "number",
+      "format": "float",
+      "readOnly": true
+    },
+    "invoice_date": {
+      "type": "string",
+      "readOnly": true,
+      "nullable": true
+    },
+    "next_approver_choices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ApproverRead"
+      },
+      "nullable": true,
+      "readOnly": true
+    },
+    "last_export_user": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SimpleUser"
+        }
+      ],
+      "readOnly": true
+    },
+    "last_modified_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Modified"
+    },
+    "last_export_date": {
+      "type": "string",
+      "format": "date",
+      "readOnly": true
+    },
+    "submitted_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "gl_post_date": {
+      "type": "string",
+      "readOnly": true,
+      "nullable": true
+    },
+    "invoice_number": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "group": {
+      "type": "integer",
+      "readOnly": true,
+      "nullable": true
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/BillTypeEnum"
+        }
+      ],
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "user": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SimpleUser"
+        }
+      ],
+      "description": "Last modified by user."
+    },
+    "approver": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/BillListViewApproverUserDocs"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true,
+      "type": "object"
+    },
+    "past_due": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "invoice_created": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "invoice_uuid": {
+      "type": "string",
+      "readOnly": true
+    },
+    "invoice_total": {
+      "type": "number",
+      "format": "double",
+      "maximum": 10000000000000,
+      "minimum": -10000000000000,
+      "exclusiveMaximum": true,
+      "exclusiveMinimum": true,
+      "readOnly": true
+    },
+    "creator": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SimpleUser"
+        }
+      ],
+      "description": "Creator of the bill."
+    }
+  },
+  "required": [
+    "creator",
+    "currency",
+    "user",
+    "uuid",
+    "vendor"
+  ]
+}

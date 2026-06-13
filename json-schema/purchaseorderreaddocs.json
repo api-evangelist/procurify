@@ -1,0 +1,197 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PurchaseOrderReadDocs",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "PO_Num": {
+      "type": "string",
+      "nullable": true,
+      "title": "PO Number",
+      "maxLength": 30
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "title": "PO Date"
+    },
+    "discount": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PriceModifierDocs"
+        }
+      ],
+      "readOnly": true
+    },
+    "freight": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,6})?$",
+      "nullable": true
+    },
+    "fulfilment_status": {
+      "$ref": "#/components/schemas/FulfilmentStatusEnum"
+    },
+    "item_count": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "last_modified": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "number": {
+      "type": "string"
+    },
+    "other": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,6})?$",
+      "nullable": true
+    },
+    "pref_vendor": {
+      "$ref": "#/components/schemas/SimpleVendor"
+    },
+    "procurify_PO": {
+      "type": "integer",
+      "readOnly": true,
+      "title": "Procurify PO Number"
+    },
+    "promise_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "punchout_system": {
+      "type": "integer",
+      "nullable": true,
+      "readOnly": true
+    },
+    "purchase_agreement": {
+      "type": "integer",
+      "nullable": true
+    },
+    "purchase_agreement_status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PurchaseAgreementStatusEnum"
+        }
+      ],
+      "readOnly": true,
+      "nullable": true,
+      "type": "object"
+    },
+    "purchased_currency": {
+      "$ref": "#/components/schemas/SimpleCurrency"
+    },
+    "purchased_currency_rate": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,9}(?:\\.\\d{0,6})?$",
+      "nullable": true
+    },
+    "purchaser": {
+      "$ref": "#/components/schemas/SimpleUser"
+    },
+    "state": {
+      "nullable": true,
+      "minimum": -2147483648,
+      "maximum": 2147483647,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/PurchaseOrderStateEnum"
+        },
+        {
+          "$ref": "#/components/schemas/NullEnum"
+        }
+      ],
+      "type": "integer"
+    },
+    "subtotal": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,17}(?:\\.\\d{0,2})?$"
+    },
+    "total": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,17}(?:\\.\\d{0,2})?$",
+      "title": "Total Cost"
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "version": {
+      "type": "integer",
+      "maximum": 2147483647,
+      "minimum": -2147483648
+    },
+    "punchout_items_rejected": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "total_amount": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,2})?$"
+    },
+    "currency": {
+      "type": "string",
+      "default": ""
+    },
+    "email_status": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 50
+    },
+    "email_status_updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "punchout_supplier_name": {
+      "type": "string",
+      "nullable": true,
+      "readOnly": true
+    },
+    "punchout_supplier_icon": {
+      "type": "string",
+      "nullable": true,
+      "readOnly": true
+    },
+    "punchout_vendor_reference": {
+      "type": "integer",
+      "nullable": true,
+      "readOnly": true
+    },
+    "punchout_is_retriable": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "has_blanket_order_items": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    }
+  },
+  "required": [
+    "id",
+    "number",
+    "pref_vendor",
+    "promise_date",
+    "purchased_currency",
+    "purchaser",
+    "subtotal",
+    "total",
+    "total_amount",
+    "uuid"
+  ]
+}

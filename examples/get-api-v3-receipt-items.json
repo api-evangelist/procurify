@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/receipt/items/",
+  "method": "GET",
+  "operationId": "receipt_items_list",
+  "summary": "Get list of receipt items by order item",
+  "tags": [
+    "receipt"
+  ]
+}

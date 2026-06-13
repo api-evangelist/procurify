@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CostAllocationRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "budget": {
+      "$ref": "#/components/schemas/AccountRead"
+    },
+    "object_id": {
+      "type": "integer",
+      "maximum": 4294967295,
+      "minimum": 0,
+      "format": "int64",
+      "nullable": true
+    },
+    "amount": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$",
+      "title": "Billed Amount"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/Currency"
+    },
+    "created_on": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "amount",
+    "budget",
+    "currency"
+  ]
+}

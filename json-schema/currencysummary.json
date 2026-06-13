@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CurrencySummary",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 10
+    },
+    "rate": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,9}(?:\\.\\d{0,6})?$"
+    },
+    "base": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "name",
+    "rate"
+  ]
+}

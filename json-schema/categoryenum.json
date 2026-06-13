@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CategoryEnum",
+  "enum": [
+    0,
+    1
+  ],
+  "type": "integer",
+  "description": "* `0` - Physical\n* `1` - Virtual"
+}

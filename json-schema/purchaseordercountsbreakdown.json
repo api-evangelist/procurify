@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PurchaseOrderCountsBreakdown",
+  "type": "object",
+  "properties": {
+    "all": {
+      "type": "integer"
+    },
+    "open": {
+      "type": "integer"
+    },
+    "partial": {
+      "type": "integer"
+    },
+    "closed": {
+      "type": "integer"
+    },
+    "cancelled": {
+      "type": "integer"
+    },
+    "page": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "all",
+    "cancelled",
+    "closed",
+    "open",
+    "page",
+    "partial"
+  ]
+}

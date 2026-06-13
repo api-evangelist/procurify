@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentMetadataDocs",
+  "type": "object",
+  "properties": {
+    "permissions": {
+      "$ref": "#/components/schemas/PermissionsEditDeleteApprove"
+    },
+    "summary": {
+      "$ref": "#/components/schemas/PaymentSummaryDocs"
+    },
+    "pagination": {
+      "$ref": "#/components/schemas/PaginationDocs"
+    }
+  },
+  "required": [
+    "pagination",
+    "permissions",
+    "summary"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/account-codes/",
+  "method": "POST",
+  "operationId": "account_codes_create",
+  "summary": "Create Account Codes",
+  "tags": [
+    "account-codes"
+  ]
+}

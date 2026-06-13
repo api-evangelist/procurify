@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BillStatusEnum",
+  "enum": [
+    0,
+    1,
+    2,
+    3,
+    6,
+    7,
+    8,
+    4,
+    5
+  ],
+  "type": "integer",
+  "description": "* `0` - Draft\n* `1` - Confirmed\n* `2` - Approved\n* `3` - Denied\n* `6` - Payment Confirmed\n* `7` - Payment Approved\n* `8` - Payment Limbo\n* `4` - Paid\n* `5` - Withdrawn"
+}

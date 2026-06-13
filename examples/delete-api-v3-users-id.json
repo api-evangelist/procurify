@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/users/{id}/",
+  "method": "DELETE",
+  "operationId": "users_destroy",
+  "summary": "Deactivate User",
+  "tags": [
+    "users"
+  ]
+}

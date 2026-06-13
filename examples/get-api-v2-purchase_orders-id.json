@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/purchase_orders/{id}/",
+  "method": "GET",
+  "operationId": "purchase_orders_retrieve",
+  "summary": "Get Purchase Order by ID (with items)",
+  "tags": [
+    "purchase-orders"
+  ]
+}

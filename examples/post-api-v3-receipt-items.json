@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/receipt/items/",
+  "method": "POST",
+  "operationId": "receipt_items_create",
+  "summary": "Create a receipt item for an order item",
+  "tags": [
+    "receipt"
+  ]
+}

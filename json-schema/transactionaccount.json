@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransactionAccount",
+  "type": "object",
+  "properties": {
+    "account_code": {
+      "type": "string"
+    },
+    "account_code_description": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "department_branch": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "account_code",
+    "account_code_description",
+    "department",
+    "department_branch"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VendorBreakdownDocs",
+  "type": "object",
+  "properties": {
+    "speed": {
+      "$ref": "#/components/schemas/BreakdownDocs"
+    },
+    "accuracy": {
+      "$ref": "#/components/schemas/BreakdownDocs"
+    },
+    "quality": {
+      "$ref": "#/components/schemas/BreakdownDocs"
+    },
+    "cost": {
+      "$ref": "#/components/schemas/BreakdownDocs"
+    }
+  },
+  "required": [
+    "accuracy",
+    "cost",
+    "quality",
+    "speed"
+  ]
+}

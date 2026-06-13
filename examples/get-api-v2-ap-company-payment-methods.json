@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/ap/company-payment-methods/",
+  "method": "GET",
+  "operationId": "ap_company_payment_methods_list",
+  "summary": "Get list of Company Payment Methods",
+  "tags": [
+    "ap"
+  ]
+}

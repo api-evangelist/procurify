@@ -1,0 +1,201 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PurchaseOrderUpdateRequest",
+  "type": "object",
+  "properties": {
+    "order_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/OrderItemPurchaseEditRequest"
+      }
+    },
+    "custom_fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": {}
+      },
+      "writeOnly": true,
+      "default": []
+    },
+    "PO_Num": {
+      "type": "string",
+      "nullable": true,
+      "title": "PO Number",
+      "maxLength": 30
+    },
+    "buyer_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "buyer_contact": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "buyer_addressLineOne": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Address line",
+      "maxLength": 300
+    },
+    "buyer_postalCode": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Postal Code",
+      "maxLength": 20
+    },
+    "buyer_city": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "buyer_state_province": {
+      "type": "string",
+      "title": "State/Province",
+      "maxLength": 40
+    },
+    "buyer_country": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Country",
+      "maxLength": 80
+    },
+    "buyer_address": {
+      "type": "integer"
+    },
+    "comment": {
+      "type": "string",
+      "nullable": true,
+      "title": "Notes"
+    },
+    "receiver_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "receiver_contact": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "receiver_addressLineOne": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Address line",
+      "maxLength": 300
+    },
+    "receiver_postalCode": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Postal Code",
+      "maxLength": 20
+    },
+    "receiver_city": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "receiver_state_province": {
+      "type": "string",
+      "title": "State/Province",
+      "maxLength": 40
+    },
+    "receiver_country": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Country",
+      "maxLength": 80
+    },
+    "receiver_address": {
+      "type": "integer"
+    },
+    "promise_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "freight": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,6})?$",
+      "nullable": true
+    },
+    "discount": {
+      "type": "object",
+      "additionalProperties": {}
+    },
+    "tax": {
+      "type": "object",
+      "additionalProperties": {}
+    },
+    "other": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,6})?$",
+      "nullable": true
+    },
+    "disclaimer_description": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 100
+    },
+    "disclaimer_text": {
+      "type": "string",
+      "nullable": true
+    },
+    "payment_term_ref": {
+      "type": "integer",
+      "nullable": true
+    },
+    "shipping_term_ref": {
+      "type": "integer",
+      "nullable": true
+    },
+    "payment_method_ref": {
+      "type": "integer",
+      "nullable": true
+    },
+    "shipping_method_ref": {
+      "type": "integer",
+      "nullable": true
+    },
+    "creditcard": {
+      "type": "integer",
+      "nullable": true
+    },
+    "version": {
+      "type": "integer"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "contract": {
+      "type": "integer",
+      "nullable": true
+    }
+  },
+  "required": [
+    "buyer_address",
+    "buyer_addressLineOne",
+    "buyer_city",
+    "buyer_contact",
+    "buyer_country",
+    "buyer_name",
+    "buyer_postalCode",
+    "discount",
+    "order_items",
+    "promise_date",
+    "receiver_address",
+    "receiver_addressLineOne",
+    "receiver_city",
+    "receiver_contact",
+    "receiver_country",
+    "receiver_name",
+    "receiver_postalCode",
+    "tax",
+    "version"
+  ]
+}

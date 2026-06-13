@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OrderItemTypeEnum",
+  "enum": [
+    0,
+    1,
+    2
+  ],
+  "type": "integer",
+  "description": "* `0` - One Time\n* `1` - Recurring\n* `2` - Blanket"
+}

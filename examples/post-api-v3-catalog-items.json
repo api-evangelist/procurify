@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/catalog-items/",
+  "method": "POST",
+  "operationId": "catalog_items_create",
+  "summary": "Create Catalog Item",
+  "tags": [
+    "catalog"
+  ]
+}

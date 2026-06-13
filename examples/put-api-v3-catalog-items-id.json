@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/catalog-items/{id}/",
+  "method": "PUT",
+  "operationId": "catalog_items_update",
+  "summary": "Update Catalog Item",
+  "tags": [
+    "catalog"
+  ]
+}

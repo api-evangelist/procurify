@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CatalogItemUpsertRequest",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "image": {
+      "type": "string"
+    },
+    "unitType": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "pref_vendor": {
+      "type": "integer",
+      "nullable": true
+    },
+    "account_code": {
+      "type": "integer",
+      "nullable": true
+    },
+    "internalSKU": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "description": {
+      "type": "string",
+      "nullable": true
+    },
+    "product_url": {
+      "type": "string",
+      "nullable": true
+    },
+    "currency": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,8})?$"
+    },
+    "rfo_lock": {
+      "type": "boolean"
+    },
+    "departments": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "custom_fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": {}
+      }
+    }
+  },
+  "required": [
+    "currency",
+    "custom_fields",
+    "name"
+  ]
+}

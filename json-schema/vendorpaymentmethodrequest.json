@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VendorPaymentMethodRequest",
+  "type": "object",
+  "properties": {
+    "vendor": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaymentMethodTypeEnum"
+        }
+      ],
+      "title": "Payment Method",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "data": {},
+    "currency": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "data",
+    "vendor"
+  ]
+}

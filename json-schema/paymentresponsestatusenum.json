@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentResponseStatusEnum",
+  "enum": [
+    "draft",
+    "pending_approval",
+    "approved",
+    "denied",
+    "paid",
+    "processing",
+    "failed",
+    "scheduled"
+  ],
+  "type": "string"
+}

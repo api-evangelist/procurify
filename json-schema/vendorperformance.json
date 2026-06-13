@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VendorPerformance",
+  "type": "object",
+  "properties": {
+    "overall_score": {
+      "type": "number",
+      "format": "float",
+      "readOnly": true
+    },
+    "average_delivery_time": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,3}(?:\\.\\d{0,3})?$",
+      "nullable": true,
+      "readOnly": true
+    },
+    "breakdown": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/VendorBreakdownDocs"
+        }
+      ],
+      "readOnly": true
+    }
+  }
+}

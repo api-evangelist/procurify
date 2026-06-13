@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExpenseTypeEnum",
+  "enum": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "type": "integer",
+  "description": "* `0` - OTHER\n* `1` - MEALS\n* `2` - MILEAGE\n* `3` - LABOUR\n* `4` - AIRFARE\n* `5` - LODGING"
+}

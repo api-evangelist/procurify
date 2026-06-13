@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExpenseDocs",
+  "type": "object",
+  "properties": {
+    "merchant": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string",
+      "nullable": true
+    },
+    "expenseReport": {
+      "$ref": "#/components/schemas/ExpenseReportWithUserDocs"
+    }
+  },
+  "required": [
+    "expenseReport",
+    "merchant",
+    "notes"
+  ]
+}

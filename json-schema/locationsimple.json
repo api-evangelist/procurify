@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LocationSimple",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "headquarter": {
+      "type": "boolean",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

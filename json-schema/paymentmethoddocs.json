@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentMethodDocs",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "vendor": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaymentMethodTypeEnum"
+        }
+      ],
+      "title": "Payment Method",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": {},
+      "description": "Some semi-structured data about this payment method. Keys depend on the\ntype of the payment method.",
+      "readOnly": true
+    },
+    "currency": {
+      "$ref": "#/components/schemas/Currency"
+    }
+  },
+  "required": [
+    "currency",
+    "vendor"
+  ]
+}

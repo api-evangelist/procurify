@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserProfileUnoptimized",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "firstName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "lastName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "user": {
+      "type": "integer"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 254
+    },
+    "department": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SimpleDepartment"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "location": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SimpleLocation"
+        }
+      ],
+      "readOnly": true
+    },
+    "profile_image": {
+      "type": "string",
+      "nullable": true
+    },
+    "is_active": {
+      "type": "boolean"
+    },
+    "phone": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 30
+    },
+    "position": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 100
+    },
+    "role": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SimpleRoleRead"
+        }
+      ],
+      "readOnly": true
+    },
+    "approval_delegatee": {
+      "$ref": "#/components/schemas/SimpleUserProfile"
+    },
+    "pending_approvals_count": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PendingApprovalsCountDocs"
+        }
+      ],
+      "readOnly": true
+    },
+    "expected_return_date": {
+      "type": "string",
+      "format": "date",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "approval_delegatee",
+    "department",
+    "email",
+    "user"
+  ]
+}

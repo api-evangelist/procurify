@@ -1,0 +1,9 @@
+{
+  "path": "/api/v2/purchase_orders/{role}/{status}/",
+  "method": "GET",
+  "operationId": "purchase_orders_list",
+  "summary": "Get Purchase Orders by Role & Status",
+  "tags": [
+    "purchase-orders"
+  ]
+}

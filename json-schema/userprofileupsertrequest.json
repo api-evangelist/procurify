@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserProfileUpsertRequest",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "user": {
+      "type": "integer"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "minLength": 1,
+      "maxLength": 254
+    },
+    "firstName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lastName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location": {
+      "type": "integer",
+      "nullable": true
+    },
+    "department": {
+      "type": "integer",
+      "nullable": true
+    },
+    "position": {
+      "type": "string",
+      "default": ""
+    },
+    "phone": {
+      "type": "string",
+      "default": ""
+    },
+    "profile_image": {
+      "type": "string",
+      "nullable": true
+    },
+    "is_sso_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "mark_for_skip": {
+      "type": "boolean",
+      "default": false
+    },
+    "mark_for_delete": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "department",
+    "email",
+    "firstName",
+    "lastName",
+    "location"
+  ]
+}

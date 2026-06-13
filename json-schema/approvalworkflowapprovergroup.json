@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ApprovalWorkflowApproverGroup",
+  "type": "object",
+  "properties": {
+    "approvers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ApprovalWorkflowApprover"
+      }
+    },
+    "is_pooled": {
+      "type": "boolean"
+    },
+    "level": {
+      "type": "integer"
+    },
+    "group_id": {
+      "type": "integer"
+    },
+    "group_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "approvers",
+    "group_id",
+    "group_name",
+    "is_pooled",
+    "level"
+  ]
+}

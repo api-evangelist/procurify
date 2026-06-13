@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentMethodRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaymentMethodTypeEnum"
+        }
+      ],
+      "title": "Payment Method",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "data": {},
+    "currency": {
+      "$ref": "#/components/schemas/Currency"
+    },
+    "payment_rail": {
+      "type": "string",
+      "readOnly": true
+    },
+    "bank_account_country_code": {
+      "type": "string",
+      "nullable": true,
+      "readOnly": true
+    }
+  },
+  "required": [
+    "currency",
+    "data"
+  ]
+}

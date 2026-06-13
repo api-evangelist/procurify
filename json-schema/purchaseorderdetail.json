@@ -1,0 +1,401 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PurchaseOrderDetail",
+  "type": "object",
+  "properties": {
+    "number": {
+      "type": "string",
+      "readOnly": true
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "purchaser": {
+      "$ref": "#/components/schemas/UserSummary"
+    },
+    "procurify_PO": {
+      "type": "integer",
+      "readOnly": true,
+      "title": "Procurify PO Number"
+    },
+    "PO_Num": {
+      "type": "string",
+      "nullable": true,
+      "title": "PO Number",
+      "maxLength": 30
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "title": "PO Date"
+    },
+    "buyer_name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "buyer_contact": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "buyer_addressLineOne": {
+      "type": "string",
+      "title": "Address line",
+      "maxLength": 300
+    },
+    "buyer_postalCode": {
+      "type": "string",
+      "title": "Postal Code",
+      "maxLength": 20
+    },
+    "buyer_city": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "buyer_state_province": {
+      "type": "string",
+      "title": "State/Province",
+      "maxLength": 40
+    },
+    "buyer_country": {
+      "type": "string",
+      "title": "Country",
+      "maxLength": 80
+    },
+    "buyer_address": {
+      "$ref": "#/components/schemas/AddressSummary"
+    },
+    "receiver_name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "receiver_contact": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "receiver_addressLineOne": {
+      "type": "string",
+      "title": "Address line",
+      "maxLength": 300
+    },
+    "receiver_postalCode": {
+      "type": "string",
+      "title": "Postal Code",
+      "maxLength": 20
+    },
+    "receiver_city": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "receiver_state_province": {
+      "type": "string",
+      "title": "State/Province",
+      "maxLength": 40
+    },
+    "receiver_country": {
+      "type": "string",
+      "title": "Country",
+      "maxLength": 80
+    },
+    "receiver_address": {
+      "$ref": "#/components/schemas/AddressSummary"
+    },
+    "pref_vendor": {
+      "$ref": "#/components/schemas/VendorRead"
+    },
+    "vendor_name": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 150
+    },
+    "vendor_contact": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 100
+    },
+    "vendor_addressLineOne": {
+      "type": "string",
+      "nullable": true,
+      "title": "Address line",
+      "maxLength": 300
+    },
+    "vendor_postalCode": {
+      "type": "string",
+      "nullable": true,
+      "title": "Postal Code",
+      "maxLength": 20
+    },
+    "vendor_city": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 50
+    },
+    "vendor_state_province": {
+      "type": "string",
+      "nullable": true,
+      "title": "State/Province",
+      "maxLength": 40
+    },
+    "vendor_country": {
+      "type": "string",
+      "nullable": true,
+      "title": "Country",
+      "maxLength": 80
+    },
+    "payment_terms": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "shipping_terms": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "shipping_method": {
+      "$ref": "#/components/schemas/ShippingMethod"
+    },
+    "promise_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "subtotal": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,17}(?:\\.\\d{0,2})?$"
+    },
+    "freight": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,6})?$",
+      "nullable": true
+    },
+    "tax": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PriceModifierDocs"
+        }
+      ],
+      "readOnly": true
+    },
+    "discount": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PriceModifierDocs"
+        }
+      ],
+      "readOnly": true
+    },
+    "other": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,6})?$",
+      "nullable": true
+    },
+    "total": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,17}(?:\\.\\d{0,2})?$",
+      "title": "Total Cost"
+    },
+    "comment": {
+      "type": "string",
+      "nullable": true,
+      "title": "Notes"
+    },
+    "purchased_currency": {
+      "$ref": "#/components/schemas/CurrencySummary"
+    },
+    "purchased_currency_rate": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,9}(?:\\.\\d{0,6})?$",
+      "nullable": true
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "state": {
+      "nullable": true,
+      "minimum": -2147483648,
+      "maximum": 2147483647,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/PurchaseOrderStateEnum"
+        },
+        {
+          "$ref": "#/components/schemas/NullEnum"
+        }
+      ],
+      "type": "integer"
+    },
+    "fulfilment_status": {
+      "$ref": "#/components/schemas/FulfilmentStatusEnum"
+    },
+    "disclaimer_description": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 100
+    },
+    "disclaimer_text": {
+      "type": "string",
+      "nullable": true
+    },
+    "recorded_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "closed_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "last_modified": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "staged_for_export": {
+      "type": "boolean"
+    },
+    "version": {
+      "type": "integer",
+      "maximum": 2147483647,
+      "minimum": -2147483648
+    },
+    "item_count": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "most_recent_version": {
+      "type": "integer",
+      "maximum": 2147483647,
+      "minimum": -2147483648,
+      "readOnly": true
+    },
+    "punchout_system": {
+      "type": "integer",
+      "nullable": true,
+      "readOnly": true
+    },
+    "purchase_agreement": {
+      "type": "integer",
+      "nullable": true,
+      "readOnly": true
+    },
+    "purchase_agreement_status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PurchaseAgreementStatusEnum"
+        }
+      ],
+      "readOnly": true,
+      "nullable": true,
+      "type": "object"
+    },
+    "punchout_vendor_reference": {
+      "type": "integer",
+      "nullable": true,
+      "readOnly": true
+    },
+    "punchout_supplier_icon": {
+      "type": "string",
+      "nullable": true,
+      "readOnly": true
+    },
+    "punchout_supplier_name": {
+      "type": "string",
+      "nullable": true,
+      "readOnly": true
+    },
+    "has_blanket_order_items": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "contract": {
+      "$ref": "#/components/schemas/PurchaseOrderContract"
+    },
+    "order_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PurchaseOrderLineItemRead"
+      }
+    },
+    "creditcard_is_editable": {
+      "type": "boolean"
+    },
+    "custom_fields": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CustomFieldValueRead"
+      },
+      "readOnly": true
+    },
+    "creditcard": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreditCardRead"
+        }
+      ],
+      "nullable": true,
+      "type": "object"
+    },
+    "payment_term": {
+      "$ref": "#/components/schemas/PaymentTerm"
+    },
+    "shipping_term": {
+      "$ref": "#/components/schemas/ShippingTerm"
+    },
+    "cost_details": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CostDetails"
+        }
+      ],
+      "nullable": true,
+      "readOnly": true,
+      "type": "object"
+    },
+    "punchout_is_retriable": {
+      "type": "boolean",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "buyer_address",
+    "buyer_addressLineOne",
+    "buyer_city",
+    "buyer_contact",
+    "buyer_country",
+    "buyer_name",
+    "buyer_postalCode",
+    "contract",
+    "creditcard",
+    "creditcard_is_editable",
+    "order_items",
+    "payment_term",
+    "payment_terms",
+    "pref_vendor",
+    "promise_date",
+    "purchased_currency",
+    "purchaser",
+    "receiver_address",
+    "receiver_addressLineOne",
+    "receiver_city",
+    "receiver_contact",
+    "receiver_country",
+    "receiver_name",
+    "receiver_postalCode",
+    "shipping_method",
+    "shipping_term",
+    "shipping_terms",
+    "subtotal",
+    "total",
+    "uuid"
+  ]
+}

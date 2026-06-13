@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CreditCardItemRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "creditcard": {
+      "$ref": "#/components/schemas/APCreditCard"
+    },
+    "po": {
+      "$ref": "#/components/schemas/PurchaseOrderRead"
+    },
+    "expense": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ExpenseDocs"
+        }
+      ],
+      "readOnly": true
+    },
+    "creditcard_is_editable": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "matched_statement_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/StatementItem"
+      },
+      "readOnly": true
+    }
+  },
+  "required": [
+    "creditcard",
+    "po"
+  ]
+}

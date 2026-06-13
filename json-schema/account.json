@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Account",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "account_code": {
+      "$ref": "#/components/schemas/AccountCodeRead"
+    },
+    "department": {
+      "$ref": "#/components/schemas/DepartmentSummary"
+    },
+    "warning_indicator": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "start_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "end_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "budget": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,2})?$"
+    },
+    "budget_used_approved": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,2})?$"
+    },
+    "budget_used_purchased": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,2})?$"
+    },
+    "balance_approved": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,2})?$"
+    },
+    "balance_purchased": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,13}(?:\\.\\d{0,2})?$"
+    },
+    "active": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "account_code",
+    "department"
+  ]
+}

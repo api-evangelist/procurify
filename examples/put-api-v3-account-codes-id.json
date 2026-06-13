@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/account-codes/{id}/",
+  "method": "PUT",
+  "operationId": "account_codes_update",
+  "summary": "Update Account Code",
+  "tags": [
+    "account-codes"
+  ]
+}

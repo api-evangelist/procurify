@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FlagRead",
+  "type": "object",
+  "properties": {
+    "color": {
+      "type": "string",
+      "readOnly": true
+    },
+    "symbol": {
+      "type": "string",
+      "readOnly": true
+    },
+    "object_id": {
+      "type": "integer",
+      "maximum": 4294967295,
+      "minimum": 0,
+      "format": "int64"
+    },
+    "content_type": {
+      "type": "integer",
+      "nullable": true
+    }
+  },
+  "required": [
+    "object_id"
+  ]
+}

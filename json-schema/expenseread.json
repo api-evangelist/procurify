@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExpenseRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "account": {
+      "$ref": "#/components/schemas/Account"
+    },
+    "localCurrency": {
+      "$ref": "#/components/schemas/CurrencySummary"
+    },
+    "expense_type_fields": {},
+    "creditcard": {
+      "$ref": "#/components/schemas/ExpenseLineCreditCard"
+    },
+    "account_id": {
+      "type": "integer"
+    },
+    "expenseReport": {
+      "$ref": "#/components/schemas/SimpleExpenseReport"
+    },
+    "requester": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SimpleUserSummary"
+        }
+      ],
+      "readOnly": true
+    },
+    "approver": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SimpleUserSummary"
+        }
+      ],
+      "readOnly": true
+    },
+    "approved_date": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "is_active": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "merchant": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "transDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reimburse": {
+      "type": "boolean"
+    },
+    "expense_type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ExpenseTypeEnum"
+        }
+      ],
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "paymentType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaymentTypeEnum"
+        }
+      ],
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "amount": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$",
+      "nullable": true
+    },
+    "currency_rate_final": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,9}(?:\\.\\d{0,6})?$"
+    },
+    "exchange_rate_override": {
+      "type": "boolean"
+    },
+    "tax_name": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "tax_percentage": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,8}(?:\\.\\d{0,8})?$"
+    },
+    "tax_amount": {
+      "type": "string",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$",
+      "nullable": true
+    },
+    "tax_is_inclusive": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "string",
+      "nullable": true,
+      "maxLength": 500
+    },
+    "attachment": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "last_changed_by": {
+      "type": "integer",
+      "nullable": true,
+      "title": "Last changed by user"
+    },
+    "mileage_preset": {
+      "type": "integer",
+      "nullable": true
+    },
+    "tax": {
+      "type": "integer",
+      "nullable": true
+    }
+  },
+  "required": [
+    "account",
+    "account_id",
+    "creditcard",
+    "currency_rate_final",
+    "expenseReport",
+    "expense_type_fields",
+    "localCurrency",
+    "merchant",
+    "tax_percentage",
+    "transDate"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SetupStageEnum",
+  "enum": [
+    "COMP",
+    "DEPT",
+    "USER",
+    "COA",
+    "BDGT",
+    "APPR",
+    "FIN"
+  ],
+  "type": "string",
+  "description": "* `COMP` - Company\n* `DEPT` - Department\n* `USER` - User\n* `COA` - Chart_of_Accounts\n* `BDGT` - Budget_Control\n* `APPR` - Approver\n* `FIN` - Finished"
+}

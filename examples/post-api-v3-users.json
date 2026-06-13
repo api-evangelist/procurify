@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/users/",
+  "method": "POST",
+  "operationId": "users_create",
+  "summary": "Create New User",
+  "tags": [
+    "users"
+  ]
+}

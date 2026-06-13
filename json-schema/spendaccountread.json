@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SpendAccountRead",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "account_code": {
+      "$ref": "#/components/schemas/UnoptimizedAccountCodeserializer"
+    },
+    "department": {
+      "$ref": "#/components/schemas/UnoptimizedDepartmentRead"
+    },
+    "active": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "account_code",
+    "department"
+  ]
+}

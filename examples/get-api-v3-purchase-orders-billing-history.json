@@ -1,0 +1,9 @@
+{
+  "path": "/api/v3/purchase-orders/billing-history/",
+  "method": "GET",
+  "operationId": "purchase_orders_billing_history_retrieve",
+  "summary": "View billing history of a Purchase Order",
+  "tags": [
+    "purchase-orders"
+  ]
+}
