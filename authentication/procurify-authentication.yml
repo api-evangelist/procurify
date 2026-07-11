@@ -1,0 +1,39 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/procurify-procurify-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - cookie
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: BasicAuthentication
+  type: http
+  scheme: basic
+  sources:
+  - openapi/procurify-procurify-api-openapi.yml
+- name: M2MAuthentication
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/procurify-procurify-api-openapi.yml
+- name: RemoteAuthentication
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://<your-domain>.procurify.com/oauth/authorize
+    tokenUrl: https://<your-domain>.procurify.com/oauth/token
+    scopes: 0
+  sources:
+  - openapi/procurify-procurify-api-openapi.yml
+- name: cookieAuth
+  type: apiKey
+  in: cookie
+  parameter: sessionid
+  sources:
+  - openapi/procurify-procurify-api-openapi.yml
