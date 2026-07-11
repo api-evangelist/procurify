@@ -57,6 +57,10 @@ apis:
       - FN: Procurify Support
         email: support@procurify.com
 common:
+  - type: Authentication
+    url: authentication/procurify-authentication.yml
+  - type: OAuthScopes
+    url: scopes/procurify-scopes.yml
   - type: Website
     url: https://www.procurify.com/
   - type: Documentation

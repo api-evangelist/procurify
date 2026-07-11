@@ -1,0 +1,31 @@
+generated: '2026-07-11'
+method: searched
+source: openapi/procurify-procurify-api-openapi.yml
+docs: https://developer.procurify.com/tag/oauth/
+note: >-
+  Procurify's API supports only the OAuth 2.0 client_credentials grant and does
+  not offer granular, selectable permission scopes; tokens are automatically
+  scoped to the requesting domain and user email, as shown in the token response
+  documented at https://developer.procurify.com/tag/oauth/.
+schemes:
+- name: RemoteAuthentication
+  source: openapi/procurify-procurify-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://<your-domain>.procurify.com/oauth/authorize
+    tokenUrl: https://<your-domain>.procurify.com/oauth/token
+scopes:
+- scope: urn:procurify-api:domain:<your_domain>
+  description: >-
+    Automatic scope binding the access token to the requesting Procurify
+    domain; returned in the client_credentials token response rather than
+    requested by the client.
+  sources:
+  - https://developer.procurify.com/tag/oauth/
+- scope: urn:procurify-api:email:<your_email>
+  description: >-
+    Automatic scope binding the access token to the email address of the user
+    whose API credentials were used; returned in the client_credentials token
+    response rather than requested by the client.
+  sources:
+  - https://developer.procurify.com/tag/oauth/
