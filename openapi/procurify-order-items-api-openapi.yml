@@ -1,0 +1,724 @@
+openapi: 3.0.3
+info:
+  title: Procurify API Documentation account-codes order-items API
+  version: ''
+  description: '
+
+    # Disclaimer
+
+
+    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
+
+    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
+
+    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
+
+    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
+
+    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
+
+    '
+servers:
+- url: https://{user_domain}.procurify.com
+  description: Your Procurify domain
+  variables:
+    user_domain:
+      default: your-domain
+      description: Your procurify domain
+tags:
+- name: order-items
+paths:
+  /api/v3/order-items/:
+    get:
+      operationId: order_items_list
+      description: '**Order Item Status Codes**
+
+
+        | Order Item Type          | Code      | Description                       |
+
+        |--------------------------|-----------|-----------------------------------|
+
+        | PURCHASE_PENDING         | 0         | Approved but not purchased.       |
+
+        | PURCHASE_INUSE           | 1         | Added to purchaser''s PO list.     |
+
+        | RECEIVE_PENDING          | 2         | Purchased but not yet received, i.e. receivedPassQty == 0. |
+
+        | RECEIVED                 | 3         | Fully received, i.e. receivedPassQty == quantity. |
+
+        | REJECTED_FOR_PURCHASE    | 4         | Rejected at procurement, i.e. denied. |
+
+        | RECEIVE_PARTIAL          | 5         | Partially received, i.e. receivedPassQty != quantity and receivedPassQty > 0. |
+
+        | FULFILLED                | 6         | Received but unused. |
+
+        | APPROVAL_DENIED          | 7         | Denied in approval routing (by approver). |
+
+        | REQUEST_DRAFT            | 8         | Preparing for draft instead of using sessions. |'
+      summary: Get list of all order items
+      parameters:
+      - in: query
+        name: account
+        schema:
+          type: integer
+      - in: query
+        name: account_code
+        schema:
+          type: integer
+        description: Account Code
+      - in: query
+        name: active
+        schema:
+          type: boolean
+      - in: query
+        name: approved_datetime_0
+        schema:
+          type: string
+          format: date
+        description: Approved Date
+      - in: query
+        name: approved_datetime_1
+        schema:
+          type: string
+          format: date
+        description: Approved Date
+      - in: query
+        name: approved_price
+        schema:
+          type: number
+      - in: query
+        name: approved_quantity
+        schema:
+          type: number
+      - in: query
+        name: approver
+        schema:
+          type: number
+      - in: query
+        name: approver_id
+        schema:
+          type: number
+      - in: query
+        name: branch
+        schema:
+          type: integer
+        description: Location
+      - in: query
+        name: catalog
+        schema:
+          type: boolean
+      - in: query
+        name: catalog_item
+        schema:
+          type: string
+        description: A comma-separated list of integers.
+      - in: query
+        name: currency
+        schema:
+          type: integer
+      - in: query
+        name: department
+        schema:
+          type: integer
+        description: Department
+      - in: query
+        name: departments
+        schema:
+          type: string
+        description: A comma-separated list of integers.
+      - in: query
+        name: exclude
+        schema:
+          type: string
+        description: A comma-separated list of integers.
+      - in: query
+        name: exclude_punchout
+        schema:
+          type: boolean
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - in: query
+        name: fulfilment_status
+        schema:
+          type: string
+      - in: query
+        name: is_purchased
+        schema:
+          type: boolean
+      - in: query
+        name: is_recurring
+        schema:
+          type: boolean
+      - in: query
+        name: last_changed_by
+        schema:
+          type: integer
+      - in: query
+        name: last_modified_0
+        schema:
+          type: string
+          format: date
+        description: Last Modified Date
+      - in: query
+        name: last_modified_1
+        schema:
+          type: string
+          format: date
+        description: Last Modified Date
+      - in: query
+        name: lineComment
+        schema:
+          type: string
+      - in: query
+        name: location
+        schema:
+          type: integer
+        description: Location
+      - in: query
+        name: locations
+        schema:
+          type: string
+        description: A comma-separated list of integers.
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: num
+        schema:
+          type: string
+      - in: query
+        name: orderNum
+        schema:
+          type: integer
+      - in: query
+        name: orderNum__status
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+        description: '* `0` - Pending
+
+          * `1` - Approved
+
+          * `2` - Denied
+
+          * `3` - Purchased
+
+          * `4` - Cancelled
+
+          * `5` - Received
+
+          * `6` - Draft'
+      - name: order_by
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: order_created_date_0
+        schema:
+          type: string
+          format: date
+        description: Order Created Date
+      - in: query
+        name: order_created_date_1
+        schema:
+          type: string
+          format: date
+        description: Order Created Date
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: po_created_date_0
+        schema:
+          type: string
+          format: date
+        description: Purchased Date
+      - in: query
+        name: po_created_date_1
+        schema:
+          type: string
+          format: date
+        description: Purchased Date
+      - in: query
+        name: po_vendor
+        schema:
+          type: integer
+        description: Purchased Vendor
+      - in: query
+        name: pref_vendor
+        schema:
+          type: integer
+      - in: query
+        name: price
+        schema:
+          type: number
+      - in: query
+        name: purchase_agreement
+        schema:
+          type: number
+      - in: query
+        name: purchased_date_0
+        schema:
+          type: string
+          format: date
+        description: Purchased Date
+      - in: query
+        name: purchased_date_1
+        schema:
+          type: string
+          format: date
+        description: Purchased Date
+      - in: query
+        name: purchaser
+        schema:
+          type: integer
+      - in: query
+        name: quantity
+        schema:
+          type: number
+      - in: query
+        name: receivedFailQty
+        schema:
+          type: number
+      - in: query
+        name: receivedPassQty
+        schema:
+          type: number
+      - in: query
+        name: requester
+        schema:
+          type: integer
+        description: Requester
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: sku
+        schema:
+          type: string
+      - in: query
+        name: status
+        schema:
+          type: integer
+          nullable: true
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+        description: '* `0` - Purchase Pending
+
+          * `1` - Purchaser In-Use
+
+          * `2` - Receive Pending
+
+          * `3` - Received
+
+          * `4` - Rejected for Purchase
+
+          * `5` - Partial Received
+
+          * `6` - Fulfilled
+
+          * `7` - Approval Denied
+
+          * `8` - Request Draft'
+      - in: query
+        name: type
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+        description: '* `0` - One Time
+
+          * `1` - Recurring
+
+          * `2` - Blanket'
+      - in: query
+        name: unit
+        schema:
+          type: string
+      tags:
+      - order-items
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedOrderItemList'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PaginatedOrderItemList'
+          description: ''
+components:
+  schemas:
+    PaginatedOrderItemList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                previous:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+    OrderItem:
+      type: object
+      properties:
+        PO:
+          type: array
+          items:
+            type: integer
+            title: PO
+        PO_line_num:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        account:
+          type: integer
+        accountCode:
+          type: string
+          maxLength: 100
+        active:
+          type: boolean
+        approved_currency_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+          nullable: true
+        approved_datetime:
+          type: string
+          format: date-time
+          nullable: true
+        approved_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        approved_quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+          nullable: true
+        approved_shipping_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        approved_tax_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        attachments:
+          type: string
+        catalog_item:
+          type: integer
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        currency:
+          type: integer
+        dateInvoiced:
+          type: string
+          format: date-time
+          nullable: true
+        external_id:
+          type: string
+          description: External id of the order item
+          maxLength: 100
+        hot:
+          type: boolean
+        id:
+          type: integer
+          readOnly: true
+        inventoryItem:
+          type: integer
+          nullable: true
+        is_active:
+          type: boolean
+        item_attachments:
+          type: array
+          items:
+            type: integer
+        last_changed_by:
+          type: integer
+          nullable: true
+          title: Last changed by user
+        last_modified:
+          type: string
+          format: date-time
+          readOnly: true
+        lineComment:
+          type: string
+          nullable: true
+        name:
+          type: string
+          maxLength: 255
+        num:
+          type: string
+          maxLength: 50
+        orderNum:
+          type: integer
+          nullable: true
+        order_number:
+          type: integer
+          readOnly: true
+          nullable: true
+        po_note:
+          type: string
+          title: Comment
+        po_version:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        pref_vendor:
+          type: integer
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        purchase_order:
+          type: integer
+          title: Procurify PO Number
+          nullable: true
+        purchaser:
+          type: integer
+          nullable: true
+        quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        receivedFailQty:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+          title: Received Fail Quantity
+        receivedPassQty:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+          title: Received Pass Quantity
+        shipping_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        sku:
+          type: string
+          maxLength: 100
+        status:
+          nullable: true
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/OrderItemStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type: integer
+        tax_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        total_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        unit:
+          type: string
+          maxLength: 30
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        vendor:
+          type: string
+          nullable: true
+          maxLength: 100
+        receive_method:
+          allOf:
+          - $ref: '#/components/schemas/ReceiveMethodEnum'
+          minimum: 0
+          maximum: 65535
+        type:
+          allOf:
+          - $ref: '#/components/schemas/OrderItemTypeEnum'
+          minimum: 0
+          maximum: 65535
+        blanket:
+          allOf:
+          - $ref: '#/components/schemas/BlanketOrderItemRead'
+          readOnly: true
+      required:
+      - account
+      - approved_datetime
+      - currency
+      - name
+      - num
+      - pref_vendor
+      - price
+      - quantity
+      - unit
+    OrderItemStatusEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      type: integer
+      description: '* `0` - Purchase Pending
+
+        * `1` - Purchaser In-Use
+
+        * `2` - Receive Pending
+
+        * `3` - Received
+
+        * `4` - Rejected for Purchase
+
+        * `5` - Partial Received
+
+        * `6` - Fulfilled
+
+        * `7` - Approval Denied
+
+        * `8` - Request Draft'
+    ReceiveMethodEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - Quantity
+
+        * `1` - Currency amount'
+    BlanketOrderItemRead:
+      type: object
+      properties:
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        quantity:
+          type: number
+          format: double
+          nullable: true
+          readOnly: true
+        amount:
+          type: number
+          format: double
+          nullable: true
+          readOnly: true
+      required:
+      - price
+    OrderItemTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: '* `0` - One Time
+
+        * `1` - Recurring
+
+        * `2` - Blanket'
+    NullEnum:
+      enum:
+      - null
+  securitySchemes:
+    BasicAuthentication:
+      type: http
+      scheme: basic
+    M2MAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    RemoteAuthentication:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://<your-domain>.procurify.com/oauth/authorize
+          tokenUrl: https://<your-domain>.procurify.com/oauth/token
+          scopes: {}
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

@@ -1,0 +1,281 @@
+openapi: 3.0.3
+info:
+  title: Procurify API Documentation account-codes receipt API
+  version: ''
+  description: '
+
+    # Disclaimer
+
+
+    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
+
+    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
+
+    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
+
+    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
+
+    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
+
+    '
+servers:
+- url: https://{user_domain}.procurify.com
+  description: Your Procurify domain
+  variables:
+    user_domain:
+      default: your-domain
+      description: Your procurify domain
+tags:
+- name: receipt
+paths:
+  /api/v3/receipt/items/:
+    get:
+      operationId: receipt_items_list
+      description: Return a list of receipt items representing individual receiving actions.
+      summary: Get list of receipt items by order item
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - name: order_by
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: order_item
+        schema:
+          type: integer
+        description: The ID of an order item to retrieve receipt items (receiving actions) for.
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - receipt
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedReceiptItemReadList'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PaginatedReceiptItemReadList'
+          description: ''
+    post:
+      operationId: receipt_items_create
+      description: Perform a receiving action for order items within a single purchase order.
+      summary: Create a receipt item for an order item
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      tags:
+      - receipt
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemWriteRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ItemWriteRequest'
+          ? ''
+          : schema:
+              $ref: '#/components/schemas/ItemWriteRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ItemWriteRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ItemWriteRequest'
+        required: true
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReceiptItemRead'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/ReceiptItemRead'
+          description: ''
+components:
+  schemas:
+    ReceiptItemRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        pass_quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        fail_quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        order_item:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        is_edited:
+          type: boolean
+          readOnly: true
+        created_by:
+          $ref: '#/components/schemas/SimpleUserProfile'
+        total_quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+          nullable: true
+          readOnly: true
+        received_at:
+          type: string
+          format: date
+          nullable: true
+      required:
+      - created_by
+      - order_item
+    SimpleUserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        role:
+          allOf:
+          - $ref: '#/components/schemas/MinimalRoleRead'
+          readOnly: true
+        profile_image:
+          type: string
+          nullable: true
+      required:
+      - email
+    ItemWriteRequest:
+      type: object
+      properties:
+        order_item:
+          type: integer
+          description: The ID of an order item that you wish to create a receipt for. This will be the id property found in the PO or Order Items responses for this item.
+        pass_quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        fail_quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+      required:
+      - fail_quantity
+      - order_item
+      - pass_quantity
+    MinimalRoleRead:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        type:
+          type: integer
+      required:
+      - name
+      - type
+    PaginatedReceiptItemReadList:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            count:
+              type: integer
+              example: 10
+            next:
+              type: string
+              nullable: true
+              format: uri
+              example: null
+            previous:
+              type: string
+              nullable: true
+              format: uri
+              example: null
+            page_size:
+              type: integer
+              example: 10
+            num_pages:
+              type: integer
+              example: 1
+            current_page:
+              type: integer
+              example: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceiptItemRead'
+  securitySchemes:
+    BasicAuthentication:
+      type: http
+      scheme: basic
+    M2MAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    RemoteAuthentication:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://<your-domain>.procurify.com/oauth/authorize
+          tokenUrl: https://<your-domain>.procurify.com/oauth/token
+          scopes: {}
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

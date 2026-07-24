@@ -1,0 +1,823 @@
+openapi: 3.0.3
+info:
+  title: Procurify API Documentation account-codes public API
+  version: ''
+  description: '
+
+    # Disclaimer
+
+
+    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
+
+    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
+
+    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
+
+    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
+
+    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
+
+    '
+servers:
+- url: https://{user_domain}.procurify.com
+  description: Your Procurify domain
+  variables:
+    user_domain:
+      default: your-domain
+      description: Your procurify domain
+tags:
+- name: public
+paths:
+  /api/public/v1/pay/transactions/:
+    get:
+      operationId: public_v1_pay_transactions_list
+      description: 'Returns a list of all closed (fully captured, not just authorizations)
+
+        transactions across all issued cards on the platform, regardless of the
+
+        cards current status.'
+      summary: List Transactions
+      parameters:
+      - in: query
+        name: end_date
+        schema:
+          type: string
+          format: date-time
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: reconciliation_status
+        schema:
+          type: integer
+          enum:
+          - pending
+          - reviewed
+        description: 'The reconciliation status of the transaction designated by accounts payable
+
+
+          * `reviewed` - Reviewed
+
+          * `pending` - Pending'
+      - in: query
+        name: start_date
+        schema:
+          type: string
+          format: date-time
+      tags:
+      - public
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTransactionList'
+          description: ''
+  /api/public/v1/payments/:
+    get:
+      operationId: public_v1_payments_list
+      summary: List Payments
+      parameters:
+      - in: query
+        name: bill_groups
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Filter payments by a comma-separated list of bill group IDs.
+        explode: false
+        style: form
+      - in: query
+        name: created_at_after
+        schema:
+          type: string
+          format: date-time
+        description: Filter payments created on or after this date.
+      - in: query
+        name: created_at_before
+        schema:
+          type: string
+          format: date-time
+        description: Filter payments created on or before this date.
+      - in: query
+        name: currency
+        schema:
+          type: integer
+        description: Filter payments by currency ID.
+      - in: query
+        name: ids
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Filter payments by a comma-separated list of payment IDs.
+        explode: false
+        style: form
+      - in: query
+        name: invoice_number
+        schema:
+          type: string
+        description: Filter payments by exact bill invoice number.
+      - in: query
+        name: order_by
+        schema:
+          type: string
+          enum:
+          - -created_at
+          - -updated_at
+          - created_at
+          - updated_at
+        description: Order results by field. Prefix with '-' for descending order.
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: payment_amount
+        schema:
+          type: number
+        description: Filter payments with an amount equal to this value.
+      - in: query
+        name: processing_date_after
+        schema:
+          type: string
+          format: date-time
+        description: Filter payments with a processing date on or after this date.
+      - in: query
+        name: processing_date_before
+        schema:
+          type: string
+          format: date-time
+        description: Filter payments with a processing date on or before this date.
+      - in: query
+        name: status
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - approved
+            - denied
+            - draft
+            - failed
+            - paid
+            - pending_approval
+            - processing
+            - scheduled
+        description: 'Filter payments by status. Accepts a comma-separated list of statuses.
+
+
+          * `draft` - draft
+
+          * `pending_approval` - pending_approval
+
+          * `approved` - approved
+
+          * `denied` - denied
+
+          * `paid` - paid
+
+          * `processing` - processing
+
+          * `failed` - failed
+
+          * `scheduled` - scheduled'
+        explode: false
+        style: form
+      - in: query
+        name: updated_at_after
+        schema:
+          type: string
+          format: date-time
+        description: Filter payments updated on or after this date.
+      - in: query
+        name: updated_at_before
+        schema:
+          type: string
+          format: date-time
+        description: Filter payments updated on or before this date.
+      - in: query
+        name: vendor
+        schema:
+          type: integer
+        description: Filter payments by vendor ID.
+      tags:
+      - public
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPaymentResponseList'
+          description: ''
+components:
+  schemas:
+    PaginatedPaymentResponseList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                previous:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResponse'
+    PaginatedTransactionList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                previous:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+    PaymentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        uuid:
+          type: string
+        payment_source_name:
+          type: string
+          nullable: true
+          readOnly: true
+        payment_source_type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentSourceTypeEnum'
+          nullable: true
+          readOnly: true
+          description: '
+
+            * direct_debit: Payment is paid from a direct debit account
+
+            * financial_account: Payment is paid from a financial account
+
+            * external: Payment is paid outside of Procurify'
+          type: object
+        external_payment_source_id:
+          type: integer
+          nullable: true
+          readOnly: true
+          description: External bank account ID
+        creator:
+          $ref: '#/components/schemas/PaymentCreator'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,19}(?:\.\d{0,2})?$
+        currency:
+          $ref: '#/components/schemas/PaymentCurrencyResponse'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/PaymentResponseStatusEnum'
+          nullable: true
+          readOnly: true
+          description: '
+
+            * draft: Payment has been created but not yet submitted for approval.
+
+            * pending_approval: Payment is waiting for approval.
+
+            * approved: Payment has been approved and is awaiting processing.
+
+            * denied: Payment has been denied by an approver.
+
+            * paid: Payment has been successfully completed.
+
+            * processing: Payment is currently being processed.
+
+            * failed: Payment processing has failed.
+
+            * scheduled: Payment is scheduled for a future processing date.'
+          type: object
+        processing_date:
+          type: string
+          nullable: true
+          readOnly: true
+        direct_debit_bank_account_mask:
+          type: string
+          nullable: true
+          description: Last 4 digits of direct debit account.
+        vendor_name:
+          type: string
+          nullable: true
+          readOnly: true
+        posted_date:
+          type: string
+          format: date
+          nullable: true
+        gl_code:
+          type: string
+          nullable: true
+          readOnly: true
+          description: Payment source's GL code.
+        vendor_payment_method_country_code:
+          type: string
+          nullable: true
+          readOnly: true
+          description: ISO 3166 country codes
+        vendor_payment_method_rail:
+          type: string
+          nullable: true
+          readOnly: true
+          description: 'Rails supported: ACH, FEDWIRE, PAPER_CHECK, LOCAL, etc.'
+        bill_groups:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+          description: List of bill group IDs associated with the payment.
+      required:
+      - amount
+      - created_at
+      - creator
+      - currency
+      - direct_debit_bank_account_mask
+      - id
+      - posted_date
+      - updated_at
+      - uuid
+    TransactionCustomField:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/TransactionCustomFieldTypeEnum'
+          readOnly: true
+      required:
+      - name
+      - value
+    PaymentResponseStatusEnum:
+      enum:
+      - draft
+      - pending_approval
+      - approved
+      - denied
+      - paid
+      - processing
+      - failed
+      - scheduled
+      type: string
+    TransactionStatusEnum:
+      enum:
+      - capture
+      - precapture
+      - refund
+      type: string
+    ReconciliationStatusEnum:
+      enum:
+      - pending
+      - reviewed
+      type: string
+    TransactionCardholder:
+      type: object
+      properties:
+        uuid:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TransactionCardholderStatusEnum'
+          readOnly: true
+          description: '
+
+            * inactive: Cardholder is still awaiting activation
+
+            * active: Cardholder is ready to use issuing
+
+            * required_information: Cardholder must provide extra information
+
+            * deleted: Cardholder has been deleted and can no longer use issuing
+
+            * disabled: Cardholder has been disabled and can no longer use issuing'
+      required:
+      - first_name
+      - last_name
+      - uuid
+    AuthorizationStatusEnum:
+      enum:
+      - reversed
+      - pending
+      - closed
+      type: string
+    TransactionVendor:
+      type: object
+      properties:
+        name:
+          type: string
+        category:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        postal_code:
+          type: string
+      required:
+      - category
+      - city
+      - country
+      - name
+      - postal_code
+      - state
+    PaymentCreator:
+      type: object
+      properties:
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+      required:
+      - email
+      - first_name
+      - last_name
+    TransactionTypeEnum:
+      enum:
+      - spend
+      - credit
+      type: string
+    TransactionCustomFieldTypeEnum:
+      enum:
+      - text
+      - text_field
+      - integer
+      - float
+      - boolean
+      - dropdown
+      - date
+      - datetime
+      type: string
+    TransationCard:
+      type: object
+      properties:
+        uuid:
+          type: string
+        last_four_digits:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TransationCardStatusEnum'
+          nullable: true
+          readOnly: true
+          description: '
+
+            * pending: Card has been created but is not yet active. It cannot authorize transactions
+
+            * active: Card has been active and is ready for use
+
+            * inactive: Card has been locked and can no longer authorize transactions
+
+            * canceled: Card has been canceled and can no longer authorize transactions
+
+            * lost: Card has been reported lost and can no longer authorize transactions
+
+            * stolen: Card has been reported stolen and no longer authorize transactions'
+          type: object
+      required:
+      - last_four_digits
+      - uuid
+    PaymentSourceTypeEnum:
+      enum:
+      - direct_debit
+      - financial_account
+      - external
+      type: string
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        note:
+          type: string
+          description: User provided additional text about this transaction
+        vendor:
+          $ref: '#/components/schemas/TransactionVendor'
+        currency:
+          type: string
+          description: The currency that this transaction was handled in
+        amount:
+          type: string
+          readOnly: true
+          description: The value in the base unit of currency that this transaction was charged at
+        vendor_currency:
+          type: string
+          description: The currency this transaction was created
+        vendor_amount:
+          type: string
+          nullable: true
+          readOnly: true
+          description: The value in the base unit of currency that this transaction was charged at by the vendor
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TransactionStatusEnum'
+          nullable: true
+          readOnly: true
+          description: '
+
+            * capture: Deducting purchase amount from account balance
+
+            * precapture: Funds reserved due to card usage
+
+            * refund: Refunding the purchase amount back to account balance'
+          type: object
+        authorization_status:
+          allOf:
+          - $ref: '#/components/schemas/AuthorizationStatusEnum'
+          nullable: true
+          readOnly: true
+          description: '
+
+            * reversed: Previously approved and held funds have been released
+
+            * pending: Funds have been approved for a transaction and are currently held
+
+            * closed: Look at `status` for more details, the authorization is no longer relevant'
+          type: object
+        authorization_datetime:
+          type: string
+          format: date-time
+          description: The date that this transaction was initially authorized at
+        transaction_datetime:
+          type: string
+          format: date-time
+          description: The date that this transaction was captured
+        allocation_datetime:
+          type: string
+          format: date-time
+          description: The date that this transaction was allocated to a fund
+        card:
+          allOf:
+          - $ref: '#/components/schemas/TransationCard'
+          description: The card this transaction was created with
+        receipt_attachments:
+          type: array
+          items:
+            type: string
+          readOnly: true
+          description: User provided images of receipts about this transactions
+        fund:
+          allOf:
+          - $ref: '#/components/schemas/TransactionFund'
+          description: The fund this transaction is allocated to
+        account:
+          allOf:
+          - $ref: '#/components/schemas/TransactionAccount'
+          nullable: true
+          description: The chart-of-accounts entry assigned to this transaction by the cardholder or reconciler/accountant. Null when no account has been assigned.
+          type: object
+        type:
+          allOf:
+          - $ref: '#/components/schemas/TransactionTypeEnum'
+          readOnly: true
+          description: '
+
+            * spend: A transaction that has occurred on the issuing network
+
+            * credit: A transaction about allocating fund usage from selecting a fund in Procurify
+
+            '
+        reconciliation_status:
+          allOf:
+          - $ref: '#/components/schemas/ReconciliationStatusEnum'
+          readOnly: true
+          description: '
+
+            * pending: Transaction has not yet been reconciled
+
+            * reviewed: Transaction has been reviewed during reconciliation'
+        cardholder:
+          $ref: '#/components/schemas/TransactionCardholder'
+        linked_authorization:
+          type: string
+          description: Any transactions which share the same linked_authorization value are part of the same lifecycle for a transaction
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionCustomField'
+          description: A list of any custom fields provided for this transaction
+      required:
+      - account
+      - allocation_datetime
+      - authorization_datetime
+      - card
+      - cardholder
+      - currency
+      - custom_fields
+      - fund
+      - id
+      - linked_authorization
+      - note
+      - transaction_datetime
+      - vendor
+      - vendor_currency
+    PaymentCurrencyResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+    TransactionCardholderStatusEnum:
+      enum:
+      - inactive
+      - active
+      - requires_information
+      - deleted
+      - disabled
+      type: string
+    TransationCardStatusEnum:
+      enum:
+      - pending
+      - active
+      - inactive
+      - canceled
+      - lost
+      - stolen
+      type: string
+    TransactionFund:
+      type: object
+      properties:
+        uuid:
+          type: string
+        title:
+          type: string
+        reason:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TransactionFundStatusEnum'
+          readOnly: true
+          description: '
+
+            * open: The fund is open and available for use
+
+            * closed: The fund is closed and no longer available for use'
+        date_created:
+          type: string
+          format: date-time
+        amount:
+          type: string
+          readOnly: true
+        account:
+          $ref: '#/components/schemas/TransactionAccount'
+      required:
+      - account
+      - date_created
+      - reason
+      - title
+      - uuid
+    TransactionFundStatusEnum:
+      enum:
+      - open
+      - closed
+      type: string
+    TransactionAccount:
+      type: object
+      properties:
+        account_code:
+          type: string
+        account_code_description:
+          type: string
+        department:
+          type: string
+        department_branch:
+          type: string
+      required:
+      - account_code
+      - account_code_description
+      - department
+      - department_branch
+  securitySchemes:
+    BasicAuthentication:
+      type: http
+      scheme: basic
+    M2MAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    RemoteAuthentication:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://<your-domain>.procurify.com/oauth/authorize
+          tokenUrl: https://<your-domain>.procurify.com/oauth/token
+          scopes: {}
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

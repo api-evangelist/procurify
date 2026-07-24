@@ -1,0 +1,318 @@
+openapi: 3.0.3
+info:
+  title: Procurify API Documentation account-codes accounts API
+  version: ''
+  description: '
+
+    # Disclaimer
+
+
+    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
+
+    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
+
+    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
+
+    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
+
+    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
+
+    '
+servers:
+- url: https://{user_domain}.procurify.com
+  description: Your Procurify domain
+  variables:
+    user_domain:
+      default: your-domain
+      description: Your procurify domain
+tags:
+- name: accounts
+paths:
+  /api/v3/accounts/:
+    get:
+      operationId: accounts_list
+      summary: Get Accounts
+      parameters:
+      - in: query
+        name: account_code
+        schema:
+          type: string
+        description: A comma-separated list of integers.
+      - in: query
+        name: active
+        schema:
+          type: boolean
+      - in: query
+        name: department
+        schema:
+          type: integer
+      - in: query
+        name: departments
+        schema:
+          type: string
+        description: A comma-separated list of integers.
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: in_effect
+        schema:
+          type: boolean
+      - in: query
+        name: locations
+        schema:
+          type: string
+        description: A comma-separated list of integers.
+      - name: order_by
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: with_expired_budgets
+        schema:
+          type: boolean
+      tags:
+      - accounts
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedChartOfAccountsAccountList'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PaginatedChartOfAccountsAccountList'
+          description: ''
+components:
+  schemas:
+    PaginatedChartOfAccountsAccountList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                previous:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChartOfAccountsAccount'
+    AccountCodeRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        applied_accounts_count:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          maxLength: 50
+        code_length:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        description:
+          type: string
+          maxLength: 200
+        account_type:
+          allOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        active:
+          type: boolean
+        parent:
+          type: integer
+          nullable: true
+      required:
+      - code
+      - description
+    DepartmentRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        branch:
+          $ref: '#/components/schemas/LocationSimple'
+        external_id:
+          type: string
+          nullable: true
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        active:
+          type: boolean
+        punchout_email:
+          type: string
+          nullable: true
+        is_active_for_account_code:
+          type: boolean
+          readOnly: true
+      required:
+      - branch
+      - name
+    ChartOfAccountsAccount:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        account_code:
+          $ref: '#/components/schemas/AccountCodeRead'
+        department:
+          $ref: '#/components/schemas/DepartmentRead'
+        start_datetime:
+          type: string
+          format: date-time
+          nullable: true
+        end_datetime:
+          type: string
+          format: date-time
+          nullable: true
+        budget:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        budget_used_approved:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        budget_used_purchased:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        balance_approved:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        balance_purchased:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        active:
+          type: boolean
+      required:
+      - account_code
+      - department
+    AccountTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: '* `0` - Assets
+
+        * `1` - Liability
+
+        * `2` - Expense
+
+        * `3` - Income
+
+        * `4` - Equity
+
+        * `5` - Other'
+    LocationSimple:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        headquarter:
+          type: boolean
+          readOnly: true
+      required:
+      - name
+  securitySchemes:
+    BasicAuthentication:
+      type: http
+      scheme: basic
+    M2MAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    RemoteAuthentication:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://<your-domain>.procurify.com/oauth/authorize
+          tokenUrl: https://<your-domain>.procurify.com/oauth/token
+          scopes: {}
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

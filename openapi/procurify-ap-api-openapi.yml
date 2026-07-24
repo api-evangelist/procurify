@@ -1,0 +1,6625 @@
+openapi: 3.0.3
+info:
+  title: Procurify API Documentation account-codes ap API
+  version: ''
+  description: '
+
+    # Disclaimer
+
+
+    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
+
+    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
+
+    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
+
+    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
+
+    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
+
+    '
+servers:
+- url: https://{user_domain}.procurify.com
+  description: Your Procurify domain
+  variables:
+    user_domain:
+      default: your-domain
+      description: Your procurify domain
+tags:
+- name: ap
+paths:
+  /api/v2/ap/bills/{id}/:
+    get:
+      operationId: ap_bills_retrieve
+      description: ' '
+      summary: Get Bill by ID
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-f-]+$
+        required: true
+      tags:
+      - ap
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillMetadataBillRead'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/BillMetadataBillRead'
+          description: ''
+  /api/v2/ap/company-payment-methods/:
+    get:
+      operationId: ap_company_payment_methods_list
+      description: '**Payment Method Types:**
+
+
+        | Payment Method | Type      |
+
+        |----------------|-----------|
+
+        | OTHER          | 0         |
+
+        | CHECK/CHEQUE   | 1         |
+
+        | ACH            | 2         |
+
+        | EFT            | 3         |
+
+        | WIRE           | 4         |
+
+
+        **The context of ''data'' field varies based on different Payment Method type:**
+
+
+        | Payment Method | ''data'' field structure |
+
+        |----------------|------------------------|
+
+        | OTHER          | ```{"description": <string>}``` |
+
+        | CHECK/CHEQUE   | ```{"payable_to": <string>}```  |
+
+        | ACH            | ```{"routing_number": <string>, "account_number": <string>, "company_name": <string>}``` |
+
+        '
+      summary: Get list of Company Payment Methods
+      parameters:
+      - in: query
+        name: currency
+        schema:
+          type: integer
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - name: order_by
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: type
+        schema:
+          type: integer
+          title: Payment Method
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+        description: '* `0` - OTHER
+
+          * `1` - CHECK
+
+          * `2` - ACH
+
+          * `3` - EFT
+
+          * `4` - WIRE
+
+          * `5` - PROCURIFY_CHECK
+
+          * `6` - PROCURIFY_ACH
+
+          * `7` - PROCURIFY_WIRE
+
+          * `8` - AIRWALLEX'
+      tags:
+      - ap
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCompanyPaymentMethodReadList'
+              examples:
+                CompanyPaymentMethods:
+                  value:
+                    metadata:
+                      pagination:
+                        count: 10
+                        next: null
+                        previous: null
+                        page_size: 10
+                        num_pages: 1
+                        current_page: 1
+                    data:
+                    - id: 1
+                      name: Bank Account
+                      type: 0
+                      data:
+                        description: Bank Account description
+                      currency:
+                        id: 3
+                        name: USD
+                        description: ''
+                        rate: '1.000000'
+                        base: true
+                        active: true
+                      gl_code: '9000'
+                  summary: Company Payment Methods
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PaginatedCompanyPaymentMethodReadList'
+          description: ''
+    post:
+      operationId: ap_company_payment_methods_create
+      description: '**Payment Method Types:**
+
+
+        | Payment Method | Type      |
+
+        |----------------|-----------|
+
+        | OTHER          | 0         |
+
+        | CHECK/CHEQUE   | 1         |
+
+        | ACH            | 2         |
+
+        | EFT            | 3         |
+
+        | WIRE           | 4         |
+
+
+        **The context of ''data'' field varies based on different Payment Method type:**
+
+
+        | Payment Method | ''data'' field structure |
+
+        |----------------|------------------------|
+
+        | OTHER          | ```{"description": <string>}``` |
+
+        | CHECK/CHEQUE   | ```{"payable_to": <string>}```  |
+
+        | ACH            | ```{"routing_number": <string>, "account_number": <string>, "company_name": <string>}``` |
+
+        '
+      summary: Create Company Payment Method
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      tags:
+      - ap
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyPaymentMethodRequest'
+            examples:
+              CompanyPaymentMethodPayloadExample:
+                value:
+                  name: Bank Account
+                  type: 0
+                  data:
+                    description: Bank Account description
+                  gl_code: '9000'
+                  currency: 3
+                summary: Company Payment Method Payload Example
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CompanyPaymentMethodRequest'
+          ? ''
+          : schema:
+              $ref: '#/components/schemas/CompanyPaymentMethodRequest'
+            examples:
+              CompanyPaymentMethodPayloadExample:
+                value:
+                  name: Bank Account
+                  type: 0
+                  data:
+                    description: Bank Account description
+                  gl_code: '9000'
+                  currency: 3
+                summary: Company Payment Method Payload Example
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CompanyPaymentMethodRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompanyPaymentMethodRequest'
+        required: true
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyPaymentMethod'
+              examples:
+                CompanyPaymentMethodResponseExample:
+                  value:
+                    id: 1
+                    name: Bank Account
+                    type: 0
+                    data:
+                      description: Bank Account description
+                    currency:
+                      id: 3
+                      name: USD
+                      description: ''
+                      rate: '1.000000'
+                      base: true
+                      active: true
+                    gl_code: '9000'
+                  summary: Company Payment Method Response Example
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/CompanyPaymentMethod'
+          description: ''
+  /api/v2/ap/items/:
+    get:
+      operationId: ap_items_list
+      description: ' '
+      summary: Get Unbilled/Billed Items
+      parameters:
+      - in: query
+        name: bill
+        schema:
+          type: integer
+      - in: query
+        name: bill_uuid
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: billed
+        schema:
+          type: boolean
+      - in: query
+        name: budget
+        schema:
+          type: integer
+      - in: query
+        name: created_at_0
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created_at_1
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: department
+        schema:
+          type: number
+      - in: query
+        name: exclude
+        schema:
+          type: string
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - in: query
+        name: location
+        schema:
+          type: number
+      - name: order_by
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: received_on_0
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: received_on_1
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: reimburse
+        schema:
+          type: boolean
+      - in: query
+        name: requester
+        schema:
+          type: number
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: vendor
+        schema:
+          type: integer
+      tags:
+      - ap
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemMetadataItemRead'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/ItemMetadataItemRead'
+          description: ''
+  /api/v2/ap/payments/:
+    get:
+      operationId: ap_payments_list
+      description: Deprecated method for listing Payment objects. Pending removal after June 5, 2026. See List Payments in the public section.
+      summary: Get Payments
+      parameters:
+      - in: query
+        name: approver
+        schema:
+          type: integer
+      - in: query
+        name: currency
+        schema:
+          type: integer
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - name: order_by
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: payment_date_0
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: payment_date_1
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: payment_method__type
+        schema:
+          type: integer
+          title: Payment Method
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+        description: '* `0` - OTHER
+
+          * `1` - CHECK
+
+          * `2` - ACH
+
+          * `3` - EFT
+
+          * `4` - WIRE
+
+          * `5` - PROCURIFY_CHECK
+
+          * `6` - PROCURIFY_ACH
+
+          * `7` - PROCURIFY_WIRE
+
+          * `8` - AIRWALLEX'
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - ap
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      deprecated: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMetadataPaymentListRead'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PaymentMetadataPaymentListRead'
+          description: ''
+  /api/v2/ap/payments/{id}/approver-choices/:
+    get:
+      operationId: ap_payments_approver_choices_retrieve
+      summary: Get Approver Choices
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this payment.
+        required: true
+      tags:
+      - ap
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApproverChoicesMetadataApproverReadDocs'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/ApproverChoicesMetadataApproverReadDocs'
+          description: ''
+  /api/v2/ap/vendor-payment-methods/:
+    get:
+      operationId: ap_vendor_payment_methods_list
+      description: '**Payment Method Types:**
+
+
+        | Payment Method | Type      |
+
+        |----------------|-----------|
+
+        | OTHER          | 0         |
+
+        | CHECK/CHEQUE   | 1         |
+
+        | ACH            | 2         |
+
+        | EFT            | 3         |
+
+        | WIRE           | 4         |
+
+
+        **The context of ''data'' field varies based on different Payment Method type:**
+
+
+        | Payment Method | ''data'' field structure |
+
+        |----------------|------------------------|
+
+        | OTHER          | ```{"description": <string>}``` |
+
+        | CHECK/CHEQUE   | ```{"payable_to": <string>}```  |
+
+        | ACH            | ```{"routing_number": <string>, "account_number": <string>, "company_name": <string>}``` |
+
+        '
+      summary: Get list of Vendor Payment Methods
+      parameters:
+      - in: query
+        name: category
+        schema:
+          type: string
+          enum:
+          - external
+          - managed
+        description: '* `managed` - Managed payment methods that actually pay bills
+
+          * `external` - External payment methods used to manually track bill payments'
+      - in: query
+        name: currency
+        schema:
+          type: integer
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - name: order_by
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: type
+        schema:
+          type: integer
+          title: Payment Method
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+        description: '* `0` - OTHER
+
+          * `1` - CHECK
+
+          * `2` - ACH
+
+          * `3` - EFT
+
+          * `4` - WIRE
+
+          * `5` - PROCURIFY_CHECK
+
+          * `6` - PROCURIFY_ACH
+
+          * `7` - PROCURIFY_WIRE
+
+          * `8` - AIRWALLEX'
+      - in: query
+        name: vendor
+        schema:
+          type: integer
+      tags:
+      - ap
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVendorPaymentMethodReadList'
+              examples:
+                ListVendorPaymentMethodsResponseExample:
+                  value:
+                    metadata:
+                      pagination:
+                        count: 10
+                        next: null
+                        previous: null
+                        page_size: 10
+                        num_pages: 1
+                        current_page: 1
+                    data:
+                    - id: 1
+                      vendor: 10
+                      name: Technology Inc ACH 98G395E
+                      type: 2
+                      data:
+                        company_name: ABC Technology Inc
+                        account_number: '****0021'
+                        routing_number: '****7892'
+                      currency:
+                        id: 3
+                        name: USD
+                        description: ''
+                        rate: '1.000000'
+                        base: true
+                        active: true
+                  summary: List Vendor Payment Methods Response Example
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PaginatedVendorPaymentMethodReadList'
+          description: ''
+    post:
+      operationId: ap_vendor_payment_methods_create
+      description: '**Payment Method Types:**
+
+
+        | Payment Method | Type      |
+
+        |----------------|-----------|
+
+        | OTHER          | 0         |
+
+        | CHECK/CHEQUE   | 1         |
+
+        | ACH            | 2         |
+
+        | EFT            | 3         |
+
+        | WIRE           | 4         |
+
+
+        **The context of ''data'' field varies based on different Payment Method type:**
+
+
+        | Payment Method | ''data'' field structure |
+
+        |----------------|------------------------|
+
+        | OTHER          | ```{"description": <string>}``` |
+
+        | CHECK/CHEQUE   | ```{"payable_to": <string>}```  |
+
+        | ACH            | ```{"routing_number": <string>, "account_number": <string>, "company_name": <string>}``` |
+
+        '
+      summary: Create Vendor Payment Method
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      tags:
+      - ap
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorPaymentMethodRequest'
+            examples:
+              VendorPaymentMethodPayloadExample:
+                value:
+                  vendor: 10
+                  name: Technology Inc ACH 98G395E
+                  type: 2
+                  data:
+                    company_name: ABC Technology Inc
+                    account_number: '****0021'
+                    routing_number: '****7892'
+                  currency: 3
+                summary: Vendor Payment Method Payload Example
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VendorPaymentMethodRequest'
+          ? ''
+          : schema:
+              $ref: '#/components/schemas/VendorPaymentMethodRequest'
+            examples:
+              VendorPaymentMethodPayloadExample:
+                value:
+                  vendor: 10
+                  name: Technology Inc ACH 98G395E
+                  type: 2
+                  data:
+                    company_name: ABC Technology Inc
+                    account_number: '****0021'
+                    routing_number: '****7892'
+                  currency: 3
+                summary: Vendor Payment Method Payload Example
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/VendorPaymentMethodRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VendorPaymentMethodRequest'
+        required: true
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorPaymentMethodRead'
+              examples:
+                VendorPaymentMethodResponseExample:
+                  value:
+                    id: 1
+                    vendor: 10
+                    name: Technology Inc ACH 98G395E
+                    type: 2
+                    data:
+                      company_name: ABC Technology Inc
+                      account_number: '****0021'
+                      routing_number: '****7892'
+                    currency:
+                      id: 3
+                      name: USD
+                      description: ''
+                      rate: '1.000000'
+                      base: true
+                      active: true
+                  summary: Vendor Payment Method Response Example
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/VendorPaymentMethodRead'
+          description: ''
+  /api/v3/ap/bills/:
+    get:
+      operationId: ap_bills_list
+      description: 'list:
+
+        This endpoint supports OPTIONS method which returns a list of available fields and their types.'
+      summary: Get Bills
+      parameters:
+      - in: query
+        name: account_code
+        schema:
+          type: integer
+        description: Account Code
+      - in: query
+        name: approver
+        schema:
+          type: integer
+        description: Approver
+      - in: query
+        name: contract
+        schema:
+          type: number
+        description: Contracts related to bill items' purchase orders
+      - in: query
+        name: creator
+        schema:
+          type: integer
+      - in: query
+        name: currency
+        schema:
+          type: integer
+      - in: query
+        name: department
+        schema:
+          type: integer
+        description: Department
+      - in: query
+        name: due_date_0
+        schema:
+          type: string
+          format: date
+        description: Due Date
+      - in: query
+        name: due_date_1
+        schema:
+          type: string
+          format: date
+        description: Due Date
+      - in: query
+        name: exclude_bill_group_ids
+        schema:
+          type: string
+      - in: query
+        name: exclude_expense_bills
+        schema:
+          type: string
+        description: Exclude expense bills
+      - in: query
+        name: expense
+        schema:
+          type: string
+        description: Expense Bills Only
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - in: query
+        name: gl_post_date_0
+        schema:
+          type: string
+          format: date
+        description: Posting Date
+      - in: query
+        name: gl_post_date_1
+        schema:
+          type: string
+          format: date
+        description: Posting Date
+      - in: query
+        name: group
+        schema:
+          type: integer
+      - in: query
+        name: has_payment
+        schema:
+          type: boolean
+        description: Without Payment
+      - in: query
+        name: has_posting_date
+        schema:
+          type: boolean
+        description: Has Posting Date
+      - in: query
+        name: include_bill_group_ids
+        schema:
+          type: string
+      - in: query
+        name: invoice_date_0
+        schema:
+          type: string
+          format: date
+        description: Invoice Date
+      - in: query
+        name: invoice_date_1
+        schema:
+          type: string
+          format: date
+        description: Invoice Date
+      - in: query
+        name: is_exported
+        schema:
+          type: boolean
+        description: Exported Bills Only
+      - in: query
+        name: is_invoice_created
+        schema:
+          type: boolean
+        description: Drafted by AI only
+      - in: query
+        name: last_export_date_0
+        schema:
+          type: string
+          format: date
+        description: Last Export Date
+      - in: query
+        name: last_export_date_1
+        schema:
+          type: string
+          format: date
+        description: Last Export Date
+      - in: query
+        name: last_export_user
+        schema:
+          type: number
+        description: Last Export User
+      - in: query
+        name: last_modified_datetime_0
+        schema:
+          type: string
+          format: date-time
+        description: Last Modified Datetime
+      - in: query
+        name: last_modified_datetime_1
+        schema:
+          type: string
+          format: date-time
+        description: Last Modified Datetime
+      - in: query
+        name: location
+        schema:
+          type: integer
+        description: Location
+      - in: query
+        name: modified_date_0
+        schema:
+          type: string
+          format: date
+        description: Last Modified Date (Deprecated - use 'Last Modified Datetime')
+      - in: query
+        name: modified_date_1
+        schema:
+          type: string
+          format: date
+        description: Last Modified Date (Deprecated - use 'Last Modified Datetime')
+      - name: order_by
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: payment_date_0
+        schema:
+          type: string
+          format: date
+        description: Payment Date
+      - in: query
+        name: payment_date_1
+        schema:
+          type: string
+          format: date
+        description: Payment Date
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: submitted_date_0
+        schema:
+          type: string
+          format: date
+        description: Submitted Date
+      - in: query
+        name: submitted_date_1
+        schema:
+          type: string
+          format: date
+        description: Submitted Date
+      - in: query
+        name: sync_status_v2
+        schema:
+          type: string
+        description: Sync Status
+      - in: query
+        name: type
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+        description: '* `0` - Order
+
+          * `1` - Expense
+
+          * `2` - Creditcard'
+      - in: query
+        name: user
+        schema:
+          type: integer
+      - in: query
+        name: vendor
+        schema:
+          type: string
+        description: Vendors
+      - in: query
+        name: vendor[]
+        schema:
+          type: array
+          items:
+            type: integer
+        description: 'Filter bills by vendor IDs (example: vendor[]=1&vendor[]=2)'
+      tags:
+      - ap
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillMetadataListSimpleBill'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/BillMetadataListSimpleBill'
+          description: ''
+  /api/v3/ap/bills/mark-as-paid/:
+    post:
+      operationId: ap_bills_mark_as_paid_create
+      description: Set approved bills without payments to paid status.
+      summary: Mark Bills as Paid
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      tags:
+      - ap
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarkBillsAsPaidRequest'
+            examples:
+              ExampleInput:
+                value:
+                  bill_uuids:
+                  - 3cda5ef4ac1a401bb6619e4a5d87c10d
+                  - c2f2ad5bbbf345f3bdc66d1a18fbbec5
+                  payment_date: '2025-01-21'
+                summary: Example input
+                description: Mark bills as paid
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MarkBillsAsPaidRequest'
+          ? ''
+          : schema:
+              $ref: '#/components/schemas/MarkBillsAsPaidRequest'
+            examples:
+              ExampleInput:
+                value:
+                  bill_uuids:
+                  - 3cda5ef4ac1a401bb6619e4a5d87c10d
+                  - c2f2ad5bbbf345f3bdc66d1a18fbbec5
+                  payment_date: '2025-01-21'
+                summary: Example input
+                description: Mark bills as paid
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/MarkBillsAsPaidRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MarkBillsAsPaidRequest'
+        required: true
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarkBillsAsPaid'
+              examples:
+                ExampleInput:
+                  value:
+                    bill_uuids:
+                    - 3cda5ef4ac1a401bb6619e4a5d87c10d
+                    - c2f2ad5bbbf345f3bdc66d1a18fbbec5
+                    payment_date: '2025-01-21'
+                  summary: Example input
+                  description: Mark bills as paid
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/MarkBillsAsPaid'
+          description: ''
+components:
+  schemas:
+    ExpenseReportUserSummaryDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        position:
+          type: string
+          nullable: true
+          maxLength: 100
+        profile_image:
+          type: string
+          nullable: true
+        approval_delegatee:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalDelegateeDocs'
+          nullable: true
+          type: object
+        expected_return_date:
+          type: string
+          format: date
+          readOnly: true
+      required:
+      - approval_delegatee
+      - email
+    UnitCostDiffLogDocs:
+      type: object
+      properties:
+        changed_by:
+          type: string
+        changed_date:
+          type: string
+        original_unit_cost:
+          type: number
+          format: double
+        original_currency_label:
+          type: string
+    SimpleUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        profile_image:
+          type: string
+          nullable: true
+      required:
+      - email
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        active:
+          type: boolean
+      required:
+      - name
+    OrderItemTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: '* `0` - One Time
+
+        * `1` - Recurring
+
+        * `2` - Blanket'
+    UserProfileRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        department:
+          allOf:
+          - $ref: '#/components/schemas/SimpleDepartment'
+          nullable: true
+          type: object
+      required:
+      - department
+      - email
+    SimpleBill:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/BillStatusEnum'
+          minimum: 0
+          maximum: 4294967295
+        version:
+          type: integer
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+        locked:
+          type: boolean
+          readOnly: true
+        currency:
+          $ref: '#/components/schemas/SimpleCurrency'
+        uuid:
+          type: string
+          format: uuid
+        items:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+        vendor:
+          $ref: '#/components/schemas/SimpleAPVendor'
+        due_date:
+          type: string
+          readOnly: true
+          nullable: true
+        total_cost_with_tax:
+          type: number
+          format: float
+          readOnly: true
+        invoice_date:
+          type: string
+          readOnly: true
+          nullable: true
+        next_approver_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApproverRead'
+          nullable: true
+          readOnly: true
+        last_export_user:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUser'
+          readOnly: true
+        last_modified_datetime:
+          type: string
+          format: date-time
+          readOnly: true
+          title: Last Modified
+        last_export_date:
+          type: string
+          format: date
+          readOnly: true
+        submitted_date:
+          type: string
+          format: date-time
+          nullable: true
+        gl_post_date:
+          type: string
+          readOnly: true
+          nullable: true
+        invoice_number:
+          type: string
+          maxLength: 50
+        group:
+          type: integer
+          readOnly: true
+          nullable: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/BillTypeEnum'
+          minimum: 0
+          maximum: 4294967295
+        user:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUser'
+          description: Last modified by user.
+        approver:
+          allOf:
+          - $ref: '#/components/schemas/BillListViewApproverUserDocs'
+          nullable: true
+          readOnly: true
+          type: object
+        past_due:
+          type: boolean
+          readOnly: true
+        invoice_created:
+          type: boolean
+          readOnly: true
+        invoice_uuid:
+          type: string
+          readOnly: true
+        invoice_total:
+          type: number
+          format: double
+          maximum: 10000000000000
+          minimum: -10000000000000
+          exclusiveMaximum: true
+          exclusiveMinimum: true
+          readOnly: true
+        creator:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUser'
+          description: Creator of the bill.
+      required:
+      - creator
+      - currency
+      - user
+      - uuid
+      - vendor
+    BillRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+        user:
+          $ref: '#/components/schemas/UserSummary'
+        vendor:
+          $ref: '#/components/schemas/VendorRead'
+        approval_chain:
+          type: integer
+          readOnly: true
+          nullable: true
+        approver:
+          allOf:
+          - $ref: '#/components/schemas/ApproverRead'
+          nullable: true
+          type: object
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemReadSerializer_v2'
+        costs:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillCostRead'
+        invoice_attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        bill_statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillStatusRead'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+          readOnly: true
+        version_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionChoicesDocs'
+          readOnly: true
+        tax_amount:
+          type: number
+          format: double
+          readOnly: true
+        inclusive_tax_amount:
+          type: number
+          format: double
+          readOnly: true
+        exclusive_tax_amount:
+          type: number
+          format: double
+          readOnly: true
+        subtotal_cost:
+          type: number
+          format: double
+          description: This amount does not include any tax or shipping_amount
+          readOnly: true
+        total_cost:
+          type: number
+          format: double
+          description: This amount should not contain any tax or shipping, but include bill cost
+          readOnly: true
+        total_cost_with_tax:
+          type: number
+          format: double
+          description: Make sure full tax amount is added
+          readOnly: true
+        converted_total_cost:
+          type: number
+          format: double
+          description: Total cost converted to base currency.
+          readOnly: true
+        next_approver_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApproverRead'
+          nullable: true
+          readOnly: true
+        locked:
+          type: boolean
+          readOnly: true
+        bill_payment:
+          allOf:
+          - $ref: '#/components/schemas/APBillPaymentDocs'
+          nullable: true
+          readOnly: true
+          type: object
+        creditcard:
+          type: integer
+          readOnly: true
+        creditcard_name:
+          type: string
+          readOnly: true
+        last_export_user:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUserSummary'
+          readOnly: true
+        last_export_date:
+          type: string
+          format: date
+          readOnly: true
+        vendor_name:
+          type: string
+          maxLength: 100
+        vendor_contact:
+          type: string
+          maxLength: 100
+        vendor_address_one:
+          type: string
+          title: Vendor Address Line One
+          maxLength: 300
+        vendor_address_two:
+          type: string
+          title: Vendor Address Line Two
+          maxLength: 300
+        vendor_postal_code:
+          type: string
+          maxLength: 10
+        vendor_city:
+          type: string
+          maxLength: 50
+        vendor_state_province:
+          type: string
+          title: Vendor State/Province
+          maxLength: 40
+        vendor_country:
+          type: string
+          maxLength: 80
+        last_modified_datetime:
+          type: string
+          format: date-time
+          readOnly: true
+          title: Last Modified
+        submitted_date:
+          type: string
+          format: date-time
+          nullable: true
+        invoice_number:
+          type: string
+          maxLength: 50
+        invoice_date:
+          type: string
+          format: date-time
+          nullable: true
+          title: Bill Invoice Date
+        due_date:
+          type: string
+          format: date-time
+          nullable: true
+          title: Bill Due Date
+        payment_terms:
+          type: string
+          maxLength: 100
+        version:
+          type: integer
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+        status:
+          allOf:
+          - $ref: '#/components/schemas/BillStatusEnum'
+          minimum: 0
+          maximum: 4294967295
+        type:
+          allOf:
+          - $ref: '#/components/schemas/BillTypeEnum'
+          minimum: 0
+          maximum: 4294967295
+        active:
+          type: boolean
+        note:
+          type: string
+        gl_post_date:
+          type: string
+          format: date-time
+          nullable: true
+        group:
+          type: integer
+          nullable: true
+        payment_method:
+          type: integer
+          nullable: true
+          title: Bill Payment Method
+        payment_method_name:
+          type: string
+          readOnly: true
+        added_purchase_orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPurchaseOrderDocs'
+          readOnly: true
+          description: List of purchase orders of the added bill items.
+        shipping_amount:
+          type: number
+          format: double
+          readOnly: true
+        invoice_uuid:
+          type: string
+          readOnly: true
+        invoice_total:
+          type: number
+          format: double
+          maximum: 10000000000000
+          minimum: -10000000000000
+          exclusiveMaximum: true
+          exclusiveMinimum: true
+          readOnly: true
+        creator:
+          $ref: '#/components/schemas/UserSummary'
+      required:
+      - bill_statuses
+      - costs
+      - creator
+      - currency
+      - invoice_attachments
+      - items
+      - user
+      - uuid
+      - vendor
+    Attachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+        file:
+          type: string
+        name:
+          type: string
+          maxLength: 255
+        user:
+          type: integer
+        description:
+          type: string
+          maxLength: 1000
+        mimetype:
+          type: string
+          maxLength: 100
+        length:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          nullable: true
+        sha1_hash:
+          type: string
+          maxLength: 40
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - file
+      - user
+      - uuid
+    VendorPaymentMethodTransactionFee:
+      type: object
+      properties:
+        type:
+          oneOf:
+          - enum:
+            - percentage
+            type: string
+          - enum:
+            - fixed
+            type: string
+          readOnly: true
+        value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,19}(?:\.\d{0,2})?$
+      required:
+      - value
+    ItemMetadataItemRead:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/BillItemsMetadataDocs'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemReadSerializer_v2'
+      required:
+      - data
+      - metadata
+    SimpleUserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        role:
+          allOf:
+          - $ref: '#/components/schemas/MinimalRoleRead'
+          readOnly: true
+        profile_image:
+          type: string
+          nullable: true
+      required:
+      - email
+    SetupStageEnum:
+      enum:
+      - COMP
+      - DEPT
+      - USER
+      - COA
+      - BDGT
+      - APPR
+      - FIN
+      type: string
+      description: '* `COMP` - Company
+
+        * `DEPT` - Department
+
+        * `USER` - User
+
+        * `COA` - Chart_of_Accounts
+
+        * `BDGT` - Budget_Control
+
+        * `APPR` - Approver
+
+        * `FIN` - Finished'
+    ApproverChoicesMetadataApproverReadDocs:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ApproverChoicesMetadataDocs'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApproverReadDocs'
+      required:
+      - data
+      - metadata
+    PaginatedCompanyPaymentMethodReadList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                previous:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyPaymentMethodRead'
+    AccountCodeRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        applied_accounts_count:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          maxLength: 50
+        code_length:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        description:
+          type: string
+          maxLength: 200
+        account_type:
+          allOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        active:
+          type: boolean
+        parent:
+          type: integer
+          nullable: true
+      required:
+      - code
+      - description
+    SimpleAPVendor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          description: Name of the vendor
+          maxLength: 150
+      required:
+      - name
+    TimezoneEnum:
+      enum:
+      - -11
+      - -10
+      - -9
+      - -8
+      - -7
+      - -6
+      - -5
+      - -4
+      - -3.5
+      - -3
+      - -2
+      - -1
+      - 0
+      - 1
+      - 2
+      - 3
+      - 3.5
+      - 4
+      - 4.5
+      - 5
+      - 5.5
+      - 5.75
+      - 6
+      - 7
+      - 8
+      - 9
+      - 9.5
+      - 10
+      - 11
+      - 12
+      type: number
+      description: '* `-11.0` - (GMT -11:00) Midway Island, Samoa
+
+        * `-10.0` - (GMT -10:00) Hawaii
+
+        * `-9.0` - (GMT -9:00) Alaska
+
+        * `-8.0` - (GMT -8:00) Pacific Time (US &amp; Canada)
+
+        * `-7.0` - (GMT -7:00) Mountain Time (US &amp; Canada)
+
+        * `-6.0` - (GMT -6:00) Central Time (US &amp; Canada), Mexico City
+
+        * `-5.0` - (GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima
+
+        * `-4.0` - (GMT -4:00) Atlantic Time (Canada), Caracas, La Paz
+
+        * `-3.5` - (GMT -3:30) Newfoundland
+
+        * `-3.0` - (GMT -3:00) Brazil, Buenos Aires, Georgetown
+
+        * `-2.0` - (GMT -2:00) Mid-Atlantic
+
+        * `-1.0` - (GMT -1:00) Azores, Cape Verde Islands
+
+        * `0.0` - (GMT) Western Europe Time, London, Lisbon, Casablanca
+
+        * `1.0` - (GMT +1:00) Brussels, Copenhagen, Madrid, Paris
+
+        * `2.0` - (GMT +2:00) Kaliningrad, South Africa
+
+        * `3.0` - (GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg
+
+        * `3.5` - (GMT +3:30) Tehran
+
+        * `4.0` - (GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi
+
+        * `4.5` - (GMT +4:30) Kabul
+
+        * `5.0` - (GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent
+
+        * `5.5` - (GMT +5:30) Bombay, Calcutta, Madras, New Delhi
+
+        * `5.75` - (GMT +5:45) Kathmandu
+
+        * `6.0` - (GMT +6:00) Almaty, Dhaka, Colombo
+
+        * `7.0` - (GMT +7:00) Bangkok, Hanoi, Jakarta
+
+        * `8.0` - (GMT +8:00) Beijing, Perth, Singapore, Hong Kong
+
+        * `9.0` - (GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk
+
+        * `9.5` - (GMT +9:30) Adelaide, Darwin
+
+        * `10.0` - (GMT +10:00) Eastern Australia, Guam, Vladivostok
+
+        * `11.0` - (GMT +11:00) Magadan, Solomon Islands, New Caledonia
+
+        * `12.0` - (GMT +12:00) Auckland, Wellington, Fiji, Kamchatka'
+    StatementItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        creditcard:
+          type: integer
+          title: Credit Card
+        statement:
+          type: integer
+          nullable: true
+        match:
+          type: integer
+          nullable: true
+        date:
+          type: string
+          format: date
+        description:
+          type: string
+          maxLength: 255
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,2})?$
+        duplicate_of:
+          type: integer
+          nullable: true
+      required:
+      - amount
+      - creditcard
+    PaymentMethodRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data: {}
+        currency:
+          $ref: '#/components/schemas/Currency'
+        payment_rail:
+          type: string
+          readOnly: true
+        bank_account_country_code:
+          type: string
+          nullable: true
+          readOnly: true
+      required:
+      - currency
+      - data
+    BillPaymentVendorPaymentMethodRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        vendor:
+          type: integer
+        name:
+          type: string
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data: {}
+        currency:
+          $ref: '#/components/schemas/Currency'
+      required:
+      - currency
+      - data
+      - vendor
+    PODocs:
+      type: object
+      properties:
+        number:
+          type: string
+        id:
+          type: integer
+        uuid:
+          type: string
+    VendorDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          description: Name of the vendor
+          maxLength: 150
+      required:
+      - name
+    PaymentListRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        bill_payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentDocs'
+          nullable: true
+          readOnly: true
+        payment_method_type:
+          type: integer
+          readOnly: true
+        payment_method:
+          allOf:
+          - $ref: '#/components/schemas/CompanyPaymentMethodRead'
+          nullable: true
+          type: object
+        payment_date:
+          type: string
+          format: date
+          nullable: true
+          readOnly: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        total_amount_with_tax:
+          type: string
+          readOnly: true
+        tax_amount:
+          type: string
+          readOnly: true
+        inclusive_tax_amount:
+          type: string
+          readOnly: true
+        exclusive_tax_amount:
+          type: string
+          readOnly: true
+        currency:
+          $ref: '#/components/schemas/Currency'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/PaymentStatusEnum'
+          minimum: 0
+          maximum: 4294967295
+        ach_number:
+          type: integer
+          readOnly: true
+        next_approver_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApproverRead'
+          readOnly: true
+      required:
+      - currency
+      - payment_method
+    BillPurchaseOrderDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+        number:
+          type: string
+        currency:
+          type: string
+        total_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+      required:
+      - currency
+      - id
+      - number
+      - total_amount
+    MinimalRoleRead:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        type:
+          type: integer
+      required:
+      - name
+      - type
+    BillDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+          readOnly: true
+        vendor:
+          $ref: '#/components/schemas/VendorDocs'
+        tax_amount:
+          type: number
+          format: double
+          readOnly: true
+        vendor_name:
+          type: string
+          maxLength: 100
+        due_date:
+          type: string
+          format: date-time
+          nullable: true
+          title: Bill Due Date
+        status:
+          allOf:
+          - $ref: '#/components/schemas/BillStatusEnum'
+          minimum: 0
+          maximum: 4294967295
+        type:
+          allOf:
+          - $ref: '#/components/schemas/BillTypeEnum'
+          minimum: 0
+          maximum: 4294967295
+        group:
+          type: integer
+      required:
+      - group
+      - vendor
+    PermissionsEditDeleteApprove:
+      type: object
+      properties:
+        can_edit:
+          type: boolean
+        can_delete:
+          type: boolean
+        can_approve:
+          type: boolean
+      required:
+      - can_approve
+      - can_delete
+      - can_edit
+    SimpleExpenseReport:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+      required:
+      - uuid
+    PaymentMetadataDocs:
+      type: object
+      properties:
+        permissions:
+          $ref: '#/components/schemas/PermissionsEditDeleteApprove'
+        summary:
+          $ref: '#/components/schemas/PaymentSummaryDocs'
+        pagination:
+          $ref: '#/components/schemas/PaginationDocs'
+      required:
+      - pagination
+      - permissions
+      - summary
+    CustomFieldValueRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        value:
+          oneOf:
+          - type: string
+          - type: boolean
+          description: 'Given the *incoming* primitive data, return the value for this field
+
+            that should be validated and transformed to a native value.'
+          readOnly: true
+        field:
+          $ref: '#/components/schemas/CustomFieldRead'
+      required:
+      - field
+    BillStatusEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 6
+      - 7
+      - 8
+      - 4
+      - 5
+      type: integer
+      description: '* `0` - Draft
+
+        * `1` - Confirmed
+
+        * `2` - Approved
+
+        * `3` - Denied
+
+        * `6` - Payment Confirmed
+
+        * `7` - Payment Approved
+
+        * `8` - Payment Limbo
+
+        * `4` - Paid
+
+        * `5` - Withdrawn'
+    CreditCardTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      type: integer
+      description: '* `0` - other-credit-card
+
+        * `1` - Visa
+
+        * `2` - Mastercard
+
+        * `3` - American Express
+
+        * `4` - Discover
+
+        * `5` - JCB
+
+        * `6` - Diner''s Club
+
+        * `7` - Procurify'
+    PermissionsApprove:
+      type: object
+      properties:
+        can_approve:
+          type: boolean
+    CreditCard:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        number:
+          type: string
+          pattern: ^[0-9]{4}$
+          maxLength: 19
+        balance:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          nullable: true
+        gl_code:
+          type: string
+          maxLength: 100
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CreditCardTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        category:
+          nullable: true
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/CategoryEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type: integer
+        external_id:
+          type: string
+          description: External id of the Credit Card
+          maxLength: 100
+        status:
+          nullable: true
+          description: 'The status of the Credit Card
+
+
+            * `pending` - Pending
+
+            * `active` - Active
+
+            * `inactive` - Inactive
+
+            * `canceled` - Canceled
+
+            * `lost` - Lost
+
+            * `stolen` - Stolen'
+          oneOf:
+          - $ref: '#/components/schemas/CreditCardStatusEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type: integer
+        require_activation:
+          type: boolean
+          title: Require new activation?
+          description: Does this card require new activation?
+        last_changed_by:
+          type: integer
+          nullable: true
+          title: Last changed by user
+        vendor:
+          type: integer
+        payment_method:
+          type: integer
+          nullable: true
+        currency:
+          type: integer
+        currency_name:
+          type: string
+          readOnly: true
+        creator:
+          type: integer
+          nullable: true
+          title: Card Issuer
+        assignees:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCardAssignee'
+      required:
+      - assignees
+      - currency
+      - uuid
+      - vendor
+    PurchaseOrderRead:
+      type: object
+      properties:
+        number:
+          type: string
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+        purchaser:
+          $ref: '#/components/schemas/SimpleUserSummary'
+        vendor_name:
+          type: string
+          nullable: true
+          maxLength: 150
+      required:
+      - purchaser
+      - uuid
+    Account:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        account_code:
+          $ref: '#/components/schemas/AccountCodeRead'
+        department:
+          $ref: '#/components/schemas/DepartmentSummary'
+        warning_indicator:
+          type: boolean
+          readOnly: true
+        start_datetime:
+          type: string
+          format: date-time
+          nullable: true
+        end_datetime:
+          type: string
+          format: date-time
+          nullable: true
+        budget:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        budget_used_approved:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        budget_used_purchased:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        balance_approved:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        balance_purchased:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        active:
+          type: boolean
+      required:
+      - account_code
+      - department
+    OrderItemRead:
+      type: object
+      properties:
+        PO:
+          type: array
+          items:
+            type: integer
+            title: PO
+        PO_line_num:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        account:
+          $ref: '#/components/schemas/AccountRead'
+        accountCode:
+          type: string
+          maxLength: 100
+        active:
+          type: boolean
+        approved_currency_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+          nullable: true
+        approved_datetime:
+          type: string
+          format: date-time
+          nullable: true
+        approved_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        approved_quantity:
+          type: number
+          format: double
+        approved_shipping_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        approved_tax_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        attachments:
+          type: string
+        catalog_item:
+          allOf:
+          - $ref: '#/components/schemas/CatalogItemRead'
+          nullable: true
+          type: object
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        currency:
+          $ref: '#/components/schemas/CurrencySummary'
+        dateInvoiced:
+          type: string
+          format: date-time
+          nullable: true
+        external_id:
+          type: string
+          description: External id of the order item
+          maxLength: 100
+        hot:
+          type: boolean
+        id:
+          type: integer
+          readOnly: true
+        inventoryItem:
+          type: integer
+          nullable: true
+        is_active:
+          type: boolean
+        item_attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        last_changed_by:
+          type: integer
+          nullable: true
+          title: Last changed by user
+        last_modified:
+          type: string
+          format: date-time
+          readOnly: true
+        lineComment:
+          type: string
+          nullable: true
+        name:
+          type: string
+          maxLength: 255
+        num:
+          type: string
+          maxLength: 50
+        orderNum:
+          type: integer
+          nullable: true
+        order_number:
+          type: integer
+          readOnly: true
+          nullable: true
+        po_note:
+          type: string
+          title: Comment
+        po_version:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        pref_vendor:
+          $ref: '#/components/schemas/VendorRead'
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        purchase_order:
+          type: integer
+          title: Procurify PO Number
+          nullable: true
+        purchaser:
+          $ref: '#/components/schemas/UserSummary'
+        quantity:
+          type: number
+          format: double
+        receivedFailQty:
+          type: number
+          format: double
+        receivedPassQty:
+          type: number
+          format: double
+        shipping_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        sku:
+          type: string
+          maxLength: 100
+        status:
+          nullable: true
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/OrderItemStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type: integer
+        tax_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        total_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        unit:
+          type: string
+          maxLength: 30
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        vendor:
+          type: string
+          readOnly: true
+        receive_method:
+          allOf:
+          - $ref: '#/components/schemas/ReceiveMethodEnum'
+          minimum: 0
+          maximum: 65535
+        type:
+          allOf:
+          - $ref: '#/components/schemas/OrderItemTypeEnum'
+          minimum: 0
+          maximum: 65535
+        blanket:
+          allOf:
+          - $ref: '#/components/schemas/BlanketOrderItemRead'
+          readOnly: true
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+          readOnly: true
+        confirmation_status:
+          type: integer
+          nullable: true
+          readOnly: true
+        confirmation_status_description:
+          type: string
+          nullable: true
+          readOnly: true
+        cost_details:
+          allOf:
+          - $ref: '#/components/schemas/CostDetails'
+          nullable: true
+          readOnly: true
+          type: object
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldValueRead'
+          readOnly: true
+        date_required:
+          type: string
+          format: date-time
+          readOnly: true
+        fully_received_actual_receive_date:
+          type: string
+          format: date
+          readOnly: true
+        has_sibling_items:
+          type: boolean
+          readOnly: true
+        line_comment:
+          type: string
+          readOnly: true
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/MasterLogger'
+          readOnly: true
+        order_description:
+          type: string
+          readOnly: true
+        order_status:
+          type: integer
+          readOnly: true
+        order_uuid:
+          type: string
+          format: uuid
+          readOnly: true
+        punchout_supplier_icon:
+          type: string
+          readOnly: true
+          nullable: true
+        punchout_supplier_name:
+          type: string
+          readOnly: true
+          nullable: true
+        punchout_system:
+          type: integer
+          nullable: true
+          readOnly: true
+        punchout_vendor_reference:
+          type: integer
+          nullable: true
+          readOnly: true
+        punchout_supplier_can_update_quantity:
+          type: boolean
+          readOnly: true
+        purchase_order_number:
+          type: string
+          readOnly: true
+        purchase_order_uuid:
+          type: string
+          format: uuid
+          readOnly: true
+        purchased_currency_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+          readOnly: true
+          default: '0.000000'
+        recurrence:
+          allOf:
+          - $ref: '#/components/schemas/RecurringOrderItem'
+          nullable: true
+          type: object
+        requester:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUserSummary'
+          readOnly: true
+        spend_allocation:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllocationRead'
+          readOnly: true
+        submitted_date:
+          type: string
+          format: date-time
+          readOnly: true
+        taxes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Adjustment'
+          nullable: true
+      required:
+      - account
+      - approved_datetime
+      - approved_quantity
+      - catalog_item
+      - currency
+      - item_attachments
+      - name
+      - num
+      - pref_vendor
+      - price
+      - purchaser
+      - quantity
+      - receivedFailQty
+      - receivedPassQty
+      - recurrence
+      - unit
+    BranchSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+      required:
+      - name
+    BillItemsSummaryDocs:
+      type: object
+      properties:
+        total_items:
+          type: integer
+        total_cost:
+          type: number
+          format: double
+      required:
+      - total_cost
+      - total_items
+    VendorTypeEnum:
+      enum:
+      - 2
+      - 3
+      - 4
+      - 6
+      - 7
+      type: integer
+      description: '* `2` - amazon punchout
+
+        * `3` - preferred
+
+        * `4` - regular
+
+        * `6` - credit card provider
+
+        * `7` - checkout'
+    VendorPaymentMethodFlightTime:
+      type: object
+      properties:
+        min:
+          type: integer
+          minimum: 0
+          description: The minimum number of days for the payment to be in flight
+        max:
+          type: integer
+          minimum: 0
+          description: The maximum number of days for the payment to be in flight
+      required:
+      - max
+      - min
+    Nested:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          maxLength: 50
+        code_length:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        description:
+          type: string
+          maxLength: 200
+        account_type:
+          allOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        active:
+          type: boolean
+        parent:
+          type: integer
+          nullable: true
+      required:
+      - code
+      - description
+    ApproverRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/SimpleUserSummary'
+        amount_limit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        item_variance_amount_limit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+          nullable: true
+        item_variance_percentage_limit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+          nullable: true
+        approval_level:
+          type: integer
+      required:
+      - amount_limit
+      - approval_level
+      - user
+    PaymentTerm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        active:
+          type: boolean
+      required:
+      - name
+    PaymentStatusEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      type: integer
+      description: '* `0` - Draft
+
+        * `1` - Confirmed
+
+        * `2` - Approved
+
+        * `3` - Denied
+
+        * `4` - Void
+
+        * `5` - Paid
+
+        * `6` - Partially Paid
+
+        * `7` - Processing
+
+        * `8` - Failed
+
+        * `9` - Scheduled'
+    ApprovalDelegateeSlimDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+    BillListViewApproverUserDocs:
+      type: object
+      properties:
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        profile_image:
+          type: string
+          nullable: true
+        approval_delegatee:
+          $ref: '#/components/schemas/ApprovalDelegateeSlimDocs'
+      required:
+      - approval_delegatee
+    PaymentSummaryDocs:
+      type: object
+      properties:
+        total_cost:
+          type: number
+          format: double
+      required:
+      - total_cost
+    CompanyPaymentMethodRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data: {}
+        currency:
+          $ref: '#/components/schemas/Currency'
+        gl_code:
+          type: string
+      required:
+      - currency
+      - data
+    SimpleDepartment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        location:
+          $ref: '#/components/schemas/SimpleLocation'
+      required:
+      - location
+      - name
+    ApprovalDelegationRead:
+      type: object
+      properties:
+        approval_delegatee:
+          $ref: '#/components/schemas/UserProfileRead'
+        expected_return_date:
+          type: string
+          format: date
+          nullable: true
+        delegator:
+          $ref: '#/components/schemas/SimpleUserProfile'
+        setter:
+          $ref: '#/components/schemas/SimpleUserProfile'
+      required:
+      - approval_delegatee
+      - delegator
+      - setter
+    UserDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        position:
+          type: string
+          nullable: true
+          maxLength: 100
+        profile_image:
+          type: string
+          nullable: true
+        approval_delegatee:
+          type: integer
+          nullable: true
+          readOnly: true
+      required:
+      - email
+    ExpenseTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: '* `0` - OTHER
+
+        * `1` - MEALS
+
+        * `2` - MILEAGE
+
+        * `3` - LABOUR
+
+        * `4` - AIRFARE
+
+        * `5` - LODGING'
+    SingleBillMetadataDocs:
+      type: object
+      properties:
+        permissions:
+          $ref: '#/components/schemas/PermissionsEditDeleteApprove'
+        summary:
+          $ref: '#/components/schemas/BillSummaryDocs'
+      required:
+      - permissions
+      - summary
+    CreditCardAssignee:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        profile_image:
+          type: string
+          nullable: true
+      required:
+      - email
+    BillStatusRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/UserSummary'
+        date:
+          type: string
+          format: date-time
+        status:
+          allOf:
+          - $ref: '#/components/schemas/BillStatusEnum'
+          minimum: 0
+          maximum: 4294967295
+        bill:
+          type: integer
+      required:
+      - bill
+      - date
+      - status
+      - user
+    NullEnum:
+      enum:
+      - null
+    ExpenseDocs:
+      type: object
+      properties:
+        merchant:
+          type: string
+        notes:
+          type: string
+          nullable: true
+        expenseReport:
+          $ref: '#/components/schemas/ExpenseReportWithUserDocs'
+      required:
+      - expenseReport
+      - merchant
+      - notes
+    APCreditCard:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        number:
+          type: string
+          pattern: ^[0-9]{4}$
+          maxLength: 19
+        balance:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          nullable: true
+        gl_code:
+          type: string
+          maxLength: 100
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CreditCardTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        category:
+          nullable: true
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/CategoryEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type: integer
+        external_id:
+          type: string
+          description: External id of the Credit Card
+          maxLength: 100
+        status:
+          nullable: true
+          description: 'The status of the Credit Card
+
+
+            * `pending` - Pending
+
+            * `active` - Active
+
+            * `inactive` - Inactive
+
+            * `canceled` - Canceled
+
+            * `lost` - Lost
+
+            * `stolen` - Stolen'
+          oneOf:
+          - $ref: '#/components/schemas/CreditCardStatusEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type: integer
+        require_activation:
+          type: boolean
+          title: Require new activation?
+          description: Does this card require new activation?
+        last_changed_by:
+          type: integer
+          nullable: true
+          title: Last changed by user
+        vendor:
+          type: integer
+        payment_method:
+          type: integer
+          nullable: true
+        currency:
+          type: integer
+        creator:
+          type: integer
+          nullable: true
+          title: Card Issuer
+      required:
+      - currency
+      - uuid
+      - vendor
+    PaginatedVendorPaymentMethodReadList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                previous:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorPaymentMethodRead'
+    AllocationRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          title: Allocated Amount
+        account:
+          $ref: '#/components/schemas/SpendAccountRead'
+      required:
+      - account
+      - amount
+    ApproverChoicesMetadataDocs:
+      type: object
+      properties:
+        permissions:
+          $ref: '#/components/schemas/PermissionsApprove'
+        summary:
+          $ref: '#/components/schemas/PaymentSummaryDocs'
+      required:
+      - summary
+    CreditCardStatusEnum:
+      enum:
+      - pending
+      - active
+      - inactive
+      - canceled
+      - lost
+      - stolen
+      type: string
+      description: '* `pending` - Pending
+
+        * `active` - Active
+
+        * `inactive` - Inactive
+
+        * `canceled` - Canceled
+
+        * `lost` - Lost
+
+        * `stolen` - Stolen'
+    DepartmentSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        branch:
+          $ref: '#/components/schemas/BranchSummary'
+        external_id:
+          type: string
+          nullable: true
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        punchout_email:
+          type: string
+          format: email
+          nullable: true
+          description: PunchOut Email
+          maxLength: 254
+        active:
+          type: boolean
+      required:
+      - branch
+      - name
+    UnoptimizedAccountCodeserializer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          maxLength: 50
+        code_length:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        description:
+          type: string
+          maxLength: 200
+        account_type:
+          allOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        active:
+          type: boolean
+        parent:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - code
+      - description
+    BillMetadataBillRead:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/SingleBillMetadataDocs'
+        data:
+          $ref: '#/components/schemas/BillRead'
+      required:
+      - data
+      - metadata
+    SimpleUserSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        position:
+          type: string
+          nullable: true
+          maxLength: 100
+        profile_image:
+          type: string
+          nullable: true
+        approval_delegatee:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalDelegateeDocs'
+          nullable: true
+          readOnly: true
+          type: object
+        expected_return_date:
+          type: string
+          format: date
+          readOnly: true
+      required:
+      - email
+    PaymentMetadataPaymentListRead:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PaymentMetadataDocs'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentListRead'
+      required:
+      - data
+      - metadata
+    ShippingMethod:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        active:
+          type: boolean
+      required:
+      - name
+    FrequencyEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - YEARLY
+
+        * `1` - MONTHLY'
+    CurrencySummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        base:
+          type: boolean
+      required:
+      - name
+      - rate
+    PaymentTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      type: integer
+      description: '* `0` - Other - CreditCard
+
+        * `1` - Other - Cash
+
+        * `2` - Other - Cheque
+
+        * `3` - Other
+
+        * `4` - Credit Card'
+    CreditCardItemRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        creditcard:
+          $ref: '#/components/schemas/APCreditCard'
+        po:
+          $ref: '#/components/schemas/PurchaseOrderRead'
+        expense:
+          allOf:
+          - $ref: '#/components/schemas/ExpenseDocs'
+          readOnly: true
+        creditcard_is_editable:
+          type: boolean
+          readOnly: true
+        matched_statement_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatementItem'
+          readOnly: true
+      required:
+      - creditcard
+      - po
+    BillPaymentDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        bill:
+          $ref: '#/components/schemas/BillDocs'
+        user:
+          $ref: '#/components/schemas/UserDocs'
+        payment_method:
+          $ref: '#/components/schemas/BillPaymentVendorPaymentMethodRead'
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          title: Payment Amount
+        transaction:
+          type: integer
+          nullable: true
+      required:
+      - bill
+      - payment_method
+      - user
+    ExpenseLineCreditCard:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        number:
+          type: string
+          pattern: ^[0-9]{4}$
+          maxLength: 19
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CreditCardTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+    MarkBillsAsPaidRequest:
+      type: object
+      properties:
+        bill_uuids:
+          type: array
+          items:
+            type: string
+            minLength: 1
+        bill_group_ids:
+          type: array
+          items:
+            type: integer
+          default: []
+        payment_date:
+          type: string
+      required:
+      - bill_uuids
+      - payment_date
+    BillSummaryDocs:
+      type: object
+      properties:
+        has_multiple_currency:
+          type: boolean
+        total_cost:
+          type: number
+          format: double
+      required:
+      - has_multiple_currency
+      - total_cost
+    CostAllocationRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        budget:
+          $ref: '#/components/schemas/AccountRead'
+        object_id:
+          type: integer
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+          nullable: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          title: Billed Amount
+        currency:
+          $ref: '#/components/schemas/Currency'
+        created_on:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - amount
+      - budget
+      - currency
+    LocationTimezoneEnum:
+      enum:
+      - Africa/Abidjan
+      - Africa/Accra
+      - Africa/Addis_Ababa
+      - Africa/Algiers
+      - Africa/Asmara
+      - Africa/Bamako
+      - Africa/Bangui
+      - Africa/Banjul
+      - Africa/Bissau
+      - Africa/Blantyre
+      - Africa/Brazzaville
+      - Africa/Bujumbura
+      - Africa/Cairo
+      - Africa/Casablanca
+      - Africa/Ceuta
+      - Africa/Conakry
+      - Africa/Dakar
+      - Africa/Dar_es_Salaam
+      - Africa/Djibouti
+      - Africa/Douala
+      - Africa/El_Aaiun
+      - Africa/Freetown
+      - Africa/Gaborone
+      - Africa/Harare
+      - Africa/Johannesburg
+      - Africa/Juba
+      - Africa/Kampala
+      - Africa/Khartoum
+      - Africa/Kigali
+      - Africa/Kinshasa
+      - Africa/Lagos
+      - Africa/Libreville
+      - Africa/Lome
+      - Africa/Luanda
+      - Africa/Lubumbashi
+      - Africa/Lusaka
+      - Africa/Malabo
+      - Africa/Maputo
+      - Africa/Maseru
+      - Africa/Mbabane
+      - Africa/Mogadishu
+      - Africa/Monrovia
+      - Africa/Nairobi
+      - Africa/Ndjamena
+      - Africa/Niamey
+      - Africa/Nouakchott
+      - Africa/Ouagadougou
+      - Africa/Porto-Novo
+      - Africa/Sao_Tome
+      - Africa/Tripoli
+      - Africa/Tunis
+      - Africa/Windhoek
+      - America/Adak
+      - America/Anchorage
+      - America/Anguilla
+      - America/Antigua
+      - America/Araguaina
+      - America/Argentina/Buenos_Aires
+      - America/Argentina/Catamarca
+      - America/Argentina/Cordoba
+      - America/Argentina/Jujuy
+      - America/Argentina/La_Rioja
+      - America/Argentina/Mendoza
+      - America/Argentina/Rio_Gallegos
+      - America/Argentina/Salta
+      - America/Argentina/San_Juan
+      - America/Argentina/San_Luis
+      - America/Argentina/Tucuman
+      - America/Argentina/Ushuaia
+      - America/Aruba
+      - America/Asuncion
+      - America/Atikokan
+      - America/Bahia
+      - America/Bahia_Banderas
+      - America/Barbados
+      - America/Belem
+      - America/Belize
+      - America/Blanc-Sablon
+      - America/Boa_Vista
+      - America/Bogota
+      - America/Boise
+      - America/Cambridge_Bay
+      - America/Campo_Grande
+      - America/Cancun
+      - America/Caracas
+      - America/Cayenne
+      - America/Cayman
+      - America/Chicago
+      - America/Chihuahua
+      - America/Costa_Rica
+      - America/Creston
+      - America/Cuiaba
+      - America/Curacao
+      - America/Danmarkshavn
+      - America/Dawson
+      - America/Dawson_Creek
+      - America/Denver
+      - America/Detroit
+      - America/Dominica
+      - America/Edmonton
+      - America/Eirunepe
+      - America/El_Salvador
+      - America/Fort_Nelson
+      - America/Fortaleza
+      - America/Glace_Bay
+      - America/Godthab
+      - America/Goose_Bay
+      - America/Grand_Turk
+      - America/Grenada
+      - America/Guadeloupe
+      - America/Guatemala
+      - America/Guayaquil
+      - America/Guyana
+      - America/Halifax
+      - America/Havana
+      - America/Hermosillo
+      - America/Indiana/Indianapolis
+      - America/Indiana/Knox
+      - America/Indiana/Marengo
+      - America/Indiana/Petersburg
+      - America/Indiana/Tell_City
+      - America/Indiana/Vevay
+      - America/Indiana/Vincennes
+      - America/Indiana/Winamac
+      - America/Inuvik
+      - America/Iqaluit
+      - America/Jamaica
+      - America/Juneau
+      - America/Kentucky/Louisville
+      - America/Kentucky/Monticello
+      - America/Kralendijk
+      - America/La_Paz
+      - America/Lima
+      - America/Los_Angeles
+      - America/Lower_Princes
+      - America/Maceio
+      - America/Managua
+      - America/Manaus
+      - America/Marigot
+      - America/Martinique
+      - America/Matamoros
+      - America/Mazatlan
+      - America/Menominee
+      - America/Merida
+      - America/Metlakatla
+      - America/Mexico_City
+      - America/Miquelon
+      - America/Moncton
+      - America/Monterrey
+      - America/Montevideo
+      - America/Montserrat
+      - America/Nassau
+      - America/New_York
+      - America/Nipigon
+      - America/Nome
+      - America/Noronha
+      - America/North_Dakota/Beulah
+      - America/North_Dakota/Center
+      - America/North_Dakota/New_Salem
+      - America/Ojinaga
+      - America/Panama
+      - America/Pangnirtung
+      - America/Paramaribo
+      - America/Phoenix
+      - America/Port-au-Prince
+      - America/Port_of_Spain
+      - America/Porto_Velho
+      - America/Puerto_Rico
+      - America/Punta_Arenas
+      - America/Rainy_River
+      - America/Rankin_Inlet
+      - America/Recife
+      - America/Regina
+      - America/Resolute
+      - America/Rio_Branco
+      - America/Santarem
+      - America/Santiago
+      - America/Santo_Domingo
+      - America/Sao_Paulo
+      - America/Scoresbysund
+      - America/Sitka
+      - America/St_Barthelemy
+      - America/St_Johns
+      - America/St_Kitts
+      - America/St_Lucia
+      - America/St_Thomas
+      - America/St_Vincent
+      - America/Swift_Current
+      - America/Tegucigalpa
+      - America/Thule
+      - America/Thunder_Bay
+      - America/Tijuana
+      - America/Toronto
+      - America/Tortola
+      - America/Vancouver
+      - America/Whitehorse
+      - America/Winnipeg
+      - America/Yakutat
+      - America/Yellowknife
+      - Antarctica/Casey
+      - Antarctica/Davis
+      - Antarctica/DumontDUrville
+      - Antarctica/Macquarie
+      - Antarctica/Mawson
+      - Antarctica/McMurdo
+      - Antarctica/Palmer
+      - Antarctica/Rothera
+      - Antarctica/Syowa
+      - Antarctica/Troll
+      - Antarctica/Vostok
+      - Arctic/Longyearbyen
+      - Asia/Aden
+      - Asia/Almaty
+      - Asia/Amman
+      - Asia/Anadyr
+      - Asia/Aqtau
+      - Asia/Aqtobe
+      - Asia/Ashgabat
+      - Asia/Atyrau
+      - Asia/Baghdad
+      - Asia/Bahrain
+      - Asia/Baku
+      - Asia/Bangkok
+      - Asia/Barnaul
+      - Asia/Beirut
+      - Asia/Bishkek
+      - Asia/Brunei
+      - Asia/Chita
+      - Asia/Choibalsan
+      - Asia/Colombo
+      - Asia/Damascus
+      - Asia/Dhaka
+      - Asia/Dili
+      - Asia/Dubai
+      - Asia/Dushanbe
+      - Asia/Famagusta
+      - Asia/Gaza
+      - Asia/Hebron
+      - Asia/Ho_Chi_Minh
+      - Asia/Hong_Kong
+      - Asia/Hovd
+      - Asia/Irkutsk
+      - Asia/Jakarta
+      - Asia/Jayapura
+      - Asia/Jerusalem
+      - Asia/Kabul
+      - Asia/Kamchatka
+      - Asia/Karachi
+      - Asia/Kathmandu
+      - Asia/Khandyga
+      - Asia/Kolkata
+      - Asia/Krasnoyarsk
+      - Asia/Kuala_Lumpur
+      - Asia/Kuching
+      - Asia/Kuwait
+      - Asia/Macau
+      - Asia/Magadan
+      - Asia/Makassar
+      - Asia/Manila
+      - Asia/Muscat
+      - Asia/Nicosia
+      - Asia/Novokuznetsk
+      - Asia/Novosibirsk
+      - Asia/Omsk
+      - Asia/Oral
+      - Asia/Phnom_Penh
+      - Asia/Pontianak
+      - Asia/Pyongyang
+      - Asia/Qatar
+      - Asia/Qyzylorda
+      - Asia/Riyadh
+      - Asia/Sakhalin
+      - Asia/Samarkand
+      - Asia/Seoul
+      - Asia/Shanghai
+      - Asia/Singapore
+      - Asia/Srednekolymsk
+      - Asia/Taipei
+      - Asia/Tashkent
+      - Asia/Tbilisi
+      - Asia/Tehran
+      - Asia/Thimphu
+      - Asia/Tokyo
+      - Asia/Tomsk
+      - Asia/Ulaanbaatar
+      - Asia/Urumqi
+      - Asia/Ust-Nera
+      - Asia/Vientiane
+      - Asia/Vladivostok
+      - Asia/Yakutsk
+      - Asia/Yangon
+      - Asia/Yekaterinburg
+      - Asia/Yerevan
+      - Atlantic/Azores
+      - Atlantic/Bermuda
+      - Atlantic/Canary
+      - Atlantic/Cape_Verde
+      - Atlantic/Faroe
+      - Atlantic/Madeira
+      - Atlantic/Reykjavik
+      - Atlantic/South_Georgia
+      - Atlantic/St_Helena
+      - Atlantic/Stanley
+      - Australia/Adelaide
+      - Australia/Brisbane
+      - Australia/Broken_Hill
+      - Australia/Currie
+      - Australia/Darwin
+      - Australia/Eucla
+      - Australia/Hobart
+      - Australia/Lindeman
+      - Australia/Lord_Howe
+      - Australia/Melbourne
+      - Australia/Perth
+      - Australia/Sydney
+      - Canada/Atlantic
+      - Canada/Central
+      - Canada/Eastern
+      - Canada/Mountain
+      - Canada/Newfoundland
+      - Canada/Pacific
+      - Europe/Amsterdam
+      - Europe/Andorra
+      - Europe/Astrakhan
+      - Europe/Athens
+      - Europe/Belgrade
+      - Europe/Berlin
+      - Europe/Bratislava
+      - Europe/Brussels
+      - Europe/Bucharest
+      - Europe/Budapest
+      - Europe/Busingen
+      - Europe/Chisinau
+      - Europe/Copenhagen
+      - Europe/Dublin
+      - Europe/Gibraltar
+      - Europe/Guernsey
+      - Europe/Helsinki
+      - Europe/Isle_of_Man
+      - Europe/Istanbul
+      - Europe/Jersey
+      - Europe/Kaliningrad
+      - Europe/Kiev
+      - Europe/Kirov
+      - Europe/Lisbon
+      - Europe/Ljubljana
+      - Europe/London
+      - Europe/Luxembourg
+      - Europe/Madrid
+      - Europe/Malta
+      - Europe/Mariehamn
+      - Europe/Minsk
+      - Europe/Monaco
+      - Europe/Moscow
+      - Europe/Oslo
+      - Europe/Paris
+      - Europe/Podgorica
+      - Europe/Prague
+      - Europe/Riga
+      - Europe/Rome
+      - Europe/Samara
+      - Europe/San_Marino
+      - Europe/Sarajevo
+      - Europe/Saratov
+      - Europe/Simferopol
+      - Europe/Skopje
+      - Europe/Sofia
+      - Europe/Stockholm
+      - Europe/Tallinn
+      - Europe/Tirane
+      - Europe/Ulyanovsk
+      - Europe/Uzhgorod
+      - Europe/Vaduz
+      - Europe/Vatican
+      - Europe/Vienna
+      - Europe/Vilnius
+      - Europe/Volgograd
+      - Europe/Warsaw
+      - Europe/Zagreb
+      - Europe/Zaporozhye
+      - Europe/Zurich
+      - GMT
+      - Indian/Antananarivo
+      - Indian/Chagos
+      - Indian/Christmas
+      - Indian/Cocos
+      - Indian/Comoro
+      - Indian/Kerguelen
+      - Indian/Mahe
+      - Indian/Maldives
+      - Indian/Mauritius
+      - Indian/Mayotte
+      - Indian/Reunion
+      - Pacific/Apia
+      - Pacific/Auckland
+      - Pacific/Bougainville
+      - Pacific/Chatham
+      - Pacific/Chuuk
+      - Pacific/Easter
+      - Pacific/Efate
+      - Pacific/Enderbury
+      - Pacific/Fakaofo
+      - Pacific/Fiji
+      - Pacific/Funafuti
+      - Pacific/Galapagos
+      - Pacific/Gambier
+      - Pacific/Guadalcanal
+      - Pacific/Guam
+      - Pacific/Honolulu
+      - Pacific/Kiritimati
+      - Pacific/Kosrae
+      - Pacific/Kwajalein
+      - Pacific/Majuro
+      - Pacific/Marquesas
+      - Pacific/Midway
+      - Pacific/Nauru
+      - Pacific/Niue
+      - Pacific/Norfolk
+      - Pacific/Noumea
+      - Pacific/Pago_Pago
+      - Pacific/Palau
+      - Pacific/Pitcairn
+      - Pacific/Pohnpei
+      - Pacific/Port_Moresby
+      - Pacific/Rarotonga
+      - Pacific/Saipan
+      - Pacific/Tahiti
+      - Pacific/Tarawa
+      - Pacific/Tongatapu
+      - Pacific/Wake
+      - Pacific/Wallis
+      - US/Alaska
+      - US/Arizona
+      - US/Central
+      - US/Eastern
+      - US/Hawaii
+      - US/Mountain
+      - US/Pacific
+      - UTC
+      type: string
+      description: '* `Africa/Abidjan` - Africa/Abidjan
+
+        * `Africa/Accra` - Africa/Accra
+
+        * `Africa/Addis_Ababa` - Africa/Addis_Ababa
+
+        * `Africa/Algiers` - Africa/Algiers
+
+        * `Africa/Asmara` - Africa/Asmara
+
+        * `Africa/Bamako` - Africa/Bamako
+
+        * `Africa/Bangui` - Africa/Bangui
+
+        * `Africa/Banjul` - Africa/Banjul
+
+        * `Africa/Bissau` - Africa/Bissau
+
+        * `Africa/Blantyre` - Africa/Blantyre
+
+        * `Africa/Brazzaville` - Africa/Brazzaville
+
+        * `Africa/Bujumbura` - Africa/Bujumbura
+
+        * `Africa/Cairo` - Africa/Cairo
+
+        * `Africa/Casablanca` - Africa/Casablanca
+
+        * `Africa/Ceuta` - Africa/Ceuta
+
+        * `Africa/Conakry` - Africa/Conakry
+
+        * `Africa/Dakar` - Africa/Dakar
+
+        * `Africa/Dar_es_Salaam` - Africa/Dar_es_Salaam
+
+        * `Africa/Djibouti` - Africa/Djibouti
+
+        * `Africa/Douala` - Africa/Douala
+
+        * `Africa/El_Aaiun` - Africa/El_Aaiun
+
+        * `Africa/Freetown` - Africa/Freetown
+
+        * `Africa/Gaborone` - Africa/Gaborone
+
+        * `Africa/Harare` - Africa/Harare
+
+        * `Africa/Johannesburg` - Africa/Johannesburg
+
+        * `Africa/Juba` - Africa/Juba
+
+        * `Africa/Kampala` - Africa/Kampala
+
+        * `Africa/Khartoum` - Africa/Khartoum
+
+        * `Africa/Kigali` - Africa/Kigali
+
+        * `Africa/Kinshasa` - Africa/Kinshasa
+
+        * `Africa/Lagos` - Africa/Lagos
+
+        * `Africa/Libreville` - Africa/Libreville
+
+        * `Africa/Lome` - Africa/Lome
+
+        * `Africa/Luanda` - Africa/Luanda
+
+        * `Africa/Lubumbashi` - Africa/Lubumbashi
+
+        * `Africa/Lusaka` - Africa/Lusaka
+
+        * `Africa/Malabo` - Africa/Malabo
+
+        * `Africa/Maputo` - Africa/Maputo
+
+        * `Africa/Maseru` - Africa/Maseru
+
+        * `Africa/Mbabane` - Africa/Mbabane
+
+        * `Africa/Mogadishu` - Africa/Mogadishu
+
+        * `Africa/Monrovia` - Africa/Monrovia
+
+        * `Africa/Nairobi` - Africa/Nairobi
+
+        * `Africa/Ndjamena` - Africa/Ndjamena
+
+        * `Africa/Niamey` - Africa/Niamey
+
+        * `Africa/Nouakchott` - Africa/Nouakchott
+
+        * `Africa/Ouagadougou` - Africa/Ouagadougou
+
+        * `Africa/Porto-Novo` - Africa/Porto-Novo
+
+        * `Africa/Sao_Tome` - Africa/Sao_Tome
+
+        * `Africa/Tripoli` - Africa/Tripoli
+
+        * `Africa/Tunis` - Africa/Tunis
+
+        * `Africa/Windhoek` - Africa/Windhoek
+
+        * `America/Adak` - America/Adak
+
+        * `America/Anchorage` - America/Anchorage
+
+        * `America/Anguilla` - America/Anguilla
+
+        * `America/Antigua` - America/Antigua
+
+        * `America/Araguaina` - America/Araguaina
+
+        * `America/Argentina/Buenos_Aires` - America/Argentina/Buenos_Aires
+
+        * `America/Argentina/Catamarca` - America/Argentina/Catamarca
+
+        * `America/Argentina/Cordoba` - America/Argentina/Cordoba
+
+        * `America/Argentina/Jujuy` - America/Argentina/Jujuy
+
+        * `America/Argentina/La_Rioja` - America/Argentina/La_Rioja
+
+        * `America/Argentina/Mendoza` - America/Argentina/Mendoza
+
+        * `America/Argentina/Rio_Gallegos` - America/Argentina/Rio_Gallegos
+
+        * `America/Argentina/Salta` - America/Argentina/Salta
+
+        * `America/Argentina/San_Juan` - America/Argentina/San_Juan
+
+        * `America/Argentina/San_Luis` - America/Argentina/San_Luis
+
+        * `America/Argentina/Tucuman` - America/Argentina/Tucuman
+
+        * `America/Argentina/Ushuaia` - America/Argentina/Ushuaia
+
+        * `America/Aruba` - America/Aruba
+
+        * `America/Asuncion` - America/Asuncion
+
+        * `America/Atikokan` - America/Atikokan
+
+        * `America/Bahia` - America/Bahia
+
+        * `America/Bahia_Banderas` - America/Bahia_Banderas
+
+        * `America/Barbados` - America/Barbados
+
+        * `America/Belem` - America/Belem
+
+        * `America/Belize` - America/Belize
+
+        * `America/Blanc-Sablon` - America/Blanc-Sablon
+
+        * `America/Boa_Vista` - America/Boa_Vista
+
+        * `America/Bogota` - America/Bogota
+
+        * `America/Boise` - America/Boise
+
+        * `America/Cambridge_Bay` - America/Cambridge_Bay
+
+        * `America/Campo_Grande` - America/Campo_Grande
+
+        * `America/Cancun` - America/Cancun
+
+        * `America/Caracas` - America/Caracas
+
+        * `America/Cayenne` - America/Cayenne
+
+        * `America/Cayman` - America/Cayman
+
+        * `America/Chicago` - America/Chicago
+
+        * `America/Chihuahua` - America/Chihuahua
+
+        * `America/Costa_Rica` - America/Costa_Rica
+
+        * `America/Creston` - America/Creston
+
+        * `America/Cuiaba` - America/Cuiaba
+
+        * `America/Curacao` - America/Curacao
+
+        * `America/Danmarkshavn` - America/Danmarkshavn
+
+        * `America/Dawson` - America/Dawson
+
+        * `America/Dawson_Creek` - America/Dawson_Creek
+
+        * `America/Denver` - America/Denver
+
+        * `America/Detroit` - America/Detroit
+
+        * `America/Dominica` - America/Dominica
+
+        * `America/Edmonton` - America/Edmonton
+
+        * `America/Eirunepe` - America/Eirunepe
+
+        * `America/El_Salvador` - America/El_Salvador
+
+        * `America/Fort_Nelson` - America/Fort_Nelson
+
+        * `America/Fortaleza` - America/Fortaleza
+
+        * `America/Glace_Bay` - America/Glace_Bay
+
+        * `America/Godthab` - America/Godthab
+
+        * `America/Goose_Bay` - America/Goose_Bay
+
+        * `America/Grand_Turk` - America/Grand_Turk
+
+        * `America/Grenada` - America/Grenada
+
+        * `America/Guadeloupe` - America/Guadeloupe
+
+        * `America/Guatemala` - America/Guatemala
+
+        * `America/Guayaquil` - America/Guayaquil
+
+        * `America/Guyana` - America/Guyana
+
+        * `America/Halifax` - America/Halifax
+
+        * `America/Havana` - America/Havana
+
+        * `America/Hermosillo` - America/Hermosillo
+
+        * `America/Indiana/Indianapolis` - America/Indiana/Indianapolis
+
+        * `America/Indiana/Knox` - America/Indiana/Knox
+
+        * `America/Indiana/Marengo` - America/Indiana/Marengo
+
+        * `America/Indiana/Petersburg` - America/Indiana/Petersburg
+
+        * `America/Indiana/Tell_City` - America/Indiana/Tell_City
+
+        * `America/Indiana/Vevay` - America/Indiana/Vevay
+
+        * `America/Indiana/Vincennes` - America/Indiana/Vincennes
+
+        * `America/Indiana/Winamac` - America/Indiana/Winamac
+
+        * `America/Inuvik` - America/Inuvik
+
+        * `America/Iqaluit` - America/Iqaluit
+
+        * `America/Jamaica` - America/Jamaica
+
+        * `America/Juneau` - America/Juneau
+
+        * `America/Kentucky/Louisville` - America/Kentucky/Louisville
+
+        * `America/Kentucky/Monticello` - America/Kentucky/Monticello
+
+        * `America/Kralendijk` - America/Kralendijk
+
+        * `America/La_Paz` - America/La_Paz
+
+        * `America/Lima` - America/Lima
+
+        * `America/Los_Angeles` - America/Los_Angeles
+
+        * `America/Lower_Princes` - America/Lower_Princes
+
+        * `America/Maceio` - America/Maceio
+
+        * `America/Managua` - America/Managua
+
+        * `America/Manaus` - America/Manaus
+
+        * `America/Marigot` - America/Marigot
+
+        * `America/Martinique` - America/Martinique
+
+        * `America/Matamoros` - America/Matamoros
+
+        * `America/Mazatlan` - America/Mazatlan
+
+        * `America/Menominee` - America/Menominee
+
+        * `America/Merida` - America/Merida
+
+        * `America/Metlakatla` - America/Metlakatla
+
+        * `America/Mexico_City` - America/Mexico_City
+
+        * `America/Miquelon` - America/Miquelon
+
+        * `America/Moncton` - America/Moncton
+
+        * `America/Monterrey` - America/Monterrey
+
+        * `America/Montevideo` - America/Montevideo
+
+        * `America/Montserrat` - America/Montserrat
+
+        * `America/Nassau` - America/Nassau
+
+        * `America/New_York` - America/New_York
+
+        * `America/Nipigon` - America/Nipigon
+
+        * `America/Nome` - America/Nome
+
+        * `America/Noronha` - America/Noronha
+
+        * `America/North_Dakota/Beulah` - America/North_Dakota/Beulah
+
+        * `America/North_Dakota/Center` - America/North_Dakota/Center
+
+        * `America/North_Dakota/New_Salem` - America/North_Dakota/New_Salem
+
+        * `America/Ojinaga` - America/Ojinaga
+
+        * `America/Panama` - America/Panama
+
+        * `America/Pangnirtung` - America/Pangnirtung
+
+        * `America/Paramaribo` - America/Paramaribo
+
+        * `America/Phoenix` - America/Phoenix
+
+        * `America/Port-au-Prince` - America/Port-au-Prince
+
+        * `America/Port_of_Spain` - America/Port_of_Spain
+
+        * `America/Porto_Velho` - America/Porto_Velho
+
+        * `America/Puerto_Rico` - America/Puerto_Rico
+
+        * `America/Punta_Arenas` - America/Punta_Arenas
+
+        * `America/Rainy_River` - America/Rainy_River
+
+        * `America/Rankin_Inlet` - America/Rankin_Inlet
+
+        * `America/Recife` - America/Recife
+
+        * `America/Regina` - America/Regina
+
+        * `America/Resolute` - America/Resolute
+
+        * `America/Rio_Branco` - America/Rio_Branco
+
+        * `America/Santarem` - America/Santarem
+
+        * `America/Santiago` - America/Santiago
+
+        * `America/Santo_Domingo` - America/Santo_Domingo
+
+        * `America/Sao_Paulo` - America/Sao_Paulo
+
+        * `America/Scoresbysund` - America/Scoresbysund
+
+        * `America/Sitka` - America/Sitka
+
+        * `America/St_Barthelemy` - America/St_Barthelemy
+
+        * `America/St_Johns` - America/St_Johns
+
+        * `America/St_Kitts` - America/St_Kitts
+
+        * `America/St_Lucia` - America/St_Lucia
+
+        * `America/St_Thomas` - America/St_Thomas
+
+        * `America/St_Vincent` - America/St_Vincent
+
+        * `America/Swift_Current` - America/Swift_Current
+
+        * `America/Tegucigalpa` - America/Tegucigalpa
+
+        * `America/Thule` - America/Thule
+
+        * `America/Thunder_Bay` - America/Thunder_Bay
+
+        * `America/Tijuana` - America/Tijuana
+
+        * `America/Toronto` - America/Toronto
+
+        * `America/Tortola` - America/Tortola
+
+        * `America/Vancouver` - America/Vancouver
+
+        * `America/Whitehorse` - America/Whitehorse
+
+        * `America/Winnipeg` - America/Winnipeg
+
+        * `America/Yakutat` - America/Yakutat
+
+        * `America/Yellowknife` - America/Yellowknife
+
+        * `Antarctica/Casey` - Antarctica/Casey
+
+        * `Antarctica/Davis` - Antarctica/Davis
+
+        * `Antarctica/DumontDUrville` - Antarctica/DumontDUrville
+
+        * `Antarctica/Macquarie` - Antarctica/Macquarie
+
+        * `Antarctica/Mawson` - Antarctica/Mawson
+
+        * `Antarctica/McMurdo` - Antarctica/McMurdo
+
+        * `Antarctica/Palmer` - Antarctica/Palmer
+
+        * `Antarctica/Rothera` - Antarctica/Rothera
+
+        * `Antarctica/Syowa` - Antarctica/Syowa
+
+        * `Antarctica/Troll` - Antarctica/Troll
+
+        * `Antarctica/Vostok` - Antarctica/Vostok
+
+        * `Arctic/Longyearbyen` - Arctic/Longyearbyen
+
+        * `Asia/Aden` - Asia/Aden
+
+        * `Asia/Almaty` - Asia/Almaty
+
+        * `Asia/Amman` - Asia/Amman
+
+        * `Asia/Anadyr` - Asia/Anadyr
+
+        * `Asia/Aqtau` - Asia/Aqtau
+
+        * `Asia/Aqtobe` - Asia/Aqtobe
+
+        * `Asia/Ashgabat` - Asia/Ashgabat
+
+        * `Asia/Atyrau` - Asia/Atyrau
+
+        * `Asia/Baghdad` - Asia/Baghdad
+
+        * `Asia/Bahrain` - Asia/Bahrain
+
+        * `Asia/Baku` - Asia/Baku
+
+        * `Asia/Bangkok` - Asia/Bangkok
+
+        * `Asia/Barnaul` - Asia/Barnaul
+
+        * `Asia/Beirut` - Asia/Beirut
+
+        * `Asia/Bishkek` - Asia/Bishkek
+
+        * `Asia/Brunei` - Asia/Brunei
+
+        * `Asia/Chita` - Asia/Chita
+
+        * `Asia/Choibalsan` - Asia/Choibalsan
+
+        * `Asia/Colombo` - Asia/Colombo
+
+        * `Asia/Damascus` - Asia/Damascus
+
+        * `Asia/Dhaka` - Asia/Dhaka
+
+        * `Asia/Dili` - Asia/Dili
+
+        * `Asia/Dubai` - Asia/Dubai
+
+        * `Asia/Dushanbe` - Asia/Dushanbe
+
+        * `Asia/Famagusta` - Asia/Famagusta
+
+        * `Asia/Gaza` - Asia/Gaza
+
+        * `Asia/Hebron` - Asia/Hebron
+
+        * `Asia/Ho_Chi_Minh` - Asia/Ho_Chi_Minh
+
+        * `Asia/Hong_Kong` - Asia/Hong_Kong
+
+        * `Asia/Hovd` - Asia/Hovd
+
+        * `Asia/Irkutsk` - Asia/Irkutsk
+
+        * `Asia/Jakarta` - Asia/Jakarta
+
+        * `Asia/Jayapura` - Asia/Jayapura
+
+        * `Asia/Jerusalem` - Asia/Jerusalem
+
+        * `Asia/Kabul` - Asia/Kabul
+
+        * `Asia/Kamchatka` - Asia/Kamchatka
+
+        * `Asia/Karachi` - Asia/Karachi
+
+        * `Asia/Kathmandu` - Asia/Kathmandu
+
+        * `Asia/Khandyga` - Asia/Khandyga
+
+        * `Asia/Kolkata` - Asia/Kolkata
+
+        * `Asia/Krasnoyarsk` - Asia/Krasnoyarsk
+
+        * `Asia/Kuala_Lumpur` - Asia/Kuala_Lumpur
+
+        * `Asia/Kuching` - Asia/Kuching
+
+        * `Asia/Kuwait` - Asia/Kuwait
+
+        * `Asia/Macau` - Asia/Macau
+
+        * `Asia/Magadan` - Asia/Magadan
+
+        * `Asia/Makassar` - Asia/Makassar
+
+        * `Asia/Manila` - Asia/Manila
+
+        * `Asia/Muscat` - Asia/Muscat
+
+        * `Asia/Nicosia` - Asia/Nicosia
+
+        * `Asia/Novokuznetsk` - Asia/Novokuznetsk
+
+        * `Asia/Novosibirsk` - Asia/Novosibirsk
+
+        * `Asia/Omsk` - Asia/Omsk
+
+        * `Asia/Oral` - Asia/Oral
+
+        * `Asia/Phnom_Penh` - Asia/Phnom_Penh
+
+        * `Asia/Pontianak` - Asia/Pontianak
+
+        * `Asia/Pyongyang` - Asia/Pyongyang
+
+        * `Asia/Qatar` - Asia/Qatar
+
+        * `Asia/Qyzylorda` - Asia/Qyzylorda
+
+        * `Asia/Riyadh` - Asia/Riyadh
+
+        * `Asia/Sakhalin` - Asia/Sakhalin
+
+        * `Asia/Samarkand` - Asia/Samarkand
+
+        * `Asia/Seoul` - Asia/Seoul
+
+        * `Asia/Shanghai` - Asia/Shanghai
+
+        * `Asia/Singapore` - Asia/Singapore
+
+        * `Asia/Srednekolymsk` - Asia/Srednekolymsk
+
+        * `Asia/Taipei` - Asia/Taipei
+
+        * `Asia/Tashkent` - Asia/Tashkent
+
+        * `Asia/Tbilisi` - Asia/Tbilisi
+
+        * `Asia/Tehran` - Asia/Tehran
+
+        * `Asia/Thimphu` - Asia/Thimphu
+
+        * `Asia/Tokyo` - Asia/Tokyo
+
+        * `Asia/Tomsk` - Asia/Tomsk
+
+        * `Asia/Ulaanbaatar` - Asia/Ulaanbaatar
+
+        * `Asia/Urumqi` - Asia/Urumqi
+
+        * `Asia/Ust-Nera` - Asia/Ust-Nera
+
+        * `Asia/Vientiane` - Asia/Vientiane
+
+        * `Asia/Vladivostok` - Asia/Vladivostok
+
+        * `Asia/Yakutsk` - Asia/Yakutsk
+
+        * `Asia/Yangon` - Asia/Yangon
+
+        * `Asia/Yekaterinburg` - Asia/Yekaterinburg
+
+        * `Asia/Yerevan` - Asia/Yerevan
+
+        * `Atlantic/Azores` - Atlantic/Azores
+
+        * `Atlantic/Bermuda` - Atlantic/Bermuda
+
+        * `Atlantic/Canary` - Atlantic/Canary
+
+        * `Atlantic/Cape_Verde` - Atlantic/Cape_Verde
+
+        * `Atlantic/Faroe` - Atlantic/Faroe
+
+        * `Atlantic/Madeira` - Atlantic/Madeira
+
+        * `Atlantic/Reykjavik` - Atlantic/Reykjavik
+
+        * `Atlantic/South_Georgia` - Atlantic/South_Georgia
+
+        * `Atlantic/St_Helena` - Atlantic/St_Helena
+
+        * `Atlantic/Stanley` - Atlantic/Stanley
+
+        * `Australia/Adelaide` - Australia/Adelaide
+
+        * `Australia/Brisbane` - Australia/Brisbane
+
+        * `Australia/Broken_Hill` - Australia/Broken_Hill
+
+        * `Australia/Currie` - Australia/Currie
+
+        * `Australia/Darwin` - Australia/Darwin
+
+        * `Australia/Eucla` - Australia/Eucla
+
+        * `Australia/Hobart` - Australia/Hobart
+
+        * `Australia/Lindeman` - Australia/Lindeman
+
+        * `Australia/Lord_Howe` - Australia/Lord_Howe
+
+        * `Australia/Melbourne` - Australia/Melbourne
+
+        * `Australia/Perth` - Australia/Perth
+
+        * `Australia/Sydney` - Australia/Sydney
+
+        * `Canada/Atlantic` - Canada/Atlantic
+
+        * `Canada/Central` - Canada/Central
+
+        * `Canada/Eastern` - Canada/Eastern
+
+        * `Canada/Mountain` - Canada/Mountain
+
+        * `Canada/Newfoundland` - Canada/Newfoundland
+
+        * `Canada/Pacific` - Canada/Pacific
+
+        * `Europe/Amsterdam` - Europe/Amsterdam
+
+        * `Europe/Andorra` - Europe/Andorra
+
+        * `Europe/Astrakhan` - Europe/Astrakhan
+
+        * `Europe/Athens` - Europe/Athens
+
+        * `Europe/Belgrade` - Europe/Belgrade
+
+        * `Europe/Berlin` - Europe/Berlin
+
+        * `Europe/Bratislava` - Europe/Bratislava
+
+        * `Europe/Brussels` - Europe/Brussels
+
+        * `Europe/Bucharest` - Europe/Bucharest
+
+        * `Europe/Budapest` - Europe/Budapest
+
+        * `Europe/Busingen` - Europe/Busingen
+
+        * `Europe/Chisinau` - Europe/Chisinau
+
+        * `Europe/Copenhagen` - Europe/Copenhagen
+
+        * `Europe/Dublin` - Europe/Dublin
+
+        * `Europe/Gibraltar` - Europe/Gibraltar
+
+        * `Europe/Guernsey` - Europe/Guernsey
+
+        * `Europe/Helsinki` - Europe/Helsinki
+
+        * `Europe/Isle_of_Man` - Europe/Isle_of_Man
+
+        * `Europe/Istanbul` - Europe/Istanbul
+
+        * `Europe/Jersey` - Europe/Jersey
+
+        * `Europe/Kaliningrad` - Europe/Kaliningrad
+
+        * `Europe/Kiev` - Europe/Kiev
+
+        * `Europe/Kirov` - Europe/Kirov
+
+        * `Europe/Lisbon` - Europe/Lisbon
+
+        * `Europe/Ljubljana` - Europe/Ljubljana
+
+        * `Europe/London` - Europe/London
+
+        * `Europe/Luxembourg` - Europe/Luxembourg
+
+        * `Europe/Madrid` - Europe/Madrid
+
+        * `Europe/Malta` - Europe/Malta
+
+        * `Europe/Mariehamn` - Europe/Mariehamn
+
+        * `Europe/Minsk` - Europe/Minsk
+
+        * `Europe/Monaco` - Europe/Monaco
+
+        * `Europe/Moscow` - Europe/Moscow
+
+        * `Europe/Oslo` - Europe/Oslo
+
+        * `Europe/Paris` - Europe/Paris
+
+        * `Europe/Podgorica` - Europe/Podgorica
+
+        * `Europe/Prague` - Europe/Prague
+
+        * `Europe/Riga` - Europe/Riga
+
+        * `Europe/Rome` - Europe/Rome
+
+        * `Europe/Samara` - Europe/Samara
+
+        * `Europe/San_Marino` - Europe/San_Marino
+
+        * `Europe/Sarajevo` - Europe/Sarajevo
+
+        * `Europe/Saratov` - Europe/Saratov
+
+        * `Europe/Simferopol` - Europe/Simferopol
+
+        * `Europe/Skopje` - Europe/Skopje
+
+        * `Europe/Sofia` - Europe/Sofia
+
+        * `Europe/Stockholm` - Europe/Stockholm
+
+        * `Europe/Tallinn` - Europe/Tallinn
+
+        * `Europe/Tirane` - Europe/Tirane
+
+        * `Europe/Ulyanovsk` - Europe/Ulyanovsk
+
+        * `Europe/Uzhgorod` - Europe/Uzhgorod
+
+        * `Europe/Vaduz` - Europe/Vaduz
+
+        * `Europe/Vatican` - Europe/Vatican
+
+        * `Europe/Vienna` - Europe/Vienna
+
+        * `Europe/Vilnius` - Europe/Vilnius
+
+        * `Europe/Volgograd` - Europe/Volgograd
+
+        * `Europe/Warsaw` - Europe/Warsaw
+
+        * `Europe/Zagreb` - Europe/Zagreb
+
+        * `Europe/Zaporozhye` - Europe/Zaporozhye
+
+        * `Europe/Zurich` - Europe/Zurich
+
+        * `GMT` - GMT
+
+        * `Indian/Antananarivo` - Indian/Antananarivo
+
+        * `Indian/Chagos` - Indian/Chagos
+
+        * `Indian/Christmas` - Indian/Christmas
+
+        * `Indian/Cocos` - Indian/Cocos
+
+        * `Indian/Comoro` - Indian/Comoro
+
+        * `Indian/Kerguelen` - Indian/Kerguelen
+
+        * `Indian/Mahe` - Indian/Mahe
+
+        * `Indian/Maldives` - Indian/Maldives
+
+        * `Indian/Mauritius` - Indian/Mauritius
+
+        * `Indian/Mayotte` - Indian/Mayotte
+
+        * `Indian/Reunion` - Indian/Reunion
+
+        * `Pacific/Apia` - Pacific/Apia
+
+        * `Pacific/Auckland` - Pacific/Auckland
+
+        * `Pacific/Bougainville` - Pacific/Bougainville
+
+        * `Pacific/Chatham` - Pacific/Chatham
+
+        * `Pacific/Chuuk` - Pacific/Chuuk
+
+        * `Pacific/Easter` - Pacific/Easter
+
+        * `Pacific/Efate` - Pacific/Efate
+
+        * `Pacific/Enderbury` - Pacific/Enderbury
+
+        * `Pacific/Fakaofo` - Pacific/Fakaofo
+
+        * `Pacific/Fiji` - Pacific/Fiji
+
+        * `Pacific/Funafuti` - Pacific/Funafuti
+
+        * `Pacific/Galapagos` - Pacific/Galapagos
+
+        * `Pacific/Gambier` - Pacific/Gambier
+
+        * `Pacific/Guadalcanal` - Pacific/Guadalcanal
+
+        * `Pacific/Guam` - Pacific/Guam
+
+        * `Pacific/Honolulu` - Pacific/Honolulu
+
+        * `Pacific/Kiritimati` - Pacific/Kiritimati
+
+        * `Pacific/Kosrae` - Pacific/Kosrae
+
+        * `Pacific/Kwajalein` - Pacific/Kwajalein
+
+        * `Pacific/Majuro` - Pacific/Majuro
+
+        * `Pacific/Marquesas` - Pacific/Marquesas
+
+        * `Pacific/Midway` - Pacific/Midway
+
+        * `Pacific/Nauru` - Pacific/Nauru
+
+        * `Pacific/Niue` - Pacific/Niue
+
+        * `Pacific/Norfolk` - Pacific/Norfolk
+
+        * `Pacific/Noumea` - Pacific/Noumea
+
+        * `Pacific/Pago_Pago` - Pacific/Pago_Pago
+
+        * `Pacific/Palau` - Pacific/Palau
+
+        * `Pacific/Pitcairn` - Pacific/Pitcairn
+
+        * `Pacific/Pohnpei` - Pacific/Pohnpei
+
+        * `Pacific/Port_Moresby` - Pacific/Port_Moresby
+
+        * `Pacific/Rarotonga` - Pacific/Rarotonga
+
+        * `Pacific/Saipan` - Pacific/Saipan
+
+        * `Pacific/Tahiti` - Pacific/Tahiti
+
+        * `Pacific/Tarawa` - Pacific/Tarawa
+
+        * `Pacific/Tongatapu` - Pacific/Tongatapu
+
+        * `Pacific/Wake` - Pacific/Wake
+
+        * `Pacific/Wallis` - Pacific/Wallis
+
+        * `US/Alaska` - US/Alaska
+
+        * `US/Arizona` - US/Arizona
+
+        * `US/Central` - US/Central
+
+        * `US/Eastern` - US/Eastern
+
+        * `US/Hawaii` - US/Hawaii
+
+        * `US/Mountain` - US/Mountain
+
+        * `US/Pacific` - US/Pacific
+
+        * `UTC` - UTC'
+    CustomFieldRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        content_type:
+          type: integer
+        default_value:
+          type: string
+          maxLength: 5000
+        is_required:
+          type: boolean
+        field_choices:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        field_type:
+          $ref: '#/components/schemas/FieldTypeEnum'
+        field_label:
+          type: string
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
+      required:
+      - content_type
+      - name
+    ExpenseRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        account:
+          $ref: '#/components/schemas/Account'
+        localCurrency:
+          $ref: '#/components/schemas/CurrencySummary'
+        expense_type_fields: {}
+        creditcard:
+          $ref: '#/components/schemas/ExpenseLineCreditCard'
+        account_id:
+          type: integer
+        expenseReport:
+          $ref: '#/components/schemas/SimpleExpenseReport'
+        requester:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUserSummary'
+          readOnly: true
+        approver:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUserSummary'
+          readOnly: true
+        approved_date:
+          type: string
+          format: date-time
+          readOnly: true
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        merchant:
+          type: string
+          maxLength: 100
+        transDate:
+          type: string
+          format: date-time
+        reimburse:
+          type: boolean
+        expense_type:
+          allOf:
+          - $ref: '#/components/schemas/ExpenseTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        paymentType:
+          allOf:
+          - $ref: '#/components/schemas/PaymentTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+          nullable: true
+        currency_rate_final:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        exchange_rate_override:
+          type: boolean
+        tax_name:
+          type: string
+          maxLength: 30
+        tax_percentage:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
+        tax_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+          nullable: true
+        tax_is_inclusive:
+          type: boolean
+        notes:
+          type: string
+          nullable: true
+          maxLength: 500
+        attachment:
+          type: string
+        active:
+          type: boolean
+        last_changed_by:
+          type: integer
+          nullable: true
+          title: Last changed by user
+        mileage_preset:
+          type: integer
+          nullable: true
+        tax:
+          type: integer
+          nullable: true
+      required:
+      - account
+      - account_id
+      - creditcard
+      - currency_rate_final
+      - expenseReport
+      - expense_type_fields
+      - localCurrency
+      - merchant
+      - tax_percentage
+      - transDate
+    VersionChoicesDocs:
+      type: object
+      properties:
+        pk:
+          type: integer
+        version:
+          type: integer
+    PaymentMethodDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        vendor:
+          type: integer
+        name:
+          type: string
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data:
+          type: object
+          additionalProperties: {}
+          description: 'Some semi-structured data about this payment method. Keys depend on the
+
+            type of the payment method.'
+          readOnly: true
+        currency:
+          $ref: '#/components/schemas/Currency'
+      required:
+      - currency
+      - vendor
+    DurationEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - YEARS
+
+        * `1` - MONTHS'
+    ActionEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      type: integer
+      description: '* `0` - Request
+
+        * `1` - FinalApproval
+
+        * `2` - ApprovalDenied
+
+        * `3` - ApproveAndPassOn
+
+        * `4` - Purchase
+
+        * `5` - RejectLineItems
+
+        * `6` - UpdateOnReceive
+
+        * `7` - MarkOrderReceived
+
+        * `8` - ClosePO
+
+        * `9` - UnmarkOrderReceived
+
+        * `10` - OpenPO
+
+        * `11` - RequestLineItem
+
+        * `12` - UndoReceiveLog
+
+        * `13` - CancelPO
+
+        * `14` - StockLineItem
+
+        * `15` - TransactionApproved
+
+        * `16` - TransactionDenied
+
+        * `17` - TransactionPartiallyDenied
+
+        * `18` - TransactionAllocation
+
+        * `19` - OrderPurchased
+
+        * `20` - RecordPO'
+    LanguageEnum:
+      enum:
+      - 1
+      type: integer
+      description: '* `1` - English'
+    BillItemsMetadataDocs:
+      type: object
+      properties:
+        summary:
+          $ref: '#/components/schemas/BillItemsSummaryDocs'
+        pagination:
+          $ref: '#/components/schemas/PaginationDocs'
+      required:
+      - pagination
+      - summary
+    VendorRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          description: Name of the vendor
+          maxLength: 150
+        active:
+          type: boolean
+        addressLineOne:
+          type: string
+          nullable: true
+          title: Address line 1
+          description: First line of address
+          maxLength: 300
+        addressLineTwo:
+          type: string
+          nullable: true
+          title: Address line 2
+          description: Second line of address
+          maxLength: 300
+        postalCode:
+          type: string
+          nullable: true
+          title: Postal Code
+          description: Postal or Zip code of the vendor
+          maxLength: 20
+        city:
+          type: string
+          nullable: true
+          description: City of the vendor
+          maxLength: 50
+        state_province:
+          type: string
+          nullable: true
+          title: State/Province
+          description: State or Province of the vendor
+          maxLength: 40
+        country:
+          type: string
+          nullable: true
+          description: Country of the vendor
+          maxLength: 80
+        phoneOne:
+          type: string
+          nullable: true
+          description: Primary phone no. of the vendor
+          maxLength: 20
+        phoneTwo:
+          type: string
+          nullable: true
+          description: Secondary phone no. of the vendor
+          maxLength: 20
+        fax:
+          type: string
+          nullable: true
+          description: Fax no. of the vendor
+          maxLength: 20
+        email:
+          type: array
+          items:
+            type: string
+            format: email
+        comments:
+          type: string
+          nullable: true
+          description: Notes about the vendor
+        contact:
+          type: string
+          nullable: true
+          description: Contact person of the vendor
+          maxLength: 50
+        url:
+          type: string
+          nullable: true
+          description: Website of the vendor
+          maxLength: 200
+        external_id:
+          type: string
+          nullable: true
+          description: External id of the vendor
+          maxLength: 100
+        dateModified:
+          type: string
+          format: date-time
+          readOnly: true
+        currency:
+          type: integer
+          nullable: true
+        payment_term_ref:
+          allOf:
+          - $ref: '#/components/schemas/PaymentTerm'
+          nullable: true
+          type: object
+        shipping_term_ref:
+          allOf:
+          - $ref: '#/components/schemas/ShippingTerm'
+          nullable: true
+          type: object
+        payment_method_ref:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethod'
+          nullable: true
+          type: object
+        shipping_method_ref:
+          allOf:
+          - $ref: '#/components/schemas/ShippingMethod'
+          nullable: true
+          type: object
+        payment_methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodRead'
+          readOnly: true
+        tax:
+          type: integer
+          nullable: true
+        type:
+          $ref: '#/components/schemas/VendorTypeEnum'
+        default_payment_method:
+          type: integer
+          nullable: true
+        creditcards:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCard'
+          readOnly: true
+        is_1099_eligible:
+          type: boolean
+          nullable: true
+          title: 1099 Eligible?
+        overall_score:
+          type: number
+          format: double
+          nullable: true
+          readOnly: true
+        is_auto_email_po_enabled:
+          type: boolean
+        po_pdf_labels:
+          type: string
+          description: Placeholder for a KVStore value
+          maxLength: 200
+        email_configurations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/EmailConfiguration'
+      required:
+      - name
+      - type
+    FieldTypeEnum:
+      enum:
+      - t
+      - a
+      - i
+      - f
+      - b
+      - m
+      - d
+      - h
+      type: string
+      description: '* `t` - Text
+
+        * `a` - Large Text Field
+
+        * `i` - Integer
+
+        * `f` - Floating point decimal
+
+        * `b` - Boolean (Yes/No)
+
+        * `m` - Dropdown Choices
+
+        * `d` - Date
+
+        * `h` - Date Time'
+    ApproverReadDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/SimpleUserSummary'
+        amount_limit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        item_variance_amount_limit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+          nullable: true
+        item_variance_percentage_limit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+          nullable: true
+        approval_level:
+          type: integer
+        bill_amount_limit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+      required:
+      - amount_limit
+      - approval_level
+      - bill_amount_limit
+      - user
+    BillMetadataListSimpleBill:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ListBillsMetadataDocs'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleBill'
+      required:
+      - data
+      - metadata
+    VendorPaymentMethodRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        vendor:
+          type: integer
+          description: ID of the vendor this payment method is for
+        name:
+          type: string
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        currency:
+          $ref: '#/components/schemas/Currency'
+        payment_rail:
+          type: string
+          readOnly: true
+        bank_account_country_code:
+          type: string
+          nullable: true
+          readOnly: true
+        flight_time:
+          allOf:
+          - $ref: '#/components/schemas/VendorPaymentMethodFlightTime'
+          readOnly: true
+        transaction_fee:
+          allOf:
+          - $ref: '#/components/schemas/VendorPaymentMethodTransactionFee'
+          readOnly: true
+      required:
+      - currency
+      - vendor
+    OrderItemStatusEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      type: integer
+      description: '* `0` - Purchase Pending
+
+        * `1` - Purchaser In-Use
+
+        * `2` - Receive Pending
+
+        * `3` - Received
+
+        * `4` - Rejected for Purchase
+
+        * `5` - Partial Received
+
+        * `6` - Fulfilled
+
+        * `7` - Approval Denied
+
+        * `8` - Request Draft'
+    ItemReadSerializer_v2:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        orderitem:
+          allOf:
+          - $ref: '#/components/schemas/OrderItemRead'
+          readOnly: true
+          description: Purchase order item origin (if exists).
+        expense:
+          allOf:
+          - $ref: '#/components/schemas/ExpenseRead'
+          nullable: true
+          description: Expense line item origin (if exists).
+          type: object
+        bill:
+          type: integer
+          nullable: true
+        vendor:
+          $ref: '#/components/schemas/VendorRead'
+        sku:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 1000
+        po:
+          allOf:
+          - $ref: '#/components/schemas/PODocs'
+          readOnly: true
+          description: Purchase order origin (if originated from PO item or PO misc. costs).
+        unit:
+          type: string
+          maxLength: 30
+        quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          title: Item Quantity
+          readOnly: true
+          description: Item quantity, only applicable to bill by quantity.
+        currency:
+          $ref: '#/components/schemas/Currency'
+        total_cost:
+          type: number
+          format: double
+          description: Item total cost without tax amount.
+          readOnly: true
+        received_on:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Last received datetime of the related purchase order item.
+        packing_slips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+          readOnly: true
+        cost_allocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostAllocationRead'
+        archived:
+          type: boolean
+        expense_report:
+          allOf:
+          - $ref: '#/components/schemas/ExpenseReportDocs'
+          readOnly: true
+        same_unit_cost:
+          type: boolean
+          readOnly: true
+        creditcard_item:
+          allOf:
+          - $ref: '#/components/schemas/CreditCardItemRead'
+          nullable: true
+          description: Credit card item origin (if exists).
+          type: object
+        is_edited:
+          type: boolean
+          readOnly: true
+        unit_cost_diff_log:
+          allOf:
+          - $ref: '#/components/schemas/UnitCostDiffLogDocs'
+          nullable: true
+          readOnly: true
+          type: object
+        tax_name:
+          type: string
+          maxLength: 100
+        tax_percentage:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
+          nullable: true
+        tax_amount:
+          type: number
+          format: double
+          readOnly: true
+        tax_is_inclusive:
+          type: boolean
+        tax:
+          type: integer
+          nullable: true
+        total_cost_with_tax:
+          type: number
+          format: double
+          description: Item total cost with tax amount.
+          readOnly: true
+        shipping_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          nullable: true
+        unit_cost:
+          type: number
+          format: float
+          readOnly: true
+          description: Unit cost of the item, applicable to bill by quantity items only.
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldValueRead'
+          readOnly: true
+        type:
+          type: string
+        bill_by_cost:
+          type: boolean
+          readOnly: true
+          description: Item billing method is bill by cost (true) or bill by quantity (false).
+      required:
+      - cost_allocations
+      - creditcard_item
+      - currency
+      - description
+      - expense
+      - type
+      - vendor
+    ReceiveMethodEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - Quantity
+
+        * `1` - Currency amount'
+    SimpleCurrency:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+      required:
+      - name
+      - rate
+    PaginationDocs:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+        page_size:
+          type: integer
+        num_pages:
+          type: integer
+        current_page:
+          type: integer
+      required:
+      - count
+      - current_page
+      - next
+      - num_pages
+      - page_size
+      - previous
+    CompanyPaymentMethod:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data: {}
+        currency:
+          type: integer
+        gl_code:
+          type: string
+          maxLength: 100
+      required:
+      - data
+    BlanketOrderItemRead:
+      type: object
+      properties:
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        quantity:
+          type: number
+          format: double
+          nullable: true
+          readOnly: true
+        amount:
+          type: number
+          format: double
+          nullable: true
+          readOnly: true
+      required:
+      - price
+    CatalogItemRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        image:
+          type: string
+        unitType:
+          type: string
+          maxLength: 30
+        pref_vendor:
+          $ref: '#/components/schemas/VendorRead'
+        account_code:
+          $ref: '#/components/schemas/AccountCodeRead'
+        internalSKU:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+          nullable: true
+        product_url:
+          type: string
+          nullable: true
+        currency:
+          $ref: '#/components/schemas/CurrencySummary'
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        rfo_lock:
+          type: boolean
+        departments:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldValueRead'
+          readOnly: true
+        requested_count:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        last_requested_date:
+          type: string
+          format: date-time
+          nullable: true
+        selected_account:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+      required:
+      - account_code
+      - currency
+      - name
+      - pref_vendor
+    SimpleLocation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        headquarter:
+          type: boolean
+          readOnly: true
+      required:
+      - name
+    Comment:
+      type: object
+      properties:
+        userprofile:
+          allOf:
+          - $ref: '#/components/schemas/UserSummary'
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        comment:
+          type: string
+          readOnly: true
+        submit_date:
+          type: string
+          format: date-time
+          title: Date/time submitted
+    BillCostRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        cost_allocation:
+          $ref: '#/components/schemas/CostAllocationRead'
+        name:
+          type: string
+          maxLength: 100
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        bill:
+          type: integer
+        cost:
+          type: integer
+          nullable: true
+          title: Cost Class
+        currency:
+          type: integer
+          nullable: true
+      required:
+      - amount
+      - bill
+      - cost_allocation
+      - name
+    SpendAccountRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        account_code:
+          $ref: '#/components/schemas/UnoptimizedAccountCodeserializer'
+        department:
+          $ref: '#/components/schemas/UnoptimizedDepartmentRead'
+        active:
+          type: boolean
+      required:
+      - account_code
+      - department
+    CompanyPaymentMethodRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data: {}
+        currency:
+          type: integer
+        gl_code:
+          type: string
+          maxLength: 100
+      required:
+      - data
+    ListBillsMetadataDocs:
+      type: object
+      properties:
+        permissions:
+          $ref: '#/components/schemas/PermissionsEditDeleteApprove'
+        summary:
+          $ref: '#/components/schemas/BillSummaryDocs'
+        pagination:
+          $ref: '#/components/schemas/PaginationDocs'
+      required:
+      - pagination
+      - permissions
+      - summary
+    ExpenseReportWithUserDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+        uuid:
+          type: string
+        user:
+          $ref: '#/components/schemas/ExpenseReportUserSummaryDocs'
+      required:
+      - id
+      - user
+      - uuid
+    AccountRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        account_code:
+          $ref: '#/components/schemas/AccountCodeRead'
+        department:
+          $ref: '#/components/schemas/DepartmentSummary'
+        warning_indicator:
+          type: boolean
+          readOnly: true
+        budget_used_approved:
+          type: number
+          format: double
+        budget_used_purchased:
+          type: number
+          format: double
+        start_datetime:
+          type: string
+          format: date-time
+          nullable: true
+        end_datetime:
+          type: string
+          format: date-time
+          nullable: true
+        budget:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        balance_approved:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        balance_purchased:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        active:
+          type: boolean
+      required:
+      - account_code
+      - department
+    UnoptimizedBranchRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        external_id:
+          type: string
+          nullable: true
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        url:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        logo:
+          type: string
+        language:
+          allOf:
+          - $ref: '#/components/schemas/LanguageEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        multipleLocations:
+          type: boolean
+        locationTimezone:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/LocationTimezoneEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type: integer
+        userLimit:
+          type: integer
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+        budgetOvertureToggle:
+          type: boolean
+        purchase_filtering:
+          type: boolean
+        catalog_permission:
+          type: boolean
+        separate_expense_approval:
+          type: boolean
+        standalone_travel_approval:
+          type: boolean
+        phoneOne:
+          type: string
+          maxLength: 20
+        phoneTwo:
+          type: string
+          nullable: true
+          maxLength: 20
+        fax:
+          type: string
+          nullable: true
+          maxLength: 20
+        email:
+          type: string
+          format: email
+          nullable: true
+          maxLength: 254
+        fiscalYearEndDay:
+          type: integer
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+          nullable: true
+        fiscalYearEndMonth:
+          type: integer
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+          nullable: true
+        timezone:
+          allOf:
+          - $ref: '#/components/schemas/TimezoneEnum'
+          maximum: 10000
+          exclusiveMaximum: true
+          minimum: -10000
+          exclusiveMinimum: true
+        beginDate:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        ported:
+          type: boolean
+        port_date:
+          type: string
+          format: date-time
+          nullable: true
+        active:
+          type: boolean
+        fields_cache:
+          type: string
+          nullable: true
+        activated:
+          type: boolean
+        setup_stage:
+          $ref: '#/components/schemas/SetupStageEnum'
+        localCurrency:
+          type: integer
+        contactPerson:
+          type: integer
+          nullable: true
+        buyerAddress:
+          type: integer
+          nullable: true
+        shippingAddress:
+          type: integer
+          nullable: true
+      required:
+      - localCurrency
+      - name
+      - phoneOne
+    PaymentMethodTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      type: integer
+      description: '* `0` - OTHER
+
+        * `1` - CHECK
+
+        * `2` - ACH
+
+        * `3` - EFT
+
+        * `4` - WIRE
+
+        * `5` - PROCURIFY_CHECK
+
+        * `6` - PROCURIFY_ACH
+
+        * `7` - PROCURIFY_WIRE
+
+        * `8` - AIRWALLEX'
+    EmailConfiguration:
+      type: object
+      properties:
+        auto_po:
+          type: boolean
+        payment_remittance:
+          type: boolean
+    BlankEnum:
+      enum:
+      - ''
+    VendorPaymentMethodRequest:
+      type: object
+      properties:
+        vendor:
+          type: integer
+        name:
+          type: string
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data: {}
+        currency:
+          type: integer
+      required:
+      - data
+      - vendor
+    PaymentSimpleDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+          title: Payment User
+        approver:
+          type: integer
+          nullable: true
+          title: Current Approver
+        status:
+          allOf:
+          - $ref: '#/components/schemas/PaymentStatusEnum'
+          minimum: 0
+          maximum: 4294967295
+        currency:
+          type: integer
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        payment_method:
+          type: integer
+          nullable: true
+        payment_date:
+          type: string
+          format: date
+          nullable: true
+        memo:
+          type: string
+          maxLength: 255
+        reference_number:
+          type: string
+          maxLength: 255
+        is_processed:
+          type: boolean
+      required:
+      - currency
+      - user
+    Adjustment:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: '#/components/schemas/AdjustmentTypeEnum'
+        value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,7}(?:\.\d{0,8})?$
+        name:
+          type: string
+          nullable: true
+      required:
+      - type
+      - value
+    AdjustmentTypeEnum:
+      enum:
+      - percent
+      - amount
+      - 0
+      - 1
+      description: '* `percent` - percent
+
+        * `amount` - amount
+
+        * `0` - 0
+
+        * `1` - 1'
+    Currency:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        description:
+          type: string
+          maxLength: 100
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        base:
+          type: boolean
+        active:
+          type: boolean
+      required:
+      - name
+      - rate
+    ShippingTerm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        active:
+          type: boolean
+      required:
+      - name
+    AccountTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: '* `0` - Assets
+
+        * `1` - Liability
+
+        * `2` - Expense
+
+        * `3` - Income
+
+        * `4` - Equity
+
+        * `5` - Other'
+    ApprovalDelegateeDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        department:
+          type: integer
+          nullable: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+      required:
+      - email
+    MarkBillsAsPaid:
+      type: object
+      properties:
+        bill_uuids:
+          type: array
+          items:
+            type: string
+        bill_group_ids:
+          type: array
+          items:
+            type: integer
+          default: []
+        payment_date:
+          type: string
+      required:
+      - bill_uuids
+      - payment_date
+    APBillPaymentDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        payment:
+          $ref: '#/components/schemas/PaymentSimpleDocs'
+        payment_method:
+          $ref: '#/components/schemas/PaymentMethodDocs'
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          title: Payment Amount
+        transaction:
+          type: integer
+          nullable: true
+      required:
+      - payment
+      - payment_method
+    CostDetails:
+      type: object
+      properties:
+        subtotal:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
+          nullable: true
+        total_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
+        total_cost_in_base_currency:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
+        tax_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
+      required:
+      - tax_amount
+      - total_cost
+      - total_cost_in_base_currency
+    CategoryEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - Physical
+
+        * `1` - Virtual'
+    ExpenseReportDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+        uuid:
+          type: string
+    UnoptimizedDepartmentRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        branch:
+          $ref: '#/components/schemas/UnoptimizedBranchRead'
+        external_id:
+          type: string
+          nullable: true
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        punchout_email:
+          type: string
+          format: email
+          nullable: true
+          description: PunchOut Email
+          maxLength: 254
+        active:
+          type: boolean
+      required:
+      - branch
+      - name
+    BillTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: '* `0` - Order
+
+        * `1` - Expense
+
+        * `2` - Creditcard'
+    RecurringOrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        start_date:
+          type: string
+          format: date
+        frequency:
+          allOf:
+          - $ref: '#/components/schemas/FrequencyEnum'
+          minimum: 0
+          maximum: 4294967295
+        duration:
+          allOf:
+          - $ref: '#/components/schemas/DurationEnum'
+          minimum: 0
+          maximum: 4294967295
+        duration_quantity:
+          type: integer
+          maximum: 4294967295
+          minimum: 1
+          format: int64
+        recurring_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        periods_count:
+          type: integer
+          readOnly: true
+      required:
+      - duration
+      - duration_quantity
+      - frequency
+      - recurring_price
+    MasterLogger:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/UserSummary'
+        next_approver:
+          $ref: '#/components/schemas/UserSummary'
+        next_approvers:
+          type: array
+          items:
+            type: integer
+        nextApprover:
+          $ref: '#/components/schemas/UserSummary'
+        approval_delegation:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalDelegationRead'
+          nullable: true
+          type: object
+        dateTime:
+          type: string
+          format: date-time
+          readOnly: true
+        action:
+          nullable: true
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/ActionEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type: integer
+        line_qty_pass:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+          nullable: true
+        line_qty_fail:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+          nullable: true
+        order:
+          type: integer
+          nullable: true
+        lineItem:
+          type: integer
+          nullable: true
+        PO:
+          type: integer
+          title: Procurify PO Number
+          nullable: true
+        inventoryItem:
+          type: integer
+          nullable: true
+        stocking_parent:
+          type: integer
+          nullable: true
+      required:
+      - approval_delegation
+      - nextApprover
+      - next_approver
+      - user
+    UserSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        department:
+          $ref: '#/components/schemas/DepartmentSummary'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        position:
+          type: string
+          nullable: true
+          maxLength: 100
+        phone:
+          type: string
+          nullable: true
+          maxLength: 30
+        address:
+          type: string
+          nullable: true
+        notifications:
+          type: boolean
+        is_active:
+          type: boolean
+        mobile:
+          type: boolean
+        profile_image:
+          type: string
+          nullable: true
+        slack_user_id:
+          type: string
+          maxLength: 50
+        is_sso_enabled:
+          type: boolean
+        last_changed_by:
+          type: integer
+          nullable: true
+          title: Last changed by user
+        user:
+          type: integer
+        approval_delegatee:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalDelegateeDocs'
+          nullable: true
+          readOnly: true
+          type: object
+        expected_return_date:
+          type: string
+          format: date
+          readOnly: true
+      required:
+      - department
+      - email
+      - user
+  securitySchemes:
+    BasicAuthentication:
+      type: http
+      scheme: basic
+    M2MAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    RemoteAuthentication:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://<your-domain>.procurify.com/oauth/authorize
+          tokenUrl: https://<your-domain>.procurify.com/oauth/token
+          scopes: {}
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

@@ -1,0 +1,358 @@
+openapi: 3.0.3
+info:
+  title: Procurify API Documentation account-codes permissions API
+  version: ''
+  description: '
+
+    # Disclaimer
+
+
+    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
+
+    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
+
+    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
+
+    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
+
+    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
+
+    '
+servers:
+- url: https://{user_domain}.procurify.com
+  description: Your Procurify domain
+  variables:
+    user_domain:
+      default: your-domain
+      description: Your procurify domain
+tags:
+- name: permissions
+paths:
+  /api/v3/permissions/:
+    get:
+      operationId: permissions_list
+      summary: Get Available User Permissions
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - name: order_by
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - permissions
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPermissionReadList'
+              examples:
+                UserPermissions:
+                  value:
+                    metadata:
+                      pagination:
+                        count: 10
+                        next: null
+                        previous: null
+                        page_size: 10
+                        num_pages: 1
+                        current_page: 1
+                    data:
+                    - id: 507
+                      codename: add_bill
+                  summary: User Permissions
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PaginatedPermissionReadList'
+          description: ''
+  /api/v3/permissions/groups/:
+    get:
+      operationId: permissions_groups_list
+      summary: Get Available System Roles
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+      - name: order_by
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: permission
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: type
+        schema:
+          type: integer
+      - in: query
+        name: user
+        schema:
+          type: integer
+      - in: query
+        name: userprofile
+        schema:
+          type: integer
+      tags:
+      - permissions
+      security:
+      - RemoteAuthentication: []
+      - M2MAuthentication: []
+      - BasicAuthentication: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPermissionGroupReadList'
+              examples:
+                SystemRoles:
+                  value:
+                    metadata:
+                      pagination:
+                        count: 10
+                        next: null
+                        previous: null
+                        page_size: 10
+                        num_pages: 1
+                        current_page: 1
+                    data:
+                    - id: 5
+                      name: Approver
+                      user_count: 0
+                      permissions:
+                      - id: 900
+                        codename: view_reports
+                      - id: 982
+                        codename: view_reports_budgets
+                      - id: 977
+                        codename: view_reports_expenses_by_department
+                      - id: 976
+                        codename: view_reports_orders_by_department
+                      - id: 975
+                        codename: view_reports_orders_by_user
+                      - id: 974
+                        codename: view_reports_orders_by_vendor
+                      - id: 101
+                        codename: add_expensereport
+                      - id: 887
+                        codename: approve_expensereport
+                      - id: 71
+                        codename: add_order
+                      - id: 886
+                        codename: approve_order
+                      - id: 95
+                        codename: add_travel
+                      - id: 888
+                        codename: approve_travel
+                      type: 1
+                  summary: System Roles
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PaginatedPermissionGroupReadList'
+          description: ''
+components:
+  schemas:
+    PermissionRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        codename:
+          type: string
+          maxLength: 100
+        tier:
+          type: string
+          description: 'Get the tier for this permission from PermissionMeta.
+
+            Returns "Basic" if PermissionMeta doesn''t exist, otherwise returns the tier label ("Basic" or "Pro").'
+          readOnly: true
+      required:
+      - codename
+    PermissionGroupRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        user_count:
+          type: integer
+          readOnly: true
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionRead'
+          readOnly: true
+        type:
+          type: integer
+        tier:
+          type: string
+          readOnly: true
+      required:
+      - name
+      - type
+    PaginatedPermissionGroupReadList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                previous:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionGroupRead'
+    PaginatedPermissionReadList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                previous:
+                  type: string
+                  nullable: true
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionRead'
+  securitySchemes:
+    BasicAuthentication:
+      type: http
+      scheme: basic
+    M2MAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    RemoteAuthentication:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://<your-domain>.procurify.com/oauth/authorize
+          tokenUrl: https://<your-domain>.procurify.com/oauth/token
+          scopes: {}
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
