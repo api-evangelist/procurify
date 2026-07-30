@@ -13,7 +13,20 @@ description: >
   and consuming JSON. Procurify does not support webhooks; all integrations are
   pull-based through the REST endpoints documented at developer.procurify.com.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/procurify.png
 url: https://raw.githubusercontent.com/api-evangelist/procurify/refs/heads/main/apis.yml
 created: 2026-06-13
 modified: 2026-06-13
@@ -28,34 +41,278 @@ tags:
   - Procure-to-Pay
   - ERP Integration
 apis:
-  - aid: procurify:procurify-api
-    name: Procurify API
-    description: >
-      RESTful API for managing spend management workflows including purchase
-      requests, approvals, purchase orders, vendor management, accounts
-      payable, receipts, budget tracking, and catalog management.
-    humanURL: https://developer.procurify.com/
-    baseURL: https://api.procurify.com/
-    tags:
-      - Spend Management
-      - Purchase Orders
-      - Procurement
-      - Accounts Payable
-      - Vendor Management
-    properties:
-      - type: Documentation
-        url: https://developer.procurify.com/
-      - type: OpenAPI
-        url: https://developer.procurify.com/openapi.json
-      - type: OpenAPI
-        url: openapi/procurify-procurify-api-openapi.yml
-      - type: JSONSchema
-        url: json-schema/
-      - type: Examples
-        url: examples/
-    contact:
-      - FN: Procurify Support
-        email: support@procurify.com
+- aid: procurify:procurify-account-codes-api
+  name: Procurify account-codes API
+  description: The account-codes API from Procurify — 2 operation(s) for account-codes.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - account-codes
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-account-codes-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-accounts-api
+  name: Procurify accounts API
+  description: The accounts API from Procurify — 1 operation(s) for accounts.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-ap-api
+  name: Procurify ap API
+  description: The ap API from Procurify — 8 operation(s) for ap.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - ap
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-ap-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-catalog-api
+  name: Procurify catalog API
+  description: The catalog API from Procurify — 3 operation(s) for catalog.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-catalog-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-currencies-api
+  name: Procurify currencies API
+  description: The currencies API from Procurify — 1 operation(s) for currencies.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - currencies
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-currencies-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-custom-fields-api
+  name: Procurify custom-fields API
+  description: The custom-fields API from Procurify — 2 operation(s) for custom-fields.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - custom-fields
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-custom-fields-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-departments-api
+  name: Procurify departments API
+  description: The departments API from Procurify — 2 operation(s) for departments.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - departments
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-departments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-locations-api
+  name: Procurify locations API
+  description: The locations API from Procurify — 2 operation(s) for locations.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - locations
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-locations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-oauth-api
+  name: Procurify oauth API
+  description: The oauth API from Procurify — 1 operation(s) for oauth.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - oauth
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-oauth-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-order-items-api
+  name: Procurify order-items API
+  description: The order-items API from Procurify — 1 operation(s) for order-items.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - order-items
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-order-items-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-permissions-api
+  name: Procurify permissions API
+  description: The permissions API from Procurify — 2 operation(s) for permissions.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-permissions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-public-api
+  name: Procurify public API
+  description: The public API from Procurify — 2 operation(s) for public.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - public
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-public-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-purchase-orders-api
+  name: Procurify purchase-orders API
+  description: The purchase-orders API from Procurify — 7 operation(s) for purchase-orders.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - purchase-orders
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-purchase-orders-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-receipt-api
+  name: Procurify receipt API
+  description: The receipt API from Procurify — 1 operation(s) for receipt.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - receipt
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-receipt-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-requisitions-api
+  name: Procurify requisitions API
+  description: The requisitions API from Procurify — 3 operation(s) for requisitions.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - requisitions
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-requisitions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-users-api
+  name: Procurify users API
+  description: The users API from Procurify — 3 operation(s) for users.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-vendors-api
+  name: Procurify vendors API
+  description: The vendors API from Procurify — 2 operation(s) for vendors.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - vendors
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-vendors-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
 common:
   - type: AgenticAccess
     url: agentic-access/procurify-agentic-access.yml
