@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Procurify API Documentation account-codes custom-fields API
-  version: ''
+  version: "1.0"
   description: '
 
     # Disclaimer
