@@ -1,0 +1,1228 @@
+{
+  "item": [
+    {
+      "id": "c90d3102-fbc4-44f5-b9e7-ba5f1a66ea75",
+      "name": "requisitions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9b06998f-117a-4e50-a9af-cafb569857ca",
+          "name": "Get All Order Items",
+          "request": {
+            "name": "Get All Order Items",
+            "description": {
+              "content": "**Order Item Status Codes**\n\n| Order Item Type          | Code      | Description                       |\n|--------------------------|-----------|-----------------------------------|\n| PURCHASE_PENDING         | 0         | Approved but not purchased.       |\n| PURCHASE_INUSE           | 1         | Added to purchaser's PO list.     |\n| RECEIVE_PENDING          | 2         | Purchased but not yet received, i.e. receivedPassQty == 0. |\n| RECEIVED                 | 3         | Fully received, i.e. receivedPassQty == quantity. |\n| REJECTED_FOR_PURCHASE    | 4         | Rejected at procurement, i.e. denied. |\n| RECEIVE_PARTIAL          | 5         | Partially received, i.e. receivedPassQty != quantity and receivedPassQty > 0. |\n| FULFILLED                | 6         | Received but unused. |\n| APPROVAL_DENIED          | 7         | Denied in approval routing (by approver). |\n| REQUEST_DRAFT            | 8         | Preparing for draft instead of using sessions. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "global",
+                "order_items",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_code",
+                  "value": "<integer>",
+                  "description": "Account Code"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "approved_datetime_0",
+                  "value": "<date>",
+                  "description": "Approved Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "approved_datetime_1",
+                  "value": "<date>",
+                  "description": "Approved Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "approved_price",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "approved_quantity",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "approver",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "approver_id",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "branch",
+                  "value": "<integer>",
+                  "description": "Location"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_item",
+                  "value": "<string>",
+                  "description": "A comma-separated list of integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "department",
+                  "value": "<integer>",
+                  "description": "Department"
+                },
+                {
+                  "disabled": false,
+                  "key": "departments",
+                  "value": "<string>",
+                  "description": "A comma-separated list of integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>",
+                  "description": "A comma-separated list of integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_punchout",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfilment_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_purchased",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_recurring",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_changed_by",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified_0",
+                  "value": "<date>",
+                  "description": "Last Modified Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified_1",
+                  "value": "<date>",
+                  "description": "Last Modified Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "lineComment",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<integer>",
+                  "description": "Location"
+                },
+                {
+                  "disabled": false,
+                  "key": "locations",
+                  "value": "<string>",
+                  "description": "A comma-separated list of integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "num",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderNum",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderNum__status",
+                  "value": "<integer>",
+                  "description": "* `0` - Pending\n* `1` - Approved\n* `2` - Denied\n* `3` - Purchased\n* `4` - Cancelled\n* `5` - Received\n* `6` - Draft"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_created_date_0",
+                  "value": "<date>",
+                  "description": "Order Created Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_created_date_1",
+                  "value": "<date>",
+                  "description": "Order Created Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "po_created_date_0",
+                  "value": "<date>",
+                  "description": "Purchased Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "po_created_date_1",
+                  "value": "<date>",
+                  "description": "Purchased Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "po_vendor",
+                  "value": "<integer>",
+                  "description": "Purchased Vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "pref_vendor",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchase_agreement",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchased_date_0",
+                  "value": "<date>",
+                  "description": "Purchased Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchased_date_1",
+                  "value": "<date>",
+                  "description": "Purchased Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchaser",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "quantity",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "receivedFailQty",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "receivedPassQty",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "requester",
+                  "value": "<integer>",
+                  "description": "Requester"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "sku",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<integer>",
+                  "description": "* `0` - Purchase Pending\n* `1` - Purchaser In-Use\n* `2` - Receive Pending\n* `3` - Received\n* `4` - Rejected for Purchase\n* `5` - Partial Received\n* `6` - Fulfilled\n* `7` - Approval Denied\n* `8` - Request Draft"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<integer>",
+                  "description": "* `0` - One Time\n* `1` - Recurring\n* `2` - Blanket"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d600b6b0-2ba1-46b6-8d01-df1ced1512ee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "global",
+                    "order_items",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_code",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "approved_datetime_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "approved_datetime_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "approved_price",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "approved_quantity",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "approver",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "approver_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "branch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "catalog",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "catalog_item",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "departments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude_punchout",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fulfilment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_purchased",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_recurring",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "last_changed_by",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "last_modified_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "last_modified_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "lineComment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "num",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderNum__status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_created_date_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "order_created_date_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "po_created_date_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "po_created_date_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "po_vendor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pref_vendor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "purchase_agreement",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "purchased_date_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "purchased_date_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "purchaser",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "quantity",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "receivedFailQty",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "receivedPassQty",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "requester",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"pagination\": {\n      \"count\": 10,\n      \"next\": null,\n      \"previous\": null,\n      \"page_size\": 10,\n      \"num_pages\": 1,\n      \"current_page\": 1\n    }\n  },\n  \"data\": [\n    {\n      \"account\": 8989,\n      \"approved_datetime\": \"1961-02-07T03:21:37.253Z\",\n      \"currency\": 8822,\n      \"name\": \"string\",\n      \"num\": \"string\",\n      \"pref_vendor\": 5138,\n      \"price\": \"-04695155848\",\n      \"quantity\": \"-902612\",\n      \"unit\": \"string\",\n      \"PO\": [\n        9117,\n        8155\n      ],\n      \"PO_line_num\": 1242123583,\n      \"accountCode\": \"string\",\n      \"active\": false,\n      \"approved_currency_rate\": \"-93235.\",\n      \"approved_price\": \"-6954777860.360899\",\n      \"approved_quantity\": \"11155.3447\",\n      \"approved_shipping_amount\": \"-0\",\n      \"approved_tax_amount\": \"-027949\",\n      \"attachments\": \"string\",\n      \"catalog_item\": 9991,\n      \"created_at\": \"1954-02-17T04:34:52.189Z\",\n      \"dateInvoiced\": \"1963-05-16T05:07:00.641Z\",\n      \"external_id\": \"string\",\n      \"hot\": false,\n      \"id\": 9530,\n      \"inventoryItem\": 618,\n      \"is_active\": true,\n      \"item_attachments\": [\n        9655,\n        6196\n      ],\n      \"last_changed_by\": 1150,\n      \"last_modified\": \"2013-12-21T18:13:44.903Z\",\n      \"lineComment\": \"string\",\n      \"orderNum\": 3667,\n      \"order_number\": 8479,\n      \"po_note\": \"string\",\n      \"po_version\": -428687611,\n      \"purchase_order\": 3382,\n      \"purchaser\": 6736,\n      \"receivedFailQty\": \"332\",\n      \"receivedPassQty\": \"562547958.060\",\n      \"shipping_amount\": \"7.6323042\",\n      \"sku\": \"string\",\n      \"status\": 6,\n      \"tax_amount\": \"732\",\n      \"total_cost\": \"-653176825686187\",\n      \"updated_at\": \"1951-03-16T16:48:56.532Z\",\n      \"vendor\": \"string\",\n      \"receive_method\": 0,\n      \"type\": 2,\n      \"blanket\": {\n        \"price\": \"7514500840019\",\n        \"quantity\": 5846.720000155618,\n        \"amount\": 5684.941281807361\n      }\n    },\n    {\n      \"account\": 595,\n      \"approved_datetime\": \"2008-08-01T15:10:27.927Z\",\n      \"currency\": 224,\n      \"name\": \"string\",\n      \"num\": \"string\",\n      \"pref_vendor\": 5277,\n      \"price\": \"980712264.27\",\n      \"quantity\": \"098.3095\",\n      \"unit\": \"string\",\n      \"PO\": [\n        9555,\n        3518\n      ],\n      \"PO_line_num\": -197126787,\n      \"accountCode\": \"string\",\n      \"active\": false,\n      \"approved_currency_rate\": \"-203687.\",\n      \"approved_price\": \".79522342\",\n      \"approved_quantity\": \"-0504691.3\",\n      \"approved_shipping_amount\": \"-056.435736\",\n      \"approved_tax_amount\": \"634\",\n      \"attachments\": \"string\",\n      \"catalog_item\": 1344,\n      \"created_at\": \"2010-07-11T08:24:49.100Z\",\n      \"dateInvoiced\": \"2020-02-03T20:22:36.383Z\",\n      \"external_id\": \"string\",\n      \"hot\": false,\n      \"id\": 171,\n      \"inventoryItem\": 7339,\n      \"is_active\": true,\n      \"item_attachments\": [\n        7644,\n        4252\n      ],\n      \"last_changed_by\": 6210,\n      \"last_modified\": \"1969-04-02T17:13:16.409Z\",\n      \"lineComment\": \"string\",\n      \"orderNum\": 8807,\n      \"order_number\": 4740,\n      \"po_note\": \"string\",\n      \"po_version\": -1560874876,\n      \"purchase_order\": 5608,\n      \"purchaser\": 5504,\n      \"receivedFailQty\": \"-.656\",\n      \"receivedPassQty\": \"-9345861\",\n      \"shipping_amount\": \"-9500307.4553004\",\n      \"sku\": \"string\",\n      \"status\": 6,\n      \"tax_amount\": \"5165979.\",\n      \"total_cost\": \"214.2\",\n      \"updated_at\": \"2021-11-04T08:54:12.618Z\",\n      \"vendor\": \"string\",\n      \"receive_method\": 1,\n      \"type\": 2,\n      \"blanket\": {\n        \"price\": \"-0898333537.00992712\",\n        \"quantity\": 3801.513511335336,\n        \"amount\": 2189.030977892299\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18d69687-f8f5-4658-9f62-d3e29871333c",
+          "name": "Get All Orders",
+          "request": {
+            "name": "Get All Orders",
+            "description": {
+              "content": "**Order Status Codes**\n\n| Order Type          | Code      |\n|---------------------|-----------|\n| PENDING             | 0         |\n| APPROVED            | 1         |\n| REJECTED            | 2         |\n| PURCHASED           | 3         |\n| CANCELLED (legacy)  | 4         |\n| RECEIVED            | 5         |\n| DRAFT               | 6         |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "global",
+                "orders",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_code",
+                  "value": "<integer>",
+                  "description": "Account Code"
+                },
+                {
+                  "disabled": false,
+                  "key": "branch",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateRequired",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_0",
+                  "value": "<date>",
+                  "description": "Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_1",
+                  "value": "<date>",
+                  "description": "Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "department",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "has_blanket_order_items",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_punchout",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "lineCount",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_date_0",
+                  "value": "<date>",
+                  "description": "Last Modified Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_date_1",
+                  "value": "<date>",
+                  "description": "Last Modified Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<number>",
+                  "description": "Order"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "pref_vendor",
+                  "value": "<integer>",
+                  "description": "Preferred Vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "requester",
+                  "value": "<integer>",
+                  "description": "Requester"
+                },
+                {
+                  "disabled": false,
+                  "key": "required_date_0",
+                  "value": "<date>",
+                  "description": "Date Required"
+                },
+                {
+                  "disabled": false,
+                  "key": "required_date_1",
+                  "value": "<date>",
+                  "description": "Date Required"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<integer>",
+                  "description": "* `0` - Pending\n* `1` - Approved\n* `2` - Denied\n* `3` - Purchased\n* `4` - Cancelled\n* `5` - Received\n* `6` - Draft"
+                },
+                {
+                  "disabled": false,
+                  "key": "totalPrice",
+                  "value": "<number>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "636d081c-845e-4845-a381-318b3212cf50",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "global",
+                    "orders",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_code",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "branch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dateRequired",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "date_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has_blanket_order_items",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_punchout",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lineCount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "modified_date_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pref_vendor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "requester",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "required_date_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "required_date_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "totalPrice",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"pagination\": {\n      \"count\": 10,\n      \"next\": null,\n      \"previous\": null,\n      \"page_size\": 10,\n      \"num_pages\": 1,\n      \"current_page\": 1\n    }\n  },\n  \"data\": [\n    {\n      \"branch\": {\n        \"localCurrency\": 7683,\n        \"name\": \"string\",\n        \"phoneOne\": \"string\",\n        \"id\": 2752,\n        \"external_id\": \"string\",\n        \"url\": \"http://AasibUTKuSNabmikXrkoiNxFvFA.qgYIbu3YnYLBk,X\",\n        \"logo\": \"string\",\n        \"language\": 1,\n        \"multipleLocations\": true,\n        \"locationTimezone\": \"America/Cayman\",\n        \"userLimit\": 1889749402,\n        \"budgetOvertureToggle\": false,\n        \"purchase_filtering\": true,\n        \"catalog_permission\": false,\n        \"separate_expense_approval\": false,\n        \"standalone_travel_approval\": true,\n        \"phoneTwo\": \"string\",\n        \"fax\": \"string\",\n        \"email\": \"7mNBlo2g4E@WotemapZ.ym\",\n        \"fiscalYearEndDay\": 3326578783,\n        \"fiscalYearEndMonth\": 1272297300,\n        \"beginDate\": \"2017-02-08T18:40:30.896Z\",\n        \"ported\": false,\n        \"port_date\": \"2017-06-20T07:51:48.521Z\",\n        \"active\": false,\n        \"activated\": true,\n        \"setup_stage\": \"DEPT\",\n        \"contactPerson\": 2811,\n        \"buyerAddress\": 528,\n        \"shippingAddress\": 3391\n      },\n      \"dateRequired\": \"1947-08-29T09:47:01.007Z\",\n      \"department\": {\n        \"branch\": {\n          \"name\": \"string\",\n          \"id\": 87\n        },\n        \"name\": \"string\",\n        \"id\": 2800,\n        \"external_id\": \"string\",\n        \"punchout_email\": \"gUmov@R.gjkk\",\n        \"active\": true\n      },\n      \"logs\": [\n        {\n          \"approval_delegation\": {\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"delegator\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"setter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"nextApprover\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"gehTlhmHB4F4p@hejdmDQdiRDWkEvVBtJ.ct\",\n            \"user\": 4053,\n            \"id\": 773,\n            \"created_at\": \"1985-08-06T03:28:56.211Z\",\n            \"updated_at\": \"1970-08-04T17:04:29.026Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": true,\n            \"is_active\": false,\n            \"mobile\": true,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": true,\n            \"last_changed_by\": 5057,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1958-12-14\"\n          },\n          \"next_approver\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"YooTaSn@swSvqLdMwFMG.ql\",\n            \"user\": 8536,\n            \"id\": 2336,\n            \"created_at\": \"1981-03-31T20:12:46.797Z\",\n            \"updated_at\": \"1976-03-07T01:36:18.719Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": true,\n            \"is_active\": true,\n            \"mobile\": true,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": true,\n            \"last_changed_by\": 8137,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1973-11-30\"\n          },\n          \"user\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"fLxdpKkmzR@ALyoGSCEbXUGrewbvPAKUpbC.uvyt\",\n            \"user\": 9205,\n            \"id\": 7353,\n            \"created_at\": \"2001-01-24T06:39:36.920Z\",\n            \"updated_at\": \"1990-07-26T17:34:05.368Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": false,\n            \"is_active\": false,\n            \"mobile\": false,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": false,\n            \"last_changed_by\": 9853,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"2018-02-13\"\n          },\n          \"id\": 2520,\n          \"next_approvers\": [\n            5070,\n            976\n          ],\n          \"dateTime\": \"1990-07-31T08:05:36.282Z\",\n          \"action\": 14,\n          \"line_qty_pass\": \"-481916\",\n          \"line_qty_fail\": \"8958745390.7281\",\n          \"order\": 9632,\n          \"lineItem\": 2826,\n          \"PO\": 5090,\n          \"inventoryItem\": 7456,\n          \"stocking_parent\": 2080\n        },\n        {\n          \"approval_delegation\": {\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"delegator\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"setter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"nextApprover\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"fi23VIu@gMMi.dbc\",\n            \"user\": 186,\n            \"id\": 5989,\n            \"created_at\": \"1997-09-03T08:13:42.084Z\",\n            \"updated_at\": \"1999-09-15T12:45:46.121Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": false,\n            \"is_active\": true,\n            \"mobile\": true,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": false,\n            \"last_changed_by\": 2178,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1987-07-02\"\n          },\n          \"next_approver\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"3ViE@LudiUvzuAPGEH.ej\",\n            \"user\": 2283,\n            \"id\": 2711,\n            \"created_at\": \"1986-01-05T03:04:28.788Z\",\n            \"updated_at\": \"1948-08-24T17:53:44.660Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": true,\n            \"is_active\": true,\n            \"mobile\": false,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": true,\n            \"last_changed_by\": 2741,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1958-03-06\"\n          },\n          \"user\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"wDcX-0@dmTsDXPgbcMtEckyOxsGkz.okox\",\n            \"user\": 3577,\n            \"id\": 6419,\n            \"created_at\": \"1974-09-18T10:39:33.697Z\",\n            \"updated_at\": \"1969-11-07T04:04:29.440Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": false,\n            \"is_active\": false,\n            \"mobile\": false,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": true,\n            \"last_changed_by\": 7868,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1982-07-07\"\n          },\n          \"id\": 4248,\n          \"next_approvers\": [\n            2027,\n            364\n          ],\n          \"dateTime\": \"2012-10-06T05:09:25.747Z\",\n          \"action\": 9,\n          \"line_qty_pass\": \"-06407\",\n          \"line_qty_fail\": \"25533\",\n          \"order\": 4411,\n          \"lineItem\": 5829,\n          \"PO\": 7135,\n          \"inventoryItem\": 1455,\n          \"stocking_parent\": 1658\n        }\n      ],\n      \"next_approvers\": [\n        {\n          \"department\": {\n            \"branch\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"id\": 3977,\n            \"external_id\": \"string\",\n            \"punchout_email\": \"d8p@ITVcAKeejeyTDKtKXfyYrIjKqrhxUy.fgk\",\n            \"active\": true\n          },\n          \"email\": \"L-4wmPQ9z2dQ@D.fl\",\n          \"user\": 3039,\n          \"id\": 5982,\n          \"created_at\": \"1970-09-30T12:51:36.930Z\",\n          \"updated_at\": \"1996-10-09T21:42:28.972Z\",\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"position\": \"string\",\n          \"phone\": \"string\",\n          \"address\": \"string\",\n          \"notifications\": false,\n          \"is_active\": false,\n          \"mobile\": true,\n          \"profile_image\": \"string\",\n          \"slack_user_id\": \"string\",\n          \"is_sso_enabled\": false,\n          \"last_changed_by\": 8807,\n          \"approval_delegatee\": {\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"expected_return_date\": \"1951-01-23\"\n        },\n        {\n          \"department\": {\n            \"branch\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"id\": 3411,\n            \"external_id\": \"string\",\n            \"punchout_email\": \"EZPyBn8uYsz6mC@L.goxg\",\n            \"active\": false\n          },\n          \"email\": \"BcoM-SztF7SN@XDtsKvBqgOnWcy.wonp\",\n          \"user\": 5490,\n          \"id\": 7013,\n          \"created_at\": \"1982-09-26T18:49:28.022Z\",\n          \"updated_at\": \"1971-04-15T20:08:44.044Z\",\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"position\": \"string\",\n          \"phone\": \"string\",\n          \"address\": \"string\",\n          \"notifications\": false,\n          \"is_active\": true,\n          \"mobile\": false,\n          \"profile_image\": \"string\",\n          \"slack_user_id\": \"string\",\n          \"is_sso_enabled\": true,\n          \"last_changed_by\": 8668,\n          \"approval_delegatee\": {\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"expected_return_date\": \"2021-10-03\"\n        }\n      ],\n      \"user\": {\n        \"department\": {\n          \"branch\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"string\",\n          \"id\": 8343,\n          \"external_id\": \"string\",\n          \"punchout_email\": \"u1TG0XTiSgvC9vi@Qr.ows\",\n          \"active\": false\n        },\n        \"email\": \"lTaqYl-3QRO@UXQwCsbIaZGadpaXSbzVuBQtYd.gwwg\",\n        \"user\": 1263,\n        \"id\": 3511,\n        \"created_at\": \"2006-06-12T11:51:36.900Z\",\n        \"updated_at\": \"1976-05-06T09:53:56.118Z\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"position\": \"string\",\n        \"phone\": \"string\",\n        \"address\": \"string\",\n        \"notifications\": false,\n        \"is_active\": true,\n        \"mobile\": true,\n        \"profile_image\": \"string\",\n        \"slack_user_id\": \"string\",\n        \"is_sso_enabled\": false,\n        \"last_changed_by\": 9616,\n        \"approval_delegatee\": {\n          \"email\": \"Q37i469PFRa@SIUvcVEHcgWNogfGXSCWOqcQABGRD.wjaa\",\n          \"id\": 9207,\n          \"department\": 4831,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\"\n        },\n        \"expected_return_date\": \"1968-02-25\"\n      },\n      \"uuid\": \"086dc217-b1d4-ff01-7b90-aa1ad7a995b6\",\n      \"num\": 634,\n      \"currency\": {\n        \"name\": \"string\",\n        \"rate\": \"24\",\n        \"id\": 8897,\n        \"base\": false\n      },\n      \"total_cost_in_base_currency\": 1111.991948712886,\n      \"item_count\": 9070,\n      \"ip_address\": \"string\",\n      \"date\": \"1978-04-03T07:24:38.308Z\",\n      \"description\": \"string\",\n      \"dateModified\": \"1984-06-23T22:53:08.688Z\",\n      \"lineCount\": -1117967107,\n      \"purchasedCount\": 1118492520,\n      \"totalPrice\": \"8667\",\n      \"status\": 2,\n      \"next_approver\": {\n        \"department\": {\n          \"branch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"string\",\n          \"id\": 841,\n          \"external_id\": \"string\",\n          \"punchout_email\": \"PXLm98zjMhS3fm@DfpBOofwnFJOpC.yuh\",\n          \"active\": true\n        },\n        \"email\": \"KitXy1p1@JECGROupOBzclSJ.nwei\",\n        \"user\": 2373,\n        \"id\": 2827,\n        \"created_at\": \"1954-09-27T09:28:25.911Z\",\n        \"updated_at\": \"1964-06-01T00:02:11.609Z\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"position\": \"string\",\n        \"phone\": \"string\",\n        \"address\": \"string\",\n        \"notifications\": false,\n        \"is_active\": true,\n        \"mobile\": true,\n        \"profile_image\": \"string\",\n        \"slack_user_id\": \"string\",\n        \"is_sso_enabled\": false,\n        \"last_changed_by\": 8547,\n        \"approval_delegatee\": {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"department\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"expected_return_date\": \"2016-07-20\"\n      },\n      \"approval_delegatee\": 2431,\n      \"punchout_group\": {\n        \"id\": 8822,\n        \"name\": \"string\"\n      },\n      \"punchout_shipping_address\": {\n        \"id\": 6551,\n        \"name\": \"string\"\n      },\n      \"punchout_items_rejected\": false,\n      \"punchout_supplier_name\": \"string\",\n      \"punchout_supplier_icon\": \"string\",\n      \"punchout_vendor_reference\": 2430,\n      \"punchout_is_retriable\": false,\n      \"punchout_order_purchase_order_id\": 4715,\n      \"has_blanket_order_items\": true,\n      \"approval_workflow\": {\n        \"can_peer_review\": true,\n        \"can_self_approve\": true,\n        \"current_step\": {\n          \"approver\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"group_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"group_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"step_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"is_complete\": true,\n        \"next_step\": {\n          \"group_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"group_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"options\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"step_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"updated_at\": \"2005-09-27T12:29:07.048Z\"\n      },\n      \"denial_reason\": 6,\n      \"denial_comment\": \"string\"\n    },\n    {\n      \"branch\": {\n        \"localCurrency\": 8670,\n        \"name\": \"string\",\n        \"phoneOne\": \"string\",\n        \"id\": 2485,\n        \"external_id\": \"string\",\n        \"url\": \"https://DgAQGGucchvLyyX.tarLX.JgNlOs92Q74HEuEWomXyBK2F43eHGI,Q2GPDwE8Hm4PS-nN66WlHOyFTDvv\",\n        \"logo\": \"string\",\n        \"language\": 1,\n        \"multipleLocations\": false,\n        \"locationTimezone\": \"America/Menominee\",\n        \"userLimit\": 3350940397,\n        \"budgetOvertureToggle\": true,\n        \"purchase_filtering\": true,\n        \"catalog_permission\": false,\n        \"separate_expense_approval\": true,\n        \"standalone_travel_approval\": false,\n        \"phoneTwo\": \"string\",\n        \"fax\": \"string\",\n        \"email\": \"UPykxwF4KOTWmyQ@famDibetXYjJ.brze\",\n        \"fiscalYearEndDay\": 3966333103,\n        \"fiscalYearEndMonth\": 3552712617,\n        \"beginDate\": \"1947-04-04T03:11:35.399Z\",\n        \"ported\": false,\n        \"port_date\": \"1998-09-14T07:50:19.000Z\",\n        \"active\": true,\n        \"activated\": true,\n        \"setup_stage\": \"APPR\",\n        \"contactPerson\": 18,\n        \"buyerAddress\": 1701,\n        \"shippingAddress\": 1532\n      },\n      \"dateRequired\": \"1950-06-06T09:57:37.431Z\",\n      \"department\": {\n        \"branch\": {\n          \"name\": \"string\",\n          \"id\": 3475\n        },\n        \"name\": \"string\",\n        \"id\": 8602,\n        \"external_id\": \"string\",\n        \"punchout_email\": \"dhlfBc@jCNxJMeuvSlDlA.bbss\",\n        \"active\": false\n      },\n      \"logs\": [\n        {\n          \"approval_delegation\": {\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"delegator\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"setter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"nextApprover\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"wN5ZzwLjb85w@NuTsnnwjrcMKYgWDDiHSXriMfToyHLpeF.qa\",\n            \"user\": 6591,\n            \"id\": 7960,\n            \"created_at\": \"1999-01-19T15:20:21.129Z\",\n            \"updated_at\": \"1949-11-30T13:20:57.649Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": false,\n            \"is_active\": false,\n            \"mobile\": true,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": true,\n            \"last_changed_by\": 2108,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1956-08-31\"\n          },\n          \"next_approver\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"ZIMPKRipQ@gwWcNorHbvHoLHnurE.oxtp\",\n            \"user\": 785,\n            \"id\": 8858,\n            \"created_at\": \"1959-03-08T02:11:55.000Z\",\n            \"updated_at\": \"1948-05-29T11:34:48.349Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": true,\n            \"is_active\": false,\n            \"mobile\": false,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": false,\n            \"last_changed_by\": 9612,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1951-10-02\"\n          },\n          \"user\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"UGATeby50zmBDW7@EhdtuqBdifG.zp\",\n            \"user\": 8477,\n            \"id\": 501,\n            \"created_at\": \"2015-01-17T22:14:15.805Z\",\n            \"updated_at\": \"1980-05-10T14:51:02.394Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": false,\n            \"is_active\": true,\n            \"mobile\": false,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": false,\n            \"last_changed_by\": 7526,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1950-06-09\"\n          },\n          \"id\": 4172,\n          \"next_approvers\": [\n            994,\n            8859\n          ],\n          \"dateTime\": \"1977-07-21T04:06:00.379Z\",\n          \"action\": 19,\n          \"line_qty_pass\": \"8935\",\n          \"line_qty_fail\": \"-5\",\n          \"order\": 6938,\n          \"lineItem\": 5648,\n          \"PO\": 6932,\n          \"inventoryItem\": 4333,\n          \"stocking_parent\": 4757\n        },\n        {\n          \"approval_delegation\": {\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"delegator\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"setter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"nextApprover\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"bcucYAZ@gVahXbDfEQbkIWc.fqt\",\n            \"user\": 2376,\n            \"id\": 3690,\n            \"created_at\": \"1959-06-18T20:34:56.555Z\",\n            \"updated_at\": \"2020-10-28T05:49:14.159Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": false,\n            \"is_active\": true,\n            \"mobile\": true,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": false,\n            \"last_changed_by\": 1602,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1981-05-18\"\n          },\n          \"next_approver\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"0MwadjWE@RjtCAuwNzCMCXzZqCjdWusILc.co\",\n            \"user\": 6032,\n            \"id\": 7339,\n            \"created_at\": \"1954-10-03T14:09:27.878Z\",\n            \"updated_at\": \"1999-10-24T16:42:45.623Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": false,\n            \"is_active\": true,\n            \"mobile\": true,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": false,\n            \"last_changed_by\": 4205,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1985-01-01\"\n          },\n          \"user\": {\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": \"EWyGsiOgg@umCAnbkvNHixJYOEXkvwBwhZLPyVXDYl.fqv\",\n            \"user\": 3982,\n            \"id\": 7306,\n            \"created_at\": \"1985-06-03T16:29:20.969Z\",\n            \"updated_at\": \"1994-08-06T04:33:46.852Z\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"position\": \"string\",\n            \"phone\": \"string\",\n            \"address\": \"string\",\n            \"notifications\": false,\n            \"is_active\": false,\n            \"mobile\": true,\n            \"profile_image\": \"string\",\n            \"slack_user_id\": \"string\",\n            \"is_sso_enabled\": false,\n            \"last_changed_by\": 931,\n            \"approval_delegatee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expected_return_date\": \"1970-07-06\"\n          },\n          \"id\": 3151,\n          \"next_approvers\": [\n            4118,\n            7698\n          ],\n          \"dateTime\": \"1959-07-19T18:26:07.446Z\",\n          \"action\": 16,\n          \"line_qty_pass\": \"94.571\",\n          \"line_qty_fail\": \"2047159754\",\n          \"order\": 1509,\n          \"lineItem\": 3552,\n          \"PO\": 2220,\n          \"inventoryItem\": 8509,\n          \"stocking_parent\": 5867\n        }\n      ],\n      \"next_approvers\": [\n        {\n          \"department\": {\n            \"branch\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"id\": 7432,\n            \"external_id\": \"string\",\n            \"punchout_email\": \"bcCsahcgMZg8@lTfkVpnjxoyMVwnB.ntso\",\n            \"active\": true\n          },\n          \"email\": \"ADk4sqbH9FZ4J5@XxLWMnFIpnKEufCAfcobbqwD.ghsg\",\n          \"user\": 7157,\n          \"id\": 4307,\n          \"created_at\": \"1959-12-12T06:27:30.529Z\",\n          \"updated_at\": \"1949-09-30T10:40:50.936Z\",\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"position\": \"string\",\n          \"phone\": \"string\",\n          \"address\": \"string\",\n          \"notifications\": false,\n          \"is_active\": false,\n          \"mobile\": true,\n          \"profile_image\": \"string\",\n          \"slack_user_id\": \"string\",\n          \"is_sso_enabled\": true,\n          \"last_changed_by\": 612,\n          \"approval_delegatee\": {\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"expected_return_date\": \"2005-04-19\"\n        },\n        {\n          \"department\": {\n            \"branch\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"id\": 5995,\n            \"external_id\": \"string\",\n            \"punchout_email\": \"cIM7TFWxQGGn@rJWGwamerZPVTgtjdfq.ap\",\n            \"active\": false\n          },\n          \"email\": \"rMhfoqSporcDLL@pdfIrKvQMorQArCpwtcNDlZK.ql\",\n          \"user\": 7810,\n          \"id\": 8402,\n          \"created_at\": \"1955-06-09T14:46:51.694Z\",\n          \"updated_at\": \"2015-04-17T14:39:04.518Z\",\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"position\": \"string\",\n          \"phone\": \"string\",\n          \"address\": \"string\",\n          \"notifications\": true,\n          \"is_active\": true,\n          \"mobile\": true,\n          \"profile_image\": \"string\",\n          \"slack_user_id\": \"string\",\n          \"is_sso_enabled\": true,\n          \"last_changed_by\": 8348,\n          \"approval_delegatee\": {\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"department\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"expected_return_date\": \"1999-06-06\"\n        }\n      ],\n      \"user\": {\n        \"department\": {\n          \"branch\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"string\",\n          \"id\": 715,\n          \"external_id\": \"string\",\n          \"punchout_email\": \"cqCHHJlZ33iRx@QMYjmE.nvv\",\n          \"active\": true\n        },\n        \"email\": \"VeStksp@Tzn.tv\",\n        \"user\": 3294,\n        \"id\": 1098,\n        \"created_at\": \"1993-04-09T22:31:54.277Z\",\n        \"updated_at\": \"2018-12-05T00:49:04.826Z\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"position\": \"string\",\n        \"phone\": \"string\",\n        \"address\": \"string\",\n        \"notifications\": true,\n        \"is_active\": true,\n        \"mobile\": false,\n        \"profile_image\": \"string\",\n        \"slack_user_id\": \"string\",\n        \"is_sso_enabled\": false,\n        \"last_changed_by\": 4198,\n        \"approval_delegatee\": {\n          \"email\": \"bT5Bz1dk@KOtzDXNRAKfboVUSpSmhbtdAZCpZV.rvu\",\n          \"id\": 8178,\n          \"department\": 1683,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\"\n        },\n        \"expected_return_date\": \"2006-10-25\"\n      },\n      \"uuid\": \"afdf2a70-a52c-a231-f4c1-914b186bc4ae\",\n      \"num\": 3872,\n      \"currency\": {\n        \"name\": \"string\",\n        \"rate\": \"\",\n        \"id\": 1539,\n        \"base\": true\n      },\n      \"total_cost_in_base_currency\": 8805.722449099178,\n      \"item_count\": 2022,\n      \"ip_address\": \"string\",\n      \"date\": \"1977-01-14T13:37:52.903Z\",\n      \"description\": \"string\",\n      \"dateModified\": \"1980-01-18T10:59:08.731Z\",\n      \"lineCount\": -1945464434,\n      \"purchasedCount\": -716506588,\n      \"totalPrice\": \"192.9\",\n      \"status\": 6,\n      \"next_approver\": {\n        \"department\": {\n          \"branch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"string\",\n          \"id\": 1005,\n          \"external_id\": \"string\",\n          \"punchout_email\": \"1mOBZm3hXKtVXj@ShzBQBEwLLsvz.hn\",\n          \"active\": false\n        },\n        \"email\": \"Oo6y@ZhvGguChOaQtwNhC.gi\",\n        \"user\": 9955,\n        \"id\": 2463,\n        \"created_at\": \"1984-09-12T03:37:01.748Z\",\n        \"updated_at\": \"2016-02-26T00:39:57.028Z\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"position\": \"string\",\n        \"phone\": \"string\",\n        \"address\": \"string\",\n        \"notifications\": false,\n        \"is_active\": true,\n        \"mobile\": true,\n        \"profile_image\": \"string\",\n        \"slack_user_id\": \"string\",\n        \"is_sso_enabled\": false,\n        \"last_changed_by\": 9841,\n        \"approval_delegatee\": {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"department\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"expected_return_date\": \"1959-06-16\"\n      },\n      \"approval_delegatee\": 7596,\n      \"punchout_group\": {\n        \"id\": 3652,\n        \"name\": \"string\"\n      },\n      \"punchout_shipping_address\": {\n        \"id\": 5441,\n        \"name\": \"string\"\n      },\n      \"punchout_items_rejected\": false,\n      \"punchout_supplier_name\": \"string\",\n      \"punchout_supplier_icon\": \"string\",\n      \"punchout_vendor_reference\": 812,\n      \"punchout_is_retriable\": false,\n      \"punchout_order_purchase_order_id\": 1686,\n      \"has_blanket_order_items\": true,\n      \"approval_workflow\": {\n        \"can_peer_review\": false,\n        \"can_self_approve\": false,\n        \"current_step\": {\n          \"approver\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"group_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"group_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"step_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"is_complete\": false,\n        \"next_step\": {\n          \"group_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"group_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"options\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"step_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"updated_at\": \"2009-03-06T01:53:34.203Z\"\n      },\n      \"denial_reason\": 5,\n      \"denial_comment\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9547ffd8-4451-4008-99d3-cca8fb87b0b6",
+          "name": "Creating a requisition",
+          "request": {
+            "name": "Creating a requisition",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "requisitions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "department_name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "line_items",
+                  "value": "{\"account_code\":\"<string>\",\"currency_code\":\"<string>\",\"custom_fields\":[{\"custom_field_name\":\"<string>\",\"custom_field_value\":\"<string>\"},{\"custom_field_name\":\"<string>\",\"custom_field_value\":\"<string>\"}],\"item_name\":\"<string>\",\"quantity\":\"<decimal>\",\"unit\":\"<string>\",\"unit_price\":\"<decimal>\",\"vendor_name\":\"<string>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "line_items",
+                  "value": "{\"account_code\":\"<string>\",\"currency_code\":\"<string>\",\"custom_fields\":[{\"custom_field_name\":\"<string>\",\"custom_field_value\":\"<string>\"},{\"custom_field_name\":\"<string>\",\"custom_field_value\":\"<string>\"}],\"item_name\":\"<string>\",\"quantity\":\"<decimal>\",\"unit\":\"<string>\",\"unit_price\":\"<decimal>\",\"vendor_name\":\"<string>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "location_name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "required_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e5f4b880-5dd3-4ea7-bd02-29e7f038c1f1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "requisitions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "department_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "line_items",
+                      "value": "{\"account_code\":\"<string>\",\"currency_code\":\"<string>\",\"custom_fields\":[{\"custom_field_name\":\"<string>\",\"custom_field_value\":\"<string>\"},{\"custom_field_name\":\"<string>\",\"custom_field_value\":\"<string>\"}],\"item_name\":\"<string>\",\"quantity\":\"<decimal>\",\"unit\":\"<string>\",\"unit_price\":\"<decimal>\",\"vendor_name\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "line_items",
+                      "value": "{\"account_code\":\"<string>\",\"currency_code\":\"<string>\",\"custom_fields\":[{\"custom_field_name\":\"<string>\",\"custom_field_value\":\"<string>\"},{\"custom_field_name\":\"<string>\",\"custom_field_value\":\"<string>\"}],\"item_name\":\"<string>\",\"quantity\":\"<decimal>\",\"unit\":\"<string>\",\"unit_price\":\"<decimal>\",\"vendor_name\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "location_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "required_date",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uuid\": \"231d6fe5-dcc9-9094-6697-bbe64a40d525\"\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your procurify domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "user_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{user_domain}}.procurify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0970ad7f-ca22-4421-8d4d-ef93818a6e93",
+    "name": "Procurify API Documentation account-codes requisitions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Disclaimer\n\n- Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.\n- Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.\n- Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.\n- In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.\n- You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.\n",
+      "type": "text/plain"
+    }
+  }
+}

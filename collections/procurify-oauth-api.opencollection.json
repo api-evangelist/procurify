@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Procurify API Documentation account-codes oauth API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "oauth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate with OAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{user_domain}.procurify.com/oauth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Getting access to Procurify API involves the following three steps:\n\n  1. Request credentials for your Procurify account.\n  2. Request access token using your credentials.\n  3. Use access token to access Procurify API resources.\n\n#### Request credentials for your Procurify account.\n\nThe first step is to request credentials from Procurify. Your role must have access to manage integrations settings in order to request API credentials. You can request API credentials by going to go:\n\n  1. Settings "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

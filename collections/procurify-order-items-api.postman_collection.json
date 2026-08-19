@@ -1,0 +1,669 @@
+{
+  "item": [
+    {
+      "id": "0bd0c86f-c07a-42cd-9a22-3d6ae2c96693",
+      "name": "order-items",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fcab45a2-1cf9-44ce-9dc1-a9d2fced13e6",
+          "name": "Get list of all order items",
+          "request": {
+            "name": "Get list of all order items",
+            "description": {
+              "content": "**Order Item Status Codes**\n\n| Order Item Type          | Code      | Description                       |\n|--------------------------|-----------|-----------------------------------|\n| PURCHASE_PENDING         | 0         | Approved but not purchased.       |\n| PURCHASE_INUSE           | 1         | Added to purchaser's PO list.     |\n| RECEIVE_PENDING          | 2         | Purchased but not yet received, i.e. receivedPassQty == 0. |\n| RECEIVED                 | 3         | Fully received, i.e. receivedPassQty == quantity. |\n| REJECTED_FOR_PURCHASE    | 4         | Rejected at procurement, i.e. denied. |\n| RECEIVE_PARTIAL          | 5         | Partially received, i.e. receivedPassQty != quantity and receivedPassQty > 0. |\n| FULFILLED                | 6         | Received but unused. |\n| APPROVAL_DENIED          | 7         | Denied in approval routing (by approver). |\n| REQUEST_DRAFT            | 8         | Preparing for draft instead of using sessions. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "order-items",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_code",
+                  "value": "<integer>",
+                  "description": "Account Code"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "approved_datetime_0",
+                  "value": "<date>",
+                  "description": "Approved Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "approved_datetime_1",
+                  "value": "<date>",
+                  "description": "Approved Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "approved_price",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "approved_quantity",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "approver",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "approver_id",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "branch",
+                  "value": "<integer>",
+                  "description": "Location"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_item",
+                  "value": "<string>",
+                  "description": "A comma-separated list of integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "department",
+                  "value": "<integer>",
+                  "description": "Department"
+                },
+                {
+                  "disabled": false,
+                  "key": "departments",
+                  "value": "<string>",
+                  "description": "A comma-separated list of integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>",
+                  "description": "A comma-separated list of integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_punchout",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfilment_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_purchased",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_recurring",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_changed_by",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified_0",
+                  "value": "<date>",
+                  "description": "Last Modified Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_modified_1",
+                  "value": "<date>",
+                  "description": "Last Modified Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "lineComment",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<integer>",
+                  "description": "Location"
+                },
+                {
+                  "disabled": false,
+                  "key": "locations",
+                  "value": "<string>",
+                  "description": "A comma-separated list of integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "num",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderNum",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderNum__status",
+                  "value": "<integer>",
+                  "description": "* `0` - Pending\n* `1` - Approved\n* `2` - Denied\n* `3` - Purchased\n* `4` - Cancelled\n* `5` - Received\n* `6` - Draft"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_created_date_0",
+                  "value": "<date>",
+                  "description": "Order Created Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_created_date_1",
+                  "value": "<date>",
+                  "description": "Order Created Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "po_created_date_0",
+                  "value": "<date>",
+                  "description": "Purchased Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "po_created_date_1",
+                  "value": "<date>",
+                  "description": "Purchased Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "po_vendor",
+                  "value": "<integer>",
+                  "description": "Purchased Vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "pref_vendor",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchase_agreement",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchased_date_0",
+                  "value": "<date>",
+                  "description": "Purchased Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchased_date_1",
+                  "value": "<date>",
+                  "description": "Purchased Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchaser",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "quantity",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "receivedFailQty",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "receivedPassQty",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "requester",
+                  "value": "<integer>",
+                  "description": "Requester"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "sku",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<integer>",
+                  "description": "* `0` - Purchase Pending\n* `1` - Purchaser In-Use\n* `2` - Receive Pending\n* `3` - Received\n* `4` - Rejected for Purchase\n* `5` - Partial Received\n* `6` - Fulfilled\n* `7` - Approval Denied\n* `8` - Request Draft"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<integer>",
+                  "description": "* `0` - One Time\n* `1` - Recurring\n* `2` - Blanket"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a66a9d0-496f-4b4d-ae25-b43f41d34684",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "order-items",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_code",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "approved_datetime_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "approved_datetime_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "approved_price",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "approved_quantity",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "approver",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "approver_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "branch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "catalog",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "catalog_item",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "departments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude_punchout",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fulfilment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_purchased",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_recurring",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "last_changed_by",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "last_modified_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "last_modified_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "lineComment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "num",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderNum",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderNum__status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_created_date_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "order_created_date_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "po_created_date_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "po_created_date_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "po_vendor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pref_vendor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "purchase_agreement",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "purchased_date_0",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "purchased_date_1",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "purchaser",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "quantity",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "receivedFailQty",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "receivedPassQty",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "requester",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"pagination\": {\n      \"count\": 10,\n      \"next\": null,\n      \"previous\": null,\n      \"page_size\": 10,\n      \"num_pages\": 1,\n      \"current_page\": 1\n    }\n  },\n  \"data\": [\n    {\n      \"account\": 9415,\n      \"approved_datetime\": \"1982-01-22T06:23:36.231Z\",\n      \"currency\": 198,\n      \"name\": \"string\",\n      \"num\": \"string\",\n      \"pref_vendor\": 5073,\n      \"price\": \"-34125325.76\",\n      \"quantity\": \"-\",\n      \"unit\": \"string\",\n      \"PO\": [\n        6748,\n        3301\n      ],\n      \"PO_line_num\": 48354023,\n      \"accountCode\": \"string\",\n      \"active\": false,\n      \"approved_currency_rate\": \"40\",\n      \"approved_price\": \"796960208\",\n      \"approved_quantity\": \"7385497619.23\",\n      \"approved_shipping_amount\": \"2464349356100.41688\",\n      \"approved_tax_amount\": \"3228166664\",\n      \"attachments\": \"string\",\n      \"catalog_item\": 850,\n      \"created_at\": \"2001-03-06T20:57:10.279Z\",\n      \"dateInvoiced\": \"2023-08-20T07:23:47.907Z\",\n      \"external_id\": \"string\",\n      \"hot\": true,\n      \"id\": 4201,\n      \"inventoryItem\": 5896,\n      \"is_active\": true,\n      \"item_attachments\": [\n        6549,\n        8966\n      ],\n      \"last_changed_by\": 7745,\n      \"last_modified\": \"1965-11-04T17:39:20.857Z\",\n      \"lineComment\": \"string\",\n      \"orderNum\": 2129,\n      \"order_number\": 5217,\n      \"po_note\": \"string\",\n      \"po_version\": 227978041,\n      \"purchase_order\": 9406,\n      \"purchaser\": 3552,\n      \"receivedFailQty\": \"-9278058149.25011\",\n      \"receivedPassQty\": \"-482784615.5458\",\n      \"shipping_amount\": \"00150172.08\",\n      \"sku\": \"string\",\n      \"status\": 1,\n      \"tax_amount\": \"-882270478712\",\n      \"total_cost\": \"8860.27\",\n      \"updated_at\": \"1976-11-19T04:15:09.270Z\",\n      \"vendor\": \"string\",\n      \"receive_method\": 1,\n      \"type\": 1,\n      \"blanket\": {\n        \"price\": \"4530060\",\n        \"quantity\": 561.64697745823,\n        \"amount\": 234.4921046817916\n      }\n    },\n    {\n      \"account\": 3675,\n      \"approved_datetime\": \"1999-01-09T19:57:50.497Z\",\n      \"currency\": 9828,\n      \"name\": \"string\",\n      \"num\": \"string\",\n      \"pref_vendor\": 3336,\n      \"price\": \"-792\",\n      \"quantity\": \"-4319138301\",\n      \"unit\": \"string\",\n      \"PO\": [\n        1417,\n        3894\n      ],\n      \"PO_line_num\": 367141704,\n      \"accountCode\": \"string\",\n      \"active\": true,\n      \"approved_currency_rate\": \"652.2\",\n      \"approved_price\": \"497147121908\",\n      \"approved_quantity\": \"2980255971\",\n      \"approved_shipping_amount\": \"5\",\n      \"approved_tax_amount\": \"32.4\",\n      \"attachments\": \"string\",\n      \"catalog_item\": 6107,\n      \"created_at\": \"1998-02-16T05:33:13.682Z\",\n      \"dateInvoiced\": \"2012-04-27T00:57:09.894Z\",\n      \"external_id\": \"string\",\n      \"hot\": true,\n      \"id\": 5903,\n      \"inventoryItem\": 5222,\n      \"is_active\": true,\n      \"item_attachments\": [\n        7233,\n        7162\n      ],\n      \"last_changed_by\": 9394,\n      \"last_modified\": \"1950-06-09T07:28:42.351Z\",\n      \"lineComment\": \"string\",\n      \"orderNum\": 9589,\n      \"order_number\": 8241,\n      \"po_note\": \"string\",\n      \"po_version\": 1901574157,\n      \"purchase_order\": 262,\n      \"purchaser\": 577,\n      \"receivedFailQty\": \"-9627685374\",\n      \"receivedPassQty\": \"-0855851\",\n      \"shipping_amount\": \"-7.542\",\n      \"sku\": \"string\",\n      \"status\": 4,\n      \"tax_amount\": \"-5776008996397.7\",\n      \"total_cost\": \"1\",\n      \"updated_at\": \"2003-12-06T07:51:03.605Z\",\n      \"vendor\": \"string\",\n      \"receive_method\": 0,\n      \"type\": 2,\n      \"blanket\": {\n        \"price\": \"901558.\",\n        \"quantity\": 7348.607043168995,\n        \"amount\": 595.5527982342857\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your procurify domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "user_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{user_domain}}.procurify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4d402c32-737e-4d2b-b365-5c85dde329b2",
+    "name": "Procurify API Documentation account-codes order-items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Disclaimer\n\n- Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.\n- Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.\n- Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.\n- In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.\n- You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.\n",
+      "type": "text/plain"
+    }
+  }
+}

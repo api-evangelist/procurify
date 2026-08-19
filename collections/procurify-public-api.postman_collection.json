@@ -1,0 +1,482 @@
+{
+  "item": [
+    {
+      "id": "3ecca0c1-1119-4727-9994-fe6ad254adc1",
+      "name": "public",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4da83972-338a-46ab-ac06-f9d4be6eedf4",
+          "name": "List Transactions",
+          "request": {
+            "name": "List Transactions",
+            "description": {
+              "content": "Returns a list of all closed (fully captured, not just authorizations)\ntransactions across all issued cards on the platform, regardless of the\ncards current status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "v1",
+                "pay",
+                "transactions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "reconciliation_status",
+                  "value": "<integer>",
+                  "description": "The reconciliation status of the transaction designated by accounts payable\n\n* `reviewed` - Reviewed\n* `pending` - Pending"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "91562a0e-d088-4d7a-9a01-49d60dd8c617",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "v1",
+                    "pay",
+                    "transactions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "reconciliation_status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"pagination\": {\n      \"count\": 10,\n      \"next\": null,\n      \"previous\": null,\n      \"page_size\": 10,\n      \"num_pages\": 1,\n      \"current_page\": 1\n    }\n  },\n  \"data\": [\n    {\n      \"account\": {\n        \"account_code\": \"string\",\n        \"account_code_description\": \"string\",\n        \"department\": \"string\",\n        \"department_branch\": \"string\"\n      },\n      \"allocation_datetime\": \"1963-10-05T10:07:51.859Z\",\n      \"authorization_datetime\": \"2022-01-13T01:12:48.257Z\",\n      \"card\": {\n        \"last_four_digits\": \"string\",\n        \"uuid\": \"string\",\n        \"status\": {\n          \"value\": \"<Error: Could not resolve allOf schema\"\n        }\n      },\n      \"cardholder\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"uuid\": \"string\",\n        \"status\": \"active\"\n      },\n      \"currency\": \"string\",\n      \"custom_fields\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"type\": \"text\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"type\": \"date\"\n        }\n      ],\n      \"fund\": {\n        \"account\": {\n          \"account_code\": \"string\",\n          \"account_code_description\": \"string\",\n          \"department\": \"string\",\n          \"department_branch\": \"string\"\n        },\n        \"date_created\": \"2025-08-19T14:42:09.522Z\",\n        \"reason\": \"string\",\n        \"title\": \"string\",\n        \"uuid\": \"string\",\n        \"status\": \"open\",\n        \"amount\": \"string\"\n      },\n      \"id\": 367,\n      \"linked_authorization\": \"string\",\n      \"note\": \"string\",\n      \"transaction_datetime\": \"2004-07-24T16:51:10.868Z\",\n      \"vendor\": {\n        \"category\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"name\": \"string\",\n        \"postal_code\": \"string\",\n        \"state\": \"string\"\n      },\n      \"vendor_currency\": \"string\",\n      \"amount\": \"string\",\n      \"vendor_amount\": \"string\",\n      \"status\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"authorization_status\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"receipt_attachments\": [\n        \"string\",\n        \"string\"\n      ],\n      \"type\": \"credit\",\n      \"reconciliation_status\": \"pending\"\n    },\n    {\n      \"account\": {\n        \"account_code\": \"string\",\n        \"account_code_description\": \"string\",\n        \"department\": \"string\",\n        \"department_branch\": \"string\"\n      },\n      \"allocation_datetime\": \"1964-03-21T01:56:10.268Z\",\n      \"authorization_datetime\": \"1982-08-22T19:51:42.671Z\",\n      \"card\": {\n        \"last_four_digits\": \"string\",\n        \"uuid\": \"string\",\n        \"status\": {\n          \"value\": \"<Error: Could not resolve allOf schema\"\n        }\n      },\n      \"cardholder\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"uuid\": \"string\",\n        \"status\": \"active\"\n      },\n      \"currency\": \"string\",\n      \"custom_fields\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"type\": \"date\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"type\": \"date\"\n        }\n      ],\n      \"fund\": {\n        \"account\": {\n          \"account_code\": \"string\",\n          \"account_code_description\": \"string\",\n          \"department\": \"string\",\n          \"department_branch\": \"string\"\n        },\n        \"date_created\": \"2022-06-24T02:38:25.837Z\",\n        \"reason\": \"string\",\n        \"title\": \"string\",\n        \"uuid\": \"string\",\n        \"status\": \"open\",\n        \"amount\": \"string\"\n      },\n      \"id\": 4814,\n      \"linked_authorization\": \"string\",\n      \"note\": \"string\",\n      \"transaction_datetime\": \"1952-06-24T13:38:48.074Z\",\n      \"vendor\": {\n        \"category\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"name\": \"string\",\n        \"postal_code\": \"string\",\n        \"state\": \"string\"\n      },\n      \"vendor_currency\": \"string\",\n      \"amount\": \"string\",\n      \"vendor_amount\": \"string\",\n      \"status\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"authorization_status\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"receipt_attachments\": [\n        \"string\",\n        \"string\"\n      ],\n      \"type\": \"spend\",\n      \"reconciliation_status\": \"pending\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cd9ef97-c590-433c-bb11-1fc548a1cf88",
+          "name": "List Payments",
+          "request": {
+            "name": "List Payments",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "public",
+                "v1",
+                "payments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bill_groups",
+                  "value": "<integer>,<integer>",
+                  "description": "Filter payments by a comma-separated list of bill group IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_after",
+                  "value": "<dateTime>",
+                  "description": "Filter payments created on or after this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_before",
+                  "value": "<dateTime>",
+                  "description": "Filter payments created on or before this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<integer>",
+                  "description": "Filter payments by currency ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<integer>,<integer>",
+                  "description": "Filter payments by a comma-separated list of payment IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "invoice_number",
+                  "value": "<string>",
+                  "description": "Filter payments by exact bill invoice number."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Order results by field. Prefix with '-' for descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_amount",
+                  "value": "<number>",
+                  "description": "Filter payments with an amount equal to this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "processing_date_after",
+                  "value": "<dateTime>",
+                  "description": "Filter payments with a processing date on or after this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "processing_date_before",
+                  "value": "<dateTime>",
+                  "description": "Filter payments with a processing date on or before this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>,<string>",
+                  "description": "Filter payments by status. Accepts a comma-separated list of statuses.\n\n* `draft` - draft\n* `pending_approval` - pending_approval\n* `approved` - approved\n* `denied` - denied\n* `paid` - paid\n* `processing` - processing\n* `failed` - failed\n* `scheduled` - scheduled"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at_after",
+                  "value": "<dateTime>",
+                  "description": "Filter payments updated on or after this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at_before",
+                  "value": "<dateTime>",
+                  "description": "Filter payments updated on or before this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "vendor",
+                  "value": "<integer>",
+                  "description": "Filter payments by vendor ID."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "033df1c4-5cfe-442f-9253-f9cd908c605d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "public",
+                    "v1",
+                    "payments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_groups",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "created_at_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "payment_amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "processing_date_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "processing_date_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "updated_at_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "vendor",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"pagination\": {\n      \"count\": 10,\n      \"next\": null,\n      \"previous\": null,\n      \"page_size\": 10,\n      \"num_pages\": 1,\n      \"current_page\": 1\n    }\n  },\n  \"data\": [\n    {\n      \"amount\": \"-1201246064233226.00\",\n      \"created_at\": \"2022-11-09T02:29:17.156Z\",\n      \"creator\": {\n        \"email\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\"\n      },\n      \"currency\": {\n        \"id\": 1740,\n        \"name\": \"string\"\n      },\n      \"direct_debit_bank_account_mask\": \"string\",\n      \"id\": 1462,\n      \"posted_date\": \"1946-08-17\",\n      \"updated_at\": \"1960-05-26T00:55:47.780Z\",\n      \"uuid\": \"string\",\n      \"payment_source_name\": \"string\",\n      \"payment_source_type\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"external_payment_source_id\": 5193,\n      \"status\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"processing_date\": \"string\",\n      \"vendor_name\": \"string\",\n      \"gl_code\": \"string\",\n      \"vendor_payment_method_country_code\": \"string\",\n      \"vendor_payment_method_rail\": \"string\",\n      \"bill_groups\": [\n        2899,\n        8106\n      ]\n    },\n    {\n      \"amount\": \"38577857\",\n      \"created_at\": \"2002-03-26T13:55:56.426Z\",\n      \"creator\": {\n        \"email\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\"\n      },\n      \"currency\": {\n        \"id\": 8439,\n        \"name\": \"string\"\n      },\n      \"direct_debit_bank_account_mask\": \"string\",\n      \"id\": 2404,\n      \"posted_date\": \"1997-07-02\",\n      \"updated_at\": \"2000-07-15T06:32:14.619Z\",\n      \"uuid\": \"string\",\n      \"payment_source_name\": \"string\",\n      \"payment_source_type\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"external_payment_source_id\": 4784,\n      \"status\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"processing_date\": \"string\",\n      \"vendor_name\": \"string\",\n      \"gl_code\": \"string\",\n      \"vendor_payment_method_country_code\": \"string\",\n      \"vendor_payment_method_rail\": \"string\",\n      \"bill_groups\": [\n        9080,\n        127\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your procurify domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "user_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{user_domain}}.procurify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aecd8844-a4d4-4e28-bd1d-e326bf277a07",
+    "name": "Procurify API Documentation account-codes public API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Disclaimer\n\n- Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.\n- Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.\n- Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.\n- In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.\n- You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.\n",
+      "type": "text/plain"
+    }
+  }
+}

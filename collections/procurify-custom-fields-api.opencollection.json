@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Procurify API Documentation account-codes custom-fields API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "custom-fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Order Item Custom Field Dropdown Choices",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{user_domain}.procurify.com/api/v3/custom-fields/:id/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this custom field."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": " "
+        },
+        {
+          "info": {
+            "name": "Get Active/Inactive Order Item Custom Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v3/custom-fields/order-items/",
+            "params": [
+              {
+                "name": "field_type",
+                "value": "",
+                "type": "query",
+                "description": "* `t` - Text\n* `a` - Large Text Field\n* `i` - Integer\n* `f` - Floating point decimal\n* `b` - Boolean (Yes/No)\n* `m` - Dropdown Choices\n* `d` - Date\n* `h` - Date Time"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "meta__is_active",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get list of custom fields associated with order items"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,792 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Procurify API Documentation account-codes ap API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ap",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bill by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v2/ap/bills/:id/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": " "
+        },
+        {
+          "info": {
+            "name": "Get list of Company Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v2/ap/company-payment-methods/",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "* `0` - OTHER\n* `1` - CHECK\n* `2` - ACH\n* `3` - EFT\n* `4` - WIRE\n* `5` - PROCURIFY_CHECK\n* `6` - PROCURIFY_ACH\n* `7` - PROCURIFY_WIRE\n* `8` - AIRWALLEX"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "**Payment Method Types:**\n\n| Payment Method | Type      |\n|----------------|-----------|\n| OTHER          | 0         |\n| CHECK/CHEQUE   | 1         |\n| ACH            | 2         |\n| EFT            | 3         |\n| WIRE           | 4         |\n\n**The context of 'data' field varies based on different Payment Method type:**\n\n| Payment Method | 'data' field structure |\n|----------------|------------------------|\n| OTHER          | ```{\"description\": <string>}``` |\n| CHECK/CHEQUE   | ```{\"payable_to"
+        },
+        {
+          "info": {
+            "name": "Create Company Payment Method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{user_domain}.procurify.com/api/v2/ap/company-payment-methods/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "**Payment Method Types:**\n\n| Payment Method | Type      |\n|----------------|-----------|\n| OTHER          | 0         |\n| CHECK/CHEQUE   | 1         |\n| ACH            | 2         |\n| EFT            | 3         |\n| WIRE           | 4         |\n\n**The context of 'data' field varies based on different Payment Method type:**\n\n| Payment Method | 'data' field structure |\n|----------------|------------------------|\n| OTHER          | ```{\"description\": <string>}``` |\n| CHECK/CHEQUE   | ```{\"payable_to"
+        },
+        {
+          "info": {
+            "name": "Get Unbilled/Billed Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v2/ap/items/",
+            "params": [
+              {
+                "name": "bill",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bill_uuid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "billed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "budget",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at_0",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at_1",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "department",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "received_on_0",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "received_on_1",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "reimburse",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "requester",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "vendor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": " "
+        },
+        {
+          "info": {
+            "name": "Get Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v2/ap/payments/",
+            "params": [
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "payment_date_0",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "payment_date_1",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "payment_method__type",
+                "value": "",
+                "type": "query",
+                "description": "* `0` - OTHER\n* `1` - CHECK\n* `2` - ACH\n* `3` - EFT\n* `4` - WIRE\n* `5` - PROCURIFY_CHECK\n* `6` - PROCURIFY_ACH\n* `7` - PROCURIFY_WIRE\n* `8` - AIRWALLEX"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Deprecated method for listing Payment objects. Pending removal after June 5, 2026. See List Payments in the public section."
+        },
+        {
+          "info": {
+            "name": "Get Approver Choices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v2/ap/payments/:id/approver-choices/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this payment."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Approver Choices"
+        },
+        {
+          "info": {
+            "name": "Get list of Vendor Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v2/ap/vendor-payment-methods/",
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "* `managed` - Managed payment methods that actually pay bills\n* `external` - External payment methods used to manually track bill payments"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "* `0` - OTHER\n* `1` - CHECK\n* `2` - ACH\n* `3` - EFT\n* `4` - WIRE\n* `5` - PROCURIFY_CHECK\n* `6` - PROCURIFY_ACH\n* `7` - PROCURIFY_WIRE\n* `8` - AIRWALLEX"
+              },
+              {
+                "name": "vendor",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "**Payment Method Types:**\n\n| Payment Method | Type      |\n|----------------|-----------|\n| OTHER          | 0         |\n| CHECK/CHEQUE   | 1         |\n| ACH            | 2         |\n| EFT            | 3         |\n| WIRE           | 4         |\n\n**The context of 'data' field varies based on different Payment Method type:**\n\n| Payment Method | 'data' field structure |\n|----------------|------------------------|\n| OTHER          | ```{\"description\": <string>}``` |\n| CHECK/CHEQUE   | ```{\"payable_to"
+        },
+        {
+          "info": {
+            "name": "Create Vendor Payment Method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{user_domain}.procurify.com/api/v2/ap/vendor-payment-methods/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "**Payment Method Types:**\n\n| Payment Method | Type      |\n|----------------|-----------|\n| OTHER          | 0         |\n| CHECK/CHEQUE   | 1         |\n| ACH            | 2         |\n| EFT            | 3         |\n| WIRE           | 4         |\n\n**The context of 'data' field varies based on different Payment Method type:**\n\n| Payment Method | 'data' field structure |\n|----------------|------------------------|\n| OTHER          | ```{\"description\": <string>}``` |\n| CHECK/CHEQUE   | ```{\"payable_to"
+        },
+        {
+          "info": {
+            "name": "Get Bills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v3/ap/bills/",
+            "params": [
+              {
+                "name": "account_code",
+                "value": "",
+                "type": "query",
+                "description": "Account Code"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query",
+                "description": "Approver"
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "Contracts related to bill items' purchase orders"
+              },
+              {
+                "name": "creator",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "department",
+                "value": "",
+                "type": "query",
+                "description": "Department"
+              },
+              {
+                "name": "due_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Due Date"
+              },
+              {
+                "name": "due_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Due Date"
+              },
+              {
+                "name": "exclude_bill_group_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "exclude_expense_bills",
+                "value": "",
+                "type": "query",
+                "description": "Exclude expense bills"
+              },
+              {
+                "name": "expense",
+                "value": "",
+                "type": "query",
+                "description": "Expense Bills Only"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gl_post_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Posting Date"
+              },
+              {
+                "name": "gl_post_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Posting Date"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "has_payment",
+                "value": "",
+                "type": "query",
+                "description": "Without Payment"
+              },
+              {
+                "name": "has_posting_date",
+                "value": "",
+                "type": "query",
+                "description": "Has Posting Date"
+              },
+              {
+                "name": "include_bill_group_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "invoice_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Invoice Date"
+              },
+              {
+                "name": "invoice_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Invoice Date"
+              },
+              {
+                "name": "is_exported",
+                "value": "",
+                "type": "query",
+                "description": "Exported Bills Only"
+              },
+              {
+                "name": "is_invoice_created",
+                "value": "",
+                "type": "query",
+                "description": "Drafted by AI only"
+              },
+              {
+                "name": "last_export_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Last Export Date"
+              },
+              {
+                "name": "last_export_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Last Export Date"
+              },
+              {
+                "name": "last_export_user",
+                "value": "",
+                "type": "query",
+                "description": "Last Export User"
+              },
+              {
+                "name": "last_modified_datetime_0",
+                "value": "",
+                "type": "query",
+                "description": "Last Modified Datetime"
+              },
+              {
+                "name": "last_modified_datetime_1",
+                "value": "",
+                "type": "query",
+                "description": "Last Modified Datetime"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Location"
+              },
+              {
+                "name": "modified_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Last Modified Date (Deprecated - use 'Last Modified Datetime')"
+              },
+              {
+                "name": "modified_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Last Modified Date (Deprecated - use 'Last Modified Datetime')"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "payment_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Payment Date"
+              },
+              {
+                "name": "payment_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Payment Date"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "submitted_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Submitted Date"
+              },
+              {
+                "name": "submitted_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Submitted Date"
+              },
+              {
+                "name": "sync_status_v2",
+                "value": "",
+                "type": "query",
+                "description": "Sync Status"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "* `0` - Order\n* `1` - Expense\n* `2` - Creditcard"
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "vendor",
+                "value": "",
+                "type": "query",
+                "description": "Vendors"
+              },
+              {
+                "name": "vendor[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter bills by vendor IDs (example: vendor[]=1&vendor[]=2)"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "list:\nThis endpoint supports OPTIONS method which returns a list of available fields and their types."
+        },
+        {
+          "info": {
+            "name": "Mark Bills as Paid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{user_domain}.procurify.com/api/v3/ap/bills/mark-as-paid/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Set approved bills without payments to paid status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

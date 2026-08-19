@@ -1,0 +1,705 @@
+{
+  "item": [
+    {
+      "id": "4aa46499-0e06-49bd-b560-5e74d93cfd52",
+      "name": "departments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a218179e-35c5-4d1f-957a-70781095a048",
+          "name": "List Departments",
+          "request": {
+            "name": "List Departments",
+            "description": {
+              "content": " ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "departments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "branch",
+                  "value": "<integer>",
+                  "description": "Filter departments by their branch."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_is_active_for_account_code",
+                  "value": "<integer>",
+                  "description": "Setting this adds the addition of the booeal field 'has_active_account' to each department object of the response. The query param accepts an integer representing the primary key of the account code to check if there exists an account object associated with the department with that account code."
+                },
+                {
+                  "disabled": false,
+                  "key": "location_perm_override",
+                  "value": "<boolean>",
+                  "description": "Setting this overrides the need to enable the PROCUREMENT_ACCESS and/or RECEIVE_BY_DEPARTMENT feature switches. This parameter can only be used in conjunction with permission and user and cannot function without both of those parameters explicitly set."
+                },
+                {
+                  "disabled": false,
+                  "key": "locations",
+                  "value": "<integer>",
+                  "description": "Filter departments by the locations (branches) passed in."
+                },
+                {
+                  "disabled": false,
+                  "key": "locations",
+                  "value": "<integer>",
+                  "description": "Filter departments by the locations (branches) passed in."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "permission",
+                  "value": "<integer>",
+                  "description": "Filter by permission. In isolation, this parameter can only be set to 68 (add purchase order); 841 (view report); or 899 (receive_po), which correlate with permission to add purchase orders, view reports, and receive purchase orders respectively. However, the results returned correlate with the “by department” version of these permissions, which means that results are filtered by permission to add purchase orders by department, permission to view reports by department, and receive purchase orders by department. This should only be used in conjunction with the PROCUREMENT_ACCESS and/or RECEIVE_BY_DEPARTMENT feature switches. If used in conjunction with location_perm_override=true and user, the value can be set to any permission, and the result will be departments filtered by the provided user and permission values. If used in conjunction with the RECEIVE_BY_DEPARTMENT feature flag, the permission can only be set to 68, 841, or 899 (see second sentence for what these permissions do). The result will be all departments filtered by the provided user value."
+                },
+                {
+                  "disabled": false,
+                  "key": "requestable",
+                  "value": "<string>",
+                  "description": "Fetch all requestable departments by the currently authorized user. Accepts ORDER, EXPENSE, TRAVEL, and PAY_REQUEST."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>",
+                  "description": "Filter by user. If this parameter is set, the user must be a superuser or have the add_po_by_department or receive_po_by_department permissions. In isolation, this parameter should only be used in conjunction with the PROCUREMENT_ACCESS and/or RECEIVE_BY_DEPARTMENT feature switches. If used in conjunction with location_perm_override=true and permission query parameter, the result returned will be departments filtered by the provided user and permission values. If used in conjunction with the RECEIVE_BY_DEPARTMENT feature flag, the result will be departments filtered by the user provided and the permission set to 68 (add purchase order); 841 (view report); or 899 (receive purchase order) (see permission query parameter explanation for more information on what these stand for)."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "458b9b5d-77e4-4f80-a07c-da3e874052b1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "departments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "branch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_is_active_for_account_code",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "location_perm_override",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "permission",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "requestable",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"pagination\": {\n      \"count\": 10,\n      \"next\": null,\n      \"previous\": null,\n      \"page_size\": 10,\n      \"num_pages\": 1,\n      \"current_page\": 1\n    }\n  },\n  \"data\": [\n    {\n      \"branch\": {\n        \"name\": \"string\",\n        \"id\": 9697,\n        \"headquarter\": true\n      },\n      \"name\": \"string\",\n      \"id\": 7422,\n      \"external_id\": \"string\",\n      \"active\": true,\n      \"punchout_email\": \"string\",\n      \"is_active_for_account_code\": true\n    },\n    {\n      \"branch\": {\n        \"name\": \"string\",\n        \"id\": 4731,\n        \"headquarter\": false\n      },\n      \"name\": \"string\",\n      \"id\": 2653,\n      \"external_id\": \"string\",\n      \"active\": false,\n      \"punchout_email\": \"string\",\n      \"is_active_for_account_code\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "758bdb43-2ee0-458b-a893-756b9e833f57",
+          "name": "Create New Department",
+          "request": {
+            "name": "Create New Department",
+            "description": {
+              "content": " ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "departments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "branch",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "External id"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "punchout_email",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "363835e8-9cec-49b1-93e6-9e2fa3b2287e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "departments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "branch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "External id",
+                        "type": "text/plain"
+                      },
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "punchout_email",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"branch\": {\n      \"name\": \"string\",\n      \"id\": 4769,\n      \"headquarter\": false\n    },\n    \"name\": \"string\",\n    \"id\": 3983,\n    \"external_id\": \"string\",\n    \"active\": false,\n    \"punchout_email\": \"string\",\n    \"is_active_for_account_code\": false\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e40e1aa-ddad-44bd-9350-1d5202de75fd",
+          "name": "Update Department",
+          "request": {
+            "name": "Update Department",
+            "description": {
+              "content": " ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "departments",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this department."
+                },
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "branch",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "External id"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "punchout_email",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "29c3c63a-2ef4-44e1-b3bc-dd1bf01a61ee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "departments",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this department."
+                    },
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "branch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "External id",
+                        "type": "text/plain"
+                      },
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "punchout_email",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"branch\": {\n      \"name\": \"string\",\n      \"id\": 4769,\n      \"headquarter\": false\n    },\n    \"name\": \"string\",\n    \"id\": 3983,\n    \"external_id\": \"string\",\n    \"active\": false,\n    \"punchout_email\": \"string\",\n    \"is_active_for_account_code\": false\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your procurify domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "user_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{user_domain}}.procurify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "43d2b506-891d-45b2-9c97-fc6e1a3c49f2",
+    "name": "Procurify API Documentation account-codes departments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Disclaimer\n\n- Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.\n- Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.\n- Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.\n- In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.\n- You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.\n",
+      "type": "text/plain"
+    }
+  }
+}

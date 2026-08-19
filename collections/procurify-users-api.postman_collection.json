@@ -1,0 +1,1140 @@
+{
+  "item": [
+    {
+      "id": "115d3a68-87fc-4ac5-b9de-9f45f20ab3ac",
+      "name": "users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7213733-d016-4296-ac36-826f4f59f786",
+          "name": "List Users",
+          "request": {
+            "name": "List Users",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "users",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "pending_invite",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "permission",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "42c85da9-c149-4b43-a25d-1b8698fafff8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "users",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_invite",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "permission",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"pagination\": {\n      \"count\": 10,\n      \"next\": null,\n      \"previous\": null,\n      \"page_size\": 10,\n      \"num_pages\": 1,\n      \"current_page\": 1\n    }\n  },\n  \"data\": [\n    {\n      \"approval_delegatee\": {\n        \"email\": \"xag1tA@DzVZWqfUwnMQRxeWsRUiPjEUuWLsAZ.mc\",\n        \"id\": 348,\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"role\": {\n          \"name\": \"string\",\n          \"type\": 9284\n        },\n        \"profile_image\": \"string\"\n      },\n      \"department\": {\n        \"location\": {\n          \"name\": \"string\",\n          \"id\": 857,\n          \"headquarter\": false\n        },\n        \"name\": \"string\",\n        \"id\": 3236\n      },\n      \"email\": \"uAFJd4cWaDzDB@hUOSyhPfbDNeKteFgWa.yhci\",\n      \"user\": 5191,\n      \"id\": 3924,\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"location\": {\n        \"name\": \"string\",\n        \"id\": 6697,\n        \"headquarter\": false\n      },\n      \"profile_image\": \"string\",\n      \"is_active\": false,\n      \"phone\": \"string\",\n      \"position\": \"string\",\n      \"role\": {\n        \"name\": \"string\",\n        \"type\": 1723,\n        \"id\": 1933\n      },\n      \"pending_approvals_count\": {\n        \"bill\": 9042,\n        \"expense\": 1962,\n        \"order\": 1732,\n        \"payment\": 9810,\n        \"travel\": 5397\n      },\n      \"expected_return_date\": \"1974-01-27\"\n    },\n    {\n      \"approval_delegatee\": {\n        \"email\": \"ZFfSjAgKP@hHQdpkqyWnMjMyNgaXPyWcsvMNhsEjHtC.uv\",\n        \"id\": 3275,\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"role\": {\n          \"name\": \"string\",\n          \"type\": 3683\n        },\n        \"profile_image\": \"string\"\n      },\n      \"department\": {\n        \"location\": {\n          \"name\": \"string\",\n          \"id\": 5662,\n          \"headquarter\": false\n        },\n        \"name\": \"string\",\n        \"id\": 458\n      },\n      \"email\": \"2epsJ9t5lcDytBV@aKODoW.lpe\",\n      \"user\": 2069,\n      \"id\": 1575,\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"location\": {\n        \"name\": \"string\",\n        \"id\": 4176,\n        \"headquarter\": true\n      },\n      \"profile_image\": \"string\",\n      \"is_active\": true,\n      \"phone\": \"string\",\n      \"position\": \"string\",\n      \"role\": {\n        \"name\": \"string\",\n        \"type\": 4955,\n        \"id\": 6237\n      },\n      \"pending_approvals_count\": {\n        \"bill\": 815,\n        \"expense\": 2060,\n        \"order\": 2404,\n        \"payment\": 7492,\n        \"travel\": 3365\n      },\n      \"expected_return_date\": \"1977-10-28\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0107d341-13f2-4e75-8eab-4011149d744e",
+          "name": "Create New User",
+          "request": {
+            "name": "Create New User",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "users",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>"
+                },
+                {
+                  "disabled": false,
+                  "key": "send_invitation_email",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "phone",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "position",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "role_id",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "all_locations",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "home_department",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "home_location",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>"
+                },
+                {
+                  "disabled": false,
+                  "key": "send_invitation_email",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "phone",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "position",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "role_id",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "all_locations",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "home_department",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "home_location",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "12eae42c-b6de-43b1-b4c5-0ff4452dfcf9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "users",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "send_invitation_email",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "first_name",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "key": "last_name",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "key": "phone",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "key": "position",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "key": "role_id",
+                      "value": "0"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "all_locations",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "home_department",
+                      "value": "0"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "home_location",
+                      "value": "0"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "send_invitation_email",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "first_name",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "key": "last_name",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "key": "phone",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "key": "position",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "key": "role_id",
+                      "value": "0"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "all_locations",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "home_department",
+                      "value": "0"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "home_location",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"approval_delegatee\": {\n        \"email\": \"jW8@hijL.ary\",\n        \"id\": 9930,\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"role\": {\n          \"name\": \"string\",\n          \"type\": 6705\n        },\n        \"profile_image\": \"string\"\n      },\n      \"department\": {\n        \"location\": {\n          \"name\": \"string\",\n          \"id\": 4913,\n          \"headquarter\": false\n        },\n        \"name\": \"string\",\n        \"id\": 5445\n      },\n      \"email\": \"AYZXZ@GUppKINY.qut\",\n      \"user\": 3811,\n      \"id\": 8739,\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"location\": {\n        \"name\": \"string\",\n        \"id\": 827,\n        \"headquarter\": false\n      },\n      \"profile_image\": \"string\",\n      \"is_active\": false,\n      \"phone\": \"string\",\n      \"position\": \"string\",\n      \"role\": {\n        \"name\": \"string\",\n        \"type\": 7131,\n        \"id\": 5268\n      },\n      \"pending_approvals_count\": {\n        \"bill\": 6584,\n        \"expense\": 1541,\n        \"order\": 2147,\n        \"payment\": 3308,\n        \"travel\": 3217\n      },\n      \"expected_return_date\": \"2004-07-11\"\n    },\n    {\n      \"approval_delegatee\": {\n        \"email\": \"y5Gujvrvj@clMywIEyzIAvgQuY.dtcn\",\n        \"id\": 9502,\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"role\": {\n          \"name\": \"string\",\n          \"type\": 603\n        },\n        \"profile_image\": \"string\"\n      },\n      \"department\": {\n        \"location\": {\n          \"name\": \"string\",\n          \"id\": 8446,\n          \"headquarter\": true\n        },\n        \"name\": \"string\",\n        \"id\": 1657\n      },\n      \"email\": \"F-RVCNKwX@FYLweMtOD.xtf\",\n      \"user\": 3761,\n      \"id\": 7727,\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"location\": {\n        \"name\": \"string\",\n        \"id\": 7371,\n        \"headquarter\": true\n      },\n      \"profile_image\": \"string\",\n      \"is_active\": true,\n      \"phone\": \"string\",\n      \"position\": \"string\",\n      \"role\": {\n        \"name\": \"string\",\n        \"type\": 3138,\n        \"id\": 5270\n      },\n      \"pending_approvals_count\": {\n        \"bill\": 3769,\n        \"expense\": 6630,\n        \"order\": 5564,\n        \"payment\": 5115,\n        \"travel\": 1700\n      },\n      \"expected_return_date\": \"2013-07-18\"\n    }\n  ],\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43570137-2478-4442-9808-b409b500c93a",
+          "name": "Update User",
+          "request": {
+            "name": "Update User",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "users",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this user profile."
+                },
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "department",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "firstName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "lastName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "position",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "phone",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "profile_image",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_sso_enabled",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "mark_for_skip",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "mark_for_delete",
+                  "value": "false"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ac4bc874-a9bf-4dc0-9926-d648089f1015",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "users",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this user profile."
+                    },
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "department",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "firstName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "lastName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "location",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "user",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "position",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "key": "phone",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "key": "profile_image",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "is_sso_enabled",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "mark_for_skip",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "mark_for_delete",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"approval_delegatee\": {\n      \"email\": \"5uG5XNBrpxNoHMw@AxXYXIcyBPZwMbmfKFiFcswEPxkIceU.bjka\",\n      \"id\": 3860,\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": {\n        \"name\": \"string\",\n        \"type\": 1029\n      },\n      \"profile_image\": \"string\"\n    },\n    \"department\": {\n      \"location\": {\n        \"name\": \"string\",\n        \"id\": 835,\n        \"headquarter\": true\n      },\n      \"name\": \"string\",\n      \"id\": 4325\n    },\n    \"email\": \"9OmZoFe@JfsJTLOxKsZhDXNpKPIrkPV.yuw\",\n    \"user\": 3160,\n    \"id\": 7556,\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"location\": {\n      \"name\": \"string\",\n      \"id\": 604,\n      \"headquarter\": false\n    },\n    \"profile_image\": \"string\",\n    \"is_active\": true,\n    \"phone\": \"string\",\n    \"position\": \"string\",\n    \"role\": {\n      \"name\": \"string\",\n      \"type\": 3970,\n      \"id\": 5026\n    },\n    \"pending_approvals_count\": {\n      \"bill\": 7846,\n      \"expense\": 2046,\n      \"order\": 9235,\n      \"payment\": 1208,\n      \"travel\": 4623\n    },\n    \"expected_return_date\": \"1989-04-14\"\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1aa037f-9246-45ab-8f39-8a65de370052",
+          "name": "Deactivate User",
+          "request": {
+            "name": "Deactivate User",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "users",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this user profile."
+                },
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "201fea36-906b-422f-a49d-70ba2ba72bab",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "users",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this user profile."
+                    },
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc0c0f84-c772-4391-87da-2145de17ce81",
+          "name": "Get Logged-in User",
+          "request": {
+            "name": "Get Logged-in User",
+            "description": {
+              "content": "Get the logged in user account information",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "users",
+                "me",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b4d21297-44eb-4e60-81da-32ceac8e90c6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "users",
+                    "me",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 2,\n    \"domains\": {\n      \"active\": false,\n      \"procurify_domains\": [\n        {\n          \"subdomain\": \"example.com\",\n          \"name\": \"example.com\"\n        }\n      ]\n    },\n    \"headquarter_logo\": \"https://commondatastorage.googleapis.com/cdn.procurify.com/attachments/7e3c3a59-8e37-4575-b510-508aeea9ee43\",\n    \"systemaccess_cache\": {\n      \"structured\": {\n        \"1\": {\n          \"flattened\": [\n            \"nav_receive\",\n            \"nav_approval\",\n            \"nav_manage\",\n            \"nav_request\",\n            \"nav_purchase\",\n            \"nav_report\",\n            \"nav_setting\"\n          ],\n          \"roles\": [\n            {\n              \"permissions\": [\n                {\n                  \"id\": 3,\n                  \"description\": \"Navigation for Request\",\n                  \"name\": \"Request\"\n                },\n                {\n                  \"id\": 4,\n                  \"description\": \"Navigation for Approval\",\n                  \"name\": \"Approval\"\n                },\n                {\n                  \"id\": 5,\n                  \"description\": \"Navigation for Purchase\",\n                  \"name\": \"Purchase\"\n                },\n                {\n                  \"id\": 6,\n                  \"description\": \"Navigation for Receive\",\n                  \"name\": \"Receive\"\n                },\n                {\n                  \"id\": 7,\n                  \"description\": \"Navigation for Manage\",\n                  \"name\": \"Manage\"\n                },\n                {\n                  \"id\": 8,\n                  \"description\": \"Navigation for Settings\",\n                  \"name\": \"Settings\"\n                },\n                {\n                  \"id\": 9,\n                  \"description\": \"Navigation for Report\",\n                  \"name\": \"Report\"\n                }\n              ],\n              \"id\": 15,\n              \"name\": \"Location Manager\"\n            }\n          ]\n        },\n        \"2\": {\n          \"flattened\": [\n            \"nav_request\",\n            \"nav_approval\",\n            \"nav_report\"\n          ],\n          \"roles\": [\n            {\n              \"permissions\": [\n                {\n                  \"id\": 3,\n                  \"description\": \"Navigation for Request\",\n                  \"name\": \"Request\"\n                },\n                {\n                  \"id\": 4,\n                  \"description\": \"Navigation for Approval\",\n                  \"name\": \"Approval\"\n                },\n                {\n                  \"id\": 9,\n                  \"description\": \"Navigation for Report\",\n                  \"name\": \"Report\"\n                }\n              ],\n              \"id\": 25,\n              \"name\": \"Approver\"\n            }\n          ]\n        },\n        \"3\": {\n          \"flattened\": [\n            \"nav_request\",\n            \"nav_approval\",\n            \"nav_report\"\n          ],\n          \"roles\": [\n            {\n              \"permissions\": [\n                {\n                  \"id\": 3,\n                  \"description\": \"Navigation for Request\",\n                  \"name\": \"Request\"\n                },\n                {\n                  \"id\": 4,\n                  \"description\": \"Navigation for Approval\",\n                  \"name\": \"Approval\"\n                },\n                {\n                  \"id\": 9,\n                  \"description\": \"Navigation for Report\",\n                  \"name\": \"Report\"\n                }\n              ],\n              \"id\": 25,\n              \"name\": \"Approver\"\n            }\n          ]\n        },\n        \"system\": {\n          \"flattened\": [\n            \"superuser\",\n            \"accounts_payable\"\n          ],\n          \"roles\": [\n            {\n              \"permissions\": [\n                {\n                  \"id\": 2,\n                  \"description\": \"Full Access\",\n                  \"name\": \"Superuser\"\n                }\n              ],\n              \"id\": 2,\n              \"name\": \"Superuser\"\n            },\n            {\n              \"permissions\": [\n                {\n                  \"id\": 12,\n                  \"description\": \"Accounts Payable\",\n                  \"name\": \"Accounts Payable\"\n                }\n              ],\n              \"id\": 31,\n              \"name\": \"AP\"\n            }\n          ]\n        }\n      },\n      \"flattened\": [\n        \"superuser\",\n        \"nav_manage\",\n        \"nav_request\",\n        \"nav_purchase\",\n        \"accounts_payable\",\n        \"nav_receive\",\n        \"nav_setting\",\n        \"nav_approval\",\n        \"nav_report\"\n      ]\n    },\n    \"approval_delegatee\": null,\n    \"is_approval_delegatee\": false,\n    \"department\": {\n      \"branch\": {\n        \"name\": \"\",\n        \"url\": \"\",\n        \"logo\": null,\n        \"currency\": {\n          \"name\": \"\",\n          \"description\": \"\",\n          \"rate\": null,\n          \"base\": false,\n          \"active\": false\n        },\n        \"phoneOne\": \"\",\n        \"fax\": \"\",\n        \"email\": \"\",\n        \"primary_billing_address\": {\n          \"name\": \"\",\n          \"addressLineOne\": \"\",\n          \"city\": \"\",\n          \"postalCode\": \"\",\n          \"state_province\": \"\",\n          \"country\": \"\"\n        },\n        \"primary_shipping_address\": {\n          \"name\": \"\",\n          \"addressLineOne\": \"\",\n          \"city\": \"\",\n          \"postalCode\": \"\",\n          \"state_province\": \"\",\n          \"country\": \"\"\n        },\n        \"language\": null,\n        \"locationTimezone\": null,\n        \"active\": false,\n        \"external_id\": \"\"\n      },\n      \"external_id\": \"\",\n      \"name\": \"\",\n      \"active\": false\n    },\n    \"created_at\": \"2017-03-17T21:45:36.120222Z\",\n    \"updated_at\": \"2017-03-24T00:55:40.724146Z\",\n    \"firstName\": \"Frank\",\n    \"lastName\": \"Borman\",\n    \"email\": \"nick+redshift7@procurify.com\",\n    \"position\": \"\",\n    \"phone\": \"-\",\n    \"address\": \"\",\n    \"notifications\": true,\n    \"is_active\": true,\n    \"pending_invite\": false,\n    \"role\": 7,\n    \"mobile\": false,\n    \"profile_image\": \"nickredshift7procurifycom_aa1fbc9b_frank-borman.jpg\",\n    \"slack_user_id\": \"\",\n    \"is_sso_enabled\": false,\n    \"last_changed_by\": null,\n    \"user\": 2\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your procurify domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "user_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{user_domain}}.procurify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "00b6cae9-5295-47da-a958-ea26d35b62be",
+    "name": "Procurify API Documentation account-codes users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Disclaimer\n\n- Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.\n- Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.\n- Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.\n- In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.\n- You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.\n",
+      "type": "text/plain"
+    }
+  }
+}

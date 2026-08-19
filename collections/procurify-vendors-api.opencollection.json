@@ -1,0 +1,245 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Procurify API Documentation account-codes vendors API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "vendors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get list of all active vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v3/vendors/",
+            "params": [
+              {
+                "name": "exclude_other",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of the vendor. See above for possible options.\n\n* `1` - other\n* `2` - amazon punchout\n* `3` - preferred\n* `4` - regular\n* `5` - employee\n* `6` - credit card provider\n* `7` - checkout"
+              },
+              {
+                "name": "type__in",
+                "value": "",
+                "type": "query",
+                "description": "* `other` - other\n* `amazon_punchout` - amazon_punchout\n* `preferred` - preferred\n* `regular` - regular\n* `employee` - employee\n* `cc_provider` - cc_provider\n* `checkout` - checkout\n* `pending` - pending"
+              },
+              {
+                "name": "vendor_group",
+                "value": "",
+                "type": "path",
+                "description": "\n**\"all\"**: Get list of all vendors.\n\n**\"credit_card_providers\"**: Get list of credit card provider vendors. These vendors are displayed in Payee Management for Credit Card Providers.\n\n**\"default\"**: Get list of \"preferred\" and \"regular\" vendors. These vendors are displayed in Procure (procurement, vendors, etc) and AP i.e., default vendor list. OTHER is discontinued from procure.\n\n**\"other\"**: Get list of \"other\" vendors. Only returns the 'OTHER' vendor reserved for requesting non-vendor names.\n\n**\"preferred\"**: Get list of \"preferred\" vendors.\n\n**\"purchasable\"**: Get list of \"purchasable\" vendors.\n\n**\"requestable\"**: Get list of \"requestable\" vendors. These vendors are displayed in Request and designated by Purchaser."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "**Vendor Type Codes**\n\n| Vendor Type         | Type      | Description                       |\n|---------------------|-----------|-----------------------------------|\n| OTHER               | 1         | Previously 'OTHER' vendor (ID=1), used for storing non-vendor\n|                     |           | for storing non-vendor Vendor names in request. |\n| HIDDEN              | 2         | New type of vendors that is reserved for system purposes (eg. Amazon Business). |\n| PREFERRED (default) | 3      "
+        },
+        {
+          "info": {
+            "name": "Create Vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{user_domain}.procurify.com/api/v3/vendors/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new vendor\n\nDue to having multiple vendors with the same name, especially\ncommon if user keeps deleting vendors with the same name, these\ndeleted vendors get thrown into the inactive list.\n\n**Vendor Types**\n\n| Vendor Type         | Type      |\n|---------------------|-----------|\n| OTHER               | 1         |\n| HIDDEN              | 2         |\n| PREFERRED (default) | 3         |\n| REGULAR             | 4         |\n| EMPLOYEE            | 5         |\n| CC_PROVIDER         | 6      "
+        },
+        {
+          "info": {
+            "name": "Get Vendor by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v3/vendors/:id/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this vendor."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get detail of a vendor by id"
+        },
+        {
+          "info": {
+            "name": "Update Vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{user_domain}.procurify.com/api/v3/vendors/:id/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this vendor."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update Vendor"
+        },
+        {
+          "info": {
+            "name": "Partial Update Vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{user_domain}.procurify.com/api/v3/vendors/:id/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this vendor."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Partial Update Vendor"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

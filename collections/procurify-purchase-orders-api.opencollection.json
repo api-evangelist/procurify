@@ -1,0 +1,386 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Procurify API Documentation account-codes purchase-orders API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "purchase-orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Revise a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{user_domain}.procurify.com/api/v2/purchase_order/revise/:procurify_PO/",
+            "params": [
+              {
+                "name": "confirm_duplicate_external_po_number",
+                "value": "",
+                "type": "query",
+                "description": "Mechanism to check for duplicate custom PO number. If there is a duplicate, API will fail unless this query param is set to True."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "procurify_PO",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this po."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Deprecated method for revising a purchase order. Pending removable after November 16, 2023. Use `PUT` on `/api/v3/purchase-orders/{id}` instead."
+        },
+        {
+          "info": {
+            "name": "Get Purchase Order by ID (with items)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v2/purchase_orders/:id/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Procurify PO or UUID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "**Purchase Order State Codes**\n\n| Order Type          | Code      |\n|---------------------|-----------|\n| PURCHASED           | 0         |\n| CANCELLED           | 1         |\n| (legacy code)       | 2         |\n| CLOSED              | 3         |\n| PAID                | 4         |\n| REOPENED            | 5         |"
+        },
+        {
+          "info": {
+            "name": "Get Purchase Orders by Role & Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v2/purchase_orders/:role/:status/",
+            "params": [
+              {
+                "name": "account_code",
+                "value": "",
+                "type": "query",
+                "description": "Account Code"
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "Contract"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Currency"
+              },
+              {
+                "name": "date_0",
+                "value": "",
+                "type": "query",
+                "description": "YYYY-MM-DD (start date): Filter POs by Created Date range"
+              },
+              {
+                "name": "date_1",
+                "value": "",
+                "type": "query",
+                "description": "YYYY-MM-DD (end date): Filter POs by Created Date range"
+              },
+              {
+                "name": "expiry_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Expiry Date"
+              },
+              {
+                "name": "expiry_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Expiry Date"
+              },
+              {
+                "name": "has_blanket_order_items",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "modified_date_0",
+                "value": "",
+                "type": "query",
+                "description": "YYYY-MM-DD (start date): Filter POs by Last Modified Date range"
+              },
+              {
+                "name": "modified_date_1",
+                "value": "",
+                "type": "query",
+                "description": "YYYY-MM-DD (end date): Filter POs by Last Modified Date range"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort by field"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pref_vendor",
+                "value": "",
+                "type": "query",
+                "description": "ID of Vendor"
+              },
+              {
+                "name": "promise_date_0",
+                "value": "",
+                "type": "query",
+                "description": "YYYY-MM-DD (start date): Filter POs by Promise Date range"
+              },
+              {
+                "name": "promise_date_1",
+                "value": "",
+                "type": "query",
+                "description": "YYYY-MM-DD (end date): Filter POs by Promise Date range"
+              },
+              {
+                "name": "purchase_order",
+                "value": "",
+                "type": "query",
+                "description": "Purchase Order"
+              },
+              {
+                "name": "purchaser",
+                "value": "",
+                "type": "query",
+                "description": "Purchaser"
+              },
+              {
+                "name": "requester",
+                "value": "",
+                "type": "query",
+                "description": "Requester"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "total_0",
+                "value": "",
+                "type": "query",
+                "description": "Total"
+              },
+              {
+                "name": "total_1",
+                "value": "",
+                "type": "query",
+                "description": "Total"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Purchase Orders by Role & Status"
+        },
+        {
+          "info": {
+            "name": "Update a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{user_domain}.procurify.com/api/v3/purchase-orders/:procurify_PO/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "procurify_PO",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this po."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update a Purchase Order"
+        },
+        {
+          "info": {
+            "name": "Close a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{user_domain}.procurify.com/api/v3/purchase-orders/:procurify_PO/close/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "procurify_PO",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this po."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Close a Purchase Order"
+        },
+        {
+          "info": {
+            "name": "Reopen a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{user_domain}.procurify.com/api/v3/purchase-orders/:procurify_PO/reopen/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "procurify_PO",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this po."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Reopen a Purchase Order"
+        },
+        {
+          "info": {
+            "name": "View billing history of a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v3/purchase-orders/billing-history/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "View billing history of a Purchase Order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

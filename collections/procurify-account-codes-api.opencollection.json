@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Procurify API Documentation account-codes API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "account-codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Account Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v3/account-codes/",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "is_parent",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "**Account Code Types**\n\n| Account Code Type | Type |\n|-------------------|------|\n| ASSETS            | 0    |\n| LIABILITY         | 1    |\n| EXPENSE           | 2    |\n| INCOME            | 3    |\n| EQUITY            | 4    |\n| OTHER             | 5    |"
+        },
+        {
+          "info": {
+            "name": "Create Account Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{user_domain}.procurify.com/api/v3/account-codes/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "**Account Code Types**\n\n| Account Code Type | Type |\n|-------------------|------|\n| ASSETS            | 0    |\n| LIABILITY         | 1    |\n| EXPENSE           | 2    |\n| INCOME            | 3    |\n| EQUITY            | 4    |\n| OTHER             | 5    |"
+        },
+        {
+          "info": {
+            "name": "Update Account Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{user_domain}.procurify.com/api/v3/account-codes/:id/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this account code."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "**Account Code Types**\n\n| Account Code Type | Type |\n|-------------------|------|\n| ASSETS            | 0    |\n| LIABILITY         | 1    |\n| EXPENSE           | 2    |\n| INCOME            | 3    |\n| EQUITY            | 4    |\n| OTHER             | 5    |"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

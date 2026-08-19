@@ -1,0 +1,2153 @@
+{
+  "item": [
+    {
+      "id": "8aca05eb-a03b-4b40-9bc0-3a6be3cfe08e",
+      "name": "vendors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55f88cd0-a53d-4624-982c-e83ab449850a",
+          "name": "Get list of all active vendors",
+          "request": {
+            "name": "Get list of all active vendors",
+            "description": {
+              "content": "**Vendor Type Codes**\n\n| Vendor Type         | Type      | Description                       |\n|---------------------|-----------|-----------------------------------|\n| OTHER               | 1         | Previously 'OTHER' vendor (ID=1), used for storing non-vendor\n|                     |           | for storing non-vendor Vendor names in request. |\n| HIDDEN              | 2         | New type of vendors that is reserved for system purposes (eg. Amazon Business). |\n| PREFERRED (default) | 3         | The default vendors from previous list\n|                     |           | where active vendor dropdowns everywhere previously showed.\n|                     |           | Request now ONLY shows these vendors (+OTHER) |\n| REGULAR             | 4         | New type of vendors that are non-preferred,\n|                     |           | for any AP purposes and purchasers to update.\n|                     |           | (DOES NOT show up in Request, but shows up in Procure) |\n| EMPLOYEE            | 5         | New type of vendors that do not show up anywhere except in AP employees list. |\n| CC_PROVIDER         | 6         | Similar type of vendors to AP employees, but for AP credit card providers. |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "vendors",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "exclude_other",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<integer>",
+                  "description": "Type of the vendor. See above for possible options.\n\n* `1` - other\n* `2` - amazon punchout\n* `3` - preferred\n* `4` - regular\n* `5` - employee\n* `6` - credit card provider\n* `7` - checkout"
+                },
+                {
+                  "disabled": false,
+                  "key": "type__in",
+                  "value": "<string>",
+                  "description": "* `other` - other\n* `amazon_punchout` - amazon_punchout\n* `preferred` - preferred\n* `regular` - regular\n* `employee` - employee\n* `cc_provider` - cc_provider\n* `checkout` - checkout\n* `pending` - pending"
+                },
+                {
+                  "disabled": false,
+                  "key": "type__in",
+                  "value": "<string>",
+                  "description": "* `other` - other\n* `amazon_punchout` - amazon_punchout\n* `preferred` - preferred\n* `regular` - regular\n* `employee` - employee\n* `cc_provider` - cc_provider\n* `checkout` - checkout\n* `pending` - pending"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vendor_group",
+                  "description": "(Required) \n**\"all\"**: Get list of all vendors.\n\n**\"credit_card_providers\"**: Get list of credit card provider vendors. These vendors are displayed in Payee Management for Credit Card Providers.\n\n**\"default\"**: Get list of \"preferred\" and \"regular\" vendors. These vendors are displayed in Procure (procurement, vendors, etc) and AP i.e., default vendor list. OTHER is discontinued from procure.\n\n**\"other\"**: Get list of \"other\" vendors. Only returns the 'OTHER' vendor reserved for requesting non-vendor names.\n\n**\"preferred\"**: Get list of \"preferred\" vendors.\n\n**\"purchasable\"**: Get list of \"purchasable\" vendors.\n\n**\"requestable\"**: Get list of \"requestable\" vendors. These vendors are displayed in Request and designated by Purchaser."
+                },
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dbfdcd6f-952b-407b-8aed-0fc44e2848e7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "vendors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exclude_other",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type__in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type__in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vendor_group",
+                      "description": "(Required) \n**\"all\"**: Get list of all vendors.\n\n**\"credit_card_providers\"**: Get list of credit card provider vendors. These vendors are displayed in Payee Management for Credit Card Providers.\n\n**\"default\"**: Get list of \"preferred\" and \"regular\" vendors. These vendors are displayed in Procure (procurement, vendors, etc) and AP i.e., default vendor list. OTHER is discontinued from procure.\n\n**\"other\"**: Get list of \"other\" vendors. Only returns the 'OTHER' vendor reserved for requesting non-vendor names.\n\n**\"preferred\"**: Get list of \"preferred\" vendors.\n\n**\"purchasable\"**: Get list of \"purchasable\" vendors.\n\n**\"requestable\"**: Get list of \"requestable\" vendors. These vendors are displayed in Request and designated by Purchaser."
+                    },
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"pagination\": {\n      \"count\": 10,\n      \"next\": null,\n      \"previous\": null,\n      \"page_size\": 10,\n      \"num_pages\": 1,\n      \"current_page\": 1\n    }\n  },\n  \"data\": [\n    {\n      \"email\": [\n        \"u3bxY-HXxd@romgcrXspsMqrhBMnEicdxDbgtUDA.blje\",\n        \"ctLM4ZU4sOyA@RYFfhgrQdnHFgHvzZghtzqFcGCBVon.czwx\"\n      ],\n      \"name\": \"string\",\n      \"overall_score\": \"-90.\",\n      \"type\": 4,\n      \"id\": 1239,\n      \"active\": true,\n      \"addressLineOne\": \"string\",\n      \"addressLineTwo\": \"string\",\n      \"postalCode\": \"string\",\n      \"city\": \"string\",\n      \"state_province\": \"string\",\n      \"country\": \"string\",\n      \"phoneOne\": \"string\",\n      \"phoneTwo\": \"string\",\n      \"fax\": \"string\",\n      \"comments\": \"string\",\n      \"contact\": \"string\",\n      \"url\": \"string\",\n      \"external_id\": \"string\",\n      \"dateModified\": \"1964-04-13T06:20:53.123Z\",\n      \"currency\": 3124,\n      \"payment_term_ref\": {\n        \"name\": \"string\",\n        \"id\": 8653,\n        \"description\": \"string\",\n        \"active\": true\n      },\n      \"shipping_term_ref\": {\n        \"name\": \"string\",\n        \"id\": 9981,\n        \"description\": \"string\",\n        \"active\": true\n      },\n      \"payment_method_ref\": {\n        \"name\": \"string\",\n        \"id\": 9151,\n        \"description\": \"string\",\n        \"active\": false\n      },\n      \"shipping_method_ref\": {\n        \"name\": \"string\",\n        \"id\": 1389,\n        \"description\": \"string\",\n        \"active\": true\n      },\n      \"payment_methods\": [\n        {\n          \"currency\": {\n            \"name\": \"string\",\n            \"rate\": \"-686188310\",\n            \"id\": 9357,\n            \"description\": \"string\",\n            \"base\": false,\n            \"active\": false\n          },\n          \"data\": \"\",\n          \"id\": 5772,\n          \"name\": \"string\",\n          \"type\": 4,\n          \"payment_rail\": \"string\",\n          \"bank_account_country_code\": \"string\"\n        },\n        {\n          \"currency\": {\n            \"name\": \"string\",\n            \"rate\": \"479\",\n            \"id\": 6592,\n            \"description\": \"string\",\n            \"base\": true,\n            \"active\": false\n          },\n          \"data\": \"\",\n          \"id\": 575,\n          \"name\": \"string\",\n          \"type\": 5,\n          \"payment_rail\": \"string\",\n          \"bank_account_country_code\": \"string\"\n        }\n      ],\n      \"tax\": 3089,\n      \"default_payment_method\": 5077,\n      \"creditcards\": [\n        {\n          \"assignees\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profile_image\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profile_image\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"currency\": 5817,\n          \"uuid\": \"13dbd87c-3c94-5d6a-dff9-8ec91268818d\",\n          \"vendor\": 2793,\n          \"id\": 2904,\n          \"is_active\": true,\n          \"created_at\": \"1977-02-19T06:59:41.393Z\",\n          \"updated_at\": \"1953-06-03T05:17:49.002Z\",\n          \"name\": \"string\",\n          \"number\": \"9654\",\n          \"balance\": -1199845122,\n          \"gl_code\": \"string\",\n          \"type\": 5,\n          \"category\": 1,\n          \"external_id\": \"string\",\n          \"status\": \"active\",\n          \"require_activation\": true,\n          \"last_changed_by\": 7604,\n          \"payment_method\": 9555,\n          \"currency_name\": \"string\",\n          \"creator\": 5177\n        },\n        {\n          \"assignees\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profile_image\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profile_image\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"currency\": 9792,\n          \"uuid\": \"17c79337-676c-0472-e669-01dae3e4c865\",\n          \"vendor\": 9390,\n          \"id\": 6753,\n          \"is_active\": true,\n          \"created_at\": \"1966-09-14T18:32:48.382Z\",\n          \"updated_at\": \"2005-05-30T20:02:33.195Z\",\n          \"name\": \"string\",\n          \"number\": \"9846\",\n          \"balance\": -1059582201,\n          \"gl_code\": \"string\",\n          \"type\": 5,\n          \"category\": 1,\n          \"external_id\": \"string\",\n          \"status\": \"active\",\n          \"require_activation\": false,\n          \"last_changed_by\": 3517,\n          \"payment_method\": 5043,\n          \"currency_name\": \"string\",\n          \"creator\": 2706\n        }\n      ],\n      \"is_1099_eligible\": true,\n      \"is_auto_email_po_enabled\": true,\n      \"po_pdf_labels\": \"string\",\n      \"vendor_request\": {\n        \"submitted_date\": \"2003-05-30T23:49:01.685Z\",\n        \"id\": 4156,\n        \"requester\": \"string\",\n        \"next_approver\": \"string\",\n        \"permissions\": {\n          \"key_0\": {}\n        }\n      },\n      \"email_configurations\": {\n        \"key_0\": {\n          \"auto_po\": false,\n          \"payment_remittance\": true\n        }\n      }\n    },\n    {\n      \"email\": [\n        \"y8mY9gB2o4xFGJ@ELtOpomppJxJhzzBeANlWihFrdCtDI.avvj\",\n        \"AKM9YGe@sfozrIKmlTXO.qvg\"\n      ],\n      \"name\": \"string\",\n      \"overall_score\": \"-.\",\n      \"type\": 4,\n      \"id\": 6638,\n      \"active\": false,\n      \"addressLineOne\": \"string\",\n      \"addressLineTwo\": \"string\",\n      \"postalCode\": \"string\",\n      \"city\": \"string\",\n      \"state_province\": \"string\",\n      \"country\": \"string\",\n      \"phoneOne\": \"string\",\n      \"phoneTwo\": \"string\",\n      \"fax\": \"string\",\n      \"comments\": \"string\",\n      \"contact\": \"string\",\n      \"url\": \"string\",\n      \"external_id\": \"string\",\n      \"dateModified\": \"1974-06-14T23:05:42.944Z\",\n      \"currency\": 490,\n      \"payment_term_ref\": {\n        \"name\": \"string\",\n        \"id\": 2520,\n        \"description\": \"string\",\n        \"active\": true\n      },\n      \"shipping_term_ref\": {\n        \"name\": \"string\",\n        \"id\": 3916,\n        \"description\": \"string\",\n        \"active\": false\n      },\n      \"payment_method_ref\": {\n        \"name\": \"string\",\n        \"id\": 1769,\n        \"description\": \"string\",\n        \"active\": true\n      },\n      \"shipping_method_ref\": {\n        \"name\": \"string\",\n        \"id\": 3483,\n        \"description\": \"string\",\n        \"active\": true\n      },\n      \"payment_methods\": [\n        {\n          \"currency\": {\n            \"name\": \"string\",\n            \"rate\": \"30941.80989\",\n            \"id\": 4088,\n            \"description\": \"string\",\n            \"base\": true,\n            \"active\": true\n          },\n          \"data\": \"\",\n          \"id\": 2234,\n          \"name\": \"string\",\n          \"type\": 6,\n          \"payment_rail\": \"string\",\n          \"bank_account_country_code\": \"string\"\n        },\n        {\n          \"currency\": {\n            \"name\": \"string\",\n            \"rate\": \"57273\",\n            \"id\": 8467,\n            \"description\": \"string\",\n            \"base\": true,\n            \"active\": true\n          },\n          \"data\": \"\",\n          \"id\": 2214,\n          \"name\": \"string\",\n          \"type\": 2,\n          \"payment_rail\": \"string\",\n          \"bank_account_country_code\": \"string\"\n        }\n      ],\n      \"tax\": 6222,\n      \"default_payment_method\": 3534,\n      \"creditcards\": [\n        {\n          \"assignees\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profile_image\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profile_image\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"currency\": 1332,\n          \"uuid\": \"85a60f52-176c-96cd-6eb4-54c8697ca87b\",\n          \"vendor\": 5833,\n          \"id\": 5302,\n          \"is_active\": false,\n          \"created_at\": \"1971-10-17T17:43:56.318Z\",\n          \"updated_at\": \"1984-08-24T10:42:03.975Z\",\n          \"name\": \"string\",\n          \"number\": \"7830\",\n          \"balance\": -1761876245,\n          \"gl_code\": \"string\",\n          \"type\": 4,\n          \"category\": 0,\n          \"external_id\": \"string\",\n          \"status\": \"stolen\",\n          \"require_activation\": false,\n          \"last_changed_by\": 9495,\n          \"payment_method\": 2178,\n          \"currency_name\": \"string\",\n          \"creator\": 6281\n        },\n        {\n          \"assignees\": [\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profile_image\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profile_image\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"currency\": 9572,\n          \"uuid\": \"2bbd6283-ad53-6edd-e5c4-484c24d9bdcd\",\n          \"vendor\": 6999,\n          \"id\": 8396,\n          \"is_active\": true,\n          \"created_at\": \"1997-11-09T12:29:10.626Z\",\n          \"updated_at\": \"2003-04-29T18:10:38.862Z\",\n          \"name\": \"string\",\n          \"number\": \"4605\",\n          \"balance\": -1800251491,\n          \"gl_code\": \"string\",\n          \"type\": 3,\n          \"category\": 1,\n          \"external_id\": \"string\",\n          \"status\": \"stolen\",\n          \"require_activation\": false,\n          \"last_changed_by\": 3666,\n          \"payment_method\": 4817,\n          \"currency_name\": \"string\",\n          \"creator\": 6403\n        }\n      ],\n      \"is_1099_eligible\": true,\n      \"is_auto_email_po_enabled\": false,\n      \"po_pdf_labels\": \"string\",\n      \"vendor_request\": {\n        \"submitted_date\": \"1961-08-28T07:33:09.882Z\",\n        \"id\": 7150,\n        \"requester\": \"string\",\n        \"next_approver\": \"string\",\n        \"permissions\": {\n          \"key_0\": {}\n        }\n      },\n      \"email_configurations\": {\n        \"key_0\": {\n          \"auto_po\": true,\n          \"payment_remittance\": true\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61a33420-84f7-4f3f-b2a0-b472b66b4df9",
+          "name": "Create Vendor",
+          "request": {
+            "name": "Create Vendor",
+            "description": {
+              "content": "Create a new vendor\n\nDue to having multiple vendors with the same name, especially\ncommon if user keeps deleting vendors with the same name, these\ndeleted vendors get thrown into the inactive list.\n\n**Vendor Types**\n\n| Vendor Type         | Type      |\n|---------------------|-----------|\n| OTHER               | 1         |\n| HIDDEN              | 2         |\n| PREFERRED (default) | 3         |\n| REGULAR             | 4         |\n| EMPLOYEE            | 5         |\n| CC_PROVIDER         | 6         |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "vendors",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "overall_score",
+                  "value": "<decimal>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "addressLineOne",
+                  "value": "<string>",
+                  "description": "First line of address"
+                },
+                {
+                  "disabled": false,
+                  "key": "addressLineTwo",
+                  "value": "<string>",
+                  "description": "Second line of address"
+                },
+                {
+                  "disabled": false,
+                  "key": "postalCode",
+                  "value": "<string>",
+                  "description": "Postal or Zip code of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "City of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "state_province",
+                  "value": "<string>",
+                  "description": "State or Province of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Country of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "phoneOne",
+                  "value": "<string>",
+                  "description": "Primary phone no. of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "phoneTwo",
+                  "value": "<string>",
+                  "description": "Secondary phone no. of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "fax",
+                  "value": "<string>",
+                  "description": "Fax no. of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "comments",
+                  "value": "<string>",
+                  "description": "Notes about the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "contact",
+                  "value": "<string>",
+                  "description": "Contact person of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "Website of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "External id of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_term_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_term_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_method_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_method_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "tax",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "default_payment_method",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_1099_eligible",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_auto_email_po_enabled",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "po_pdf_labels",
+                  "value": "<string>",
+                  "description": "Placeholder for a KVStore value"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{\"auto_po\":\"<boolean>\",\"payment_remittance\":\"<boolean>\"}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c0ddc95e-ade2-4174-b0a1-07187f544163",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "vendors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "overall_score",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "First line of address",
+                        "type": "text/plain"
+                      },
+                      "key": "addressLineOne",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Second line of address",
+                        "type": "text/plain"
+                      },
+                      "key": "addressLineTwo",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Postal or Zip code of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "postalCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "City of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "State or Province of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "state_province",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Country of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primary phone no. of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "phoneOne",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Secondary phone no. of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "phoneTwo",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Fax no. of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "fax",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Notes about the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Contact person of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "contact",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Website of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "External id of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "currency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "tax",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "default_payment_method",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "is_1099_eligible",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "is_auto_email_po_enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Placeholder for a KVStore value",
+                        "type": "text/plain"
+                      },
+                      "key": "po_pdf_labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{\"auto_po\":\"<boolean>\",\"payment_remittance\":\"<boolean>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"name\": \"string\",\n    \"type\": \"<integer>\",\n    \"id\": 4682,\n    \"active\": false,\n    \"addressLineOne\": \"string\",\n    \"addressLineTwo\": \"string\",\n    \"postalCode\": \"string\",\n    \"city\": \"string\",\n    \"state_province\": \"string\",\n    \"country\": \"string\",\n    \"phoneOne\": \"string\",\n    \"phoneTwo\": \"string\",\n    \"fax\": \"string\",\n    \"email\": [\n      \"string\",\n      \"string\"\n    ],\n    \"comments\": \"string\",\n    \"contact\": \"string\",\n    \"url\": \"string\",\n    \"external_id\": \"string\",\n    \"dateModified\": \"1993-03-26T22:42:06.240Z\",\n    \"currency\": 455,\n    \"payment_term_ref\": {\n      \"name\": \"string\",\n      \"id\": 8398,\n      \"description\": \"string\",\n      \"active\": false\n    },\n    \"shipping_term_ref\": {\n      \"name\": \"string\",\n      \"id\": 9204,\n      \"description\": \"string\",\n      \"active\": true\n    },\n    \"payment_method_ref\": {\n      \"name\": \"string\",\n      \"id\": 2009,\n      \"description\": \"string\",\n      \"active\": true\n    },\n    \"shipping_method_ref\": {\n      \"name\": \"string\",\n      \"id\": 2968,\n      \"description\": \"string\",\n      \"active\": false\n    },\n    \"payment_methods\": [\n      {\n        \"currency\": {\n          \"name\": \"string\",\n          \"rate\": \"191542422.23110\",\n          \"id\": 2373,\n          \"description\": \"string\",\n          \"base\": false,\n          \"active\": true\n        },\n        \"data\": \"\",\n        \"id\": 2169,\n        \"name\": \"string\",\n        \"type\": 5,\n        \"payment_rail\": \"string\",\n        \"bank_account_country_code\": \"string\"\n      },\n      {\n        \"currency\": {\n          \"name\": \"string\",\n          \"rate\": \"605379.\",\n          \"id\": 2663,\n          \"description\": \"string\",\n          \"base\": false,\n          \"active\": true\n        },\n        \"data\": \"\",\n        \"id\": 2641,\n        \"name\": \"string\",\n        \"type\": 7,\n        \"payment_rail\": \"string\",\n        \"bank_account_country_code\": \"string\"\n      }\n    ],\n    \"tax\": 9462,\n    \"default_payment_method\": 5139,\n    \"creditcards\": [\n      {\n        \"assignees\": [\n          {\n            \"email\": \"9jiaPn9TLVy@eIzFJAhTyOvPOtIF.mox\",\n            \"id\": 113,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          },\n          {\n            \"email\": \"XM3K7o@RGQYoViPyrccR.kui\",\n            \"id\": 5958,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          }\n        ],\n        \"currency\": 1061,\n        \"uuid\": \"b592cd37-9480-39e8-53de-25308b22f3a1\",\n        \"vendor\": 857,\n        \"id\": 2969,\n        \"is_active\": true,\n        \"created_at\": \"1995-12-20T15:31:59.759Z\",\n        \"updated_at\": \"1980-11-24T03:36:56.651Z\",\n        \"name\": \"string\",\n        \"number\": \"5926\",\n        \"balance\": -1634307115,\n        \"gl_code\": \"string\",\n        \"type\": 0,\n        \"category\": 1,\n        \"external_id\": \"string\",\n        \"status\": \"active\",\n        \"require_activation\": false,\n        \"last_changed_by\": 3242,\n        \"payment_method\": 1120,\n        \"currency_name\": \"string\",\n        \"creator\": 1501\n      },\n      {\n        \"assignees\": [\n          {\n            \"email\": \"quOtzI@xdUFvoYySdTwNrHuOZDuvcrNsvDJ.tp\",\n            \"id\": 6996,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          },\n          {\n            \"email\": \"jNk@nJhSYzrqqZlAULbfP.jy\",\n            \"id\": 8904,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          }\n        ],\n        \"currency\": 5942,\n        \"uuid\": \"dabeaf9d-515a-be6c-ba8f-ae43f7d6a0fe\",\n        \"vendor\": 6550,\n        \"id\": 8774,\n        \"is_active\": false,\n        \"created_at\": \"1971-11-15T22:29:03.335Z\",\n        \"updated_at\": \"1994-07-09T03:45:25.357Z\",\n        \"name\": \"string\",\n        \"number\": \"1783\",\n        \"balance\": -940540313,\n        \"gl_code\": \"string\",\n        \"type\": 1,\n        \"category\": 1,\n        \"external_id\": \"string\",\n        \"status\": \"inactive\",\n        \"require_activation\": true,\n        \"last_changed_by\": 9975,\n        \"payment_method\": 7087,\n        \"currency_name\": \"string\",\n        \"creator\": 8397\n      }\n    ],\n    \"is_1099_eligible\": false,\n    \"overall_score\": 8782.593280874828,\n    \"is_auto_email_po_enabled\": false,\n    \"po_pdf_labels\": \"string\",\n    \"email_configurations\": {\n      \"key_0\": {\n        \"auto_po\": false,\n        \"payment_remittance\": true\n      },\n      \"key_1\": {\n        \"auto_po\": true,\n        \"payment_remittance\": false\n      },\n      \"key_2\": {\n        \"auto_po\": true,\n        \"payment_remittance\": false\n      }\n    },\n    \"performance\": {\n      \"overall_score\": 3836.048038591896,\n      \"average_delivery_time\": \"-\",\n      \"breakdown\": {\n        \"accuracy\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"cost\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quality\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"speed\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"vendor_request\": {\n      \"submitted_date\": \"1981-04-12T22:11:41.161Z\",\n      \"id\": 8288,\n      \"requester\": \"string\",\n      \"next_approver\": \"string\",\n      \"permissions\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    }\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "258b9871-5f0f-4fef-8ddf-70eab645e984",
+          "name": "Get Vendor by ID",
+          "request": {
+            "name": "Get Vendor by ID",
+            "description": {
+              "content": "Get detail of a vendor by id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "vendors",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this vendor."
+                },
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d89ecc74-ab49-47a2-82a6-ec3755ac4ae5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "vendors",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this vendor."
+                    },
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"name\": \"string\",\n    \"type\": \"<integer>\",\n    \"id\": 9107,\n    \"active\": false,\n    \"addressLineOne\": \"string\",\n    \"addressLineTwo\": \"string\",\n    \"postalCode\": \"string\",\n    \"city\": \"string\",\n    \"state_province\": \"string\",\n    \"country\": \"string\",\n    \"phoneOne\": \"string\",\n    \"phoneTwo\": \"string\",\n    \"fax\": \"string\",\n    \"email\": [\n      \"string\",\n      \"string\"\n    ],\n    \"comments\": \"string\",\n    \"contact\": \"string\",\n    \"url\": \"string\",\n    \"external_id\": \"string\",\n    \"dateModified\": \"2024-11-15T06:01:04.265Z\",\n    \"currency\": 4675,\n    \"payment_term_ref\": {\n      \"name\": \"string\",\n      \"id\": 6347,\n      \"description\": \"string\",\n      \"active\": false\n    },\n    \"shipping_term_ref\": {\n      \"name\": \"string\",\n      \"id\": 6468,\n      \"description\": \"string\",\n      \"active\": false\n    },\n    \"payment_method_ref\": {\n      \"name\": \"string\",\n      \"id\": 3419,\n      \"description\": \"string\",\n      \"active\": true\n    },\n    \"shipping_method_ref\": {\n      \"name\": \"string\",\n      \"id\": 6731,\n      \"description\": \"string\",\n      \"active\": false\n    },\n    \"payment_methods\": [\n      {\n        \"currency\": {\n          \"name\": \"string\",\n          \"rate\": \"-1.256391\",\n          \"id\": 8523,\n          \"description\": \"string\",\n          \"base\": false,\n          \"active\": false\n        },\n        \"data\": \"\",\n        \"id\": 3864,\n        \"name\": \"string\",\n        \"type\": 6,\n        \"payment_rail\": \"string\",\n        \"bank_account_country_code\": \"string\"\n      },\n      {\n        \"currency\": {\n          \"name\": \"string\",\n          \"rate\": \"-074024200\",\n          \"id\": 3196,\n          \"description\": \"string\",\n          \"base\": false,\n          \"active\": true\n        },\n        \"data\": \"\",\n        \"id\": 372,\n        \"name\": \"string\",\n        \"type\": 6,\n        \"payment_rail\": \"string\",\n        \"bank_account_country_code\": \"string\"\n      }\n    ],\n    \"tax\": 9158,\n    \"default_payment_method\": 6741,\n    \"creditcards\": [\n      {\n        \"assignees\": [\n          {\n            \"email\": \"JK-sdl7Cg9q0q@LpKLdw.uz\",\n            \"id\": 8141,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          },\n          {\n            \"email\": \"LULx39OVEolu1s@pgWeoisIMYLitJQEL.gmu\",\n            \"id\": 5109,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          }\n        ],\n        \"currency\": 1163,\n        \"uuid\": \"958944f8-c870-07f2-921a-2d444e165a25\",\n        \"vendor\": 3757,\n        \"id\": 3752,\n        \"is_active\": false,\n        \"created_at\": \"2014-11-09T09:10:09.925Z\",\n        \"updated_at\": \"1988-02-24T17:14:25.517Z\",\n        \"name\": \"string\",\n        \"number\": \"6356\",\n        \"balance\": -1750888990,\n        \"gl_code\": \"string\",\n        \"type\": 2,\n        \"category\": 1,\n        \"external_id\": \"string\",\n        \"status\": \"active\",\n        \"require_activation\": true,\n        \"last_changed_by\": 313,\n        \"payment_method\": 7369,\n        \"currency_name\": \"string\",\n        \"creator\": 4084\n      },\n      {\n        \"assignees\": [\n          {\n            \"email\": \"yPW3LqGy8fmUXT@qYnRRmQZPrNHWECciKyVsHEO.sjd\",\n            \"id\": 423,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          },\n          {\n            \"email\": \"Oxva@ghfswJEuoEegMiR.gsx\",\n            \"id\": 5168,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          }\n        ],\n        \"currency\": 1606,\n        \"uuid\": \"2f5207e0-171d-ec0a-de4a-09a87a00fad4\",\n        \"vendor\": 3019,\n        \"id\": 9695,\n        \"is_active\": false,\n        \"created_at\": \"2008-07-03T01:21:04.855Z\",\n        \"updated_at\": \"2020-11-27T17:55:58.018Z\",\n        \"name\": \"string\",\n        \"number\": \"3255\",\n        \"balance\": 346891425,\n        \"gl_code\": \"string\",\n        \"type\": 1,\n        \"category\": 0,\n        \"external_id\": \"string\",\n        \"status\": \"inactive\",\n        \"require_activation\": true,\n        \"last_changed_by\": 5267,\n        \"payment_method\": 3893,\n        \"currency_name\": \"string\",\n        \"creator\": 2798\n      }\n    ],\n    \"is_1099_eligible\": false,\n    \"overall_score\": 492.769481389278,\n    \"is_auto_email_po_enabled\": false,\n    \"po_pdf_labels\": \"string\",\n    \"email_configurations\": {\n      \"key_0\": {\n        \"auto_po\": true,\n        \"payment_remittance\": true\n      },\n      \"key_1\": {\n        \"auto_po\": false,\n        \"payment_remittance\": false\n      },\n      \"key_2\": {\n        \"auto_po\": false,\n        \"payment_remittance\": true\n      }\n    },\n    \"performance\": {\n      \"overall_score\": 1007.8640908250159,\n      \"average_delivery_time\": \"85\",\n      \"breakdown\": {\n        \"accuracy\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"cost\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"quality\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"speed\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"vendor_request\": {\n      \"submitted_date\": \"2002-11-20T13:43:23.215Z\",\n      \"id\": 232,\n      \"requester\": \"string\",\n      \"next_approver\": \"string\",\n      \"permissions\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      }\n    }\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98d2e602-54f1-4807-bb9b-27d3927f96a8",
+          "name": "Update Vendor",
+          "request": {
+            "name": "Update Vendor",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "vendors",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this vendor."
+                },
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "overall_score",
+                  "value": "<decimal>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "addressLineOne",
+                  "value": "<string>",
+                  "description": "First line of address"
+                },
+                {
+                  "disabled": false,
+                  "key": "addressLineTwo",
+                  "value": "<string>",
+                  "description": "Second line of address"
+                },
+                {
+                  "disabled": false,
+                  "key": "postalCode",
+                  "value": "<string>",
+                  "description": "Postal or Zip code of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "City of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "state_province",
+                  "value": "<string>",
+                  "description": "State or Province of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Country of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "phoneOne",
+                  "value": "<string>",
+                  "description": "Primary phone no. of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "phoneTwo",
+                  "value": "<string>",
+                  "description": "Secondary phone no. of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "fax",
+                  "value": "<string>",
+                  "description": "Fax no. of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "comments",
+                  "value": "<string>",
+                  "description": "Notes about the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "contact",
+                  "value": "<string>",
+                  "description": "Contact person of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "Website of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "External id of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_term_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_term_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_method_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_method_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "tax",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "default_payment_method",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_1099_eligible",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_auto_email_po_enabled",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "po_pdf_labels",
+                  "value": "<string>",
+                  "description": "Placeholder for a KVStore value"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{\"auto_po\":\"<boolean>\",\"payment_remittance\":\"<boolean>\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_1",
+                  "value": "{\"auto_po\":\"<boolean>\",\"payment_remittance\":\"<boolean>\"}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "607646cd-ba62-48ba-9edd-d2e50b7b110c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "vendors",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this vendor."
+                    },
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "overall_score",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "First line of address",
+                        "type": "text/plain"
+                      },
+                      "key": "addressLineOne",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Second line of address",
+                        "type": "text/plain"
+                      },
+                      "key": "addressLineTwo",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Postal or Zip code of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "postalCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "City of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "State or Province of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "state_province",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Country of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primary phone no. of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "phoneOne",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Secondary phone no. of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "phoneTwo",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Fax no. of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "fax",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Notes about the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Contact person of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "contact",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Website of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "External id of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "currency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "tax",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "default_payment_method",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "is_1099_eligible",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "is_auto_email_po_enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Placeholder for a KVStore value",
+                        "type": "text/plain"
+                      },
+                      "key": "po_pdf_labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{\"auto_po\":\"<boolean>\",\"payment_remittance\":\"<boolean>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"name\": \"string\",\n    \"type\": \"<integer>\",\n    \"id\": 6539,\n    \"active\": true,\n    \"addressLineOne\": \"string\",\n    \"addressLineTwo\": \"string\",\n    \"postalCode\": \"string\",\n    \"city\": \"string\",\n    \"state_province\": \"string\",\n    \"country\": \"string\",\n    \"phoneOne\": \"string\",\n    \"phoneTwo\": \"string\",\n    \"fax\": \"string\",\n    \"email\": [\n      \"lyRpQSIqeH@eiIHFvDzreCNWyUrzMbvsX.qs\",\n      \"ItyufJ3oOOPCu@YeMWtsMLXpbbPhkX.varv\"\n    ],\n    \"comments\": \"string\",\n    \"contact\": \"string\",\n    \"url\": \"string\",\n    \"external_id\": \"string\",\n    \"dateModified\": \"2004-10-15T16:27:19.777Z\",\n    \"currency\": 1863,\n    \"payment_term_ref\": 9983,\n    \"shipping_term_ref\": 2736,\n    \"payment_method_ref\": 538,\n    \"shipping_method_ref\": 4991,\n    \"payment_methods\": [\n      {\n        \"currency\": {\n          \"name\": \"string\",\n          \"rate\": \"312840.7406\",\n          \"id\": 7236,\n          \"description\": \"string\",\n          \"base\": true,\n          \"active\": true\n        },\n        \"data\": \"\",\n        \"id\": 7325,\n        \"name\": \"string\",\n        \"type\": 4,\n        \"payment_rail\": \"string\",\n        \"bank_account_country_code\": \"string\"\n      },\n      {\n        \"currency\": {\n          \"name\": \"string\",\n          \"rate\": \"-6824114\",\n          \"id\": 1333,\n          \"description\": \"string\",\n          \"base\": false,\n          \"active\": true\n        },\n        \"data\": \"\",\n        \"id\": 7812,\n        \"name\": \"string\",\n        \"type\": 5,\n        \"payment_rail\": \"string\",\n        \"bank_account_country_code\": \"string\"\n      }\n    ],\n    \"tax\": 6006,\n    \"default_payment_method\": 7812,\n    \"creditcards\": [\n      {\n        \"assignees\": [\n          {\n            \"email\": \"gsgZOs@CLjgclBZMPxdQqwv.aiv\",\n            \"id\": 8305,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          },\n          {\n            \"email\": \"1AUF5IE0HMJ-ww@ZZYnGxPaToQPcfJMsVOGQo.bxt\",\n            \"id\": 837,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          }\n        ],\n        \"currency\": 9079,\n        \"uuid\": \"4a9c6ca1-31fd-f6b7-05ee-f748fb352a0b\",\n        \"vendor\": 9461,\n        \"id\": 4679,\n        \"is_active\": true,\n        \"created_at\": \"2022-04-17T07:21:23.154Z\",\n        \"updated_at\": \"2016-11-03T10:29:42.642Z\",\n        \"name\": \"string\",\n        \"number\": \"4615\",\n        \"balance\": 231224786,\n        \"gl_code\": \"string\",\n        \"type\": 2,\n        \"category\": 0,\n        \"external_id\": \"string\",\n        \"status\": \"pending\",\n        \"require_activation\": true,\n        \"last_changed_by\": 4916,\n        \"payment_method\": 8518,\n        \"currency_name\": \"string\",\n        \"creator\": 6487\n      },\n      {\n        \"assignees\": [\n          {\n            \"email\": \"dh0@PwMxoNmHp.xlhn\",\n            \"id\": 9474,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          },\n          {\n            \"email\": \"UvbdRWrbe7TB@UotfoSNwUIqh.ed\",\n            \"id\": 2696,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          }\n        ],\n        \"currency\": 7564,\n        \"uuid\": \"d160d6a5-ba7a-86c2-7798-9c6fa95d3f00\",\n        \"vendor\": 7309,\n        \"id\": 8528,\n        \"is_active\": false,\n        \"created_at\": \"2014-05-06T04:04:29.462Z\",\n        \"updated_at\": \"1955-11-20T01:47:26.203Z\",\n        \"name\": \"string\",\n        \"number\": \"1363\",\n        \"balance\": -1249305935,\n        \"gl_code\": \"string\",\n        \"type\": 4,\n        \"category\": 0,\n        \"external_id\": \"string\",\n        \"status\": \"pending\",\n        \"require_activation\": false,\n        \"last_changed_by\": 6358,\n        \"payment_method\": 7470,\n        \"currency_name\": \"string\",\n        \"creator\": 546\n      }\n    ],\n    \"is_1099_eligible\": true,\n    \"overall_score\": 1625.662920554848,\n    \"is_auto_email_po_enabled\": true,\n    \"po_pdf_labels\": \"string\",\n    \"email_configurations\": {\n      \"key_0\": {\n        \"auto_po\": true,\n        \"payment_remittance\": false\n      }\n    }\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c948084-3538-4889-aec3-fbc7bc00d071",
+          "name": "Partial Update Vendor",
+          "request": {
+            "name": "Partial Update Vendor",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "vendors",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this vendor."
+                },
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "addressLineOne",
+                  "value": "<string>",
+                  "description": "First line of address"
+                },
+                {
+                  "disabled": false,
+                  "key": "addressLineTwo",
+                  "value": "<string>",
+                  "description": "Second line of address"
+                },
+                {
+                  "disabled": false,
+                  "key": "postalCode",
+                  "value": "<string>",
+                  "description": "Postal or Zip code of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "City of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "state_province",
+                  "value": "<string>",
+                  "description": "State or Province of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Country of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "phoneOne",
+                  "value": "<string>",
+                  "description": "Primary phone no. of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "phoneTwo",
+                  "value": "<string>",
+                  "description": "Secondary phone no. of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "fax",
+                  "value": "<string>",
+                  "description": "Fax no. of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>"
+                },
+                {
+                  "disabled": false,
+                  "key": "comments",
+                  "value": "<string>",
+                  "description": "Notes about the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "contact",
+                  "value": "<string>",
+                  "description": "Contact person of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "Website of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "External id of the vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_term_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_term_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_method_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_method_ref",
+                  "value": "<object>"
+                },
+                {
+                  "disabled": false,
+                  "key": "tax",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "default_payment_method",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_1099_eligible",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "overall_score",
+                  "value": "<decimal>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_auto_email_po_enabled",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "po_pdf_labels",
+                  "value": "<string>",
+                  "description": "Placeholder for a KVStore value"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{\"auto_po\":\"<boolean>\",\"payment_remittance\":\"<boolean>\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_1",
+                  "value": "{\"auto_po\":\"<boolean>\",\"payment_remittance\":\"<boolean>\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_2",
+                  "value": "{\"auto_po\":\"<boolean>\",\"payment_remittance\":\"<boolean>\"}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "411dd6e8-0b50-4752-b4b6-97aaa0b28da9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "vendors",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this vendor."
+                    },
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "First line of address",
+                        "type": "text/plain"
+                      },
+                      "key": "addressLineOne",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Second line of address",
+                        "type": "text/plain"
+                      },
+                      "key": "addressLineTwo",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Postal or Zip code of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "postalCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "City of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "State or Province of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "state_province",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Country of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primary phone no. of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "phoneOne",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Secondary phone no. of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "phoneTwo",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Fax no. of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "fax",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Notes about the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Contact person of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "contact",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Website of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "External id of the vendor",
+                        "type": "text/plain"
+                      },
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "currency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "tax",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "type",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "default_payment_method",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "is_1099_eligible",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "overall_score",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "is_auto_email_po_enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Placeholder for a KVStore value",
+                        "type": "text/plain"
+                      },
+                      "key": "po_pdf_labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{\"auto_po\":\"<boolean>\",\"payment_remittance\":\"<boolean>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"email\": [\n      \"SbM2a92G6@mcavCZypYQsjIMoQODfJs.aj\",\n      \"80fj7vrLWjXGN8F@UFAsSsJlTxbV.ivw\"\n    ],\n    \"name\": \"string\",\n    \"overall_score\": \"-1\",\n    \"type\": \"<integer>\",\n    \"id\": 9652,\n    \"active\": true,\n    \"addressLineOne\": \"string\",\n    \"addressLineTwo\": \"string\",\n    \"postalCode\": \"string\",\n    \"city\": \"string\",\n    \"state_province\": \"string\",\n    \"country\": \"string\",\n    \"phoneOne\": \"string\",\n    \"phoneTwo\": \"string\",\n    \"fax\": \"string\",\n    \"comments\": \"string\",\n    \"contact\": \"string\",\n    \"url\": \"string\",\n    \"external_id\": \"string\",\n    \"dateModified\": \"1998-04-27T05:50:53.588Z\",\n    \"currency\": 5925,\n    \"payment_term_ref\": {\n      \"name\": \"string\",\n      \"id\": 8365,\n      \"description\": \"string\",\n      \"active\": true\n    },\n    \"shipping_term_ref\": {\n      \"name\": \"string\",\n      \"id\": 8360,\n      \"description\": \"string\",\n      \"active\": false\n    },\n    \"payment_method_ref\": {\n      \"name\": \"string\",\n      \"id\": 8924,\n      \"description\": \"string\",\n      \"active\": false\n    },\n    \"shipping_method_ref\": {\n      \"name\": \"string\",\n      \"id\": 875,\n      \"description\": \"string\",\n      \"active\": true\n    },\n    \"payment_methods\": [\n      {\n        \"currency\": {\n          \"name\": \"string\",\n          \"rate\": \"-952\",\n          \"id\": 7745,\n          \"description\": \"string\",\n          \"base\": true,\n          \"active\": false\n        },\n        \"data\": \"\",\n        \"id\": 2978,\n        \"name\": \"string\",\n        \"type\": 7,\n        \"payment_rail\": \"string\",\n        \"bank_account_country_code\": \"string\"\n      },\n      {\n        \"currency\": {\n          \"name\": \"string\",\n          \"rate\": \"-2238.5058\",\n          \"id\": 9802,\n          \"description\": \"string\",\n          \"base\": false,\n          \"active\": true\n        },\n        \"data\": \"\",\n        \"id\": 4084,\n        \"name\": \"string\",\n        \"type\": 3,\n        \"payment_rail\": \"string\",\n        \"bank_account_country_code\": \"string\"\n      }\n    ],\n    \"tax\": 5182,\n    \"default_payment_method\": 8437,\n    \"creditcards\": [\n      {\n        \"assignees\": [\n          {\n            \"email\": \"0Kh65Aiu4nXuKt@mjzDLJfsYznDaurjGZUfdASuZTlVHiSyf.eje\",\n            \"id\": 2982,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          },\n          {\n            \"email\": \"iFPU0YWa6a0JBIu@SOsjHEQsSOlyWOZsNZ.jzrm\",\n            \"id\": 6805,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          }\n        ],\n        \"currency\": 3367,\n        \"uuid\": \"e269c2a5-7883-e372-3b44-2fa0a613f802\",\n        \"vendor\": 6790,\n        \"id\": 4397,\n        \"is_active\": false,\n        \"created_at\": \"1970-01-17T23:21:51.703Z\",\n        \"updated_at\": \"1977-04-24T09:32:48.622Z\",\n        \"name\": \"string\",\n        \"number\": \"5261\",\n        \"balance\": -109415680,\n        \"gl_code\": \"string\",\n        \"type\": 6,\n        \"category\": 1,\n        \"external_id\": \"string\",\n        \"status\": \"lost\",\n        \"require_activation\": true,\n        \"last_changed_by\": 9563,\n        \"payment_method\": 9146,\n        \"currency_name\": \"string\",\n        \"creator\": 189\n      },\n      {\n        \"assignees\": [\n          {\n            \"email\": \"T3w@JjPPuSoHpctTuST.lxpj\",\n            \"id\": 4269,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          },\n          {\n            \"email\": \"Ll0@wMpLAKCArypJsMP.uawm\",\n            \"id\": 279,\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"profile_image\": \"string\"\n          }\n        ],\n        \"currency\": 272,\n        \"uuid\": \"54620079-789a-83cb-fee0-34c81534d202\",\n        \"vendor\": 1850,\n        \"id\": 2774,\n        \"is_active\": false,\n        \"created_at\": \"1965-08-05T12:17:19.292Z\",\n        \"updated_at\": \"2018-07-12T14:32:12.228Z\",\n        \"name\": \"string\",\n        \"number\": \"4742\",\n        \"balance\": -897129793,\n        \"gl_code\": \"string\",\n        \"type\": 7,\n        \"category\": 1,\n        \"external_id\": \"string\",\n        \"status\": \"canceled\",\n        \"require_activation\": false,\n        \"last_changed_by\": 1696,\n        \"payment_method\": 6494,\n        \"currency_name\": \"string\",\n        \"creator\": 5043\n      }\n    ],\n    \"is_1099_eligible\": false,\n    \"is_auto_email_po_enabled\": true,\n    \"po_pdf_labels\": \"string\",\n    \"vendor_request\": {\n      \"submitted_date\": \"1993-11-21T00:13:19.817Z\",\n      \"id\": 9573,\n      \"requester\": \"string\",\n      \"next_approver\": \"string\",\n      \"permissions\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      }\n    },\n    \"email_configurations\": {\n      \"key_0\": {\n        \"auto_po\": false,\n        \"payment_remittance\": false\n      },\n      \"key_1\": {\n        \"auto_po\": false,\n        \"payment_remittance\": true\n      }\n    }\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your procurify domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "user_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{user_domain}}.procurify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "27cd0b0f-6b93-4b2b-b3c5-dd8e13a30e1b",
+    "name": "Procurify API Documentation account-codes vendors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Disclaimer\n\n- Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.\n- Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.\n- Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.\n- In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.\n- You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Procurify API Documentation account-codes order-items API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "order-items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get list of all order items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v3/order-items/",
+            "params": [
+              {
+                "name": "account",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_code",
+                "value": "",
+                "type": "query",
+                "description": "Account Code"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "approved_datetime_0",
+                "value": "",
+                "type": "query",
+                "description": "Approved Date"
+              },
+              {
+                "name": "approved_datetime_1",
+                "value": "",
+                "type": "query",
+                "description": "Approved Date"
+              },
+              {
+                "name": "approved_price",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "approved_quantity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "approver_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Location"
+              },
+              {
+                "name": "catalog",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "catalog_item",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of integers."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "department",
+                "value": "",
+                "type": "query",
+                "description": "Department"
+              },
+              {
+                "name": "departments",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of integers."
+              },
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of integers."
+              },
+              {
+                "name": "exclude_punchout",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fulfilment_status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "is_purchased",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "is_recurring",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last_changed_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last_modified_0",
+                "value": "",
+                "type": "query",
+                "description": "Last Modified Date"
+              },
+              {
+                "name": "last_modified_1",
+                "value": "",
+                "type": "query",
+                "description": "Last Modified Date"
+              },
+              {
+                "name": "lineComment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Location"
+              },
+              {
+                "name": "locations",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of integers."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "num",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderNum",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderNum__status",
+                "value": "",
+                "type": "query",
+                "description": "* `0` - Pending\n* `1` - Approved\n* `2` - Denied\n* `3` - Purchased\n* `4` - Cancelled\n* `5` - Received\n* `6` - Draft"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "order_created_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Order Created Date"
+              },
+              {
+                "name": "order_created_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Order Created Date"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "po_created_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Purchased Date"
+              },
+              {
+                "name": "po_created_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Purchased Date"
+              },
+              {
+                "name": "po_vendor",
+                "value": "",
+                "type": "query",
+                "description": "Purchased Vendor"
+              },
+              {
+                "name": "pref_vendor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "price",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "purchase_agreement",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "purchased_date_0",
+                "value": "",
+                "type": "query",
+                "description": "Purchased Date"
+              },
+              {
+                "name": "purchased_date_1",
+                "value": "",
+                "type": "query",
+                "description": "Purchased Date"
+              },
+              {
+                "name": "purchaser",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "quantity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "receivedFailQty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "receivedPassQty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "requester",
+                "value": "",
+                "type": "query",
+                "description": "Requester"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "sku",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "* `0` - Purchase Pending\n* `1` - Purchaser In-Use\n* `2` - Receive Pending\n* `3` - Received\n* `4` - Rejected for Purchase\n* `5` - Partial Received\n* `6` - Fulfilled\n* `7` - Approval Denied\n* `8` - Request Draft"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "* `0` - One Time\n* `1` - Recurring\n* `2` - Blanket"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "**Order Item Status Codes**\n\n| Order Item Type          | Code      | Description                       |\n|--------------------------|-----------|-----------------------------------|\n| PURCHASE_PENDING         | 0         | Approved but not purchased.       |\n| PURCHASE_INUSE           | 1         | Added to purchaser's PO list.     |\n| RECEIVE_PENDING          | 2         | Purchased but not yet received, i.e. receivedPassQty == 0. |\n| RECEIVED                 | 3         | Fully received, i.e."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

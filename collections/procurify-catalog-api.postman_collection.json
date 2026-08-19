@@ -1,0 +1,1081 @@
+{
+  "item": [
+    {
+      "id": "fca17b3d-a345-49e9-846b-1362102d7da1",
+      "name": "catalog",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "db574681-477e-4686-a105-33fccc39a6c2",
+          "name": "Get All Catalog Bundles",
+          "request": {
+            "name": "Get All Catalog Bundles",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "catalog-bundles",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7b16fdec-c9cf-464f-9be8-850b4ab17ee3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "catalog-bundles",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"pagination\": {\n      \"count\": 10,\n      \"next\": null,\n      \"previous\": null,\n      \"page_size\": 10,\n      \"num_pages\": 1,\n      \"current_page\": 1\n    }\n  },\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"id\": 9222,\n      \"description\": \"string\",\n      \"image\": \"string\",\n      \"active\": true,\n      \"items\": [\n        {\n          \"account_code\": {\n            \"code\": \"string\",\n            \"description\": \"string\",\n            \"id\": 8790,\n            \"applied_accounts_count\": 1175,\n            \"code_length\": 1061084222,\n            \"account_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"active\": false,\n            \"parent\": 5715\n          },\n          \"currency\": {\n            \"name\": \"string\",\n            \"rate\": \"64529.770848\",\n            \"id\": 1334,\n            \"base\": false\n          },\n          \"name\": \"string\",\n          \"pref_vendor\": {\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": 119,\n            \"active\": false,\n            \"addressLineOne\": \"string\",\n            \"addressLineTwo\": \"string\",\n            \"postalCode\": \"string\",\n            \"city\": \"string\",\n            \"state_province\": \"string\",\n            \"country\": \"string\",\n            \"phoneOne\": \"string\",\n            \"phoneTwo\": \"string\",\n            \"fax\": \"string\",\n            \"email\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"comments\": \"string\",\n            \"contact\": \"string\",\n            \"url\": \"string\",\n            \"external_id\": \"string\",\n            \"dateModified\": \"2016-09-03T10:49:25.138Z\",\n            \"currency\": 5752,\n            \"payment_term_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_term_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_method_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_method_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_methods\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tax\": 674,\n            \"default_payment_method\": 3473,\n            \"creditcards\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"is_1099_eligible\": false,\n            \"overall_score\": 3894.238731315167,\n            \"is_auto_email_po_enabled\": false,\n            \"po_pdf_labels\": \"string\",\n            \"email_configurations\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"quantity\": 7921.643237790598,\n          \"id\": 3983,\n          \"image\": \"string\",\n          \"unitType\": \"string\",\n          \"internalSKU\": \"string\",\n          \"description\": \"string\",\n          \"product_url\": \"string\",\n          \"price\": \"18732\",\n          \"rfo_lock\": false,\n          \"departments\": [\n            5483,\n            102\n          ],\n          \"custom_fields\": [\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"requested_count\": 1050613650,\n          \"last_requested_date\": \"1993-01-03T08:16:57.608Z\",\n          \"selected_account\": {\n            \"key_0\": {}\n          }\n        },\n        {\n          \"account_code\": {\n            \"code\": \"string\",\n            \"description\": \"string\",\n            \"id\": 6010,\n            \"applied_accounts_count\": 1501,\n            \"code_length\": -1353240053,\n            \"account_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"active\": false,\n            \"parent\": 3712\n          },\n          \"currency\": {\n            \"name\": \"string\",\n            \"rate\": \"75\",\n            \"id\": 880,\n            \"base\": true\n          },\n          \"name\": \"string\",\n          \"pref_vendor\": {\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": 2881,\n            \"active\": false,\n            \"addressLineOne\": \"string\",\n            \"addressLineTwo\": \"string\",\n            \"postalCode\": \"string\",\n            \"city\": \"string\",\n            \"state_province\": \"string\",\n            \"country\": \"string\",\n            \"phoneOne\": \"string\",\n            \"phoneTwo\": \"string\",\n            \"fax\": \"string\",\n            \"email\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"comments\": \"string\",\n            \"contact\": \"string\",\n            \"url\": \"string\",\n            \"external_id\": \"string\",\n            \"dateModified\": \"1973-06-18T06:40:04.435Z\",\n            \"currency\": 1117,\n            \"payment_term_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_term_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_method_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_method_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_methods\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tax\": 6176,\n            \"default_payment_method\": 9203,\n            \"creditcards\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"is_1099_eligible\": true,\n            \"overall_score\": 7267.544385887268,\n            \"is_auto_email_po_enabled\": false,\n            \"po_pdf_labels\": \"string\",\n            \"email_configurations\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"quantity\": 5299.309885984467,\n          \"id\": 424,\n          \"image\": \"string\",\n          \"unitType\": \"string\",\n          \"internalSKU\": \"string\",\n          \"description\": \"string\",\n          \"product_url\": \"string\",\n          \"price\": \"-142436056.286\",\n          \"rfo_lock\": true,\n          \"departments\": [\n            6660,\n            8320\n          ],\n          \"custom_fields\": [\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"requested_count\": -764487024,\n          \"last_requested_date\": \"1968-07-05T13:11:51.643Z\",\n          \"selected_account\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        }\n      ],\n      \"items_count\": 2682\n    },\n    {\n      \"name\": \"string\",\n      \"id\": 1374,\n      \"description\": \"string\",\n      \"image\": \"string\",\n      \"active\": false,\n      \"items\": [\n        {\n          \"account_code\": {\n            \"code\": \"string\",\n            \"description\": \"string\",\n            \"id\": 5642,\n            \"applied_accounts_count\": 4810,\n            \"code_length\": -1274353813,\n            \"account_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"active\": true,\n            \"parent\": 2535\n          },\n          \"currency\": {\n            \"name\": \"string\",\n            \"rate\": \"-52027.9\",\n            \"id\": 3898,\n            \"base\": true\n          },\n          \"name\": \"string\",\n          \"pref_vendor\": {\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": 5829,\n            \"active\": true,\n            \"addressLineOne\": \"string\",\n            \"addressLineTwo\": \"string\",\n            \"postalCode\": \"string\",\n            \"city\": \"string\",\n            \"state_province\": \"string\",\n            \"country\": \"string\",\n            \"phoneOne\": \"string\",\n            \"phoneTwo\": \"string\",\n            \"fax\": \"string\",\n            \"email\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"comments\": \"string\",\n            \"contact\": \"string\",\n            \"url\": \"string\",\n            \"external_id\": \"string\",\n            \"dateModified\": \"1948-01-09T09:36:53.599Z\",\n            \"currency\": 2214,\n            \"payment_term_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_term_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_method_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_method_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_methods\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tax\": 9774,\n            \"default_payment_method\": 738,\n            \"creditcards\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"is_1099_eligible\": false,\n            \"overall_score\": 3804.9537033708293,\n            \"is_auto_email_po_enabled\": false,\n            \"po_pdf_labels\": \"string\",\n            \"email_configurations\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"quantity\": 6603.211991798415,\n          \"id\": 7031,\n          \"image\": \"string\",\n          \"unitType\": \"string\",\n          \"internalSKU\": \"string\",\n          \"description\": \"string\",\n          \"product_url\": \"string\",\n          \"price\": \"-628421\",\n          \"rfo_lock\": true,\n          \"departments\": [\n            4037,\n            3178\n          ],\n          \"custom_fields\": [\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"requested_count\": -220061833,\n          \"last_requested_date\": \"1966-10-13T12:00:36.439Z\",\n          \"selected_account\": {\n            \"key_0\": {}\n          }\n        },\n        {\n          \"account_code\": {\n            \"code\": \"string\",\n            \"description\": \"string\",\n            \"id\": 8384,\n            \"applied_accounts_count\": 4165,\n            \"code_length\": -956669701,\n            \"account_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"active\": false,\n            \"parent\": 5625\n          },\n          \"currency\": {\n            \"name\": \"string\",\n            \"rate\": \"-99495.8812\",\n            \"id\": 206,\n            \"base\": false\n          },\n          \"name\": \"string\",\n          \"pref_vendor\": {\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": 1245,\n            \"active\": false,\n            \"addressLineOne\": \"string\",\n            \"addressLineTwo\": \"string\",\n            \"postalCode\": \"string\",\n            \"city\": \"string\",\n            \"state_province\": \"string\",\n            \"country\": \"string\",\n            \"phoneOne\": \"string\",\n            \"phoneTwo\": \"string\",\n            \"fax\": \"string\",\n            \"email\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"comments\": \"string\",\n            \"contact\": \"string\",\n            \"url\": \"string\",\n            \"external_id\": \"string\",\n            \"dateModified\": \"1961-10-26T06:19:56.000Z\",\n            \"currency\": 7115,\n            \"payment_term_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_term_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_method_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_method_ref\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_methods\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tax\": 2143,\n            \"default_payment_method\": 2266,\n            \"creditcards\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"is_1099_eligible\": true,\n            \"overall_score\": 1951.7798758496963,\n            \"is_auto_email_po_enabled\": false,\n            \"po_pdf_labels\": \"string\",\n            \"email_configurations\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"quantity\": 8153.626619492847,\n          \"id\": 6283,\n          \"image\": \"string\",\n          \"unitType\": \"string\",\n          \"internalSKU\": \"string\",\n          \"description\": \"string\",\n          \"product_url\": \"string\",\n          \"price\": \"-.6230926\",\n          \"rfo_lock\": true,\n          \"departments\": [\n            8249,\n            2699\n          ],\n          \"custom_fields\": [\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"requested_count\": 658669957,\n          \"last_requested_date\": \"1959-01-06T06:55:39.164Z\",\n          \"selected_account\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        }\n      ],\n      \"items_count\": 3775\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82a1682f-7ec8-4adf-a6e4-1db91ea4aed0",
+          "name": "Get All Catalog Items",
+          "request": {
+            "name": "Get All Catalog Items",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "catalog-items",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bundle",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "department",
+                  "value": "<string>",
+                  "description": "A comma-separated list of integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "internalSKU",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "A comma-separated list of integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_price",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "min_price",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "pref_vendor",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f43c3adb-182f-4ffd-90c1-f537a59e7615",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "catalog-items",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bundle",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "internalSKU",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max_price",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "min_price",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pref_vendor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"pagination\": {\n      \"count\": 10,\n      \"next\": null,\n      \"previous\": null,\n      \"page_size\": 10,\n      \"num_pages\": 1,\n      \"current_page\": 1\n    }\n  },\n  \"data\": [\n    {\n      \"account_code\": {\n        \"code\": \"string\",\n        \"description\": \"string\",\n        \"id\": 543,\n        \"applied_accounts_count\": 27,\n        \"code_length\": -1269424711,\n        \"account_type\": 1,\n        \"active\": false,\n        \"parent\": 1126\n      },\n      \"currency\": {\n        \"name\": \"string\",\n        \"rate\": \"-0285\",\n        \"id\": 2120,\n        \"base\": false\n      },\n      \"name\": \"string\",\n      \"pref_vendor\": {\n        \"name\": \"string\",\n        \"type\": 6,\n        \"id\": 7743,\n        \"active\": false,\n        \"addressLineOne\": \"string\",\n        \"addressLineTwo\": \"string\",\n        \"postalCode\": \"string\",\n        \"city\": \"string\",\n        \"state_province\": \"string\",\n        \"country\": \"string\",\n        \"phoneOne\": \"string\",\n        \"phoneTwo\": \"string\",\n        \"fax\": \"string\",\n        \"email\": [\n          \"72j7@InkbifpFMfSMMAuxTVNkKjDSk.oy\",\n          \"EoIs1qED5PbiY7@AhsTWx.nl\"\n        ],\n        \"comments\": \"string\",\n        \"contact\": \"string\",\n        \"url\": \"string\",\n        \"external_id\": \"string\",\n        \"dateModified\": \"2010-08-04T07:56:32.762Z\",\n        \"currency\": 7012,\n        \"payment_term_ref\": {\n          \"name\": \"string\",\n          \"id\": 7505,\n          \"description\": \"string\",\n          \"active\": false\n        },\n        \"shipping_term_ref\": {\n          \"name\": \"string\",\n          \"id\": 4537,\n          \"description\": \"string\",\n          \"active\": true\n        },\n        \"payment_method_ref\": {\n          \"name\": \"string\",\n          \"id\": 4764,\n          \"description\": \"string\",\n          \"active\": false\n        },\n        \"shipping_method_ref\": {\n          \"name\": \"string\",\n          \"id\": 757,\n          \"description\": \"string\",\n          \"active\": true\n        },\n        \"payment_methods\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data\": \"\",\n            \"id\": 9404,\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_rail\": \"string\",\n            \"bank_account_country_code\": \"string\"\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data\": \"\",\n            \"id\": 7179,\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_rail\": \"string\",\n            \"bank_account_country_code\": \"string\"\n          }\n        ],\n        \"tax\": 9478,\n        \"default_payment_method\": 8000,\n        \"creditcards\": [\n          {\n            \"assignees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"currency\": 8346,\n            \"uuid\": \"5ecbbffd-9f70-5fab-8de4-8c064ccde683\",\n            \"vendor\": 8818,\n            \"id\": 1359,\n            \"is_active\": false,\n            \"created_at\": \"1991-07-27T17:46:04.389Z\",\n            \"updated_at\": \"1997-12-15T21:38:48.389Z\",\n            \"name\": \"string\",\n            \"number\": \"0025\",\n            \"balance\": 1857922480,\n            \"gl_code\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"external_id\": \"string\",\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"require_activation\": true,\n            \"last_changed_by\": 6525,\n            \"payment_method\": 9866,\n            \"currency_name\": \"string\",\n            \"creator\": 6357\n          },\n          {\n            \"assignees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"currency\": 2355,\n            \"uuid\": \"82f3c7e2-ade2-db13-e6b1-8265442cdd8e\",\n            \"vendor\": 6432,\n            \"id\": 5196,\n            \"is_active\": false,\n            \"created_at\": \"1970-02-06T23:14:07.774Z\",\n            \"updated_at\": \"1986-08-30T01:57:33.707Z\",\n            \"name\": \"string\",\n            \"number\": \"0101\",\n            \"balance\": -1016329173,\n            \"gl_code\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"external_id\": \"string\",\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"require_activation\": false,\n            \"last_changed_by\": 4445,\n            \"payment_method\": 9480,\n            \"currency_name\": \"string\",\n            \"creator\": 8396\n          }\n        ],\n        \"is_1099_eligible\": true,\n        \"overall_score\": 5807.726474083954,\n        \"is_auto_email_po_enabled\": true,\n        \"po_pdf_labels\": \"string\",\n        \"email_configurations\": {\n          \"key_0\": {\n            \"auto_po\": true,\n            \"payment_remittance\": false\n          },\n          \"key_1\": {\n            \"auto_po\": false,\n            \"payment_remittance\": false\n          },\n          \"key_2\": {\n            \"auto_po\": true,\n            \"payment_remittance\": true\n          }\n        }\n      },\n      \"id\": 8323,\n      \"image\": \"string\",\n      \"unitType\": \"string\",\n      \"internalSKU\": \"string\",\n      \"description\": \"string\",\n      \"product_url\": \"string\",\n      \"price\": \"93616.383384\",\n      \"rfo_lock\": false,\n      \"departments\": [\n        3736,\n        5061\n      ],\n      \"custom_fields\": [\n        {\n          \"field\": {\n            \"content_type\": 4488,\n            \"name\": \"string\",\n            \"id\": 7594,\n            \"default_value\": \"string\",\n            \"is_required\": true,\n            \"field_choices\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"field_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"field_label\": \"string\",\n            \"is_active\": true\n          },\n          \"id\": 3849,\n          \"value\": \"string\"\n        },\n        {\n          \"field\": {\n            \"content_type\": 7840,\n            \"name\": \"string\",\n            \"id\": 4979,\n            \"default_value\": \"string\",\n            \"is_required\": false,\n            \"field_choices\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"field_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"field_label\": \"string\",\n            \"is_active\": true\n          },\n          \"id\": 5758,\n          \"value\": \"string\"\n        }\n      ],\n      \"requested_count\": 1009437347,\n      \"last_requested_date\": \"1950-02-16T14:54:28.729Z\",\n      \"selected_account\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      }\n    },\n    {\n      \"account_code\": {\n        \"code\": \"string\",\n        \"description\": \"string\",\n        \"id\": 7476,\n        \"applied_accounts_count\": 2002,\n        \"code_length\": 1809722731,\n        \"account_type\": 1,\n        \"active\": false,\n        \"parent\": 1209\n      },\n      \"currency\": {\n        \"name\": \"string\",\n        \"rate\": \"09\",\n        \"id\": 9313,\n        \"base\": false\n      },\n      \"name\": \"string\",\n      \"pref_vendor\": {\n        \"name\": \"string\",\n        \"type\": 2,\n        \"id\": 5950,\n        \"active\": true,\n        \"addressLineOne\": \"string\",\n        \"addressLineTwo\": \"string\",\n        \"postalCode\": \"string\",\n        \"city\": \"string\",\n        \"state_province\": \"string\",\n        \"country\": \"string\",\n        \"phoneOne\": \"string\",\n        \"phoneTwo\": \"string\",\n        \"fax\": \"string\",\n        \"email\": [\n          \"VzxJgXW4e@KIRnRQmkkLoYpyiHwvi.zlxl\",\n          \"fCPmcH@MIJThfqQMvDjdPXKEmZRoSA.fkq\"\n        ],\n        \"comments\": \"string\",\n        \"contact\": \"string\",\n        \"url\": \"string\",\n        \"external_id\": \"string\",\n        \"dateModified\": \"1979-10-24T17:12:31.883Z\",\n        \"currency\": 7097,\n        \"payment_term_ref\": {\n          \"name\": \"string\",\n          \"id\": 7691,\n          \"description\": \"string\",\n          \"active\": false\n        },\n        \"shipping_term_ref\": {\n          \"name\": \"string\",\n          \"id\": 907,\n          \"description\": \"string\",\n          \"active\": true\n        },\n        \"payment_method_ref\": {\n          \"name\": \"string\",\n          \"id\": 8386,\n          \"description\": \"string\",\n          \"active\": true\n        },\n        \"shipping_method_ref\": {\n          \"name\": \"string\",\n          \"id\": 1390,\n          \"description\": \"string\",\n          \"active\": true\n        },\n        \"payment_methods\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data\": \"\",\n            \"id\": 4560,\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_rail\": \"string\",\n            \"bank_account_country_code\": \"string\"\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data\": \"\",\n            \"id\": 1155,\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"payment_rail\": \"string\",\n            \"bank_account_country_code\": \"string\"\n          }\n        ],\n        \"tax\": 4645,\n        \"default_payment_method\": 1728,\n        \"creditcards\": [\n          {\n            \"assignees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"currency\": 8164,\n            \"uuid\": \"bbe44e54-f7da-5aff-4951-9617a094f745\",\n            \"vendor\": 5074,\n            \"id\": 3713,\n            \"is_active\": false,\n            \"created_at\": \"1955-03-28T00:50:18.193Z\",\n            \"updated_at\": \"1991-08-25T19:38:37.426Z\",\n            \"name\": \"string\",\n            \"number\": \"3778\",\n            \"balance\": 1753551115,\n            \"gl_code\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"external_id\": \"string\",\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"require_activation\": false,\n            \"last_changed_by\": 7298,\n            \"payment_method\": 1720,\n            \"currency_name\": \"string\",\n            \"creator\": 9123\n          },\n          {\n            \"assignees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"currency\": 8690,\n            \"uuid\": \"c11be927-34a1-61fa-c437-2bed3fee9a14\",\n            \"vendor\": 2827,\n            \"id\": 9860,\n            \"is_active\": false,\n            \"created_at\": \"2010-01-28T17:34:33.650Z\",\n            \"updated_at\": \"2010-10-05T13:13:08.235Z\",\n            \"name\": \"string\",\n            \"number\": \"5560\",\n            \"balance\": 219177485,\n            \"gl_code\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"external_id\": \"string\",\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"require_activation\": true,\n            \"last_changed_by\": 2191,\n            \"payment_method\": 5767,\n            \"currency_name\": \"string\",\n            \"creator\": 7328\n          }\n        ],\n        \"is_1099_eligible\": false,\n        \"overall_score\": 3743.0651167500805,\n        \"is_auto_email_po_enabled\": false,\n        \"po_pdf_labels\": \"string\",\n        \"email_configurations\": {\n          \"key_0\": {\n            \"auto_po\": false,\n            \"payment_remittance\": true\n          }\n        }\n      },\n      \"id\": 8338,\n      \"image\": \"string\",\n      \"unitType\": \"string\",\n      \"internalSKU\": \"string\",\n      \"description\": \"string\",\n      \"product_url\": \"string\",\n      \"price\": \"59\",\n      \"rfo_lock\": false,\n      \"departments\": [\n        2553,\n        9698\n      ],\n      \"custom_fields\": [\n        {\n          \"field\": {\n            \"content_type\": 4895,\n            \"name\": \"string\",\n            \"id\": 6631,\n            \"default_value\": \"string\",\n            \"is_required\": false,\n            \"field_choices\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"field_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"field_label\": \"string\",\n            \"is_active\": false\n          },\n          \"id\": 1474,\n          \"value\": \"string\"\n        },\n        {\n          \"field\": {\n            \"content_type\": 4282,\n            \"name\": \"string\",\n            \"id\": 1799,\n            \"default_value\": \"string\",\n            \"is_required\": false,\n            \"field_choices\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"field_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"field_label\": \"string\",\n            \"is_active\": false\n          },\n          \"id\": 1361,\n          \"value\": \"string\"\n        }\n      ],\n      \"requested_count\": -1139337066,\n      \"last_requested_date\": \"1950-07-18T14:37:32.275Z\",\n      \"selected_account\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16b30df0-f128-4733-9024-835a0c15da26",
+          "name": "Create Catalog Item",
+          "request": {
+            "name": "Create Catalog Item",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "catalog-items",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_fields",
+                  "value": "{\"key_0\":{},\"key_1\":{},\"key_2\":{}}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_fields",
+                  "value": "{\"key_0\":{}}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "image",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "unitType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pref_vendor",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_code",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "internalSKU",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_url",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<decimal>"
+                },
+                {
+                  "disabled": false,
+                  "key": "rfo_lock",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "departments",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "departments",
+                  "value": "<integer>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1a9d88e9-5c48-4c64-8870-afa818c0fde3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "catalog-items",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "custom_fields",
+                      "value": "{\"key_0\":{},\"key_1\":{}}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "custom_fields",
+                      "value": "{\"key_0\":{}}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "unitType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "pref_vendor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "account_code",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "internalSKU",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "product_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "price",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "rfo_lock",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "departments",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "departments",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"account_code\": {\n      \"code\": \"string\",\n      \"description\": \"string\",\n      \"id\": 375,\n      \"applied_accounts_count\": 3233,\n      \"code_length\": -904354391,\n      \"account_type\": 0,\n      \"active\": false,\n      \"parent\": 9835\n    },\n    \"currency\": {\n      \"name\": \"string\",\n      \"rate\": \"91920\",\n      \"id\": 5179,\n      \"base\": true\n    },\n    \"name\": \"string\",\n    \"pref_vendor\": {\n      \"name\": \"string\",\n      \"type\": 4,\n      \"id\": 4584,\n      \"active\": true,\n      \"addressLineOne\": \"string\",\n      \"addressLineTwo\": \"string\",\n      \"postalCode\": \"string\",\n      \"city\": \"string\",\n      \"state_province\": \"string\",\n      \"country\": \"string\",\n      \"phoneOne\": \"string\",\n      \"phoneTwo\": \"string\",\n      \"fax\": \"string\",\n      \"email\": [\n        \"xiRsIK@cNVlMsn.fe\",\n        \"MruA2d-IT0@GKntFibiGJqtraFPbGY.rmv\"\n      ],\n      \"comments\": \"string\",\n      \"contact\": \"string\",\n      \"url\": \"string\",\n      \"external_id\": \"string\",\n      \"dateModified\": \"1956-09-21T12:21:14.338Z\",\n      \"currency\": 8436,\n      \"payment_term_ref\": {\n        \"name\": \"string\",\n        \"id\": 1730,\n        \"description\": \"string\",\n        \"active\": true\n      },\n      \"shipping_term_ref\": {\n        \"name\": \"string\",\n        \"id\": 2547,\n        \"description\": \"string\",\n        \"active\": false\n      },\n      \"payment_method_ref\": {\n        \"name\": \"string\",\n        \"id\": 2442,\n        \"description\": \"string\",\n        \"active\": true\n      },\n      \"shipping_method_ref\": {\n        \"name\": \"string\",\n        \"id\": 958,\n        \"description\": \"string\",\n        \"active\": false\n      },\n      \"payment_methods\": [\n        {\n          \"currency\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"base\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"data\": \"\",\n          \"id\": 8026,\n          \"name\": \"string\",\n          \"type\": 4056913580,\n          \"payment_rail\": \"string\",\n          \"bank_account_country_code\": \"string\"\n        },\n        {\n          \"currency\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"base\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"data\": \"\",\n          \"id\": 8284,\n          \"name\": \"string\",\n          \"type\": 2034124790,\n          \"payment_rail\": \"string\",\n          \"bank_account_country_code\": \"string\"\n        }\n      ],\n      \"tax\": 385,\n      \"default_payment_method\": 1340,\n      \"creditcards\": [\n        {\n          \"assignees\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"currency\": 8474,\n          \"uuid\": \"5b79da43-e259-a9e0-4fd0-ce9346cf4ff3\",\n          \"vendor\": 2758,\n          \"id\": 4633,\n          \"is_active\": true,\n          \"created_at\": \"1960-06-25T21:28:42.159Z\",\n          \"updated_at\": \"1984-04-30T09:22:15.926Z\",\n          \"name\": \"string\",\n          \"number\": \"3308\",\n          \"balance\": -645714022,\n          \"gl_code\": \"string\",\n          \"type\": -2006471177,\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_id\": \"string\",\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"require_activation\": false,\n          \"last_changed_by\": 8375,\n          \"payment_method\": 2553,\n          \"currency_name\": \"string\",\n          \"creator\": 7082\n        },\n        {\n          \"assignees\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"currency\": 6282,\n          \"uuid\": \"ae36a28c-5064-49b9-974e-535b47361b51\",\n          \"vendor\": 9572,\n          \"id\": 8621,\n          \"is_active\": true,\n          \"created_at\": \"1959-08-17T12:04:46.148Z\",\n          \"updated_at\": \"1985-11-14T15:14:44.547Z\",\n          \"name\": \"string\",\n          \"number\": \"3027\",\n          \"balance\": 1123511775,\n          \"gl_code\": \"string\",\n          \"type\": 1621899788,\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_id\": \"string\",\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"require_activation\": true,\n          \"last_changed_by\": 5097,\n          \"payment_method\": 4450,\n          \"currency_name\": \"string\",\n          \"creator\": 7823\n        }\n      ],\n      \"is_1099_eligible\": true,\n      \"overall_score\": 6191.217394032336,\n      \"is_auto_email_po_enabled\": true,\n      \"po_pdf_labels\": \"string\",\n      \"email_configurations\": {\n        \"key_0\": {\n          \"auto_po\": false,\n          \"payment_remittance\": false\n        },\n        \"key_1\": {\n          \"auto_po\": false,\n          \"payment_remittance\": false\n        }\n      }\n    },\n    \"id\": 9932,\n    \"image\": \"string\",\n    \"unitType\": \"string\",\n    \"internalSKU\": \"string\",\n    \"description\": \"string\",\n    \"product_url\": \"string\",\n    \"price\": \"7757880888119\",\n    \"rfo_lock\": false,\n    \"departments\": [\n      8802,\n      4206\n    ],\n    \"custom_fields\": [\n      {\n        \"field\": {\n          \"content_type\": 5763,\n          \"name\": \"string\",\n          \"id\": 8097,\n          \"default_value\": \"string\",\n          \"is_required\": false,\n          \"field_choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"field_type\": \"i\",\n          \"field_label\": \"string\",\n          \"is_active\": false\n        },\n        \"id\": 6927,\n        \"value\": \"string\"\n      },\n      {\n        \"field\": {\n          \"content_type\": 523,\n          \"name\": \"string\",\n          \"id\": 7152,\n          \"default_value\": \"string\",\n          \"is_required\": false,\n          \"field_choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"field_type\": \"d\",\n          \"field_label\": \"string\",\n          \"is_active\": true\n        },\n        \"id\": 3605,\n        \"value\": \"string\"\n      }\n    ],\n    \"requested_count\": -1600175677,\n    \"last_requested_date\": \"2006-03-09T11:20:23.862Z\",\n    \"selected_account\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68ba4742-9760-4dff-a002-d0c5eafb12b0",
+          "name": "Update Catalog Item",
+          "request": {
+            "name": "Update Catalog Item",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3",
+                "catalog-items",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this catalog items."
+                },
+                {
+                  "description": "Your procurify domain",
+                  "type": "any",
+                  "value": "{{user_domain}}",
+                  "key": "user_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://<your-domain>.procurify.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_fields",
+                  "value": "{\"key_0\":{},\"key_1\":{},\"key_2\":{},\"key_3\":{}}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_fields",
+                  "value": "{\"key_0\":{},\"key_1\":{},\"key_2\":{},\"key_3\":{},\"key_4\":{}}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "image",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "unitType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pref_vendor",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_code",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "internalSKU",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_url",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<decimal>"
+                },
+                {
+                  "disabled": false,
+                  "key": "rfo_lock",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "departments",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "departments",
+                  "value": "<integer>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3c0d6c1b-9310-430e-98ae-2614e6b9ceec",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3",
+                    "catalog-items",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this catalog items."
+                    },
+                    {
+                      "description": "Your procurify domain",
+                      "type": "any",
+                      "value": "{{user_domain}}",
+                      "key": "user_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "custom_fields",
+                      "value": "{\"key_0\":{},\"key_1\":{}}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "custom_fields",
+                      "value": "{\"key_0\":{}}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "unitType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "pref_vendor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "account_code",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "internalSKU",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "product_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "price",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "rfo_lock",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "departments",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "departments",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"account_code\": {\n      \"code\": \"string\",\n      \"description\": \"string\",\n      \"id\": 375,\n      \"applied_accounts_count\": 3233,\n      \"code_length\": -904354391,\n      \"account_type\": 0,\n      \"active\": false,\n      \"parent\": 9835\n    },\n    \"currency\": {\n      \"name\": \"string\",\n      \"rate\": \"91920\",\n      \"id\": 5179,\n      \"base\": true\n    },\n    \"name\": \"string\",\n    \"pref_vendor\": {\n      \"name\": \"string\",\n      \"type\": 4,\n      \"id\": 4584,\n      \"active\": true,\n      \"addressLineOne\": \"string\",\n      \"addressLineTwo\": \"string\",\n      \"postalCode\": \"string\",\n      \"city\": \"string\",\n      \"state_province\": \"string\",\n      \"country\": \"string\",\n      \"phoneOne\": \"string\",\n      \"phoneTwo\": \"string\",\n      \"fax\": \"string\",\n      \"email\": [\n        \"xiRsIK@cNVlMsn.fe\",\n        \"MruA2d-IT0@GKntFibiGJqtraFPbGY.rmv\"\n      ],\n      \"comments\": \"string\",\n      \"contact\": \"string\",\n      \"url\": \"string\",\n      \"external_id\": \"string\",\n      \"dateModified\": \"1956-09-21T12:21:14.338Z\",\n      \"currency\": 8436,\n      \"payment_term_ref\": {\n        \"name\": \"string\",\n        \"id\": 1730,\n        \"description\": \"string\",\n        \"active\": true\n      },\n      \"shipping_term_ref\": {\n        \"name\": \"string\",\n        \"id\": 2547,\n        \"description\": \"string\",\n        \"active\": false\n      },\n      \"payment_method_ref\": {\n        \"name\": \"string\",\n        \"id\": 2442,\n        \"description\": \"string\",\n        \"active\": true\n      },\n      \"shipping_method_ref\": {\n        \"name\": \"string\",\n        \"id\": 958,\n        \"description\": \"string\",\n        \"active\": false\n      },\n      \"payment_methods\": [\n        {\n          \"currency\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"base\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"data\": \"\",\n          \"id\": 8026,\n          \"name\": \"string\",\n          \"type\": 4056913580,\n          \"payment_rail\": \"string\",\n          \"bank_account_country_code\": \"string\"\n        },\n        {\n          \"currency\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"base\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"data\": \"\",\n          \"id\": 8284,\n          \"name\": \"string\",\n          \"type\": 2034124790,\n          \"payment_rail\": \"string\",\n          \"bank_account_country_code\": \"string\"\n        }\n      ],\n      \"tax\": 385,\n      \"default_payment_method\": 1340,\n      \"creditcards\": [\n        {\n          \"assignees\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"currency\": 8474,\n          \"uuid\": \"5b79da43-e259-a9e0-4fd0-ce9346cf4ff3\",\n          \"vendor\": 2758,\n          \"id\": 4633,\n          \"is_active\": true,\n          \"created_at\": \"1960-06-25T21:28:42.159Z\",\n          \"updated_at\": \"1984-04-30T09:22:15.926Z\",\n          \"name\": \"string\",\n          \"number\": \"3308\",\n          \"balance\": -645714022,\n          \"gl_code\": \"string\",\n          \"type\": -2006471177,\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_id\": \"string\",\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"require_activation\": false,\n          \"last_changed_by\": 8375,\n          \"payment_method\": 2553,\n          \"currency_name\": \"string\",\n          \"creator\": 7082\n        },\n        {\n          \"assignees\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"currency\": 6282,\n          \"uuid\": \"ae36a28c-5064-49b9-974e-535b47361b51\",\n          \"vendor\": 9572,\n          \"id\": 8621,\n          \"is_active\": true,\n          \"created_at\": \"1959-08-17T12:04:46.148Z\",\n          \"updated_at\": \"1985-11-14T15:14:44.547Z\",\n          \"name\": \"string\",\n          \"number\": \"3027\",\n          \"balance\": 1123511775,\n          \"gl_code\": \"string\",\n          \"type\": 1621899788,\n          \"category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_id\": \"string\",\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"require_activation\": true,\n          \"last_changed_by\": 5097,\n          \"payment_method\": 4450,\n          \"currency_name\": \"string\",\n          \"creator\": 7823\n        }\n      ],\n      \"is_1099_eligible\": true,\n      \"overall_score\": 6191.217394032336,\n      \"is_auto_email_po_enabled\": true,\n      \"po_pdf_labels\": \"string\",\n      \"email_configurations\": {\n        \"key_0\": {\n          \"auto_po\": false,\n          \"payment_remittance\": false\n        },\n        \"key_1\": {\n          \"auto_po\": false,\n          \"payment_remittance\": false\n        }\n      }\n    },\n    \"id\": 9932,\n    \"image\": \"string\",\n    \"unitType\": \"string\",\n    \"internalSKU\": \"string\",\n    \"description\": \"string\",\n    \"product_url\": \"string\",\n    \"price\": \"7757880888119\",\n    \"rfo_lock\": false,\n    \"departments\": [\n      8802,\n      4206\n    ],\n    \"custom_fields\": [\n      {\n        \"field\": {\n          \"content_type\": 5763,\n          \"name\": \"string\",\n          \"id\": 8097,\n          \"default_value\": \"string\",\n          \"is_required\": false,\n          \"field_choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"field_type\": \"i\",\n          \"field_label\": \"string\",\n          \"is_active\": false\n        },\n        \"id\": 6927,\n        \"value\": \"string\"\n      },\n      {\n        \"field\": {\n          \"content_type\": 523,\n          \"name\": \"string\",\n          \"id\": 7152,\n          \"default_value\": \"string\",\n          \"is_required\": false,\n          \"field_choices\": [\n            \"string\",\n            \"string\"\n          ],\n          \"field_type\": \"d\",\n          \"field_label\": \"string\",\n          \"is_active\": true\n        },\n        \"id\": 3605,\n        \"value\": \"string\"\n      }\n    ],\n    \"requested_count\": -1600175677,\n    \"last_requested_date\": \"2006-03-09T11:20:23.862Z\",\n    \"selected_account\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  },\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your procurify domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "user_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{user_domain}}.procurify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0f3671a8-35d6-4834-8a80-f6ba37bd99fe",
+    "name": "Procurify API Documentation account-codes catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Disclaimer\n\n- Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.\n- Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.\n- Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.\n- In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.\n- You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.\n",
+      "type": "text/plain"
+    }
+  }
+}

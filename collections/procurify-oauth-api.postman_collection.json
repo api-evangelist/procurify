@@ -1,0 +1,140 @@
+{
+  "item": [
+    {
+      "id": "25178bc6-7975-4175-80a8-a41fa070cff4",
+      "name": "oauth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "33ebcbc4-543e-4578-aea3-ddbb441bc0c7",
+          "name": "Authenticate with OAuth",
+          "request": {
+            "name": "Authenticate with OAuth",
+            "description": {
+              "content": "Getting access to Procurify API involves the following three steps:\n\n  1. Request credentials for your Procurify account.\n  2. Request access token using your credentials.\n  3. Use access token to access Procurify API resources.\n\n#### Request credentials for your Procurify account.\n\nThe first step is to request credentials from Procurify. Your role must have access to manage integrations settings in order to request API credentials. You can request API credentials by going to go:\n\n  1. Settings in the left navigation bar.\n  2. Integrations in the Tools section.\n  3. View button beside API item\n\nThis page will allow you to enter an optional description of the application you are developing with the Procurify API and once you are ready, click on “Create Application”. On the next screen, you will be presented with a Client ID and a Client Secret. You will need to copy and save these credentials securely. Please note that the Client Secret is only presented once.\n\n#### Request access token using your credentials.\n\nOnce you have the client credentials, you will need to request an access token using these credentials that can be used as a bearer token when making a request to Procurify API. You will need the following information to request an access token:\n\n|Info|Value|\n--- | ---\n|Token URL:|https://&lt;your-domain&gt;.procurify.com/oauth/token|\n|Client ID:|*From the previous step*|\n|Client Secret:|*From the previous step*|\n|Audience:|https://api.procurify.com/|\n|Grant Type:|client_credentials|\n\nOnce you have the access token, you will need to cache it until it expires (24 hrs). Please let Procurify support know if you would like help with this.\n\n\nAn example request and response using cURL (replace client id and client secret)\n\n    $ curl -H \"content-type: application/json\" -X POST \\\n        -d '{\"client_id\": \"~your_client_id~\", \\\n             \"client_secret\": \"~your_client_secret~\", \\\n             \"audience\": \"https://api.procurify.com/\", \\\n             \"grant_type\": \"client_credentials\"}' \\\n        https://<your-domain>.procurify.com/oauth/token\n\n    {\"access_token\": \"~your-access-token~\",\n     \"scope\": \"urn:procurify-api:domain:~your_domain~ urn:procurify-api:email:~your_email~\",\n     \"expires_in\": 86400,\n     \"token_type\": \"Bearer\"}\n\n\n#### Use access token to access Procurify API resources.\n\nOnce you have the access token, you can make requests to Procurify API resources. You will need to set the following headers when making the request.\n\n|Key|Value|\n--- | ---\n|Authorization:|Bearer *access_token from previous step*|\n|X-Procurify-Client:|api|\n\n\nAn example request and response using cURL (replace access token and your procurify domain)\n\n    $ curl -H \"Authorization: Bearer ~access_token~\" \\\n        -H \"X-Procurify-Client: api\" \\\n        https://<your-domain>.procurify.com/api/v3/vendors/\n\n        {\"data\":[{\"id\":1,\"name\":\"OTHER\",\"active\":true,\"addressLineOne\":\"OTHER\"...}",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "oauth",
+                "token"
+              ],
+              "host": [
+                "<your-domain>",
+                "procurify",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"audience\": \"<string>\",\n  \"grant_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ba8db30-be1e-4407-b371-6875cc96f664",
+              "name": "Successful authentication",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "oauth",
+                    "token"
+                  ],
+                  "host": [
+                    "<your-domain>",
+                    "procurify",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"~your_client_id~\",\n  \"client_secret\": \"~your_client_secret~\",\n  \"audience\": \"https://api.procurify.com/\",\n  \"grant_type\": \"client_credentials\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"~your-access-token~\",\n  \"scope\": \"urn:procurify-api:domain:~your_domain~ urn:procurify-api:email:~your_email~\",\n  \"expires_in\": 86400,\n  \"token_type\": \"Bearer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your procurify domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "user_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{user_domain}}.procurify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "22142f2f-d712-4a63-b1a4-029c95cddfa9",
+    "name": "Procurify API Documentation account-codes oauth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Disclaimer\n\n- Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.\n- Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.\n- Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.\n- In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.\n- You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Procurify API Documentation account-codes departments API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "departments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{user_domain}.procurify.com/api/v3/departments/",
+            "params": [
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Filter departments by their branch."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_is_active_for_account_code",
+                "value": "",
+                "type": "query",
+                "description": "Setting this adds the addition of the booeal field 'has_active_account' to each department object of the response. The query param accepts an integer representing the primary key of the account code to check if there exists an account object associated with the department with that account code."
+              },
+              {
+                "name": "location_perm_override",
+                "value": "",
+                "type": "query",
+                "description": "Setting this overrides the need to enable the PROCUREMENT_ACCESS and/or RECEIVE_BY_DEPARTMENT feature switches. This parameter can only be used in conjunction with permission and user and cannot function without both of those parameters explicitly set."
+              },
+              {
+                "name": "locations",
+                "value": "",
+                "type": "query",
+                "description": "Filter departments by the locations (branches) passed in."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "permission",
+                "value": "",
+                "type": "query",
+                "description": "Filter by permission. In isolation, this parameter can only be set to 68 (add purchase order); 841 (view report); or 899 (receive_po), which correlate with permission to add purchase orders, view reports, and receive purchase orders respectively. However, the results returned correlate with the “by department” version of these permissions, which means that results are filtered by permission to add purchase orders by department, permission to view reports by department, and receive purchase orders by department. This should only be used in conjunction with the PROCUREMENT_ACCESS and/or RECEIVE_BY_DEPARTMENT feature switches. If used in conjunction with location_perm_override=true and user, the value can be set to any permission, and the result will be departments filtered by the provided user and permission values. If used in conjunction with the RECEIVE_BY_DEPARTMENT feature flag, the permission can only be set to 68, 841, or 899 (see second sentence for what these permissions do). The result will be all departments filtered by the provided user value."
+              },
+              {
+                "name": "requestable",
+                "value": "",
+                "type": "query",
+                "description": "Fetch all requestable departments by the currently authorized user. Accepts ORDER, EXPENSE, TRAVEL, and PAY_REQUEST."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user. If this parameter is set, the user must be a superuser or have the add_po_by_department or receive_po_by_department permissions. In isolation, this parameter should only be used in conjunction with the PROCUREMENT_ACCESS and/or RECEIVE_BY_DEPARTMENT feature switches. If used in conjunction with location_perm_override=true and permission query parameter, the result returned will be departments filtered by the provided user and permission values. If used in conjunction with the RECEIVE_BY_DEPARTMENT feature flag, the result will be departments filtered by the user provided and the permission set to 68 (add purchase order); 841 (view report); or 899 (receive purchase order) (see permission query parameter explanation for more information on what these stand for)."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": " "
+        },
+        {
+          "info": {
+            "name": "Create New Department",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{user_domain}.procurify.com/api/v3/departments/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": " "
+        },
+        {
+          "info": {
+            "name": "Update Department",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{user_domain}.procurify.com/api/v3/departments/:id/",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this department."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://<your-domain>.procurify.com/oauth/authorize",
+              "accessTokenUrl": "https://<your-domain>.procurify.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": " "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
