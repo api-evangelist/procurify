@@ -63,6 +63,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Account
+  tags_raw:
   - accounts
   properties:
   - type: OpenAPI
@@ -79,6 +81,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - AP
+  tags_raw:
   - ap
   properties:
   - type: OpenAPI
@@ -95,6 +99,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Catalog
+  tags_raw:
   - catalog
   properties:
   - type: OpenAPI
@@ -111,6 +117,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Currency
+  tags_raw:
   - currencies
   properties:
   - type: OpenAPI
@@ -127,6 +135,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Custom Fields
+  tags_raw:
   - custom-fields
   properties:
   - type: OpenAPI
@@ -143,6 +153,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Departments
+  tags_raw:
   - departments
   properties:
   - type: OpenAPI
@@ -159,6 +171,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Locations
+  tags_raw:
   - locations
   properties:
   - type: OpenAPI
@@ -175,6 +189,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Authentication
+  tags_raw:
   - oauth
   properties:
   - type: OpenAPI
@@ -191,6 +207,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Order Items
+  tags_raw:
   - order-items
   properties:
   - type: OpenAPI
@@ -207,6 +225,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Permissions
+  tags_raw:
   - permissions
   properties:
   - type: OpenAPI
@@ -223,6 +243,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Public
+  tags_raw:
   - public
   properties:
   - type: OpenAPI
@@ -239,6 +261,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Purchase Orders
+  tags_raw:
   - purchase-orders
   properties:
   - type: OpenAPI
@@ -255,6 +279,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Receipt
+  tags_raw:
   - receipt
   properties:
   - type: OpenAPI
@@ -271,6 +297,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Requisitions
+  tags_raw:
   - requisitions
   properties:
   - type: OpenAPI
@@ -287,6 +315,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -303,6 +333,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Vendors
+  tags_raw:
   - vendors
   properties:
   - type: OpenAPI
