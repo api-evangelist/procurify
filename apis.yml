@@ -358,6 +358,9 @@ apis:
   - type: Examples
     url: examples/
 common:
+  - type: CapabilityMap
+    url: capabilities/procurify-capability-edges.yml
+    name: Procurify Business Capability Map
   - type: AgenticAccess
     url: agentic-access/procurify-agentic-access.yml
   - type: DomainSecurity

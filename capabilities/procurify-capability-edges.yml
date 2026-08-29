@@ -1,0 +1,93 @@
+slug: procurify
+provider: Procurify
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: purchase-orders
+  spec_file: procurify-purchase-orders-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.95
+  evidence: '"Revise a Purchase Order", "Close a Purchase Order", "Reopen a Purchase Order", "Get Purchase
+    Orders by Role & Status"'
+  reason: Operations create, revise, close and reopen purchase orders — direct Purchase Order Management.
+- tag: ap
+  spec_file: procurify-ap-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.85
+  evidence: GET /api/v2/ap/bills/{id}/  ap_bills_retrieve  Get Bill by ID; POST /api/v3/ap/bills/mark-as-paid/  Mark
+    Bills as Paid; GET /api/v2/ap/vendor-payment-methods/
+  reason: Operations cover vendor bills, unbilled/billed items, payments, approvers and vendor payment
+    methods — invoice processing and payment to vendors, i.e. Accounts Payable Management.
+- tag: requisitions
+  spec_file: procurify-requisitions-api-openapi.yml
+  capability_id: BC-500.40
+  capability_id_l1: BC-500
+  capability_name: Procure-to-Pay Operations Management
+  confidence: 0.8
+  evidence: POST /api/v3/requisitions/ "Creating a requisition"; schemas RequisitionCreateRequest, ApprovalWorkflowApprover
+  reason: Requisition creation with approval workflow plus order/order-item listing is core procure-to-pay
+    requisitioning.
+- tag: accounts
+  spec_file: procurify-accounts-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.78
+  evidence: 'schemas: PaginatedChartOfAccountsAccountList, ChartOfAccountsAccount, AccountTypeEnum'
+  reason: The schema names explicitly identify chart-of-accounts account records, i.e. maintenance/retrieval
+    of the chart of accounts, which is General Ledger Management. Read-only listing keeps confidence short
+    of certainty.
+- tag: order-items
+  spec_file: procurify-order-items-api-openapi.yml
+  capability_id: BC-500
+  capability_id_l1: BC-500
+  capability_name: Procurement Management
+  confidence: 0.75
+  evidence: GET /api/v3/order-items/ "Get list of all order items"; schemas OrderItem, BlanketOrderItemRead,
+    ReceiveMethodEnum
+  reason: Line items of purchase/requisition orders in a procure-to-pay platform; clearly Procurement
+    Management, but the evidence does not pin whether these belong to PO management or P2P operations.
+- tag: receipt
+  spec_file: procurify-receipt-api-openapi.yml
+  capability_id: BC-500.40
+  capability_id_l1: BC-500
+  capability_name: Procure-to-Pay Operations Management
+  confidence: 0.75
+  evidence: '"Create a receipt item for an order item"; schema ReceiptItemRead'
+  reason: Goods receipting against order items is an explicit part of day-to-day procure-to-pay operations
+    (requisitions, receipts).
+- tag: vendors
+  spec_file: procurify-vendors-api-openapi.yml
+  capability_id: BC-510
+  capability_id_l1: BC-510
+  capability_name: Supplier Management
+  confidence: 0.75
+  evidence: '"Create Vendor", "Update Vendor", "Get list of all active vendors"; schemas Vendor, VendorPerformance,
+    PaymentTerm'
+  reason: Vendor master records with terms, payment methods and a performance object — supplier management;
+    evidence spans onboarding and performance so no single L2 is warranted.
+- tag: account-codes
+  spec_file: procurify-account-codes-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.72
+  evidence: GET /api/v3/account-codes/  account_codes_list  Get Account Codes; schemas AccountTypeEnum,
+    AccountCodeRead
+  reason: Account codes with account types are GL account/chart-of-accounts reference data maintained
+    for coding spend, which sits under General Ledger Management. Some ambiguity as it is used for procurement
+    coding rather than journal posting.
