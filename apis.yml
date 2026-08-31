@@ -59,6 +59,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - AccountCodes
+  tags_raw:
   - account-codes
   properties:
   - type: OpenAPI
@@ -93,7 +95,7 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
-  - AP
+  - ap
   tags_raw:
   - ap
   properties:
@@ -147,7 +149,7 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
-  - Custom Fields
+  - custom-fields
   tags_raw:
   - custom-fields
   properties:
@@ -165,7 +167,7 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
-  - Departments
+  - departments
   tags_raw:
   - departments
   properties:
@@ -219,7 +221,7 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
-  - Order Items
+  - order-items
   tags_raw:
   - order-items
   properties:
@@ -273,7 +275,7 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
-  - Purchase Orders
+  - purchase-orders
   tags_raw:
   - purchase-orders
   properties:
@@ -291,7 +293,7 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
-  - Receipt
+  - receipt
   tags_raw:
   - receipt
   properties:
@@ -309,7 +311,7 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
-  - Requisitions
+  - requisitions
   tags_raw:
   - requisitions
   properties:
