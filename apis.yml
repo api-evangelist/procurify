@@ -197,24 +197,6 @@ apis:
     url: json-schema/
   - type: Examples
     url: examples/
-- aid: procurify:procurify-oauth-api
-  name: Procurify oauth API
-  description: The oauth API from Procurify — 1 operation(s) for oauth.
-  humanURL: https://developer.procurify.com/
-  baseURL: https://api.procurify.com/
-  tags:
-  - Authentication
-  tags_raw:
-  - oauth
-  properties:
-  - type: OpenAPI
-    url: openapi/procurify-oauth-api-openapi.yml
-  - type: Documentation
-    url: https://developer.procurify.com/
-  - type: JSONSchema
-    url: json-schema/
-  - type: Examples
-    url: examples/
 - aid: procurify:procurify-order-items-api
   name: Procurify order-items API
   description: The order-items API from Procurify — 1 operation(s) for order-items.
@@ -353,6 +335,22 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/procurify-vendors-api-openapi.yml
+  - type: Documentation
+    url: https://developer.procurify.com/
+  - type: JSONSchema
+    url: json-schema/
+  - type: Examples
+    url: examples/
+- aid: procurify:procurify-oauth-api
+  name: Procurify OAUTH API
+  description: The oauth API from Procurify — 1 operation(s) for oauth.
+  humanURL: https://developer.procurify.com/
+  baseURL: https://api.procurify.com/
+  tags:
+  - oauth
+  properties:
+  - type: OpenAPI
+    url: openapi/procurify-oauth-api-openapi.yml
   - type: Documentation
     url: https://developer.procurify.com/
   - type: JSONSchema
