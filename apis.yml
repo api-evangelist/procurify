@@ -185,7 +185,7 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
-  - Locations
+  - Location
   tags_raw:
   - locations
   properties:
@@ -347,6 +347,8 @@ apis:
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
   tags:
+  - Authentication
+  tags_raw:
   - oauth
   properties:
   - type: OpenAPI
