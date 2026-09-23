@@ -1,23 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Procurify API Documentation account-codes purchase-orders API
-  version: "1.0"
-  description: '
-
-    # Disclaimer
+  title: Procurify API Documentation Purchase Orders API
+  version: ''
+  description: '# Disclaimer
 
 
-    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
-
-    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
-
-    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
-
-    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
-
-    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
-
-    '
+    - Procurify’s API is evolving and is subject to change at any time.'
 servers:
 - url: https://{user_domain}.procurify.com
   description: Your Procurify domain
@@ -26,7 +14,7 @@ servers:
       default: your-domain
       description: Your procurify domain
 tags:
-- name: purchase-orders
+- name: Purchase Orders
 paths:
   /api/v2/purchase_order/revise/{procurify_PO}/:
     put:
@@ -58,7 +46,7 @@ paths:
         description: A unique integer value identifying this po.
         required: true
       tags:
-      - purchase-orders
+      - Purchase Orders
       requestBody:
         content:
           application/json:
@@ -99,21 +87,21 @@ paths:
       description: '**Purchase Order State Codes**
 
 
-        | Order Type          | Code      |
+        | Order Type | Code |
 
         |---------------------|-----------|
 
-        | PURCHASED           | 0         |
+        | PURCHASED | 0 |
 
-        | CANCELLED           | 1         |
+        | CANCELLED | 1 |
 
-        | (legacy code)       | 2         |
+        | (legacy code) | 2 |
 
-        | CLOSED              | 3         |
+        | CLOSED | 3 |
 
-        | PAID                | 4         |
+        | PAID | 4 |
 
-        | REOPENED            | 5         |'
+        | REOPENED | 5 |'
       summary: Get Purchase Order by ID (with items)
       parameters:
       - in: query
@@ -130,7 +118,7 @@ paths:
         description: Procurify PO or UUID
         required: true
       tags:
-      - purchase-orders
+      - Purchase Orders
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -288,7 +276,7 @@ paths:
           title: Total Cost
         description: Total
       tags:
-      - purchase-orders
+      - Purchase Orders
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -324,7 +312,7 @@ paths:
         description: A unique integer value identifying this po.
         required: true
       tags:
-      - purchase-orders
+      - Purchase Orders
       requestBody:
         content:
           application/json:
@@ -378,7 +366,7 @@ paths:
         description: A unique integer value identifying this po.
         required: true
       tags:
-      - purchase-orders
+      - Purchase Orders
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -414,7 +402,7 @@ paths:
         description: A unique integer value identifying this po.
         required: true
       tags:
-      - purchase-orders
+      - Purchase Orders
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -436,7 +424,7 @@ paths:
           - csv
           - json
       tags:
-      - purchase-orders
+      - Purchase Orders
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -454,1015 +442,25 @@ paths:
           description: ''
 components:
   schemas:
-    SessionCreate:
+    PurchaseOrderDetail:
       type: object
       properties:
-        creditcard:
-          type: integer
-          title: Credit Card
-        balance:
+        number:
           type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,2})?$
-        statement_date:
-          type: string
-          format: date-time
-          nullable: true
-      required:
-      - creditcard
-    SimpleUser:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        profile_image:
-          type: string
-          nullable: true
-      required:
-      - email
-    PaymentMethod:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type: string
-          nullable: true
-        active:
-          type: boolean
-      required:
-      - name
-    OrderItemTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      description: '* `0` - One Time
-
-        * `1` - Recurring
-
-        * `2` - Blanket'
-    UserProfileRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        department:
-          allOf:
-          - $ref: '#/components/schemas/SimpleDepartment'
-          nullable: true
-          type: object
-      required:
-      - department
-      - email
-    Attachment:
-      type: object
-      properties:
-        id:
-          type: integer
           readOnly: true
         uuid:
           type: string
           format: uuid
-        file:
-          type: string
-        name:
-          type: string
-          maxLength: 255
-        user:
-          type: integer
-        description:
-          type: string
-          maxLength: 1000
-        mimetype:
-          type: string
-          maxLength: 100
-        length:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-          nullable: true
-        sha1_hash:
-          type: string
-          maxLength: 40
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - file
-      - user
-      - uuid
-    PermissionsEditDelete:
-      type: object
-      properties:
-        can_edit:
-          type: boolean
-        can_delete:
-          type: boolean
-      required:
-      - can_delete
-      - can_edit
-    PurchaseOrderLineItemRead:
-      type: object
-      properties:
-        PO:
-          type: array
-          items:
-            type: integer
-            title: PO
-        PO_line_num:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        account:
-          $ref: '#/components/schemas/AccountRead'
-        accountCode:
-          type: string
-          maxLength: 100
-        active:
-          type: boolean
-        approved_currency_rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-          nullable: true
-        approved_datetime:
-          type: string
-          format: date-time
-          nullable: true
-        approved_price:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
-        approved_quantity:
-          type: number
-          format: double
-        approved_shipping_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
-        approved_tax_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemAttachment'
-          nullable: true
-        catalog_item:
-          allOf:
-          - $ref: '#/components/schemas/CatalogItemRead'
-          nullable: true
-          type: object
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        currency:
-          $ref: '#/components/schemas/CurrencySummary'
-        dateInvoiced:
-          type: string
-          format: date-time
-          nullable: true
-        external_id:
-          type: string
-          description: External id of the order item
-          maxLength: 100
-        hot:
-          type: boolean
-        id:
-          type: integer
-          readOnly: true
-        inventoryItem:
-          type: integer
-          nullable: true
-        is_active:
-          type: boolean
-        item_attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attachment'
-        last_changed_by:
-          type: integer
-          nullable: true
-          title: Last changed by user
-        last_modified:
-          type: string
-          format: date-time
-          readOnly: true
-        lineComment:
-          type: string
-          nullable: true
-        name:
-          type: string
-          maxLength: 255
-        num:
-          type: string
-          maxLength: 50
-        orderNum:
-          type: integer
-          nullable: true
-        order_number:
-          type: integer
-          readOnly: true
-          nullable: true
-        po_note:
-          type: string
-          title: Comment
-        po_version:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        pref_vendor:
-          $ref: '#/components/schemas/VendorRead'
-        price:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-        purchase_order:
-          type: integer
-          title: Procurify PO Number
-          nullable: true
         purchaser:
           $ref: '#/components/schemas/UserSummary'
-        quantity:
-          type: number
-          format: double
-        receivedFailQty:
-          type: number
-          format: double
-        receivedPassQty:
-          type: number
-          format: double
-        shipping_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
-        sku:
-          type: string
-          maxLength: 100
-        status:
-          nullable: true
-          minimum: -2147483648
-          maximum: 2147483647
-          oneOf:
-          - $ref: '#/components/schemas/OrderItemStatusEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        tax_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
-        total_cost:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
-        unit:
-          type: string
-          maxLength: 30
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-        vendor:
-          type: string
-          readOnly: true
-        receive_method:
-          allOf:
-          - $ref: '#/components/schemas/ReceiveMethodEnum'
-          minimum: 0
-          maximum: 65535
-        type:
-          allOf:
-          - $ref: '#/components/schemas/OrderItemTypeEnum'
-          minimum: 0
-          maximum: 65535
-        blanket:
-          allOf:
-          - $ref: '#/components/schemas/BlanketOrderItemRead'
-          readOnly: true
-        comments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Comment'
-          readOnly: true
-        confirmation_status:
-          type: integer
-          nullable: true
-          readOnly: true
-        confirmation_status_description:
-          type: string
-          nullable: true
-          readOnly: true
-        cost_details:
-          allOf:
-          - $ref: '#/components/schemas/CostDetails'
-          nullable: true
-          readOnly: true
-          type: object
-        custom_fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomFieldValueRead'
-          readOnly: true
-        date_required:
-          type: string
-          format: date-time
-          readOnly: true
-        fully_received_actual_receive_date:
-          type: string
-          format: date
-          readOnly: true
-        has_sibling_items:
-          type: boolean
-          readOnly: true
-        line_comment:
-          type: string
-          readOnly: true
-        logs:
-          type: array
-          items:
-            $ref: '#/components/schemas/MasterLogger'
-          readOnly: true
-        order_description:
-          type: string
-          readOnly: true
-        order_status:
+        procurify_PO:
           type: integer
           readOnly: true
-        order_uuid:
-          type: string
-          format: uuid
-          readOnly: true
-        punchout_supplier_icon:
-          type: string
-          readOnly: true
-          nullable: true
-        punchout_supplier_name:
-          type: string
-          readOnly: true
-          nullable: true
-        punchout_system:
-          type: integer
-          nullable: true
-          readOnly: true
-        punchout_vendor_reference:
-          type: integer
-          nullable: true
-          readOnly: true
-        punchout_supplier_can_update_quantity:
-          type: boolean
-          readOnly: true
-        purchase_order_number:
-          type: string
-          readOnly: true
-        purchase_order_uuid:
-          type: string
-          format: uuid
-          readOnly: true
-        purchased_currency_rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-          readOnly: true
-          default: '0.000000'
-        recurrence:
-          allOf:
-          - $ref: '#/components/schemas/RecurringOrderItem'
-          nullable: true
-          type: object
-        requester:
-          allOf:
-          - $ref: '#/components/schemas/SimpleUserSummary'
-          readOnly: true
-        spend_allocation:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllocationRead'
-          readOnly: true
-        submitted_date:
-          type: string
-          format: date-time
-          readOnly: true
-        taxes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Adjustment'
-          nullable: true
-        receive_log_count:
-          type: integer
-          readOnly: true
-        approval_history:
-          type: array
-          items:
-            $ref: '#/components/schemas/MasterLogger'
-          readOnly: true
-        flags:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlagRead'
-          readOnly: true
-        approved_total_cost:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,8})?$
-      required:
-      - account
-      - approved_datetime
-      - approved_quantity
-      - approved_total_cost
-      - attachments
-      - catalog_item
-      - currency
-      - item_attachments
-      - name
-      - num
-      - pref_vendor
-      - price
-      - purchaser
-      - quantity
-      - receivedFailQty
-      - receivedPassQty
-      - recurrence
-      - unit
-    POWithListPurchaseOrderDocs:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/PurchaseOrderListMeta'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PurchaseOrderDocs'
-      required:
-      - data
-      - metadata
-    SimpleUserProfile:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        role:
-          allOf:
-          - $ref: '#/components/schemas/MinimalRoleRead'
-          readOnly: true
-        profile_image:
-          type: string
-          nullable: true
-      required:
-      - email
-    SetupStageEnum:
-      enum:
-      - COMP
-      - DEPT
-      - USER
-      - COA
-      - BDGT
-      - APPR
-      - FIN
-      type: string
-      description: '* `COMP` - Company
-
-        * `DEPT` - Department
-
-        * `USER` - User
-
-        * `COA` - Chart_of_Accounts
-
-        * `BDGT` - Budget_Control
-
-        * `APPR` - Approver
-
-        * `FIN` - Finished'
-    AccountCodeRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        applied_accounts_count:
-          type: integer
-          readOnly: true
-        code:
-          type: string
-          maxLength: 50
-        code_length:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        description:
-          type: string
-          maxLength: 200
-        account_type:
-          allOf:
-          - $ref: '#/components/schemas/AccountTypeEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        active:
-          type: boolean
-        parent:
-          type: integer
-          nullable: true
-      required:
-      - code
-      - description
-    TimezoneEnum:
-      enum:
-      - -11
-      - -10
-      - -9
-      - -8
-      - -7
-      - -6
-      - -5
-      - -4
-      - -3.5
-      - -3
-      - -2
-      - -1
-      - 0
-      - 1
-      - 2
-      - 3
-      - 3.5
-      - 4
-      - 4.5
-      - 5
-      - 5.5
-      - 5.75
-      - 6
-      - 7
-      - 8
-      - 9
-      - 9.5
-      - 10
-      - 11
-      - 12
-      type: number
-      description: '* `-11.0` - (GMT -11:00) Midway Island, Samoa
-
-        * `-10.0` - (GMT -10:00) Hawaii
-
-        * `-9.0` - (GMT -9:00) Alaska
-
-        * `-8.0` - (GMT -8:00) Pacific Time (US &amp; Canada)
-
-        * `-7.0` - (GMT -7:00) Mountain Time (US &amp; Canada)
-
-        * `-6.0` - (GMT -6:00) Central Time (US &amp; Canada), Mexico City
-
-        * `-5.0` - (GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima
-
-        * `-4.0` - (GMT -4:00) Atlantic Time (Canada), Caracas, La Paz
-
-        * `-3.5` - (GMT -3:30) Newfoundland
-
-        * `-3.0` - (GMT -3:00) Brazil, Buenos Aires, Georgetown
-
-        * `-2.0` - (GMT -2:00) Mid-Atlantic
-
-        * `-1.0` - (GMT -1:00) Azores, Cape Verde Islands
-
-        * `0.0` - (GMT) Western Europe Time, London, Lisbon, Casablanca
-
-        * `1.0` - (GMT +1:00) Brussels, Copenhagen, Madrid, Paris
-
-        * `2.0` - (GMT +2:00) Kaliningrad, South Africa
-
-        * `3.0` - (GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg
-
-        * `3.5` - (GMT +3:30) Tehran
-
-        * `4.0` - (GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi
-
-        * `4.5` - (GMT +4:30) Kabul
-
-        * `5.0` - (GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent
-
-        * `5.5` - (GMT +5:30) Bombay, Calcutta, Madras, New Delhi
-
-        * `5.75` - (GMT +5:45) Kathmandu
-
-        * `6.0` - (GMT +6:00) Almaty, Dhaka, Colombo
-
-        * `7.0` - (GMT +7:00) Bangkok, Hanoi, Jakarta
-
-        * `8.0` - (GMT +8:00) Beijing, Perth, Singapore, Hong Kong
-
-        * `9.0` - (GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk
-
-        * `9.5` - (GMT +9:30) Adelaide, Darwin
-
-        * `10.0` - (GMT +10:00) Eastern Australia, Guam, Vladivostok
-
-        * `11.0` - (GMT +11:00) Magadan, Solomon Islands, New Caledonia
-
-        * `12.0` - (GMT +12:00) Auckland, Wellington, Fiji, Kamchatka'
-    PurchaseOrderBillingHistoryItem:
-      type: object
-      properties:
-        id:
-          type: integer
-        billed_qty:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          default: '0.00000000'
-        received_qty:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-          default: '0.00000'
-      required:
-      - id
-    OrderItemPurchaseEdit:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          maxLength: 255
-        sku:
-          type: string
-          maxLength: 100
-        unit:
-          type: string
-          maxLength: 30
-        quantity:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-        price:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-        po_note:
-          type: string
-          title: Comment
-        custom_fields:
-          type: array
-          items:
-            type: object
-            additionalProperties: {}
-        tax_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
-        shipping_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
-        receive_method:
-          allOf:
-          - $ref: '#/components/schemas/ReceiveMethodEnum'
-          minimum: 0
-          maximum: 65535
-      required:
-      - custom_fields
-      - id
-      - name
-      - price
-      - quantity
-      - unit
-    PaymentMethodRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 255
-        type:
-          allOf:
-          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
-          title: Payment Method
-          minimum: 0
-          maximum: 4294967295
-        data: {}
-        currency:
-          $ref: '#/components/schemas/Currency'
-        payment_rail:
-          type: string
-          readOnly: true
-        bank_account_country_code:
-          type: string
-          nullable: true
-          readOnly: true
-      required:
-      - currency
-      - data
-    PurchaseOrderUpdateSerializerSingle:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/PurchaseOrderUpdate'
-      required:
-      - data
-    PurchaseOrderContract:
-      type: object
-      properties:
-        id:
-          type: integer
-        uuid:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - uuid
-    FlagRead:
-      type: object
-      properties:
-        color:
-          type: string
-          readOnly: true
-        symbol:
-          type: string
-          readOnly: true
-        object_id:
-          type: integer
-          maximum: 4294967295
-          minimum: 0
-          format: int64
-        content_type:
-          type: integer
-          nullable: true
-      required:
-      - object_id
-    MinimalRoleRead:
-      type: object
-      properties:
-        name:
-          type: string
-          maxLength: 150
-        type:
-          type: integer
-      required:
-      - name
-      - type
-    OrderItemAttachment:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        attachment:
-          type: string
-        upload_datetime:
-          type: string
-          format: date-time
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        type:
-          $ref: '#/components/schemas/OrderItemAttachmentTypeEnum'
-        user:
-          type: integer
-        item:
-          type: integer
-      required:
-      - attachment
-      - item
-      - name
-      - user
-    PurchaseOrderReadDocsSerializerSingle:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/PurchaseOrderReadDocs'
-      required:
-      - data
-    CustomFieldValueRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        value:
-          oneOf:
-          - type: string
-          - type: boolean
-          description: 'Given the *incoming* primitive data, return the value for this field
-
-            that should be validated and transformed to a native value.'
-          readOnly: true
-        field:
-          $ref: '#/components/schemas/CustomFieldRead'
-      required:
-      - field
-    CreditCardTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      type: integer
-      description: '* `0` - other-credit-card
-
-        * `1` - Visa
-
-        * `2` - Mastercard
-
-        * `3` - American Express
-
-        * `4` - Discover
-
-        * `5` - JCB
-
-        * `6` - Diner''s Club
-
-        * `7` - Procurify'
-    CreditCard:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        uuid:
-          type: string
-          format: uuid
-        is_active:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-        name:
-          type: string
-          maxLength: 255
-        number:
-          type: string
-          pattern: ^[0-9]{4}$
-          maxLength: 19
-        balance:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-          nullable: true
-        gl_code:
-          type: string
-          maxLength: 100
-        type:
-          allOf:
-          - $ref: '#/components/schemas/CreditCardTypeEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        category:
-          nullable: true
-          minimum: -2147483648
-          maximum: 2147483647
-          oneOf:
-          - $ref: '#/components/schemas/CategoryEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        external_id:
-          type: string
-          description: External id of the Credit Card
-          maxLength: 100
-        status:
-          nullable: true
-          description: 'The status of the Credit Card
-
-
-            * `pending` - Pending
-
-            * `active` - Active
-
-            * `inactive` - Inactive
-
-            * `canceled` - Canceled
-
-            * `lost` - Lost
-
-            * `stolen` - Stolen'
-          oneOf:
-          - $ref: '#/components/schemas/CreditCardStatusEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        require_activation:
-          type: boolean
-          title: Require new activation?
-          description: Does this card require new activation?
-        last_changed_by:
-          type: integer
-          nullable: true
-          title: Last changed by user
-        vendor:
-          type: integer
-        payment_method:
-          type: integer
-          nullable: true
-        currency:
-          type: integer
-        currency_name:
-          type: string
-          readOnly: true
-        creator:
-          type: integer
-          nullable: true
-          title: Card Issuer
-        assignees:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditCardAssignee'
-      required:
-      - assignees
-      - currency
-      - uuid
-      - vendor
-    PurchaseOrderBillingHistory:
-      type: object
-      properties:
-        id:
-          type: integer
-        number:
-          type: string
-        has_unbilled_unreceived_items:
-          type: boolean
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/PurchaseOrderBillingHistoryItem'
-      required:
-      - has_unbilled_unreceived_items
-      - id
-      - items
-      - number
-    PurchaseOrderReadDocs:
-      type: object
-      properties:
-        id:
-          type: integer
+          title: Procurify PO Number
         PO_Num:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: PO Number
           maxLength: 30
         date:
@@ -1470,149 +468,6 @@ components:
           format: date-time
           readOnly: true
           title: PO Date
-        discount:
-          allOf:
-          - $ref: '#/components/schemas/PriceModifierDocs'
-          readOnly: true
-        freight:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
-          nullable: true
-        fulfilment_status:
-          $ref: '#/components/schemas/FulfilmentStatusEnum'
-        item_count:
-          type: integer
-          readOnly: true
-        last_modified:
-          type: string
-          format: date-time
-          readOnly: true
-        number:
-          type: string
-        other:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
-          nullable: true
-        pref_vendor:
-          $ref: '#/components/schemas/SimpleVendor'
-        procurify_PO:
-          type: integer
-          readOnly: true
-          title: Procurify PO Number
-        promise_date:
-          type: string
-          format: date-time
-        punchout_system:
-          type: integer
-          nullable: true
-          readOnly: true
-        purchase_agreement:
-          type: integer
-          nullable: true
-        purchase_agreement_status:
-          allOf:
-          - $ref: '#/components/schemas/PurchaseAgreementStatusEnum'
-          readOnly: true
-          nullable: true
-          type: object
-        purchased_currency:
-          $ref: '#/components/schemas/SimpleCurrency'
-        purchased_currency_rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-          nullable: true
-        purchaser:
-          $ref: '#/components/schemas/SimpleUser'
-        state:
-          nullable: true
-          minimum: -2147483648
-          maximum: 2147483647
-          oneOf:
-          - $ref: '#/components/schemas/PurchaseOrderStateEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        subtotal:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
-        total:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
-          title: Total Cost
-        uuid:
-          type: string
-          format: uuid
-        version:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        punchout_items_rejected:
-          type: boolean
-          readOnly: true
-        total_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        currency:
-          type: string
-          default: ''
-        email_status:
-          type: string
-          nullable: true
-          maxLength: 50
-        email_status_updated_at:
-          type: string
-          format: date-time
-          nullable: true
-        punchout_supplier_name:
-          type: string
-          nullable: true
-          readOnly: true
-        punchout_supplier_icon:
-          type: string
-          nullable: true
-          readOnly: true
-        punchout_vendor_reference:
-          type: integer
-          nullable: true
-          readOnly: true
-        punchout_is_retriable:
-          type: boolean
-          readOnly: true
-        has_blanket_order_items:
-          type: boolean
-          readOnly: true
-        expiry_date:
-          type: string
-          format: date-time
-          nullable: true
-      required:
-      - id
-      - number
-      - pref_vendor
-      - promise_date
-      - purchased_currency
-      - purchaser
-      - subtotal
-      - total
-      - total_amount
-      - uuid
-    PurchaseOrderUpdate:
-      type: object
-      properties:
-        order_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemPurchaseEdit'
-        PO_Num:
-          type: string
-          nullable: true
-          title: PO Number
-          maxLength: 30
         buyer_name:
           type: string
           maxLength: 100
@@ -1639,11 +494,7 @@ components:
           title: Country
           maxLength: 80
         buyer_address:
-          type: integer
-        comment:
-          type: string
-          nullable: true
-          title: Notes
+          $ref: '#/components/schemas/AddressSummary'
         receiver_name:
           type: string
           maxLength: 100
@@ -1670,57 +521,224 @@ components:
           title: Country
           maxLength: 80
         receiver_address:
-          type: integer
+          $ref: '#/components/schemas/AddressSummary'
+        pref_vendor:
+          $ref: '#/components/schemas/VendorRead'
+        vendor_name:
+          type:
+          - string
+          - 'null'
+          maxLength: 150
+        vendor_contact:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        vendor_addressLineOne:
+          type:
+          - string
+          - 'null'
+          title: Address line
+          maxLength: 300
+        vendor_postalCode:
+          type:
+          - string
+          - 'null'
+          title: Postal Code
+          maxLength: 20
+        vendor_city:
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        vendor_state_province:
+          type:
+          - string
+          - 'null'
+          title: State/Province
+          maxLength: 40
+        vendor_country:
+          type:
+          - string
+          - 'null'
+          title: Country
+          maxLength: 80
+        payment_terms:
+          type: string
+          maxLength: 100
+        shipping_terms:
+          type: string
+          maxLength: 100
+        shipping_method:
+          $ref: '#/components/schemas/ShippingMethod'
         promise_date:
           type: string
           format: date-time
+        subtotal:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
         freight:
-          type: string
+          type:
+          - string
+          - 'null'
           format: decimal
           pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
-          nullable: true
-        discount:
-          type: object
-          additionalProperties: {}
         tax:
-          type: object
-          additionalProperties: {}
+          allOf:
+          - $ref: '#/components/schemas/PriceModifierDocs'
+          readOnly: true
+        discount:
+          allOf:
+          - $ref: '#/components/schemas/PriceModifierDocs'
+          readOnly: true
         other:
-          type: string
+          type:
+          - string
+          - 'null'
           format: decimal
           pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
-          nullable: true
-        disclaimer_description:
+        total:
           type: string
-          nullable: true
+          format: decimal
+          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
+          title: Total Cost
+        comment:
+          type:
+          - string
+          - 'null'
+          title: Notes
+        purchased_currency:
+          $ref: '#/components/schemas/CurrencySummary'
+        purchased_currency_rate:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        active:
+          type: boolean
+        state:
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/PurchaseOrderStateEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        fulfilment_status:
+          $ref: '#/components/schemas/FulfilmentStatusEnum'
+        disclaimer_description:
+          type:
+          - string
+          - 'null'
           maxLength: 100
         disclaimer_text:
-          type: string
-          nullable: true
-        payment_term_ref:
-          type: integer
-          nullable: true
-        shipping_term_ref:
-          type: integer
-          nullable: true
-        payment_method_ref:
-          type: integer
-          nullable: true
-        shipping_method_ref:
-          type: integer
-          nullable: true
-        creditcard:
-          type: integer
-          nullable: true
-        version:
-          type: integer
-        expiry_date:
+          type:
+          - string
+          - 'null'
+        recorded_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        closed_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        last_modified:
           type: string
           format: date-time
-          nullable: true
-        contract:
+          readOnly: true
+        staged_for_export:
+          type: boolean
+        version:
           type: integer
-          nullable: true
+          maximum: 2147483647
+          minimum: -2147483648
+        item_count:
+          type: integer
+          readOnly: true
+        most_recent_version:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          readOnly: true
+        punchout_system:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        purchase_agreement:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        purchase_agreement_status:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseAgreementStatusEnum'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+        punchout_vendor_reference:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        punchout_supplier_icon:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        punchout_supplier_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        has_blanket_order_items:
+          type: boolean
+          readOnly: true
+        expiry_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        contract:
+          $ref: '#/components/schemas/PurchaseOrderContract'
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderLineItemRead'
+        creditcard_is_editable:
+          type: boolean
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldValueRead'
+          readOnly: true
+        creditcard:
+          allOf:
+          - $ref: '#/components/schemas/CreditCardRead'
+          type:
+          - object
+          - 'null'
+        payment_term:
+          $ref: '#/components/schemas/PaymentTerm'
+        shipping_term:
+          $ref: '#/components/schemas/ShippingTerm'
+        cost_details:
+          allOf:
+          - $ref: '#/components/schemas/CostDetails'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+        punchout_is_retriable:
+          type: boolean
+          readOnly: true
       required:
       - buyer_address
       - buyer_addressLineOne
@@ -1729,9 +747,16 @@ components:
       - buyer_country
       - buyer_name
       - buyer_postalCode
-      - discount
+      - contract
+      - creditcard
+      - creditcard_is_editable
       - order_items
+      - payment_term
+      - payment_terms
+      - pref_vendor
       - promise_date
+      - purchased_currency
+      - purchaser
       - receiver_address
       - receiver_addressLineOne
       - receiver_city
@@ -1739,36 +764,22 @@ components:
       - receiver_country
       - receiver_name
       - receiver_postalCode
-      - tax
-      - version
-    BranchSummary:
+      - shipping_method
+      - shipping_term
+      - shipping_terms
+      - subtotal
+      - total
+      - uuid
+    PermissionsEditDelete:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
+        can_edit:
+          type: boolean
+        can_delete:
+          type: boolean
       required:
-      - name
-    VendorTypeEnum:
-      enum:
-      - 2
-      - 3
-      - 4
-      - 6
-      - 7
-      type: integer
-      description: '* `2` - amazon punchout
-
-        * `3` - preferred
-
-        * `4` - regular
-
-        * `6` - credit card provider
-
-        * `7` - checkout'
+      - can_delete
+      - can_edit
     Nested:
       type: object
       properties:
@@ -1793,70 +804,13 @@ components:
         active:
           type: boolean
         parent:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
       required:
       - code
       - description
-    PaymentTerm:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type: string
-          nullable: true
-        active:
-          type: boolean
-      required:
-      - name
-    FulfilmentStatusEnum:
-      enum:
-      - empty
-      - partial
-      - full
-      type: string
-      description: '* `empty` - Empty
-
-        * `partial` - Partial
-
-        * `full` - Full'
-    SimpleDepartment:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        location:
-          $ref: '#/components/schemas/SimpleLocation'
-      required:
-      - location
-      - name
-    ApprovalDelegationRead:
-      type: object
-      properties:
-        approval_delegatee:
-          $ref: '#/components/schemas/UserProfileRead'
-        expected_return_date:
-          type: string
-          format: date
-          nullable: true
-        delegator:
-          $ref: '#/components/schemas/SimpleUserProfile'
-        setter:
-          $ref: '#/components/schemas/SimpleUserProfile'
-      required:
-      - approval_delegatee
-      - delegator
-      - setter
-    CreditCardAssignee:
+    SimpleUserProfile:
       type: object
       properties:
         id:
@@ -1872,194 +826,17 @@ components:
           type: string
           format: email
           maxLength: 254
+        role:
+          allOf:
+          - $ref: '#/components/schemas/MinimalRoleRead'
+          readOnly: true
         profile_image:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       required:
       - email
-    UserSummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        department:
-          $ref: '#/components/schemas/DepartmentSummary'
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        position:
-          type: string
-          nullable: true
-          maxLength: 100
-        phone:
-          type: string
-          nullable: true
-          maxLength: 30
-        address:
-          type: string
-          nullable: true
-        notifications:
-          type: boolean
-        is_active:
-          type: boolean
-        mobile:
-          type: boolean
-        profile_image:
-          type: string
-          nullable: true
-        slack_user_id:
-          type: string
-          maxLength: 50
-        is_sso_enabled:
-          type: boolean
-        last_changed_by:
-          type: integer
-          nullable: true
-          title: Last changed by user
-        user:
-          type: integer
-        approval_delegatee:
-          allOf:
-          - $ref: '#/components/schemas/ApprovalDelegateeDocs'
-          nullable: true
-          readOnly: true
-          type: object
-        expected_return_date:
-          type: string
-          format: date
-          readOnly: true
-      required:
-      - department
-      - email
-      - user
-    NullEnum:
-      enum:
-      - null
-    AllocationRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          title: Allocated Amount
-        account:
-          $ref: '#/components/schemas/SpendAccountRead'
-      required:
-      - account
-      - amount
-    DepartmentSummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        branch:
-          $ref: '#/components/schemas/BranchSummary'
-        external_id:
-          type: string
-          nullable: true
-          description: External id
-          maxLength: 100
-        name:
-          type: string
-          maxLength: 150
-        punchout_email:
-          type: string
-          format: email
-          nullable: true
-          description: PunchOut Email
-          maxLength: 254
-        active:
-          type: boolean
-      required:
-      - branch
-      - name
-    UnoptimizedAccountCodeserializer:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        code:
-          type: string
-          maxLength: 50
-        code_length:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        description:
-          type: string
-          maxLength: 200
-        account_type:
-          allOf:
-          - $ref: '#/components/schemas/AccountTypeEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        active:
-          type: boolean
-        parent:
-          allOf:
-          - $ref: '#/components/schemas/Nested'
-          readOnly: true
-      required:
-      - code
-      - description
-    SimpleUserSummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        position:
-          type: string
-          nullable: true
-          maxLength: 100
-        profile_image:
-          type: string
-          nullable: true
-        approval_delegatee:
-          allOf:
-          - $ref: '#/components/schemas/ApprovalDelegateeDocs'
-          nullable: true
-          readOnly: true
-          type: object
-        expected_return_date:
-          type: string
-          format: date
-          readOnly: true
-      required:
-      - email
-    ShippingMethod:
+    PaymentMethodRead:
       type: object
       properties:
         id:
@@ -2067,265 +844,27 @@ components:
           readOnly: true
         name:
           type: string
-          maxLength: 100
-        description:
-          type: string
-          nullable: true
-        active:
-          type: boolean
-      required:
-      - name
-    FrequencyEnum:
-      enum:
-      - 0
-      - 1
-      type: integer
-      description: '* `0` - YEARLY
-
-        * `1` - MONTHLY'
-    CurrencySummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 10
-        rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-        base:
-          type: boolean
-      required:
-      - name
-      - rate
-    PurchaseOrderUpdateRequest:
-      type: object
-      properties:
-        order_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemPurchaseEditRequest'
-        custom_fields:
-          type: array
-          items:
-            type: object
-            additionalProperties: {}
-          writeOnly: true
-          default: []
-        PO_Num:
-          type: string
-          nullable: true
-          title: PO Number
-          maxLength: 30
-        buyer_name:
-          type: string
-          minLength: 1
-          maxLength: 100
-        buyer_contact:
-          type: string
-          minLength: 1
-          maxLength: 100
-        buyer_addressLineOne:
-          type: string
-          minLength: 1
-          title: Address line
-          maxLength: 300
-        buyer_postalCode:
-          type: string
-          minLength: 1
-          title: Postal Code
-          maxLength: 20
-        buyer_city:
-          type: string
-          minLength: 1
-          maxLength: 50
-        buyer_state_province:
-          type: string
-          title: State/Province
-          maxLength: 40
-        buyer_country:
-          type: string
-          minLength: 1
-          title: Country
-          maxLength: 80
-        buyer_address:
-          type: integer
-        comment:
-          type: string
-          nullable: true
-          title: Notes
-        receiver_name:
-          type: string
-          minLength: 1
-          maxLength: 100
-        receiver_contact:
-          type: string
-          minLength: 1
-          maxLength: 100
-        receiver_addressLineOne:
-          type: string
-          minLength: 1
-          title: Address line
-          maxLength: 300
-        receiver_postalCode:
-          type: string
-          minLength: 1
-          title: Postal Code
-          maxLength: 20
-        receiver_city:
-          type: string
-          minLength: 1
-          maxLength: 50
-        receiver_state_province:
-          type: string
-          title: State/Province
-          maxLength: 40
-        receiver_country:
-          type: string
-          minLength: 1
-          title: Country
-          maxLength: 80
-        receiver_address:
-          type: integer
-        promise_date:
-          type: string
-          format: date-time
-        freight:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
-          nullable: true
-        discount:
-          type: object
-          additionalProperties: {}
-        tax:
-          type: object
-          additionalProperties: {}
-        other:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
-          nullable: true
-        disclaimer_description:
-          type: string
-          nullable: true
-          maxLength: 100
-        disclaimer_text:
-          type: string
-          nullable: true
-        payment_term_ref:
-          type: integer
-          nullable: true
-        shipping_term_ref:
-          type: integer
-          nullable: true
-        payment_method_ref:
-          type: integer
-          nullable: true
-        shipping_method_ref:
-          type: integer
-          nullable: true
-        creditcard:
-          type: integer
-          nullable: true
-        version:
-          type: integer
-        expiry_date:
-          type: string
-          format: date-time
-          nullable: true
-        contract:
-          type: integer
-          nullable: true
-      required:
-      - buyer_address
-      - buyer_addressLineOne
-      - buyer_city
-      - buyer_contact
-      - buyer_country
-      - buyer_name
-      - buyer_postalCode
-      - discount
-      - order_items
-      - promise_date
-      - receiver_address
-      - receiver_addressLineOne
-      - receiver_city
-      - receiver_contact
-      - receiver_country
-      - receiver_name
-      - receiver_postalCode
-      - tax
-      - version
-    AddressSummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        is_active:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        addressAssociation:
+          maxLength: 255
+        type:
           allOf:
-          - $ref: '#/components/schemas/AddressAssociationEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        addressLineOne:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data: {}
+        currency:
+          $ref: '#/components/schemas/Currency'
+        payment_rail:
           type: string
-          title: Address line 1
-          maxLength: 300
-        addressLineTwo:
-          type: string
-          title: Address line 2
-          maxLength: 300
-        postalCode:
-          type: string
-          title: Postal Code
-          maxLength: 20
-        city:
-          type: string
-          maxLength: 50
-        state_province:
-          type: string
-          title: State/Province
-          maxLength: 40
-        country:
-          type: string
-          maxLength: 80
-        last_changed_by:
-          type: integer
-          nullable: true
-          title: Last changed by user
+          readOnly: true
+        bank_account_country_code:
+          type:
+          - string
+          - 'null'
+          readOnly: true
       required:
-      - addressLineOne
-      - city
-      - country
-      - name
-      - postalCode
-    ApiNestedEditDeletePurchaseOrderDetail:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/PermissionsEditDelete'
-        data:
-          $ref: '#/components/schemas/PurchaseOrderDetail'
-      required:
+      - currency
       - data
-      - metadata
     CreditCardRead:
       type: object
       properties:
@@ -2349,10 +888,11 @@ components:
         currency:
           $ref: '#/components/schemas/Currency'
         balance:
-          type: integer
+          type:
+          - integer
+          - 'null'
           maximum: 2147483647
           minimum: -2147483648
-          nullable: true
         assignees:
           type: array
           items:
@@ -2381,70 +921,872 @@ components:
       - assignees
       - currency
       - vendor
-    MasterLogger:
+    PurchaseAgreementStatusEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: '* `0` - Open
+
+        * `1` - Pending
+
+        * `2` - Closed
+
+        * `3` - Cancelled
+
+        * `4` - Denied
+
+        * `5` - Draft'
+    CatalogItemRead:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        user:
-          $ref: '#/components/schemas/UserSummary'
-        next_approver:
-          $ref: '#/components/schemas/UserSummary'
-        next_approvers:
+        name:
+          type: string
+          maxLength: 255
+        image:
+          type: string
+        unitType:
+          type: string
+          maxLength: 30
+        pref_vendor:
+          $ref: '#/components/schemas/VendorRead'
+        account_code:
+          $ref: '#/components/schemas/AccountCodeRead'
+        internalSKU:
+          type: string
+          maxLength: 50
+        description:
+          type:
+          - string
+          - 'null'
+        product_url:
+          type:
+          - string
+          - 'null'
+        currency:
+          $ref: '#/components/schemas/CurrencySummary'
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        rfo_lock:
+          type: boolean
+        departments:
           type: array
           items:
             type: integer
-        nextApprover:
-          $ref: '#/components/schemas/UserSummary'
-        approval_delegation:
-          allOf:
-          - $ref: '#/components/schemas/ApprovalDelegationRead'
-          nullable: true
+          readOnly: true
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldValueRead'
+          readOnly: true
+        requested_count:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        last_requested_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        selected_account:
           type: object
-        dateTime:
+          additionalProperties: {}
+          readOnly: true
+      required:
+      - account_code
+      - currency
+      - name
+      - pref_vendor
+    SimpleLocation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        headquarter:
+          type: boolean
+          readOnly: true
+      required:
+      - name
+    OrderItemPurchaseEditRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        sku:
+          type: string
+          maxLength: 100
+        unit:
+          type: string
+          minLength: 1
+          maxLength: 30
+        quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        po_note:
+          type: string
+          title: Comment
+        custom_fields:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        tax_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        shipping_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        receive_method:
+          allOf:
+          - $ref: '#/components/schemas/ReceiveMethodEnum'
+          minimum: 0
+          maximum: 65535
+      required:
+      - custom_fields
+      - id
+      - name
+      - price
+      - quantity
+      - unit
+    OrderItemTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: '* `0` - One Time
+
+        * `1` - Recurring
+
+        * `2` - Blanket'
+    CreditCardTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      type: integer
+      description: '* `0` - other-credit-card
+
+        * `1` - Visa
+
+        * `2` - Mastercard
+
+        * `3` - American Express
+
+        * `4` - Discover
+
+        * `5` - JCB
+
+        * `6` - Diner''s Club
+
+        * `7` - Procurify'
+    AllocationRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          title: Allocated Amount
+        account:
+          $ref: '#/components/schemas/SpendAccountRead'
+      required:
+      - account
+      - amount
+    SimpleVendor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          description: Name of the vendor
+          maxLength: 150
+        active:
+          type: boolean
+        addressLineOne:
+          type:
+          - string
+          - 'null'
+          title: Address line 1
+          description: First line of address
+          maxLength: 300
+        addressLineTwo:
+          type:
+          - string
+          - 'null'
+          title: Address line 2
+          description: Second line of address
+          maxLength: 300
+        postalCode:
+          type:
+          - string
+          - 'null'
+          title: Postal Code
+          description: Postal or Zip code of the vendor
+          maxLength: 20
+        city:
+          type:
+          - string
+          - 'null'
+          description: City of the vendor
+          maxLength: 50
+        state_province:
+          type:
+          - string
+          - 'null'
+          title: State/Province
+          description: State or Province of the vendor
+          maxLength: 40
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country of the vendor
+          maxLength: 80
+        overall_score:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
+          readOnly: true
+        is_auto_email_po_enabled:
+          type: boolean
+          description: Represents whether the AutoEmail PO feature is turned on for this Vendor
+      required:
+      - name
+    PurchaseOrderCountsBreakdown:
+      type: object
+      properties:
+        all:
+          type: integer
+        open:
+          type: integer
+        partial:
+          type: integer
+        closed:
+          type: integer
+        cancelled:
+          type: integer
+        page:
+          type: integer
+      required:
+      - all
+      - cancelled
+      - closed
+      - open
+      - page
+      - partial
+    ApprovalDelegateeDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        department:
+          type:
+          - integer
+          - 'null'
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+      required:
+      - email
+    CustomFieldRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        content_type:
+          type: integer
+        default_value:
+          type: string
+          maxLength: 5000
+        is_required:
+          type: boolean
+        field_choices:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        field_type:
+          $ref: '#/components/schemas/FieldTypeEnum'
+        field_label:
+          type: string
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
+      required:
+      - content_type
+      - name
+    AdjustmentTypeEnum:
+      enum:
+      - percent
+      - amount
+      - 0
+      - 1
+      description: '* `percent` - percent
+
+        * `amount` - amount
+
+        * `0` - 0
+
+        * `1` - 1'
+    Attachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+        file:
+          type: string
+        name:
+          type: string
+          maxLength: 255
+        user:
+          type: integer
+        description:
+          type: string
+          maxLength: 1000
+        mimetype:
+          type: string
+          maxLength: 100
+        length:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+        sha1_hash:
+          type: string
+          maxLength: 40
+        created_at:
           type: string
           format: date-time
           readOnly: true
-        action:
-          nullable: true
+      required:
+      - file
+      - user
+      - uuid
+    PurchaseOrderUpdateRequest:
+      type: object
+      properties:
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemPurchaseEditRequest'
+        custom_fields:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          writeOnly: true
+          default: []
+        PO_Num:
+          type:
+          - string
+          - 'null'
+          title: PO Number
+          maxLength: 30
+        buyer_name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        buyer_contact:
+          type: string
+          minLength: 1
+          maxLength: 100
+        buyer_addressLineOne:
+          type: string
+          minLength: 1
+          title: Address line
+          maxLength: 300
+        buyer_postalCode:
+          type: string
+          minLength: 1
+          title: Postal Code
+          maxLength: 20
+        buyer_city:
+          type: string
+          minLength: 1
+          maxLength: 50
+        buyer_state_province:
+          type: string
+          title: State/Province
+          maxLength: 40
+        buyer_country:
+          type: string
+          minLength: 1
+          title: Country
+          maxLength: 80
+        buyer_address:
+          type: integer
+        comment:
+          type:
+          - string
+          - 'null'
+          title: Notes
+        receiver_name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        receiver_contact:
+          type: string
+          minLength: 1
+          maxLength: 100
+        receiver_addressLineOne:
+          type: string
+          minLength: 1
+          title: Address line
+          maxLength: 300
+        receiver_postalCode:
+          type: string
+          minLength: 1
+          title: Postal Code
+          maxLength: 20
+        receiver_city:
+          type: string
+          minLength: 1
+          maxLength: 50
+        receiver_state_province:
+          type: string
+          title: State/Province
+          maxLength: 40
+        receiver_country:
+          type: string
+          minLength: 1
+          title: Country
+          maxLength: 80
+        receiver_address:
+          type: integer
+        promise_date:
+          type: string
+          format: date-time
+        freight:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
+        discount:
+          type: object
+          additionalProperties: {}
+        tax:
+          type: object
+          additionalProperties: {}
+        other:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
+        disclaimer_description:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        disclaimer_text:
+          type:
+          - string
+          - 'null'
+        payment_term_ref:
+          type:
+          - integer
+          - 'null'
+        shipping_term_ref:
+          type:
+          - integer
+          - 'null'
+        payment_method_ref:
+          type:
+          - integer
+          - 'null'
+        shipping_method_ref:
+          type:
+          - integer
+          - 'null'
+        creditcard:
+          type:
+          - integer
+          - 'null'
+        version:
+          type: integer
+        expiry_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        contract:
+          type:
+          - integer
+          - 'null'
+      required:
+      - buyer_address
+      - buyer_addressLineOne
+      - buyer_city
+      - buyer_contact
+      - buyer_country
+      - buyer_name
+      - buyer_postalCode
+      - discount
+      - order_items
+      - promise_date
+      - receiver_address
+      - receiver_addressLineOne
+      - receiver_city
+      - receiver_contact
+      - receiver_country
+      - receiver_name
+      - receiver_postalCode
+      - tax
+      - version
+    AccountRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        account_code:
+          $ref: '#/components/schemas/AccountCodeRead'
+        department:
+          $ref: '#/components/schemas/DepartmentSummary'
+        warning_indicator:
+          type: boolean
+          readOnly: true
+        budget_used_approved:
+          type: number
+          format: double
+        budget_used_purchased:
+          type: number
+          format: double
+        start_datetime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_datetime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        budget:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        balance_approved:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        balance_purchased:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        active:
+          type: boolean
+      required:
+      - account_code
+      - department
+    FrequencyEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - YEARLY
+
+        * `1` - MONTHLY'
+    ShippingTerm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+      required:
+      - name
+    SessionCreate:
+      type: object
+      properties:
+        creditcard:
+          type: integer
+          title: Credit Card
+        balance:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,2})?$
+        statement_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - creditcard
+    PurchaseOrderCountsMeta:
+      type: object
+      properties:
+        purchased:
+          $ref: '#/components/schemas/PurchaseOrderCountsBreakdown'
+        receivable:
+          $ref: '#/components/schemas/PurchaseOrderCountsBreakdown'
+    SimpleDepartment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        location:
+          $ref: '#/components/schemas/SimpleLocation'
+      required:
+      - location
+      - name
+    BranchSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+      required:
+      - name
+    UnoptimizedBranchRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        logo:
+          type: string
+        language:
+          allOf:
+          - $ref: '#/components/schemas/LanguageEnum'
           minimum: -2147483648
           maximum: 2147483647
+        multipleLocations:
+          type: boolean
+        locationTimezone:
           oneOf:
-          - $ref: '#/components/schemas/ActionEnum'
+          - $ref: '#/components/schemas/LocationTimezoneEnum'
+          - $ref: '#/components/schemas/BlankEnum'
           - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        userLimit:
           type: integer
-        line_qty_pass:
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+        budgetOvertureToggle:
+          type: boolean
+        purchase_filtering:
+          type: boolean
+        catalog_permission:
+          type: boolean
+        separate_expense_approval:
+          type: boolean
+        standalone_travel_approval:
+          type: boolean
+        phoneOne:
           type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-          nullable: true
-        line_qty_fail:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-          nullable: true
-        order:
+          maxLength: 20
+        phoneTwo:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        fax:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        fiscalYearEndDay:
+          type:
+          - integer
+          - 'null'
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+        fiscalYearEndMonth:
+          type:
+          - integer
+          - 'null'
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+        timezone:
+          allOf:
+          - $ref: '#/components/schemas/TimezoneEnum'
+          exclusiveMinimum: -10000
+          exclusiveMaximum: 10000
+        beginDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        ported:
+          type: boolean
+        port_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        active:
+          type: boolean
+        fields_cache:
+          type:
+          - string
+          - 'null'
+        activated:
+          type: boolean
+        setup_stage:
+          $ref: '#/components/schemas/SetupStageEnum'
+        localCurrency:
           type: integer
-          nullable: true
-        lineItem:
-          type: integer
-          nullable: true
-        PO:
-          type: integer
-          title: Procurify PO Number
-          nullable: true
-        inventoryItem:
-          type: integer
-          nullable: true
-        stocking_parent:
-          type: integer
-          nullable: true
+        contactPerson:
+          type:
+          - integer
+          - 'null'
+        buyerAddress:
+          type:
+          - integer
+          - 'null'
+        shippingAddress:
+          type:
+          - integer
+          - 'null'
       required:
-      - approval_delegation
-      - nextApprover
-      - next_approver
-      - user
+      - localCurrency
+      - name
+      - phoneOne
+    PriceModifierDocsTypeEnum:
+      enum:
+      - amount
+      - percentage
+      type: string
+      description: '* `amount` - amount
+
+        * `percentage` - percentage'
+    PurchaseOrderBillingHistorySerializerList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderBillingHistory'
+      required:
+      - data
+    SetupStageEnum:
+      enum:
+      - COMP
+      - DEPT
+      - USER
+      - COA
+      - BDGT
+      - APPR
+      - FIN
+      type: string
+      description: '* `COMP` - Company
+
+        * `DEPT` - Department
+
+        * `USER` - User
+
+        * `COA` - Chart_of_Accounts
+
+        * `BDGT` - Budget_Control
+
+        * `APPR` - Approver
+
+        * `FIN` - Finished'
     LocationTimezoneEnum:
       enum:
       - Africa/Abidjan
@@ -3764,7 +3106,269 @@ components:
         * `US/Pacific` - US/Pacific
 
         * `UTC` - UTC'
-    CustomFieldRead:
+    PurchaseOrderUpdate:
+      type: object
+      properties:
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemPurchaseEdit'
+        PO_Num:
+          type:
+          - string
+          - 'null'
+          title: PO Number
+          maxLength: 30
+        buyer_name:
+          type: string
+          maxLength: 100
+        buyer_contact:
+          type: string
+          maxLength: 100
+        buyer_addressLineOne:
+          type: string
+          title: Address line
+          maxLength: 300
+        buyer_postalCode:
+          type: string
+          title: Postal Code
+          maxLength: 20
+        buyer_city:
+          type: string
+          maxLength: 50
+        buyer_state_province:
+          type: string
+          title: State/Province
+          maxLength: 40
+        buyer_country:
+          type: string
+          title: Country
+          maxLength: 80
+        buyer_address:
+          type: integer
+        comment:
+          type:
+          - string
+          - 'null'
+          title: Notes
+        receiver_name:
+          type: string
+          maxLength: 100
+        receiver_contact:
+          type: string
+          maxLength: 100
+        receiver_addressLineOne:
+          type: string
+          title: Address line
+          maxLength: 300
+        receiver_postalCode:
+          type: string
+          title: Postal Code
+          maxLength: 20
+        receiver_city:
+          type: string
+          maxLength: 50
+        receiver_state_province:
+          type: string
+          title: State/Province
+          maxLength: 40
+        receiver_country:
+          type: string
+          title: Country
+          maxLength: 80
+        receiver_address:
+          type: integer
+        promise_date:
+          type: string
+          format: date-time
+        freight:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
+        discount:
+          type: object
+          additionalProperties: {}
+        tax:
+          type: object
+          additionalProperties: {}
+        other:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
+        disclaimer_description:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        disclaimer_text:
+          type:
+          - string
+          - 'null'
+        payment_term_ref:
+          type:
+          - integer
+          - 'null'
+        shipping_term_ref:
+          type:
+          - integer
+          - 'null'
+        payment_method_ref:
+          type:
+          - integer
+          - 'null'
+        shipping_method_ref:
+          type:
+          - integer
+          - 'null'
+        creditcard:
+          type:
+          - integer
+          - 'null'
+        version:
+          type: integer
+        expiry_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        contract:
+          type:
+          - integer
+          - 'null'
+      required:
+      - buyer_address
+      - buyer_addressLineOne
+      - buyer_city
+      - buyer_contact
+      - buyer_country
+      - buyer_name
+      - buyer_postalCode
+      - discount
+      - order_items
+      - promise_date
+      - receiver_address
+      - receiver_addressLineOne
+      - receiver_city
+      - receiver_contact
+      - receiver_country
+      - receiver_name
+      - receiver_postalCode
+      - tax
+      - version
+    CreditCard:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        number:
+          type: string
+          pattern: ^[0-9]{4}$
+          maxLength: 19
+        balance:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+        gl_code:
+          type: string
+          maxLength: 100
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CreditCardTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        category:
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/CategoryEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        external_id:
+          type: string
+          description: External id of the Credit Card
+          maxLength: 100
+        status:
+          description: 'The status of the Credit Card
+
+
+            * `pending` - Pending
+
+            * `active` - Active
+
+            * `inactive` - Inactive
+
+            * `canceled` - Canceled
+
+            * `lost` - Lost
+
+            * `stolen` - Stolen'
+          oneOf:
+          - $ref: '#/components/schemas/CreditCardStatusEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        require_activation:
+          type: boolean
+          title: Require new activation?
+          description: Does this card require new activation?
+        last_changed_by:
+          type:
+          - integer
+          - 'null'
+          title: Last changed by user
+        vendor:
+          type: integer
+        payment_method:
+          type:
+          - integer
+          - 'null'
+        currency:
+          type: integer
+        currency_name:
+          type: string
+          readOnly: true
+        creator:
+          type:
+          - integer
+          - 'null'
+          title: Card Issuer
+        assignees:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCardAssignee'
+      required:
+      - assignees
+      - currency
+      - uuid
+      - vendor
+    PaymentMethod:
       type: object
       properties:
         id:
@@ -3772,30 +3376,916 @@ components:
           readOnly: true
         name:
           type: string
-          maxLength: 200
-        content_type:
-          type: integer
-        default_value:
-          type: string
-          maxLength: 5000
-        is_required:
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
           type: boolean
-        field_choices:
+      required:
+      - name
+    AccountCodeRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        applied_accounts_count:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          maxLength: 50
+        code_length:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        description:
+          type: string
+          maxLength: 200
+        account_type:
+          allOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        active:
+          type: boolean
+        parent:
+          type:
+          - integer
+          - 'null'
+      required:
+      - code
+      - description
+    PurchaseOrderLineItemRead:
+      type: object
+      properties:
+        PO:
           type: array
           items:
-            type: string
-          readOnly: true
-        field_type:
-          $ref: '#/components/schemas/FieldTypeEnum'
-        field_label:
+            type: integer
+            title: PO
+        PO_line_num:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        account:
+          $ref: '#/components/schemas/AccountRead'
+        accountCode:
           type: string
+          maxLength: 100
+        active:
+          type: boolean
+        approved_currency_rate:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        approved_datetime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        approved_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        approved_quantity:
+          type: number
+          format: double
+        approved_shipping_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        approved_tax_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        attachments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/OrderItemAttachment'
+        catalog_item:
+          allOf:
+          - $ref: '#/components/schemas/CatalogItemRead'
+          type:
+          - object
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        currency:
+          $ref: '#/components/schemas/CurrencySummary'
+        dateInvoiced:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        external_id:
+          type: string
+          description: External id of the order item
+          maxLength: 100
+        hot:
+          type: boolean
+        id:
+          type: integer
+          readOnly: true
+        inventoryItem:
+          type:
+          - integer
+          - 'null'
+        is_active:
+          type: boolean
+        item_attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        last_changed_by:
+          type:
+          - integer
+          - 'null'
+          title: Last changed by user
+        last_modified:
+          type: string
+          format: date-time
+          readOnly: true
+        lineComment:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+          maxLength: 255
+        num:
+          type: string
+          maxLength: 50
+        orderNum:
+          type:
+          - integer
+          - 'null'
+        order_number:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        po_note:
+          type: string
+          title: Comment
+        po_version:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        pref_vendor:
+          $ref: '#/components/schemas/VendorRead'
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        purchase_order:
+          type:
+          - integer
+          - 'null'
+          title: Procurify PO Number
+        purchaser:
+          $ref: '#/components/schemas/UserSummary'
+        quantity:
+          type: number
+          format: double
+        receivedFailQty:
+          type: number
+          format: double
+        receivedPassQty:
+          type: number
+          format: double
+        shipping_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        sku:
+          type: string
+          maxLength: 100
+        status:
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/OrderItemStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        tax_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        total_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        unit:
+          type: string
+          maxLength: 30
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        vendor:
+          type: string
+          readOnly: true
+        receive_method:
+          allOf:
+          - $ref: '#/components/schemas/ReceiveMethodEnum'
+          minimum: 0
+          maximum: 65535
+        type:
+          allOf:
+          - $ref: '#/components/schemas/OrderItemTypeEnum'
+          minimum: 0
+          maximum: 65535
+        blanket:
+          allOf:
+          - $ref: '#/components/schemas/BlanketOrderItemRead'
+          readOnly: true
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+          readOnly: true
+        confirmation_status:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        confirmation_status_description:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        cost_details:
+          allOf:
+          - $ref: '#/components/schemas/CostDetails'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldValueRead'
+          readOnly: true
+        date_required:
+          type: string
+          format: date-time
+          readOnly: true
+        fully_received_actual_receive_date:
+          type: string
+          format: date
+          readOnly: true
+        has_sibling_items:
+          type: boolean
+          readOnly: true
+        line_comment:
+          type: string
+          readOnly: true
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/MasterLogger'
+          readOnly: true
+        order_description:
+          type: string
+          readOnly: true
+        order_status:
+          type: integer
+          readOnly: true
+        order_uuid:
+          type: string
+          format: uuid
+          readOnly: true
+        punchout_supplier_icon:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        punchout_supplier_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        punchout_system:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        punchout_vendor_reference:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        punchout_supplier_can_update_quantity:
+          type: boolean
+          readOnly: true
+        purchase_order_number:
+          type: string
+          readOnly: true
+        purchase_order_uuid:
+          type: string
+          format: uuid
+          readOnly: true
+        purchased_currency_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+          readOnly: true
+          default: '0.000000'
+        recurrence:
+          allOf:
+          - $ref: '#/components/schemas/RecurringOrderItem'
+          type:
+          - object
+          - 'null'
+        requester:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUserSummary'
+          readOnly: true
+        spend_allocation:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllocationRead'
+          readOnly: true
+        submitted_date:
+          type: string
+          format: date-time
+          readOnly: true
+        taxes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Adjustment'
+        receive_log_count:
+          type: integer
+          readOnly: true
+        approval_history:
+          type: array
+          items:
+            $ref: '#/components/schemas/MasterLogger'
+          readOnly: true
+        flags:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlagRead'
+          readOnly: true
+        approved_total_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,8})?$
+      required:
+      - account
+      - approved_datetime
+      - approved_quantity
+      - approved_total_cost
+      - attachments
+      - catalog_item
+      - currency
+      - item_attachments
+      - name
+      - num
+      - pref_vendor
+      - price
+      - purchaser
+      - quantity
+      - receivedFailQty
+      - receivedPassQty
+      - recurrence
+      - unit
+    PaymentTerm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+      required:
+      - name
+    CostDetails:
+      type: object
+      properties:
+        subtotal:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
+        total_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
+        total_cost_in_base_currency:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
+        tax_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
+      required:
+      - tax_amount
+      - total_cost
+      - total_cost_in_base_currency
+    PaymentMethodTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      type: integer
+      description: '* `0` - OTHER
+
+        * `1` - CHECK
+
+        * `2` - ACH
+
+        * `3` - EFT
+
+        * `4` - WIRE
+
+        * `5` - PROCURIFY_CHECK
+
+        * `6` - PROCURIFY_ACH
+
+        * `7` - PROCURIFY_WIRE
+
+        * `8` - AIRWALLEX'
+    CurrencySummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        base:
+          type: boolean
+      required:
+      - name
+      - rate
+    PurchaseOrderUpdateSerializerSingle:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/PurchaseOrderUpdate'
+      required:
+      - data
+    SimpleCurrency:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+      required:
+      - name
+      - rate
+    PurchaseOrderReadDocsSerializerSingle:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/PurchaseOrderReadDocs'
+      required:
+      - data
+    RecurringOrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        start_date:
+          type: string
+          format: date
+        frequency:
+          allOf:
+          - $ref: '#/components/schemas/FrequencyEnum'
+          minimum: 0
+          maximum: 4294967295
+        duration:
+          allOf:
+          - $ref: '#/components/schemas/DurationEnum'
+          minimum: 0
+          maximum: 4294967295
+        duration_quantity:
+          type: integer
+          maximum: 4294967295
+          minimum: 1
+          format: int64
+        recurring_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        periods_count:
+          type: integer
+          readOnly: true
+      required:
+      - duration
+      - duration_quantity
+      - frequency
+      - recurring_price
+    MasterLogger:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/UserSummary'
+        next_approver:
+          $ref: '#/components/schemas/UserSummary'
+        next_approvers:
+          type: array
+          items:
+            type: integer
+        nextApprover:
+          $ref: '#/components/schemas/UserSummary'
+        approval_delegation:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalDelegationRead'
+          type:
+          - object
+          - 'null'
+        dateTime:
+          type: string
+          format: date-time
+          readOnly: true
+        action:
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/ActionEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        line_qty_pass:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        line_qty_fail:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        order:
+          type:
+          - integer
+          - 'null'
+        lineItem:
+          type:
+          - integer
+          - 'null'
+        PO:
+          type:
+          - integer
+          - 'null'
+          title: Procurify PO Number
+        inventoryItem:
+          type:
+          - integer
+          - 'null'
+        stocking_parent:
+          type:
+          - integer
+          - 'null'
+      required:
+      - approval_delegation
+      - nextApprover
+      - next_approver
+      - user
+    PurchaseOrderBillingHistory:
+      type: object
+      properties:
+        id:
+          type: integer
+        number:
+          type: string
+        has_unbilled_unreceived_items:
+          type: boolean
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderBillingHistoryItem'
+      required:
+      - has_unbilled_unreceived_items
+      - id
+      - items
+      - number
+    OrderItemAttachmentTypeEnum:
+      enum:
+      - other
+      - invoice
+      - packingslip
+      type: string
+      description: '* `other` - other
+
+        * `invoice` - invoice
+
+        * `packingslip` - packingslip'
+    SimpleUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        profile_image:
+          type:
+          - string
+          - 'null'
+      required:
+      - email
+    CategoryEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - Physical
+
+        * `1` - Virtual'
+    OrderItemStatusEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      type: integer
+      description: '* `0` - Purchase Pending
+
+        * `1` - Purchaser In-Use
+
+        * `2` - Receive Pending
+
+        * `3` - Received
+
+        * `4` - Rejected for Purchase
+
+        * `5` - Partial Received
+
+        * `6` - Fulfilled
+
+        * `7` - Approval Denied
+
+        * `8` - Request Draft'
+    VendorTypeEnum:
+      enum:
+      - 2
+      - 3
+      - 4
+      - 6
+      - 7
+      type: integer
+      description: '* `2` - amazon punchout
+
+        * `3` - preferred
+
+        * `4` - regular
+
+        * `6` - credit card provider
+
+        * `7` - checkout'
+    Currency:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        description:
+          type: string
+          maxLength: 100
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        base:
+          type: boolean
+        active:
+          type: boolean
+      required:
+      - name
+      - rate
+    EmailConfiguration:
+      type: object
+      properties:
+        auto_po:
+          type: boolean
+        payment_remittance:
+          type: boolean
+    AddressSummary:
+      type: object
+      properties:
+        id:
+          type: integer
           readOnly: true
         is_active:
           type: boolean
+        created_at:
+          type: string
+          format: date-time
           readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        addressAssociation:
+          allOf:
+          - $ref: '#/components/schemas/AddressAssociationEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        addressLineOne:
+          type: string
+          title: Address line 1
+          maxLength: 300
+        addressLineTwo:
+          type: string
+          title: Address line 2
+          maxLength: 300
+        postalCode:
+          type: string
+          title: Postal Code
+          maxLength: 20
+        city:
+          type: string
+          maxLength: 50
+        state_province:
+          type: string
+          title: State/Province
+          maxLength: 40
+        country:
+          type: string
+          maxLength: 80
+        last_changed_by:
+          type:
+          - integer
+          - 'null'
+          title: Last changed by user
       required:
-      - content_type
+      - addressLineOne
+      - city
+      - country
       - name
+      - postalCode
+    ShippingMethod:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+      required:
+      - name
+    UserProfileRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        department:
+          allOf:
+          - $ref: '#/components/schemas/SimpleDepartment'
+          type:
+          - object
+          - 'null'
+      required:
+      - department
+      - email
+    OrderItemAttachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        attachment:
+          type: string
+        upload_datetime:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        type:
+          $ref: '#/components/schemas/OrderItemAttachmentTypeEnum'
+        user:
+          type: integer
+        item:
+          type: integer
+      required:
+      - attachment
+      - item
+      - name
+      - user
+    POWithListPurchaseOrderDocs:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PurchaseOrderListMeta'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderDocs'
+      required:
+      - data
+      - metadata
+    LanguageEnum:
+      enum:
+      - 1
+      type: integer
+      description: '* `1` - English'
     PurchaseOrderDetailSerializerSingle:
       type: object
       properties:
@@ -3807,70 +4297,113 @@ components:
           $ref: '#/components/schemas/PurchaseOrderDetail'
       required:
       - data
-    SimpleVendor:
+    SpendAccountRead:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        name:
-          type: string
-          description: Name of the vendor
-          maxLength: 150
+        account_code:
+          $ref: '#/components/schemas/UnoptimizedAccountCodeserializer'
+        department:
+          $ref: '#/components/schemas/UnoptimizedDepartmentRead'
         active:
           type: boolean
-        addressLineOne:
-          type: string
-          nullable: true
-          title: Address line 1
-          description: First line of address
-          maxLength: 300
-        addressLineTwo:
-          type: string
-          nullable: true
-          title: Address line 2
-          description: Second line of address
-          maxLength: 300
-        postalCode:
-          type: string
-          nullable: true
-          title: Postal Code
-          description: Postal or Zip code of the vendor
-          maxLength: 20
-        city:
-          type: string
-          nullable: true
-          description: City of the vendor
-          maxLength: 50
-        state_province:
-          type: string
-          nullable: true
-          title: State/Province
-          description: State or Province of the vendor
-          maxLength: 40
-        country:
-          type: string
-          nullable: true
-          description: Country of the vendor
-          maxLength: 80
-        overall_score:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
-          readOnly: true
-        is_auto_email_po_enabled:
-          type: boolean
-          description: Represents whether the AutoEmail PO feature is turned on for this Vendor
       required:
-      - name
-    DurationEnum:
+      - account_code
+      - department
+    TimezoneEnum:
       enum:
+      - -11
+      - -10
+      - -9
+      - -8
+      - -7
+      - -6
+      - -5
+      - -4
+      - -3.5
+      - -3
+      - -2
+      - -1
       - 0
       - 1
-      type: integer
-      description: '* `0` - YEARS
+      - 2
+      - 3
+      - 3.5
+      - 4
+      - 4.5
+      - 5
+      - 5.5
+      - 5.75
+      - 6
+      - 7
+      - 8
+      - 9
+      - 9.5
+      - 10
+      - 11
+      - 12
+      type: number
+      description: '* `-11.0` - (GMT -11:00) Midway Island, Samoa
 
-        * `1` - MONTHS'
+        * `-10.0` - (GMT -10:00) Hawaii
+
+        * `-9.0` - (GMT -9:00) Alaska
+
+        * `-8.0` - (GMT -8:00) Pacific Time (US &amp; Canada)
+
+        * `-7.0` - (GMT -7:00) Mountain Time (US &amp; Canada)
+
+        * `-6.0` - (GMT -6:00) Central Time (US &amp; Canada), Mexico City
+
+        * `-5.0` - (GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima
+
+        * `-4.0` - (GMT -4:00) Atlantic Time (Canada), Caracas, La Paz
+
+        * `-3.5` - (GMT -3:30) Newfoundland
+
+        * `-3.0` - (GMT -3:00) Brazil, Buenos Aires, Georgetown
+
+        * `-2.0` - (GMT -2:00) Mid-Atlantic
+
+        * `-1.0` - (GMT -1:00) Azores, Cape Verde Islands
+
+        * `0.0` - (GMT) Western Europe Time, London, Lisbon, Casablanca
+
+        * `1.0` - (GMT +1:00) Brussels, Copenhagen, Madrid, Paris
+
+        * `2.0` - (GMT +2:00) Kaliningrad, South Africa
+
+        * `3.0` - (GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg
+
+        * `3.5` - (GMT +3:30) Tehran
+
+        * `4.0` - (GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi
+
+        * `4.5` - (GMT +4:30) Kabul
+
+        * `5.0` - (GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent
+
+        * `5.5` - (GMT +5:30) Bombay, Calcutta, Madras, New Delhi
+
+        * `5.75` - (GMT +5:45) Kathmandu
+
+        * `6.0` - (GMT +6:00) Almaty, Dhaka, Colombo
+
+        * `7.0` - (GMT +7:00) Bangkok, Hanoi, Jakarta
+
+        * `8.0` - (GMT +8:00) Beijing, Perth, Singapore, Hong Kong
+
+        * `9.0` - (GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk
+
+        * `9.5` - (GMT +9:30) Adelaide, Darwin
+
+        * `10.0` - (GMT +10:00) Eastern Australia, Guam, Vladivostok
+
+        * `11.0` - (GMT +11:00) Magadan, Solomon Islands, New Caledonia
+
+        * `12.0` - (GMT +12:00) Auckland, Wellington, Fiji, Kamchatka'
     ActionEnum:
       enum:
       - 0
@@ -3936,163 +4469,625 @@ components:
         * `19` - OrderPurchased
 
         * `20` - RecordPO'
-    LanguageEnum:
+    PurchaseOrderContract:
+      type: object
+      properties:
+        id:
+          type: integer
+        uuid:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - uuid
+    PurchaseOrderListMeta:
+      type: object
+      properties:
+        counts:
+          $ref: '#/components/schemas/PurchaseOrderCountsMeta'
+        pagination:
+          $ref: '#/components/schemas/PaginationDocs'
+      required:
+      - counts
+      - pagination
+    ReceiveMethodEnum:
       enum:
+      - 0
       - 1
       type: integer
-      description: '* `1` - English'
-    VendorRead:
+      description: '* `0` - Quantity
+
+        * `1` - Currency amount'
+    BlanketOrderItemRead:
+      type: object
+      properties:
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        quantity:
+          type:
+          - number
+          - 'null'
+          format: double
+          readOnly: true
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+          readOnly: true
+      required:
+      - price
+    ApprovalDelegationRead:
+      type: object
+      properties:
+        approval_delegatee:
+          $ref: '#/components/schemas/UserProfileRead'
+        expected_return_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        delegator:
+          $ref: '#/components/schemas/SimpleUserProfile'
+        setter:
+          $ref: '#/components/schemas/SimpleUserProfile'
+      required:
+      - approval_delegatee
+      - delegator
+      - setter
+    PurchaseOrderStateEnum:
+      enum:
+      - 0
+      - 1
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: '* `0` - Purchased
+
+        * `1` - Cancelled
+
+        * `3` - Closed
+
+        * `4` - Paid
+
+        * `5` - Reopened'
+    MinimalRoleRead:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        type:
+          type: integer
+      required:
+      - name
+      - type
+    FulfilmentStatusEnum:
+      enum:
+      - empty
+      - partial
+      - full
+      type: string
+      description: '* `empty` - Empty
+
+        * `partial` - Partial
+
+        * `full` - Full'
+    NullEnum:
+      enum:
+      - null
+    PurchaseOrderDocs:
+      type: object
+      properties:
+        number:
+          type: string
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+        purchaser:
+          $ref: '#/components/schemas/UserSummary'
+        procurify_PO:
+          type: integer
+          readOnly: true
+          title: Procurify PO Number
+        PO_Num:
+          type:
+          - string
+          - 'null'
+          title: PO Number
+          maxLength: 30
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+          title: PO Date
+        buyer_name:
+          type: string
+          maxLength: 100
+        buyer_contact:
+          type: string
+          maxLength: 100
+        buyer_addressLineOne:
+          type: string
+          title: Address line
+          maxLength: 300
+        buyer_postalCode:
+          type: string
+          title: Postal Code
+          maxLength: 20
+        buyer_city:
+          type: string
+          maxLength: 50
+        buyer_state_province:
+          type: string
+          title: State/Province
+          maxLength: 40
+        buyer_country:
+          type: string
+          title: Country
+          maxLength: 80
+        buyer_address:
+          $ref: '#/components/schemas/AddressSummary'
+        receiver_name:
+          type: string
+          maxLength: 100
+        receiver_contact:
+          type: string
+          maxLength: 100
+        receiver_addressLineOne:
+          type: string
+          title: Address line
+          maxLength: 300
+        receiver_postalCode:
+          type: string
+          title: Postal Code
+          maxLength: 20
+        receiver_city:
+          type: string
+          maxLength: 50
+        receiver_state_province:
+          type: string
+          title: State/Province
+          maxLength: 40
+        receiver_country:
+          type: string
+          title: Country
+          maxLength: 80
+        receiver_address:
+          $ref: '#/components/schemas/AddressSummary'
+        pref_vendor:
+          $ref: '#/components/schemas/VendorRead'
+        vendor_name:
+          type:
+          - string
+          - 'null'
+          maxLength: 150
+        vendor_contact:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        vendor_addressLineOne:
+          type:
+          - string
+          - 'null'
+          title: Address line
+          maxLength: 300
+        vendor_postalCode:
+          type:
+          - string
+          - 'null'
+          title: Postal Code
+          maxLength: 20
+        vendor_city:
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        vendor_state_province:
+          type:
+          - string
+          - 'null'
+          title: State/Province
+          maxLength: 40
+        vendor_country:
+          type:
+          - string
+          - 'null'
+          title: Country
+          maxLength: 80
+        payment_terms:
+          type: string
+          maxLength: 100
+        shipping_terms:
+          type: string
+          maxLength: 100
+        shipping_method:
+          type: string
+          title: Ship Via
+          maxLength: 100
+        promise_date:
+          type: string
+          format: date-time
+        subtotal:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
+        freight:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
+        tax:
+          allOf:
+          - $ref: '#/components/schemas/PriceModifierDocs'
+          readOnly: true
+        discount:
+          allOf:
+          - $ref: '#/components/schemas/PriceModifierDocs'
+          readOnly: true
+        other:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
+        total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
+          title: Total Cost
+        comment:
+          type:
+          - string
+          - 'null'
+          title: Notes
+        purchased_currency:
+          $ref: '#/components/schemas/CurrencySummary'
+        purchased_currency_rate:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        active:
+          type: boolean
+        state:
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/PurchaseOrderStateEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        fulfilment_status:
+          $ref: '#/components/schemas/FulfilmentStatusEnum'
+        disclaimer_description:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        disclaimer_text:
+          type:
+          - string
+          - 'null'
+        recorded_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        closed_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        last_modified:
+          type: string
+          format: date-time
+          readOnly: true
+        staged_for_export:
+          type: boolean
+        version:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        item_count:
+          type: integer
+          readOnly: true
+        most_recent_version:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          readOnly: true
+        punchout_system:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        purchase_agreement:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        purchase_agreement_status:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseAgreementStatusEnum'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+        punchout_vendor_reference:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        punchout_supplier_icon:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        punchout_supplier_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        has_blanket_order_items:
+          type: boolean
+          readOnly: true
+        expiry_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        contract:
+          $ref: '#/components/schemas/PurchaseOrderContract'
+      required:
+      - buyer_address
+      - buyer_addressLineOne
+      - buyer_city
+      - buyer_contact
+      - buyer_country
+      - buyer_name
+      - buyer_postalCode
+      - contract
+      - payment_terms
+      - pref_vendor
+      - promise_date
+      - purchased_currency
+      - purchaser
+      - receiver_address
+      - receiver_addressLineOne
+      - receiver_city
+      - receiver_contact
+      - receiver_country
+      - receiver_name
+      - receiver_postalCode
+      - shipping_method
+      - shipping_terms
+      - subtotal
+      - total
+      - uuid
+    UserSummary:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        name:
-          type: string
-          description: Name of the vendor
-          maxLength: 150
-        active:
-          type: boolean
-        addressLineOne:
-          type: string
-          nullable: true
-          title: Address line 1
-          description: First line of address
-          maxLength: 300
-        addressLineTwo:
-          type: string
-          nullable: true
-          title: Address line 2
-          description: Second line of address
-          maxLength: 300
-        postalCode:
-          type: string
-          nullable: true
-          title: Postal Code
-          description: Postal or Zip code of the vendor
-          maxLength: 20
-        city:
-          type: string
-          nullable: true
-          description: City of the vendor
-          maxLength: 50
-        state_province:
-          type: string
-          nullable: true
-          title: State/Province
-          description: State or Province of the vendor
-          maxLength: 40
-        country:
-          type: string
-          nullable: true
-          description: Country of the vendor
-          maxLength: 80
-        phoneOne:
-          type: string
-          nullable: true
-          description: Primary phone no. of the vendor
-          maxLength: 20
-        phoneTwo:
-          type: string
-          nullable: true
-          description: Secondary phone no. of the vendor
-          maxLength: 20
-        fax:
-          type: string
-          nullable: true
-          description: Fax no. of the vendor
-          maxLength: 20
-        email:
-          type: array
-          items:
-            type: string
-            format: email
-        comments:
-          type: string
-          nullable: true
-          description: Notes about the vendor
-        contact:
-          type: string
-          nullable: true
-          description: Contact person of the vendor
-          maxLength: 50
-        url:
-          type: string
-          nullable: true
-          description: Website of the vendor
-          maxLength: 200
-        external_id:
-          type: string
-          nullable: true
-          description: External id of the vendor
-          maxLength: 100
-        dateModified:
+        department:
+          $ref: '#/components/schemas/DepartmentSummary'
+        created_at:
           type: string
           format: date-time
           readOnly: true
-        currency:
-          type: integer
-          nullable: true
-        payment_term_ref:
-          allOf:
-          - $ref: '#/components/schemas/PaymentTerm'
-          nullable: true
-          type: object
-        shipping_term_ref:
-          allOf:
-          - $ref: '#/components/schemas/ShippingTerm'
-          nullable: true
-          type: object
-        payment_method_ref:
-          allOf:
-          - $ref: '#/components/schemas/PaymentMethod'
-          nullable: true
-          type: object
-        shipping_method_ref:
-          allOf:
-          - $ref: '#/components/schemas/ShippingMethod'
-          nullable: true
-          type: object
-        payment_methods:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethodRead'
+        updated_at:
+          type: string
+          format: date-time
           readOnly: true
-        tax:
-          type: integer
-          nullable: true
-        type:
-          $ref: '#/components/schemas/VendorTypeEnum'
-        default_payment_method:
-          type: integer
-          nullable: true
-        creditcards:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditCard'
-          readOnly: true
-        is_1099_eligible:
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        position:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        phone:
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+        address:
+          type:
+          - string
+          - 'null'
+        notifications:
           type: boolean
-          nullable: true
-          title: 1099 Eligible?
-        overall_score:
+        is_active:
+          type: boolean
+        mobile:
+          type: boolean
+        profile_image:
+          type:
+          - string
+          - 'null'
+        slack_user_id:
+          type: string
+          maxLength: 50
+        is_sso_enabled:
+          type: boolean
+        last_changed_by:
+          type:
+          - integer
+          - 'null'
+          title: Last changed by user
+        user:
+          type: integer
+        approval_delegatee:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalDelegateeDocs'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+        expected_return_date:
+          type: string
+          format: date
+          readOnly: true
+      required:
+      - department
+      - email
+      - user
+    PurchaseOrderBillingHistoryItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        billed_qty:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+          default: '0.00000000'
+        received_qty:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+          default: '0.00000'
+      required:
+      - id
+    DepartmentSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        branch:
+          $ref: '#/components/schemas/BranchSummary'
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        punchout_email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: PunchOut Email
+          maxLength: 254
+        active:
+          type: boolean
+      required:
+      - branch
+      - name
+    CreditCardStatusEnum:
+      enum:
+      - pending
+      - active
+      - inactive
+      - canceled
+      - lost
+      - stolen
+      type: string
+      description: '* `pending` - Pending
+
+        * `active` - Active
+
+        * `inactive` - Inactive
+
+        * `canceled` - Canceled
+
+        * `lost` - Lost
+
+        * `stolen` - Stolen'
+    PriceModifierDocs:
+      type: object
+      properties:
+        value:
           type: number
           format: double
-          nullable: true
-          readOnly: true
-        is_auto_email_po_enabled:
-          type: boolean
-        po_pdf_labels:
-          type: string
-          description: Placeholder for a KVStore value
-          maxLength: 200
-        email_configurations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/EmailConfiguration'
+        type:
+          $ref: '#/components/schemas/PriceModifierDocsTypeEnum'
       required:
-      - name
       - type
+      - value
+    CustomFieldValueRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        value:
+          oneOf:
+          - type: string
+          - type: boolean
+          description: 'Given the *incoming* primitive data, return the value for this field
+
+            that should be validated and transformed to a native value.'
+          readOnly: true
+        field:
+          $ref: '#/components/schemas/CustomFieldRead'
+      required:
+      - field
+    CreditCardAssignee:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        profile_image:
+          type:
+          - string
+          - 'null'
+      required:
+      - email
+    AccountTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: '* `0` - Assets
+
+        * `1` - Liability
+
+        * `2` - Expense
+
+        * `3` - Income
+
+        * `4` - Equity
+
+        * `5` - Other'
     AddressAssociationEnum:
       enum:
       - 1
@@ -4116,6 +5111,553 @@ components:
         * `6` - Travel
 
         * `7` - Private'
+    DurationEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - YEARS
+
+        * `1` - MONTHS'
+    VendorRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          description: Name of the vendor
+          maxLength: 150
+        active:
+          type: boolean
+        addressLineOne:
+          type:
+          - string
+          - 'null'
+          title: Address line 1
+          description: First line of address
+          maxLength: 300
+        addressLineTwo:
+          type:
+          - string
+          - 'null'
+          title: Address line 2
+          description: Second line of address
+          maxLength: 300
+        postalCode:
+          type:
+          - string
+          - 'null'
+          title: Postal Code
+          description: Postal or Zip code of the vendor
+          maxLength: 20
+        city:
+          type:
+          - string
+          - 'null'
+          description: City of the vendor
+          maxLength: 50
+        state_province:
+          type:
+          - string
+          - 'null'
+          title: State/Province
+          description: State or Province of the vendor
+          maxLength: 40
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country of the vendor
+          maxLength: 80
+        phoneOne:
+          type:
+          - string
+          - 'null'
+          description: Primary phone no. of the vendor
+          maxLength: 20
+        phoneTwo:
+          type:
+          - string
+          - 'null'
+          description: Secondary phone no. of the vendor
+          maxLength: 20
+        fax:
+          type:
+          - string
+          - 'null'
+          description: Fax no. of the vendor
+          maxLength: 20
+        email:
+          type: array
+          items:
+            type: string
+            format: email
+        comments:
+          type:
+          - string
+          - 'null'
+          description: Notes about the vendor
+        contact:
+          type:
+          - string
+          - 'null'
+          description: Contact person of the vendor
+          maxLength: 50
+        url:
+          type:
+          - string
+          - 'null'
+          description: Website of the vendor
+          maxLength: 200
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id of the vendor
+          maxLength: 100
+        dateModified:
+          type: string
+          format: date-time
+          readOnly: true
+        currency:
+          type:
+          - integer
+          - 'null'
+        payment_term_ref:
+          allOf:
+          - $ref: '#/components/schemas/PaymentTerm'
+          type:
+          - object
+          - 'null'
+        shipping_term_ref:
+          allOf:
+          - $ref: '#/components/schemas/ShippingTerm'
+          type:
+          - object
+          - 'null'
+        payment_method_ref:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethod'
+          type:
+          - object
+          - 'null'
+        shipping_method_ref:
+          allOf:
+          - $ref: '#/components/schemas/ShippingMethod'
+          type:
+          - object
+          - 'null'
+        payment_methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodRead'
+          readOnly: true
+        tax:
+          type:
+          - integer
+          - 'null'
+        type:
+          $ref: '#/components/schemas/VendorTypeEnum'
+        default_payment_method:
+          type:
+          - integer
+          - 'null'
+        creditcards:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCard'
+          readOnly: true
+        is_1099_eligible:
+          type:
+          - boolean
+          - 'null'
+          title: 1099 Eligible?
+        overall_score:
+          type:
+          - number
+          - 'null'
+          format: double
+          readOnly: true
+        is_auto_email_po_enabled:
+          type: boolean
+        po_pdf_labels:
+          type: string
+          description: Placeholder for a KVStore value
+          maxLength: 200
+        email_configurations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/EmailConfiguration'
+      required:
+      - name
+      - type
+    PaginationDocs:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type:
+          - string
+          - 'null'
+        previous:
+          type:
+          - string
+          - 'null'
+        page_size:
+          type: integer
+        num_pages:
+          type: integer
+        current_page:
+          type: integer
+      required:
+      - count
+      - current_page
+      - next
+      - num_pages
+      - page_size
+      - previous
+    BlankEnum:
+      enum:
+      - ''
+    Comment:
+      type: object
+      properties:
+        userprofile:
+          allOf:
+          - $ref: '#/components/schemas/UserSummary'
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        comment:
+          type: string
+          readOnly: true
+        submit_date:
+          type: string
+          format: date-time
+          title: Date/time submitted
+    OrderItemPurchaseEdit:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          maxLength: 255
+        sku:
+          type: string
+          maxLength: 100
+        unit:
+          type: string
+          maxLength: 30
+        quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        po_note:
+          type: string
+          title: Comment
+        custom_fields:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        tax_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        shipping_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        receive_method:
+          allOf:
+          - $ref: '#/components/schemas/ReceiveMethodEnum'
+          minimum: 0
+          maximum: 65535
+      required:
+      - custom_fields
+      - id
+      - name
+      - price
+      - quantity
+      - unit
+    Adjustment:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: '#/components/schemas/AdjustmentTypeEnum'
+        value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,7}(?:\.\d{0,8})?$
+        name:
+          type:
+          - string
+          - 'null'
+      required:
+      - type
+      - value
+    PurchaseOrderReadDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+        PO_Num:
+          type:
+          - string
+          - 'null'
+          title: PO Number
+          maxLength: 30
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+          title: PO Date
+        discount:
+          allOf:
+          - $ref: '#/components/schemas/PriceModifierDocs'
+          readOnly: true
+        freight:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
+        fulfilment_status:
+          $ref: '#/components/schemas/FulfilmentStatusEnum'
+        item_count:
+          type: integer
+          readOnly: true
+        last_modified:
+          type: string
+          format: date-time
+          readOnly: true
+        number:
+          type: string
+        other:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
+        pref_vendor:
+          $ref: '#/components/schemas/SimpleVendor'
+        procurify_PO:
+          type: integer
+          readOnly: true
+          title: Procurify PO Number
+        promise_date:
+          type: string
+          format: date-time
+        punchout_system:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        purchase_agreement:
+          type:
+          - integer
+          - 'null'
+        purchase_agreement_status:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseAgreementStatusEnum'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+        purchased_currency:
+          $ref: '#/components/schemas/SimpleCurrency'
+        purchased_currency_rate:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        purchaser:
+          $ref: '#/components/schemas/SimpleUser'
+        state:
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/PurchaseOrderStateEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        subtotal:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
+        total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
+          title: Total Cost
+        uuid:
+          type: string
+          format: uuid
+        version:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        punchout_items_rejected:
+          type: boolean
+          readOnly: true
+        total_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        currency:
+          type: string
+          default: ''
+        email_status:
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        email_status_updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        punchout_supplier_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        punchout_supplier_icon:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        punchout_vendor_reference:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        punchout_is_retriable:
+          type: boolean
+          readOnly: true
+        has_blanket_order_items:
+          type: boolean
+          readOnly: true
+        expiry_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - id
+      - number
+      - pref_vendor
+      - promise_date
+      - purchased_currency
+      - purchaser
+      - subtotal
+      - total
+      - total_amount
+      - uuid
+    FlagRead:
+      type: object
+      properties:
+        color:
+          type: string
+          readOnly: true
+        symbol:
+          type: string
+          readOnly: true
+        object_id:
+          type: integer
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+        content_type:
+          type:
+          - integer
+          - 'null'
+      required:
+      - object_id
+    UnoptimizedDepartmentRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        branch:
+          $ref: '#/components/schemas/UnoptimizedBranchRead'
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        punchout_email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: PunchOut Email
+          maxLength: 254
+        active:
+          type: boolean
+      required:
+      - branch
+      - name
+    SimpleUserSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        position:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        profile_image:
+          type:
+          - string
+          - 'null'
+        approval_delegatee:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalDelegateeDocs'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+        expected_return_date:
+          type: string
+          format: date
+          readOnly: true
+      required:
+      - email
     FieldTypeEnum:
       enum:
       - t
@@ -4142,1383 +5684,46 @@ components:
         * `d` - Date
 
         * `h` - Date Time'
-    PriceModifierDocs:
-      type: object
-      properties:
-        value:
-          type: number
-          format: double
-        type:
-          $ref: '#/components/schemas/PriceModifierDocsTypeEnum'
-      required:
-      - type
-      - value
-    OrderItemStatusEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      type: integer
-      description: '* `0` - Purchase Pending
-
-        * `1` - Purchaser In-Use
-
-        * `2` - Receive Pending
-
-        * `3` - Received
-
-        * `4` - Rejected for Purchase
-
-        * `5` - Partial Received
-
-        * `6` - Fulfilled
-
-        * `7` - Approval Denied
-
-        * `8` - Request Draft'
-    SimpleCurrency:
+    UnoptimizedAccountCodeserializer:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        name:
-          type: string
-          maxLength: 10
-        rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-      required:
-      - name
-      - rate
-    ReceiveMethodEnum:
-      enum:
-      - 0
-      - 1
-      type: integer
-      description: '* `0` - Quantity
-
-        * `1` - Currency amount'
-    PaginationDocs:
-      type: object
-      properties:
-        count:
-          type: integer
-        next:
-          type: string
-          nullable: true
-        previous:
-          type: string
-          nullable: true
-        page_size:
-          type: integer
-        num_pages:
-          type: integer
-        current_page:
-          type: integer
-      required:
-      - count
-      - current_page
-      - next
-      - num_pages
-      - page_size
-      - previous
-    PurchaseOrderListMeta:
-      type: object
-      properties:
-        counts:
-          $ref: '#/components/schemas/PurchaseOrderCountsMeta'
-        pagination:
-          $ref: '#/components/schemas/PaginationDocs'
-      required:
-      - counts
-      - pagination
-    BlanketOrderItemRead:
-      type: object
-      properties:
-        price:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-        quantity:
-          type: number
-          format: double
-          nullable: true
-          readOnly: true
-        amount:
-          type: number
-          format: double
-          nullable: true
-          readOnly: true
-      required:
-      - price
-    CatalogItemRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 255
-        image:
-          type: string
-        unitType:
-          type: string
-          maxLength: 30
-        pref_vendor:
-          $ref: '#/components/schemas/VendorRead'
-        account_code:
-          $ref: '#/components/schemas/AccountCodeRead'
-        internalSKU:
+        code:
           type: string
           maxLength: 50
+        code_length:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
         description:
           type: string
-          nullable: true
-        product_url:
-          type: string
-          nullable: true
-        currency:
-          $ref: '#/components/schemas/CurrencySummary'
-        price:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-        rfo_lock:
-          type: boolean
-        departments:
-          type: array
-          items:
-            type: integer
-          readOnly: true
-        custom_fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomFieldValueRead'
-          readOnly: true
-        requested_count:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        last_requested_date:
-          type: string
-          format: date-time
-          nullable: true
-        selected_account:
-          type: object
-          additionalProperties: {}
-          readOnly: true
-      required:
-      - account_code
-      - currency
-      - name
-      - pref_vendor
-    SimpleLocation:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        headquarter:
-          type: boolean
-          readOnly: true
-      required:
-      - name
-    PurchaseOrderDocs:
-      type: object
-      properties:
-        number:
-          type: string
-          readOnly: true
-        uuid:
-          type: string
-          format: uuid
-        purchaser:
-          $ref: '#/components/schemas/UserSummary'
-        procurify_PO:
-          type: integer
-          readOnly: true
-          title: Procurify PO Number
-        PO_Num:
-          type: string
-          nullable: true
-          title: PO Number
-          maxLength: 30
-        date:
-          type: string
-          format: date-time
-          readOnly: true
-          title: PO Date
-        buyer_name:
-          type: string
-          maxLength: 100
-        buyer_contact:
-          type: string
-          maxLength: 100
-        buyer_addressLineOne:
-          type: string
-          title: Address line
-          maxLength: 300
-        buyer_postalCode:
-          type: string
-          title: Postal Code
-          maxLength: 20
-        buyer_city:
-          type: string
-          maxLength: 50
-        buyer_state_province:
-          type: string
-          title: State/Province
-          maxLength: 40
-        buyer_country:
-          type: string
-          title: Country
-          maxLength: 80
-        buyer_address:
-          $ref: '#/components/schemas/AddressSummary'
-        receiver_name:
-          type: string
-          maxLength: 100
-        receiver_contact:
-          type: string
-          maxLength: 100
-        receiver_addressLineOne:
-          type: string
-          title: Address line
-          maxLength: 300
-        receiver_postalCode:
-          type: string
-          title: Postal Code
-          maxLength: 20
-        receiver_city:
-          type: string
-          maxLength: 50
-        receiver_state_province:
-          type: string
-          title: State/Province
-          maxLength: 40
-        receiver_country:
-          type: string
-          title: Country
-          maxLength: 80
-        receiver_address:
-          $ref: '#/components/schemas/AddressSummary'
-        pref_vendor:
-          $ref: '#/components/schemas/VendorRead'
-        vendor_name:
-          type: string
-          nullable: true
-          maxLength: 150
-        vendor_contact:
-          type: string
-          nullable: true
-          maxLength: 100
-        vendor_addressLineOne:
-          type: string
-          nullable: true
-          title: Address line
-          maxLength: 300
-        vendor_postalCode:
-          type: string
-          nullable: true
-          title: Postal Code
-          maxLength: 20
-        vendor_city:
-          type: string
-          nullable: true
-          maxLength: 50
-        vendor_state_province:
-          type: string
-          nullable: true
-          title: State/Province
-          maxLength: 40
-        vendor_country:
-          type: string
-          nullable: true
-          title: Country
-          maxLength: 80
-        payment_terms:
-          type: string
-          maxLength: 100
-        shipping_terms:
-          type: string
-          maxLength: 100
-        shipping_method:
-          type: string
-          title: Ship Via
-          maxLength: 100
-        promise_date:
-          type: string
-          format: date-time
-        subtotal:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
-        freight:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
-          nullable: true
-        tax:
-          allOf:
-          - $ref: '#/components/schemas/PriceModifierDocs'
-          readOnly: true
-        discount:
-          allOf:
-          - $ref: '#/components/schemas/PriceModifierDocs'
-          readOnly: true
-        other:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
-          nullable: true
-        total:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
-          title: Total Cost
-        comment:
-          type: string
-          nullable: true
-          title: Notes
-        purchased_currency:
-          $ref: '#/components/schemas/CurrencySummary'
-        purchased_currency_rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-          nullable: true
-        active:
-          type: boolean
-        state:
-          nullable: true
-          minimum: -2147483648
-          maximum: 2147483647
-          oneOf:
-          - $ref: '#/components/schemas/PurchaseOrderStateEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        fulfilment_status:
-          $ref: '#/components/schemas/FulfilmentStatusEnum'
-        disclaimer_description:
-          type: string
-          nullable: true
-          maxLength: 100
-        disclaimer_text:
-          type: string
-          nullable: true
-        recorded_date:
-          type: string
-          format: date-time
-          nullable: true
-        closed_date:
-          type: string
-          format: date-time
-          nullable: true
-        last_modified:
-          type: string
-          format: date-time
-          readOnly: true
-        staged_for_export:
-          type: boolean
-        version:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        item_count:
-          type: integer
-          readOnly: true
-        most_recent_version:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-          readOnly: true
-        punchout_system:
-          type: integer
-          nullable: true
-          readOnly: true
-        purchase_agreement:
-          type: integer
-          nullable: true
-          readOnly: true
-        purchase_agreement_status:
-          allOf:
-          - $ref: '#/components/schemas/PurchaseAgreementStatusEnum'
-          readOnly: true
-          nullable: true
-          type: object
-        punchout_vendor_reference:
-          type: integer
-          nullable: true
-          readOnly: true
-        punchout_supplier_icon:
-          type: string
-          nullable: true
-          readOnly: true
-        punchout_supplier_name:
-          type: string
-          nullable: true
-          readOnly: true
-        has_blanket_order_items:
-          type: boolean
-          readOnly: true
-        expiry_date:
-          type: string
-          format: date-time
-          nullable: true
-        contract:
-          $ref: '#/components/schemas/PurchaseOrderContract'
-      required:
-      - buyer_address
-      - buyer_addressLineOne
-      - buyer_city
-      - buyer_contact
-      - buyer_country
-      - buyer_name
-      - buyer_postalCode
-      - contract
-      - payment_terms
-      - pref_vendor
-      - promise_date
-      - purchased_currency
-      - purchaser
-      - receiver_address
-      - receiver_addressLineOne
-      - receiver_city
-      - receiver_contact
-      - receiver_country
-      - receiver_name
-      - receiver_postalCode
-      - shipping_method
-      - shipping_terms
-      - subtotal
-      - total
-      - uuid
-    Comment:
-      type: object
-      properties:
-        userprofile:
-          allOf:
-          - $ref: '#/components/schemas/UserSummary'
-          readOnly: true
-        id:
-          type: integer
-          readOnly: true
-        comment:
-          type: string
-          readOnly: true
-        submit_date:
-          type: string
-          format: date-time
-          title: Date/time submitted
-    PurchaseOrderCountsBreakdown:
-      type: object
-      properties:
-        all:
-          type: integer
-        open:
-          type: integer
-        partial:
-          type: integer
-        closed:
-          type: integer
-        cancelled:
-          type: integer
-        page:
-          type: integer
-      required:
-      - all
-      - cancelled
-      - closed
-      - open
-      - page
-      - partial
-    PurchaseOrderDetail:
-      type: object
-      properties:
-        number:
-          type: string
-          readOnly: true
-        uuid:
-          type: string
-          format: uuid
-        purchaser:
-          $ref: '#/components/schemas/UserSummary'
-        procurify_PO:
-          type: integer
-          readOnly: true
-          title: Procurify PO Number
-        PO_Num:
-          type: string
-          nullable: true
-          title: PO Number
-          maxLength: 30
-        date:
-          type: string
-          format: date-time
-          readOnly: true
-          title: PO Date
-        buyer_name:
-          type: string
-          maxLength: 100
-        buyer_contact:
-          type: string
-          maxLength: 100
-        buyer_addressLineOne:
-          type: string
-          title: Address line
-          maxLength: 300
-        buyer_postalCode:
-          type: string
-          title: Postal Code
-          maxLength: 20
-        buyer_city:
-          type: string
-          maxLength: 50
-        buyer_state_province:
-          type: string
-          title: State/Province
-          maxLength: 40
-        buyer_country:
-          type: string
-          title: Country
-          maxLength: 80
-        buyer_address:
-          $ref: '#/components/schemas/AddressSummary'
-        receiver_name:
-          type: string
-          maxLength: 100
-        receiver_contact:
-          type: string
-          maxLength: 100
-        receiver_addressLineOne:
-          type: string
-          title: Address line
-          maxLength: 300
-        receiver_postalCode:
-          type: string
-          title: Postal Code
-          maxLength: 20
-        receiver_city:
-          type: string
-          maxLength: 50
-        receiver_state_province:
-          type: string
-          title: State/Province
-          maxLength: 40
-        receiver_country:
-          type: string
-          title: Country
-          maxLength: 80
-        receiver_address:
-          $ref: '#/components/schemas/AddressSummary'
-        pref_vendor:
-          $ref: '#/components/schemas/VendorRead'
-        vendor_name:
-          type: string
-          nullable: true
-          maxLength: 150
-        vendor_contact:
-          type: string
-          nullable: true
-          maxLength: 100
-        vendor_addressLineOne:
-          type: string
-          nullable: true
-          title: Address line
-          maxLength: 300
-        vendor_postalCode:
-          type: string
-          nullable: true
-          title: Postal Code
-          maxLength: 20
-        vendor_city:
-          type: string
-          nullable: true
-          maxLength: 50
-        vendor_state_province:
-          type: string
-          nullable: true
-          title: State/Province
-          maxLength: 40
-        vendor_country:
-          type: string
-          nullable: true
-          title: Country
-          maxLength: 80
-        payment_terms:
-          type: string
-          maxLength: 100
-        shipping_terms:
-          type: string
-          maxLength: 100
-        shipping_method:
-          $ref: '#/components/schemas/ShippingMethod'
-        promise_date:
-          type: string
-          format: date-time
-        subtotal:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
-        freight:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
-          nullable: true
-        tax:
-          allOf:
-          - $ref: '#/components/schemas/PriceModifierDocs'
-          readOnly: true
-        discount:
-          allOf:
-          - $ref: '#/components/schemas/PriceModifierDocs'
-          readOnly: true
-        other:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,6})?$
-          nullable: true
-        total:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,17}(?:\.\d{0,2})?$
-          title: Total Cost
-        comment:
-          type: string
-          nullable: true
-          title: Notes
-        purchased_currency:
-          $ref: '#/components/schemas/CurrencySummary'
-        purchased_currency_rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-          nullable: true
-        active:
-          type: boolean
-        state:
-          nullable: true
-          minimum: -2147483648
-          maximum: 2147483647
-          oneOf:
-          - $ref: '#/components/schemas/PurchaseOrderStateEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        fulfilment_status:
-          $ref: '#/components/schemas/FulfilmentStatusEnum'
-        disclaimer_description:
-          type: string
-          nullable: true
-          maxLength: 100
-        disclaimer_text:
-          type: string
-          nullable: true
-        recorded_date:
-          type: string
-          format: date-time
-          nullable: true
-        closed_date:
-          type: string
-          format: date-time
-          nullable: true
-        last_modified:
-          type: string
-          format: date-time
-          readOnly: true
-        staged_for_export:
-          type: boolean
-        version:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        item_count:
-          type: integer
-          readOnly: true
-        most_recent_version:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-          readOnly: true
-        punchout_system:
-          type: integer
-          nullable: true
-          readOnly: true
-        purchase_agreement:
-          type: integer
-          nullable: true
-          readOnly: true
-        purchase_agreement_status:
-          allOf:
-          - $ref: '#/components/schemas/PurchaseAgreementStatusEnum'
-          readOnly: true
-          nullable: true
-          type: object
-        punchout_vendor_reference:
-          type: integer
-          nullable: true
-          readOnly: true
-        punchout_supplier_icon:
-          type: string
-          nullable: true
-          readOnly: true
-        punchout_supplier_name:
-          type: string
-          nullable: true
-          readOnly: true
-        has_blanket_order_items:
-          type: boolean
-          readOnly: true
-        expiry_date:
-          type: string
-          format: date-time
-          nullable: true
-        contract:
-          $ref: '#/components/schemas/PurchaseOrderContract'
-        order_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/PurchaseOrderLineItemRead'
-        creditcard_is_editable:
-          type: boolean
-        custom_fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomFieldValueRead'
-          readOnly: true
-        creditcard:
-          allOf:
-          - $ref: '#/components/schemas/CreditCardRead'
-          nullable: true
-          type: object
-        payment_term:
-          $ref: '#/components/schemas/PaymentTerm'
-        shipping_term:
-          $ref: '#/components/schemas/ShippingTerm'
-        cost_details:
-          allOf:
-          - $ref: '#/components/schemas/CostDetails'
-          nullable: true
-          readOnly: true
-          type: object
-        punchout_is_retriable:
-          type: boolean
-          readOnly: true
-      required:
-      - buyer_address
-      - buyer_addressLineOne
-      - buyer_city
-      - buyer_contact
-      - buyer_country
-      - buyer_name
-      - buyer_postalCode
-      - contract
-      - creditcard
-      - creditcard_is_editable
-      - order_items
-      - payment_term
-      - payment_terms
-      - pref_vendor
-      - promise_date
-      - purchased_currency
-      - purchaser
-      - receiver_address
-      - receiver_addressLineOne
-      - receiver_city
-      - receiver_contact
-      - receiver_country
-      - receiver_name
-      - receiver_postalCode
-      - shipping_method
-      - shipping_term
-      - shipping_terms
-      - subtotal
-      - total
-      - uuid
-    SpendAccountRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        account_code:
-          $ref: '#/components/schemas/UnoptimizedAccountCodeserializer'
-        department:
-          $ref: '#/components/schemas/UnoptimizedDepartmentRead'
-        active:
-          type: boolean
-      required:
-      - account_code
-      - department
-    PurchaseOrderCountsMeta:
-      type: object
-      properties:
-        purchased:
-          $ref: '#/components/schemas/PurchaseOrderCountsBreakdown'
-        receivable:
-          $ref: '#/components/schemas/PurchaseOrderCountsBreakdown'
-    PriceModifierDocsTypeEnum:
-      enum:
-      - amount
-      - percentage
-      type: string
-      description: '* `amount` - amount
-
-        * `percentage` - percentage'
-    AccountRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        account_code:
-          $ref: '#/components/schemas/AccountCodeRead'
-        department:
-          $ref: '#/components/schemas/DepartmentSummary'
-        warning_indicator:
-          type: boolean
-          readOnly: true
-        budget_used_approved:
-          type: number
-          format: double
-        budget_used_purchased:
-          type: number
-          format: double
-        start_datetime:
-          type: string
-          format: date-time
-          nullable: true
-        end_datetime:
-          type: string
-          format: date-time
-          nullable: true
-        budget:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        balance_approved:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        balance_purchased:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        active:
-          type: boolean
-      required:
-      - account_code
-      - department
-    UnoptimizedBranchRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        external_id:
-          type: string
-          nullable: true
-          description: External id
-          maxLength: 100
-        name:
-          type: string
-          maxLength: 150
-        url:
-          type: string
-          format: uri
-          nullable: true
           maxLength: 200
-        logo:
-          type: string
-        language:
+        account_type:
           allOf:
-          - $ref: '#/components/schemas/LanguageEnum'
+          - $ref: '#/components/schemas/AccountTypeEnum'
           minimum: -2147483648
           maximum: 2147483647
-        multipleLocations:
-          type: boolean
-        locationTimezone:
-          nullable: true
-          oneOf:
-          - $ref: '#/components/schemas/LocationTimezoneEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        userLimit:
-          type: integer
-          maximum: 4294967295
-          minimum: 0
-          format: int64
-        budgetOvertureToggle:
-          type: boolean
-        purchase_filtering:
-          type: boolean
-        catalog_permission:
-          type: boolean
-        separate_expense_approval:
-          type: boolean
-        standalone_travel_approval:
-          type: boolean
-        phoneOne:
-          type: string
-          maxLength: 20
-        phoneTwo:
-          type: string
-          nullable: true
-          maxLength: 20
-        fax:
-          type: string
-          nullable: true
-          maxLength: 20
-        email:
-          type: string
-          format: email
-          nullable: true
-          maxLength: 254
-        fiscalYearEndDay:
-          type: integer
-          maximum: 4294967295
-          minimum: 0
-          format: int64
-          nullable: true
-        fiscalYearEndMonth:
-          type: integer
-          maximum: 4294967295
-          minimum: 0
-          format: int64
-          nullable: true
-        timezone:
-          allOf:
-          - $ref: '#/components/schemas/TimezoneEnum'
-          maximum: 10000
-          exclusiveMaximum: true
-          minimum: -10000
-          exclusiveMinimum: true
-        beginDate:
-          type: string
-          format: date-time
-          readOnly: true
-          nullable: true
-        ported:
-          type: boolean
-        port_date:
-          type: string
-          format: date-time
-          nullable: true
         active:
           type: boolean
-        fields_cache:
-          type: string
-          nullable: true
-        activated:
-          type: boolean
-        setup_stage:
-          $ref: '#/components/schemas/SetupStageEnum'
-        localCurrency:
-          type: integer
-        contactPerson:
-          type: integer
-          nullable: true
-        buyerAddress:
-          type: integer
-          nullable: true
-        shippingAddress:
-          type: integer
-          nullable: true
+        parent:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
       required:
-      - localCurrency
-      - name
-      - phoneOne
-    PaymentMethodTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      type: integer
-      description: '* `0` - OTHER
-
-        * `1` - CHECK
-
-        * `2` - ACH
-
-        * `3` - EFT
-
-        * `4` - WIRE
-
-        * `5` - PROCURIFY_CHECK
-
-        * `6` - PROCURIFY_ACH
-
-        * `7` - PROCURIFY_WIRE
-
-        * `8` - AIRWALLEX'
-    EmailConfiguration:
-      type: object
-      properties:
-        auto_po:
-          type: boolean
-        payment_remittance:
-          type: boolean
-    BlankEnum:
-      enum:
-      - ''
-    PurchaseOrderBillingHistorySerializerList:
+      - code
+      - description
+    ApiNestedEditDeletePurchaseOrderDetail:
       type: object
       properties:
         metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
+          $ref: '#/components/schemas/PermissionsEditDelete'
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PurchaseOrderBillingHistory'
+          $ref: '#/components/schemas/PurchaseOrderDetail'
       required:
       - data
-    Adjustment:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          $ref: '#/components/schemas/AdjustmentTypeEnum'
-        value:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,7}(?:\.\d{0,8})?$
-        name:
-          type: string
-          nullable: true
-      required:
-      - type
-      - value
-    AdjustmentTypeEnum:
-      enum:
-      - percent
-      - amount
-      - 0
-      - 1
-      description: '* `percent` - percent
-
-        * `amount` - amount
-
-        * `0` - 0
-
-        * `1` - 1'
-    Currency:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 10
-        description:
-          type: string
-          maxLength: 100
-        rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-        base:
-          type: boolean
-        active:
-          type: boolean
-      required:
-      - name
-      - rate
-    ShippingTerm:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type: string
-          nullable: true
-        active:
-          type: boolean
-      required:
-      - name
-    AccountTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      type: integer
-      description: '* `0` - Assets
-
-        * `1` - Liability
-
-        * `2` - Expense
-
-        * `3` - Income
-
-        * `4` - Equity
-
-        * `5` - Other'
-    ApprovalDelegateeDocs:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        department:
-          type: integer
-          nullable: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-      required:
-      - email
-    PurchaseOrderStateEnum:
-      enum:
-      - 0
-      - 1
-      - 3
-      - 4
-      - 5
-      type: integer
-      description: '* `0` - Purchased
-
-        * `1` - Cancelled
-
-        * `3` - Closed
-
-        * `4` - Paid
-
-        * `5` - Reopened'
-    CostDetails:
-      type: object
-      properties:
-        subtotal:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
-          nullable: true
-        total_cost:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
-        total_cost_in_base_currency:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
-        tax_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,8})?$
-      required:
-      - tax_amount
-      - total_cost
-      - total_cost_in_base_currency
-    CategoryEnum:
-      enum:
-      - 0
-      - 1
-      type: integer
-      description: '* `0` - Physical
-
-        * `1` - Virtual'
-    OrderItemAttachmentTypeEnum:
-      enum:
-      - other
-      - invoice
-      - packingslip
-      type: string
-      description: '* `other` - other
-
-        * `invoice` - invoice
-
-        * `packingslip` - packingslip'
-    UnoptimizedDepartmentRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        branch:
-          $ref: '#/components/schemas/UnoptimizedBranchRead'
-        external_id:
-          type: string
-          nullable: true
-          description: External id
-          maxLength: 100
-        name:
-          type: string
-          maxLength: 150
-        punchout_email:
-          type: string
-          format: email
-          nullable: true
-          description: PunchOut Email
-          maxLength: 254
-        active:
-          type: boolean
-      required:
-      - branch
-      - name
-    RecurringOrderItem:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        start_date:
-          type: string
-          format: date
-        frequency:
-          allOf:
-          - $ref: '#/components/schemas/FrequencyEnum'
-          minimum: 0
-          maximum: 4294967295
-        duration:
-          allOf:
-          - $ref: '#/components/schemas/DurationEnum'
-          minimum: 0
-          maximum: 4294967295
-        duration_quantity:
-          type: integer
-          maximum: 4294967295
-          minimum: 1
-          format: int64
-        recurring_price:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-        periods_count:
-          type: integer
-          readOnly: true
-      required:
-      - duration
-      - duration_quantity
-      - frequency
-      - recurring_price
-    PurchaseAgreementStatusEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      type: integer
-      description: '* `0` - Open
-
-        * `1` - Pending
-
-        * `2` - Closed
-
-        * `3` - Cancelled
-
-        * `4` - Denied
-
-        * `5` - Draft'
-    CreditCardStatusEnum:
-      enum:
-      - pending
-      - active
-      - inactive
-      - canceled
-      - lost
-      - stolen
-      type: string
-      description: '* `pending` - Pending
-
-        * `active` - Active
-
-        * `inactive` - Inactive
-
-        * `canceled` - Canceled
-
-        * `lost` - Lost
-
-        * `stolen` - Stolen'
-    OrderItemPurchaseEditRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          minLength: 1
-          maxLength: 255
-        sku:
-          type: string
-          maxLength: 100
-        unit:
-          type: string
-          minLength: 1
-          maxLength: 30
-        quantity:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-        price:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-        po_note:
-          type: string
-          title: Comment
-        custom_fields:
-          type: array
-          items:
-            type: object
-            additionalProperties: {}
-        tax_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
-        shipping_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
-        receive_method:
-          allOf:
-          - $ref: '#/components/schemas/ReceiveMethodEnum'
-          minimum: 0
-          maximum: 65535
-      required:
-      - custom_fields
-      - id
-      - name
-      - price
-      - quantity
-      - unit
+      - metadata
   securitySchemes:
     BasicAuthentication:
       type: http

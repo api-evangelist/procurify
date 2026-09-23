@@ -1,23 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Procurify API Documentation account-codes vendors API
-  version: "1.0"
-  description: '
-
-    # Disclaimer
+  title: Procurify API Documentation Vendors API
+  version: ''
+  description: '# Disclaimer
 
 
-    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
-
-    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
-
-    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
-
-    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
-
-    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
-
-    '
+    - Procurify’s API is evolving and is subject to change at any time.'
 servers:
 - url: https://{user_domain}.procurify.com
   description: Your Procurify domain
@@ -26,7 +14,7 @@ servers:
       default: your-domain
       description: Your procurify domain
 tags:
-- name: vendors
+- name: Vendors
 paths:
   /api/v3/vendors/:
     get:
@@ -34,31 +22,31 @@ paths:
       description: '**Vendor Type Codes**
 
 
-        | Vendor Type         | Type      | Description                       |
+        | Vendor Type | Type | Description |
 
         |---------------------|-----------|-----------------------------------|
 
-        | OTHER               | 1         | Previously ''OTHER'' vendor (ID=1), used for storing non-vendor
+        | OTHER | 1 | Previously ''OTHER'' vendor (ID=1), used for storing non-vendor
 
-        |                     |           | for storing non-vendor Vendor names in request. |
+        | | | for storing non-vendor Vendor names in request. |
 
-        | HIDDEN              | 2         | New type of vendors that is reserved for system purposes (eg. Amazon Business). |
+        | HIDDEN | 2 | New type of vendors that is reserved for system purposes (eg. Amazon Business). |
 
-        | PREFERRED (default) | 3         | The default vendors from previous list
+        | PREFERRED (default) | 3 | The default vendors from previous list
 
-        |                     |           | where active vendor dropdowns everywhere previously showed.
+        | | | where active vendor dropdowns everywhere previously showed.
 
-        |                     |           | Request now ONLY shows these vendors (+OTHER) |
+        | | | Request now ONLY shows these vendors (+OTHER) |
 
-        | REGULAR             | 4         | New type of vendors that are non-preferred,
+        | REGULAR | 4 | New type of vendors that are non-preferred,
 
-        |                     |           | for any AP purposes and purchasers to update.
+        | | | for any AP purposes and purchasers to update.
 
-        |                     |           | (DOES NOT show up in Request, but shows up in Procure) |
+        | | | (DOES NOT show up in Request, but shows up in Procure) |
 
-        | EMPLOYEE            | 5         | New type of vendors that do not show up anywhere except in AP employees list. |
+        | EMPLOYEE | 5 | New type of vendors that do not show up anywhere except in AP employees list. |
 
-        | CC_PROVIDER         | 6         | Similar type of vendors to AP employees, but for AP credit card providers. |'
+        | CC_PROVIDER | 6 | Similar type of vendors to AP employees, but for AP credit card providers. |'
       summary: Get list of all active vendors
       parameters:
       - in: query
@@ -199,7 +187,7 @@ paths:
           **"requestable"**: Get list of "requestable" vendors. These vendors are displayed in Request and designated by Purchaser.'
         required: true
       tags:
-      - vendors
+      - Vendors
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -230,21 +218,21 @@ paths:
         **Vendor Types**
 
 
-        | Vendor Type         | Type      |
+        | Vendor Type | Type |
 
         |---------------------|-----------|
 
-        | OTHER               | 1         |
+        | OTHER | 1 |
 
-        | HIDDEN              | 2         |
+        | HIDDEN | 2 |
 
-        | PREFERRED (default) | 3         |
+        | PREFERRED (default) | 3 |
 
-        | REGULAR             | 4         |
+        | REGULAR | 4 |
 
-        | EMPLOYEE            | 5         |
+        | EMPLOYEE | 5 |
 
-        | CC_PROVIDER         | 6         |'
+        | CC_PROVIDER | 6 |'
       summary: Create Vendor
       parameters:
       - in: query
@@ -255,7 +243,7 @@ paths:
           - csv
           - json
       tags:
-      - vendors
+      - Vendors
       requestBody:
         content:
           application/json:
@@ -309,7 +297,7 @@ paths:
         description: A unique integer value identifying this vendor.
         required: true
       tags:
-      - vendors
+      - Vendors
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -343,7 +331,7 @@ paths:
         description: A unique integer value identifying this vendor.
         required: true
       tags:
-      - vendors
+      - Vendors
       requestBody:
         content:
           application/json:
@@ -395,7 +383,7 @@ paths:
         description: A unique integer value identifying this vendor.
         required: true
       tags:
-      - vendors
+      - Vendors
       requestBody:
         content:
           application/json:
@@ -430,32 +418,115 @@ paths:
           description: ''
 components:
   schemas:
-    CreditCardTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      type: integer
-      description: '* `0` - other-credit-card
-
-        * `1` - Visa
-
-        * `2` - Mastercard
-
-        * `3` - American Express
-
-        * `4` - Discover
-
-        * `5` - JCB
-
-        * `6` - Diner''s Club
-
-        * `7` - Procurify'
+    EmailConfiguration:
+      type: object
+      properties:
+        auto_po:
+          type: boolean
+        payment_remittance:
+          type: boolean
+    Currency:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        description:
+          type: string
+          maxLength: 100
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        base:
+          type: boolean
+        active:
+          type: boolean
+      required:
+      - name
+      - rate
+    PaymentMethodRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data: {}
+        currency:
+          $ref: '#/components/schemas/Currency'
+        payment_rail:
+          type: string
+          readOnly: true
+        bank_account_country_code:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - currency
+      - data
+    CreditCardAssignee:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        profile_image:
+          type:
+          - string
+          - 'null'
+      required:
+      - email
+    ShippingMethod:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+      required:
+      - name
+    OptimizedVendorSerializerSingle:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/OptimizedVendor'
+      required:
+      - data
     CreditCard:
       type: object
       properties:
@@ -483,10 +554,11 @@ components:
           pattern: ^[0-9]{4}$
           maxLength: 19
         balance:
-          type: integer
+          type:
+          - integer
+          - 'null'
           maximum: 2147483647
           minimum: -2147483648
-          nullable: true
         gl_code:
           type: string
           maxLength: 100
@@ -496,19 +568,19 @@ components:
           minimum: -2147483648
           maximum: 2147483647
         category:
-          nullable: true
           minimum: -2147483648
           maximum: 2147483647
           oneOf:
           - $ref: '#/components/schemas/CategoryEnum'
           - $ref: '#/components/schemas/NullEnum'
-          type: integer
+          type:
+          - integer
+          - 'null'
         external_id:
           type: string
           description: External id of the Credit Card
           maxLength: 100
         status:
-          nullable: true
           description: 'The status of the Credit Card
 
 
@@ -527,28 +599,33 @@ components:
           - $ref: '#/components/schemas/CreditCardStatusEnum'
           - $ref: '#/components/schemas/BlankEnum'
           - $ref: '#/components/schemas/NullEnum'
-          type: integer
+          type:
+          - integer
+          - 'null'
         require_activation:
           type: boolean
           title: Require new activation?
           description: Does this card require new activation?
         last_changed_by:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           title: Last changed by user
         vendor:
           type: integer
         payment_method:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         currency:
           type: integer
         currency_name:
           type: string
           readOnly: true
         creator:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           title: Card Issuer
         assignees:
           type: array
@@ -559,17 +636,36 @@ components:
       - currency
       - uuid
       - vendor
-    VendorDetailSerializerSingleCreate:
+    PaymentMethod:
       type: object
       properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/VendorDetail'
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
       required:
-      - data
+      - name
+    BreakdownDocs:
+      type: object
+      properties:
+        score:
+          type: number
+          format: double
+        weight:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,1}(?:\.\d{0,1})?$
+      required:
+      - score
+      - weight
     VendorDetail:
       type: object
       properties:
@@ -583,52 +679,61 @@ components:
         active:
           type: boolean
         addressLineOne:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Address line 1
           description: First line of address
           maxLength: 300
         addressLineTwo:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Address line 2
           description: Second line of address
           maxLength: 300
         postalCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: Postal Code
           description: Postal or Zip code of the vendor
           maxLength: 20
         city:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: City of the vendor
           maxLength: 50
         state_province:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           title: State/Province
           description: State or Province of the vendor
           maxLength: 40
         country:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Country of the vendor
           maxLength: 80
         phoneOne:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Primary phone no. of the vendor
           maxLength: 20
         phoneTwo:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Secondary phone no. of the vendor
           maxLength: 20
         fax:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Fax no. of the vendor
           maxLength: 20
         email:
@@ -644,22 +749,26 @@ components:
             probably be removed at some point in the future.'
           readOnly: true
         comments:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Notes about the vendor
         contact:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Contact person of the vendor
           maxLength: 50
         url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Website of the vendor
           maxLength: 200
         external_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: External id of the vendor
           maxLength: 100
         dateModified:
@@ -667,54 +776,63 @@ components:
           format: date-time
           readOnly: true
         currency:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         payment_term_ref:
           allOf:
           - $ref: '#/components/schemas/PaymentTerm'
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
         shipping_term_ref:
           allOf:
           - $ref: '#/components/schemas/ShippingTerm'
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
         payment_method_ref:
           allOf:
           - $ref: '#/components/schemas/PaymentMethod'
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
         shipping_method_ref:
           allOf:
           - $ref: '#/components/schemas/ShippingMethod'
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
         payment_methods:
           type: array
           items:
             $ref: '#/components/schemas/PaymentMethodRead'
           readOnly: true
         tax:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         type:
           $ref: '#/components/schemas/VendorTypeEnum'
         default_payment_method:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         creditcards:
           type: array
           items:
             $ref: '#/components/schemas/CreditCard'
           readOnly: true
         is_1099_eligible:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           title: 1099 Eligible?
         overall_score:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
           readOnly: true
         is_auto_email_po_enabled:
           type: boolean
@@ -729,9 +847,10 @@ components:
         performance:
           allOf:
           - $ref: '#/components/schemas/VendorPerformance'
-          nullable: true
           readOnly: true
-          type: object
+          type:
+          - object
+          - 'null'
         vendor_request:
           allOf:
           - $ref: '#/components/schemas/NestedVendorRequest'
@@ -739,7 +858,217 @@ components:
       required:
       - name
       - type
-    PaymentMethod:
+    BlankEnum:
+      enum:
+      - ''
+    Vendor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          description: Name of the vendor
+          maxLength: 150
+        active:
+          type: boolean
+        addressLineOne:
+          type:
+          - string
+          - 'null'
+          title: Address line 1
+          description: First line of address
+          maxLength: 300
+        addressLineTwo:
+          type:
+          - string
+          - 'null'
+          title: Address line 2
+          description: Second line of address
+          maxLength: 300
+        postalCode:
+          type:
+          - string
+          - 'null'
+          title: Postal Code
+          description: Postal or Zip code of the vendor
+          maxLength: 20
+        city:
+          type:
+          - string
+          - 'null'
+          description: City of the vendor
+          maxLength: 50
+        state_province:
+          type:
+          - string
+          - 'null'
+          title: State/Province
+          description: State or Province of the vendor
+          maxLength: 40
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country of the vendor
+          maxLength: 80
+        phoneOne:
+          type:
+          - string
+          - 'null'
+          description: Primary phone no. of the vendor
+          maxLength: 20
+        phoneTwo:
+          type:
+          - string
+          - 'null'
+          description: Secondary phone no. of the vendor
+          maxLength: 20
+        fax:
+          type:
+          - string
+          - 'null'
+          description: Fax no. of the vendor
+          maxLength: 20
+        email:
+          type: array
+          items:
+            type: string
+            format: email
+        comments:
+          type:
+          - string
+          - 'null'
+          description: Notes about the vendor
+        contact:
+          type:
+          - string
+          - 'null'
+          description: Contact person of the vendor
+          maxLength: 50
+        url:
+          type:
+          - string
+          - 'null'
+          description: Website of the vendor
+          maxLength: 200
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id of the vendor
+          maxLength: 100
+        dateModified:
+          type: string
+          format: date-time
+          readOnly: true
+        currency:
+          type:
+          - integer
+          - 'null'
+        payment_term_ref:
+          type:
+          - integer
+          - 'null'
+        shipping_term_ref:
+          type:
+          - integer
+          - 'null'
+        payment_method_ref:
+          type:
+          - integer
+          - 'null'
+        shipping_method_ref:
+          type:
+          - integer
+          - 'null'
+        payment_methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodRead'
+          readOnly: true
+        tax:
+          type:
+          - integer
+          - 'null'
+        type:
+          $ref: '#/components/schemas/VendorTypeEnum'
+        default_payment_method:
+          type:
+          - integer
+          - 'null'
+        creditcards:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCard'
+          readOnly: true
+        is_1099_eligible:
+          type:
+          - boolean
+          - 'null'
+          title: 1099 Eligible?
+        overall_score:
+          type:
+          - number
+          - 'null'
+          format: double
+          readOnly: true
+        is_auto_email_po_enabled:
+          type: boolean
+        po_pdf_labels:
+          type: string
+          description: Placeholder for a KVStore value
+          maxLength: 200
+        email_configurations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/EmailConfiguration'
+      required:
+      - name
+      - type
+    PaymentTermRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+      required:
+      - name
+    CreditCardTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      type: integer
+      description: '* `0` - other-credit-card
+
+        * `1` - Visa
+
+        * `2` - Mastercard
+
+        * `3` - American Express
+
+        * `4` - Discover
+
+        * `5` - JCB
+
+        * `6` - Diner''s Club
+
+        * `7` - Procurify'
+    PaymentTerm:
       type: object
       properties:
         id:
@@ -749,46 +1078,73 @@ components:
           type: string
           maxLength: 100
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         active:
           type: boolean
       required:
       - name
-    VendorTypeEnum:
-      enum:
-      - 2
-      - 3
-      - 4
-      - 6
-      - 7
-      type: integer
-      description: '* `2` - amazon punchout
-
-        * `3` - preferred
-
-        * `4` - regular
-
-        * `6` - credit card provider
-
-        * `7` - checkout'
-    VendorPerformance:
+    PaymentMethodRequest:
       type: object
       properties:
-        overall_score:
-          type: number
-          format: float
-          readOnly: true
-        average_delivery_time:
+        name:
           type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,3})?$
-          nullable: true
-          readOnly: true
-        breakdown:
-          allOf:
-          - $ref: '#/components/schemas/VendorBreakdownDocs'
-          readOnly: true
+          minLength: 1
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+      required:
+      - name
+    PaginatedOptimizedVendorList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                previous:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizedVendor'
     PaymentMethodTypeEnum:
       enum:
       - 0
@@ -818,824 +1174,6 @@ components:
         * `7` - PROCURIFY_WIRE
 
         * `8` - AIRWALLEX'
-    EmailConfiguration:
-      type: object
-      properties:
-        auto_po:
-          type: boolean
-        payment_remittance:
-          type: boolean
-    BlankEnum:
-      enum:
-      - ''
-    PaymentTerm:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type: string
-          nullable: true
-        active:
-          type: boolean
-      required:
-      - name
-    OptimizedVendorRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the vendor
-          maxLength: 150
-        active:
-          type: boolean
-        addressLineOne:
-          type: string
-          nullable: true
-          title: Address line 1
-          description: First line of address
-          maxLength: 300
-        addressLineTwo:
-          type: string
-          nullable: true
-          title: Address line 2
-          description: Second line of address
-          maxLength: 300
-        postalCode:
-          type: string
-          nullable: true
-          title: Postal Code
-          description: Postal or Zip code of the vendor
-          maxLength: 20
-        city:
-          type: string
-          nullable: true
-          description: City of the vendor
-          maxLength: 50
-        state_province:
-          type: string
-          nullable: true
-          title: State/Province
-          description: State or Province of the vendor
-          maxLength: 40
-        country:
-          type: string
-          nullable: true
-          description: Country of the vendor
-          maxLength: 80
-        phoneOne:
-          type: string
-          nullable: true
-          description: Primary phone no. of the vendor
-          maxLength: 20
-        phoneTwo:
-          type: string
-          nullable: true
-          description: Secondary phone no. of the vendor
-          maxLength: 20
-        fax:
-          type: string
-          nullable: true
-          description: Fax no. of the vendor
-          maxLength: 20
-        email:
-          type: array
-          items:
-            type: string
-            format: email
-            minLength: 1
-        comments:
-          type: string
-          nullable: true
-          description: Notes about the vendor
-        contact:
-          type: string
-          nullable: true
-          description: Contact person of the vendor
-          maxLength: 50
-        url:
-          type: string
-          nullable: true
-          description: Website of the vendor
-          maxLength: 200
-        external_id:
-          type: string
-          nullable: true
-          description: External id of the vendor
-          maxLength: 100
-        currency:
-          type: integer
-          nullable: true
-        payment_term_ref:
-          allOf:
-          - $ref: '#/components/schemas/PaymentTermRequest'
-          nullable: true
-          type: object
-        shipping_term_ref:
-          allOf:
-          - $ref: '#/components/schemas/ShippingTermRequest'
-          nullable: true
-          type: object
-        payment_method_ref:
-          allOf:
-          - $ref: '#/components/schemas/PaymentMethodRequest'
-          nullable: true
-          type: object
-        shipping_method_ref:
-          allOf:
-          - $ref: '#/components/schemas/ShippingMethodRequest'
-          nullable: true
-          type: object
-        tax:
-          type: integer
-          nullable: true
-        type:
-          $ref: '#/components/schemas/VendorTypeEnum'
-        default_payment_method:
-          type: integer
-          nullable: true
-        is_1099_eligible:
-          type: boolean
-          nullable: true
-          title: 1099 Eligible?
-        overall_score:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
-          nullable: true
-        is_auto_email_po_enabled:
-          type: boolean
-        po_pdf_labels:
-          type: string
-          description: Placeholder for a KVStore value
-          maxLength: 200
-        email_configurations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/EmailConfigurationRequest'
-      required:
-      - email
-      - name
-      - overall_score
-      - type
-    PatchedOptimizedVendorRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the vendor
-          maxLength: 150
-        active:
-          type: boolean
-        addressLineOne:
-          type: string
-          nullable: true
-          title: Address line 1
-          description: First line of address
-          maxLength: 300
-        addressLineTwo:
-          type: string
-          nullable: true
-          title: Address line 2
-          description: Second line of address
-          maxLength: 300
-        postalCode:
-          type: string
-          nullable: true
-          title: Postal Code
-          description: Postal or Zip code of the vendor
-          maxLength: 20
-        city:
-          type: string
-          nullable: true
-          description: City of the vendor
-          maxLength: 50
-        state_province:
-          type: string
-          nullable: true
-          title: State/Province
-          description: State or Province of the vendor
-          maxLength: 40
-        country:
-          type: string
-          nullable: true
-          description: Country of the vendor
-          maxLength: 80
-        phoneOne:
-          type: string
-          nullable: true
-          description: Primary phone no. of the vendor
-          maxLength: 20
-        phoneTwo:
-          type: string
-          nullable: true
-          description: Secondary phone no. of the vendor
-          maxLength: 20
-        fax:
-          type: string
-          nullable: true
-          description: Fax no. of the vendor
-          maxLength: 20
-        email:
-          type: array
-          items:
-            type: string
-            format: email
-            minLength: 1
-        comments:
-          type: string
-          nullable: true
-          description: Notes about the vendor
-        contact:
-          type: string
-          nullable: true
-          description: Contact person of the vendor
-          maxLength: 50
-        url:
-          type: string
-          nullable: true
-          description: Website of the vendor
-          maxLength: 200
-        external_id:
-          type: string
-          nullable: true
-          description: External id of the vendor
-          maxLength: 100
-        currency:
-          type: integer
-          nullable: true
-        payment_term_ref:
-          allOf:
-          - $ref: '#/components/schemas/PaymentTermRequest'
-          nullable: true
-          type: object
-        shipping_term_ref:
-          allOf:
-          - $ref: '#/components/schemas/ShippingTermRequest'
-          nullable: true
-          type: object
-        payment_method_ref:
-          allOf:
-          - $ref: '#/components/schemas/PaymentMethodRequest'
-          nullable: true
-          type: object
-        shipping_method_ref:
-          allOf:
-          - $ref: '#/components/schemas/ShippingMethodRequest'
-          nullable: true
-          type: object
-        tax:
-          type: integer
-          nullable: true
-        type:
-          $ref: '#/components/schemas/VendorTypeEnum'
-        default_payment_method:
-          type: integer
-          nullable: true
-        is_1099_eligible:
-          type: boolean
-          nullable: true
-          title: 1099 Eligible?
-        overall_score:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
-          nullable: true
-        is_auto_email_po_enabled:
-          type: boolean
-        po_pdf_labels:
-          type: string
-          description: Placeholder for a KVStore value
-          maxLength: 200
-        email_configurations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/EmailConfigurationRequest'
-    Currency:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 10
-        description:
-          type: string
-          maxLength: 100
-        rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-        base:
-          type: boolean
-        active:
-          type: boolean
-      required:
-      - name
-      - rate
-    PaymentMethodRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 100
-        description:
-          type: string
-          nullable: true
-        active:
-          type: boolean
-      required:
-      - name
-    ShippingMethodRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 100
-        description:
-          type: string
-          nullable: true
-        active:
-          type: boolean
-      required:
-      - name
-    ShippingTerm:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type: string
-          nullable: true
-        active:
-          type: boolean
-      required:
-      - name
-    ShippingTermRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 100
-        description:
-          type: string
-          nullable: true
-        active:
-          type: boolean
-      required:
-      - name
-    VendorBreakdownDocs:
-      type: object
-      properties:
-        speed:
-          $ref: '#/components/schemas/BreakdownDocs'
-        accuracy:
-          $ref: '#/components/schemas/BreakdownDocs'
-        quality:
-          $ref: '#/components/schemas/BreakdownDocs'
-        cost:
-          $ref: '#/components/schemas/BreakdownDocs'
-      required:
-      - accuracy
-      - cost
-      - quality
-      - speed
-    OptimizedVendorSerializerSingle:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/OptimizedVendor'
-      required:
-      - data
-    PaymentMethodRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 255
-        type:
-          allOf:
-          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
-          title: Payment Method
-          minimum: 0
-          maximum: 4294967295
-        data: {}
-        currency:
-          $ref: '#/components/schemas/Currency'
-        payment_rail:
-          type: string
-          readOnly: true
-        bank_account_country_code:
-          type: string
-          nullable: true
-          readOnly: true
-      required:
-      - currency
-      - data
-    CreditCardAssignee:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        profile_image:
-          type: string
-          nullable: true
-      required:
-      - email
-    VendorSerializerSingle:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/Vendor'
-      required:
-      - data
-    NullEnum:
-      enum:
-      - null
-    Vendor:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          description: Name of the vendor
-          maxLength: 150
-        active:
-          type: boolean
-        addressLineOne:
-          type: string
-          nullable: true
-          title: Address line 1
-          description: First line of address
-          maxLength: 300
-        addressLineTwo:
-          type: string
-          nullable: true
-          title: Address line 2
-          description: Second line of address
-          maxLength: 300
-        postalCode:
-          type: string
-          nullable: true
-          title: Postal Code
-          description: Postal or Zip code of the vendor
-          maxLength: 20
-        city:
-          type: string
-          nullable: true
-          description: City of the vendor
-          maxLength: 50
-        state_province:
-          type: string
-          nullable: true
-          title: State/Province
-          description: State or Province of the vendor
-          maxLength: 40
-        country:
-          type: string
-          nullable: true
-          description: Country of the vendor
-          maxLength: 80
-        phoneOne:
-          type: string
-          nullable: true
-          description: Primary phone no. of the vendor
-          maxLength: 20
-        phoneTwo:
-          type: string
-          nullable: true
-          description: Secondary phone no. of the vendor
-          maxLength: 20
-        fax:
-          type: string
-          nullable: true
-          description: Fax no. of the vendor
-          maxLength: 20
-        email:
-          type: array
-          items:
-            type: string
-            format: email
-        comments:
-          type: string
-          nullable: true
-          description: Notes about the vendor
-        contact:
-          type: string
-          nullable: true
-          description: Contact person of the vendor
-          maxLength: 50
-        url:
-          type: string
-          nullable: true
-          description: Website of the vendor
-          maxLength: 200
-        external_id:
-          type: string
-          nullable: true
-          description: External id of the vendor
-          maxLength: 100
-        dateModified:
-          type: string
-          format: date-time
-          readOnly: true
-        currency:
-          type: integer
-          nullable: true
-        payment_term_ref:
-          type: integer
-          nullable: true
-        shipping_term_ref:
-          type: integer
-          nullable: true
-        payment_method_ref:
-          type: integer
-          nullable: true
-        shipping_method_ref:
-          type: integer
-          nullable: true
-        payment_methods:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethodRead'
-          readOnly: true
-        tax:
-          type: integer
-          nullable: true
-        type:
-          $ref: '#/components/schemas/VendorTypeEnum'
-        default_payment_method:
-          type: integer
-          nullable: true
-        creditcards:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditCard'
-          readOnly: true
-        is_1099_eligible:
-          type: boolean
-          nullable: true
-          title: 1099 Eligible?
-        overall_score:
-          type: number
-          format: double
-          nullable: true
-          readOnly: true
-        is_auto_email_po_enabled:
-          type: boolean
-        po_pdf_labels:
-          type: string
-          description: Placeholder for a KVStore value
-          maxLength: 200
-        email_configurations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/EmailConfiguration'
-      required:
-      - name
-      - type
-    BreakdownDocs:
-      type: object
-      properties:
-        score:
-          type: number
-          format: double
-        weight:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,1}(?:\.\d{0,1})?$
-      required:
-      - score
-      - weight
-    CategoryEnum:
-      enum:
-      - 0
-      - 1
-      type: integer
-      description: '* `0` - Physical
-
-        * `1` - Virtual'
-    PaymentTermRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 100
-        description:
-          type: string
-          nullable: true
-        active:
-          type: boolean
-      required:
-      - name
-    OptimizedVendor:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          description: Name of the vendor
-          maxLength: 150
-        active:
-          type: boolean
-        addressLineOne:
-          type: string
-          nullable: true
-          title: Address line 1
-          description: First line of address
-          maxLength: 300
-        addressLineTwo:
-          type: string
-          nullable: true
-          title: Address line 2
-          description: Second line of address
-          maxLength: 300
-        postalCode:
-          type: string
-          nullable: true
-          title: Postal Code
-          description: Postal or Zip code of the vendor
-          maxLength: 20
-        city:
-          type: string
-          nullable: true
-          description: City of the vendor
-          maxLength: 50
-        state_province:
-          type: string
-          nullable: true
-          title: State/Province
-          description: State or Province of the vendor
-          maxLength: 40
-        country:
-          type: string
-          nullable: true
-          description: Country of the vendor
-          maxLength: 80
-        phoneOne:
-          type: string
-          nullable: true
-          description: Primary phone no. of the vendor
-          maxLength: 20
-        phoneTwo:
-          type: string
-          nullable: true
-          description: Secondary phone no. of the vendor
-          maxLength: 20
-        fax:
-          type: string
-          nullable: true
-          description: Fax no. of the vendor
-          maxLength: 20
-        email:
-          type: array
-          items:
-            type: string
-            format: email
-        comments:
-          type: string
-          nullable: true
-          description: Notes about the vendor
-        contact:
-          type: string
-          nullable: true
-          description: Contact person of the vendor
-          maxLength: 50
-        url:
-          type: string
-          nullable: true
-          description: Website of the vendor
-          maxLength: 200
-        external_id:
-          type: string
-          nullable: true
-          description: External id of the vendor
-          maxLength: 100
-        dateModified:
-          type: string
-          format: date-time
-          readOnly: true
-        currency:
-          type: integer
-          nullable: true
-        payment_term_ref:
-          allOf:
-          - $ref: '#/components/schemas/PaymentTerm'
-          nullable: true
-          type: object
-        shipping_term_ref:
-          allOf:
-          - $ref: '#/components/schemas/ShippingTerm'
-          nullable: true
-          type: object
-        payment_method_ref:
-          allOf:
-          - $ref: '#/components/schemas/PaymentMethod'
-          nullable: true
-          type: object
-        shipping_method_ref:
-          allOf:
-          - $ref: '#/components/schemas/ShippingMethod'
-          nullable: true
-          type: object
-        payment_methods:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethodRead'
-          readOnly: true
-        tax:
-          type: integer
-          nullable: true
-        type:
-          $ref: '#/components/schemas/VendorTypeEnum'
-        default_payment_method:
-          type: integer
-          nullable: true
-        creditcards:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditCard'
-          readOnly: true
-        is_1099_eligible:
-          type: boolean
-          nullable: true
-          title: 1099 Eligible?
-        overall_score:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
-          nullable: true
-        is_auto_email_po_enabled:
-          type: boolean
-        po_pdf_labels:
-          type: string
-          description: Placeholder for a KVStore value
-          maxLength: 200
-        vendor_request:
-          allOf:
-          - $ref: '#/components/schemas/NestedVendorRequest'
-          readOnly: true
-        email_configurations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/EmailConfiguration'
-      required:
-      - email
-      - name
-      - overall_score
-      - type
-    VendorDetailSerializerSingleRetrieve:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/VendorDetail'
-      required:
-      - data
     NestedVendorRequest:
       type: object
       properties:
@@ -1657,14 +1195,414 @@ components:
           readOnly: true
       required:
       - submitted_date
-    EmailConfigurationRequest:
+    VendorBreakdownDocs:
       type: object
       properties:
-        auto_po:
+        speed:
+          $ref: '#/components/schemas/BreakdownDocs'
+        accuracy:
+          $ref: '#/components/schemas/BreakdownDocs'
+        quality:
+          $ref: '#/components/schemas/BreakdownDocs'
+        cost:
+          $ref: '#/components/schemas/BreakdownDocs'
+      required:
+      - accuracy
+      - cost
+      - quality
+      - speed
+    PatchedOptimizedVendorRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the vendor
+          maxLength: 150
+        active:
           type: boolean
-        payment_remittance:
+        addressLineOne:
+          type:
+          - string
+          - 'null'
+          title: Address line 1
+          description: First line of address
+          maxLength: 300
+        addressLineTwo:
+          type:
+          - string
+          - 'null'
+          title: Address line 2
+          description: Second line of address
+          maxLength: 300
+        postalCode:
+          type:
+          - string
+          - 'null'
+          title: Postal Code
+          description: Postal or Zip code of the vendor
+          maxLength: 20
+        city:
+          type:
+          - string
+          - 'null'
+          description: City of the vendor
+          maxLength: 50
+        state_province:
+          type:
+          - string
+          - 'null'
+          title: State/Province
+          description: State or Province of the vendor
+          maxLength: 40
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country of the vendor
+          maxLength: 80
+        phoneOne:
+          type:
+          - string
+          - 'null'
+          description: Primary phone no. of the vendor
+          maxLength: 20
+        phoneTwo:
+          type:
+          - string
+          - 'null'
+          description: Secondary phone no. of the vendor
+          maxLength: 20
+        fax:
+          type:
+          - string
+          - 'null'
+          description: Fax no. of the vendor
+          maxLength: 20
+        email:
+          type: array
+          items:
+            type: string
+            format: email
+            minLength: 1
+        comments:
+          type:
+          - string
+          - 'null'
+          description: Notes about the vendor
+        contact:
+          type:
+          - string
+          - 'null'
+          description: Contact person of the vendor
+          maxLength: 50
+        url:
+          type:
+          - string
+          - 'null'
+          description: Website of the vendor
+          maxLength: 200
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id of the vendor
+          maxLength: 100
+        currency:
+          type:
+          - integer
+          - 'null'
+        payment_term_ref:
+          allOf:
+          - $ref: '#/components/schemas/PaymentTermRequest'
+          type:
+          - object
+          - 'null'
+        shipping_term_ref:
+          allOf:
+          - $ref: '#/components/schemas/ShippingTermRequest'
+          type:
+          - object
+          - 'null'
+        payment_method_ref:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodRequest'
+          type:
+          - object
+          - 'null'
+        shipping_method_ref:
+          allOf:
+          - $ref: '#/components/schemas/ShippingMethodRequest'
+          type:
+          - object
+          - 'null'
+        tax:
+          type:
+          - integer
+          - 'null'
+        type:
+          $ref: '#/components/schemas/VendorTypeEnum'
+        default_payment_method:
+          type:
+          - integer
+          - 'null'
+        is_1099_eligible:
+          type:
+          - boolean
+          - 'null'
+          title: 1099 Eligible?
+        overall_score:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
+        is_auto_email_po_enabled:
           type: boolean
-    ShippingMethod:
+        po_pdf_labels:
+          type: string
+          description: Placeholder for a KVStore value
+          maxLength: 200
+        email_configurations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/EmailConfigurationRequest'
+    ShippingTermRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+      required:
+      - name
+    ShippingMethodRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+      required:
+      - name
+    VendorDetailSerializerSingleRetrieve:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/VendorDetail'
+      required:
+      - data
+    OptimizedVendorRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the vendor
+          maxLength: 150
+        active:
+          type: boolean
+        addressLineOne:
+          type:
+          - string
+          - 'null'
+          title: Address line 1
+          description: First line of address
+          maxLength: 300
+        addressLineTwo:
+          type:
+          - string
+          - 'null'
+          title: Address line 2
+          description: Second line of address
+          maxLength: 300
+        postalCode:
+          type:
+          - string
+          - 'null'
+          title: Postal Code
+          description: Postal or Zip code of the vendor
+          maxLength: 20
+        city:
+          type:
+          - string
+          - 'null'
+          description: City of the vendor
+          maxLength: 50
+        state_province:
+          type:
+          - string
+          - 'null'
+          title: State/Province
+          description: State or Province of the vendor
+          maxLength: 40
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country of the vendor
+          maxLength: 80
+        phoneOne:
+          type:
+          - string
+          - 'null'
+          description: Primary phone no. of the vendor
+          maxLength: 20
+        phoneTwo:
+          type:
+          - string
+          - 'null'
+          description: Secondary phone no. of the vendor
+          maxLength: 20
+        fax:
+          type:
+          - string
+          - 'null'
+          description: Fax no. of the vendor
+          maxLength: 20
+        email:
+          type: array
+          items:
+            type: string
+            format: email
+            minLength: 1
+        comments:
+          type:
+          - string
+          - 'null'
+          description: Notes about the vendor
+        contact:
+          type:
+          - string
+          - 'null'
+          description: Contact person of the vendor
+          maxLength: 50
+        url:
+          type:
+          - string
+          - 'null'
+          description: Website of the vendor
+          maxLength: 200
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id of the vendor
+          maxLength: 100
+        currency:
+          type:
+          - integer
+          - 'null'
+        payment_term_ref:
+          allOf:
+          - $ref: '#/components/schemas/PaymentTermRequest'
+          type:
+          - object
+          - 'null'
+        shipping_term_ref:
+          allOf:
+          - $ref: '#/components/schemas/ShippingTermRequest'
+          type:
+          - object
+          - 'null'
+        payment_method_ref:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodRequest'
+          type:
+          - object
+          - 'null'
+        shipping_method_ref:
+          allOf:
+          - $ref: '#/components/schemas/ShippingMethodRequest'
+          type:
+          - object
+          - 'null'
+        tax:
+          type:
+          - integer
+          - 'null'
+        type:
+          $ref: '#/components/schemas/VendorTypeEnum'
+        default_payment_method:
+          type:
+          - integer
+          - 'null'
+        is_1099_eligible:
+          type:
+          - boolean
+          - 'null'
+          title: 1099 Eligible?
+        overall_score:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
+        is_auto_email_po_enabled:
+          type: boolean
+        po_pdf_labels:
+          type: string
+          description: Placeholder for a KVStore value
+          maxLength: 200
+        email_configurations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/EmailConfigurationRequest'
+      required:
+      - email
+      - name
+      - overall_score
+      - type
+    VendorSerializerSingle:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/Vendor'
+      required:
+      - data
+    NullEnum:
+      enum:
+      - null
+    VendorDetailSerializerSingleCreate:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/VendorDetail'
+      required:
+      - data
+    CategoryEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - Physical
+
+        * `1` - Virtual'
+    ShippingTerm:
       type: object
       properties:
         id:
@@ -1674,12 +1612,211 @@ components:
           type: string
           maxLength: 100
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         active:
           type: boolean
       required:
       - name
+    VendorPerformance:
+      type: object
+      properties:
+        overall_score:
+          type: number
+          format: float
+          readOnly: true
+        average_delivery_time:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,3})?$
+          readOnly: true
+        breakdown:
+          allOf:
+          - $ref: '#/components/schemas/VendorBreakdownDocs'
+          readOnly: true
+    OptimizedVendor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          description: Name of the vendor
+          maxLength: 150
+        active:
+          type: boolean
+        addressLineOne:
+          type:
+          - string
+          - 'null'
+          title: Address line 1
+          description: First line of address
+          maxLength: 300
+        addressLineTwo:
+          type:
+          - string
+          - 'null'
+          title: Address line 2
+          description: Second line of address
+          maxLength: 300
+        postalCode:
+          type:
+          - string
+          - 'null'
+          title: Postal Code
+          description: Postal or Zip code of the vendor
+          maxLength: 20
+        city:
+          type:
+          - string
+          - 'null'
+          description: City of the vendor
+          maxLength: 50
+        state_province:
+          type:
+          - string
+          - 'null'
+          title: State/Province
+          description: State or Province of the vendor
+          maxLength: 40
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country of the vendor
+          maxLength: 80
+        phoneOne:
+          type:
+          - string
+          - 'null'
+          description: Primary phone no. of the vendor
+          maxLength: 20
+        phoneTwo:
+          type:
+          - string
+          - 'null'
+          description: Secondary phone no. of the vendor
+          maxLength: 20
+        fax:
+          type:
+          - string
+          - 'null'
+          description: Fax no. of the vendor
+          maxLength: 20
+        email:
+          type: array
+          items:
+            type: string
+            format: email
+        comments:
+          type:
+          - string
+          - 'null'
+          description: Notes about the vendor
+        contact:
+          type:
+          - string
+          - 'null'
+          description: Contact person of the vendor
+          maxLength: 50
+        url:
+          type:
+          - string
+          - 'null'
+          description: Website of the vendor
+          maxLength: 200
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id of the vendor
+          maxLength: 100
+        dateModified:
+          type: string
+          format: date-time
+          readOnly: true
+        currency:
+          type:
+          - integer
+          - 'null'
+        payment_term_ref:
+          allOf:
+          - $ref: '#/components/schemas/PaymentTerm'
+          type:
+          - object
+          - 'null'
+        shipping_term_ref:
+          allOf:
+          - $ref: '#/components/schemas/ShippingTerm'
+          type:
+          - object
+          - 'null'
+        payment_method_ref:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethod'
+          type:
+          - object
+          - 'null'
+        shipping_method_ref:
+          allOf:
+          - $ref: '#/components/schemas/ShippingMethod'
+          type:
+          - object
+          - 'null'
+        payment_methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodRead'
+          readOnly: true
+        tax:
+          type:
+          - integer
+          - 'null'
+        type:
+          $ref: '#/components/schemas/VendorTypeEnum'
+        default_payment_method:
+          type:
+          - integer
+          - 'null'
+        creditcards:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCard'
+          readOnly: true
+        is_1099_eligible:
+          type:
+          - boolean
+          - 'null'
+          title: 1099 Eligible?
+        overall_score:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,2}(?:\.\d{0,3})?$
+        is_auto_email_po_enabled:
+          type: boolean
+        po_pdf_labels:
+          type: string
+          description: Placeholder for a KVStore value
+          maxLength: 200
+        vendor_request:
+          allOf:
+          - $ref: '#/components/schemas/NestedVendorRequest'
+          readOnly: true
+        email_configurations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/EmailConfiguration'
+      required:
+      - email
+      - name
+      - overall_score
+      - type
     CreditCardStatusEnum:
       enum:
       - pending
@@ -1700,49 +1837,30 @@ components:
         * `lost` - Lost
 
         * `stolen` - Stolen'
-    PaginatedOptimizedVendorList:
+    VendorTypeEnum:
+      enum:
+      - 2
+      - 3
+      - 4
+      - 6
+      - 7
+      type: integer
+      description: '* `2` - amazon punchout
+
+        * `3` - preferred
+
+        * `4` - regular
+
+        * `6` - credit card provider
+
+        * `7` - checkout'
+    EmailConfigurationRequest:
       type: object
       properties:
-        metadata:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  example: 10
-                next:
-                  type: string
-                  nullable: true
-                  format: uri
-                  example: null
-                previous:
-                  type: string
-                  nullable: true
-                  format: uri
-                  example: null
-                page_size:
-                  type: integer
-                  example: 10
-                num_pages:
-                  type: integer
-                  example: 1
-                current_page:
-                  type: integer
-                  example: 1
-          example:
-            pagination:
-              count: 10
-              next: null
-              previous: null
-              page_size: 10
-              num_pages: 1
-              current_page: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/OptimizedVendor'
+        auto_po:
+          type: boolean
+        payment_remittance:
+          type: boolean
   securitySchemes:
     BasicAuthentication:
       type: http

@@ -1,23 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Procurify API Documentation account-codes currencies API
-  version: "1.0"
-  description: '
-
-    # Disclaimer
+  title: Procurify API Documentation Currencies API
+  version: ''
+  description: '# Disclaimer
 
 
-    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
-
-    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
-
-    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
-
-    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
-
-    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
-
-    '
+    - Procurify’s API is evolving and is subject to change at any time.'
 servers:
 - url: https://{user_domain}.procurify.com
   description: Your Procurify domain
@@ -26,7 +14,7 @@ servers:
       default: your-domain
       description: Your procurify domain
 tags:
-- name: currencies
+- name: Currencies
 paths:
   /api/v2/currencies/:
     get:
@@ -85,7 +73,7 @@ paths:
         schema:
           type: string
       tags:
-      - currencies
+      - Currencies
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -103,29 +91,6 @@ paths:
           description: ''
 components:
   schemas:
-    Currency:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 10
-        description:
-          type: string
-          maxLength: 100
-        rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-        base:
-          type: boolean
-        active:
-          type: boolean
-      required:
-      - name
-      - rate
     PaginatedCurrencyList:
       type: object
       properties:
@@ -139,13 +104,15 @@ components:
                   type: integer
                   example: 10
                 next:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   format: uri
                   example: null
                 previous:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   format: uri
                   example: null
                 page_size:
@@ -169,6 +136,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Currency'
+    Currency:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        description:
+          type: string
+          maxLength: 100
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        base:
+          type: boolean
+        active:
+          type: boolean
+      required:
+      - name
+      - rate
   securitySchemes:
     BasicAuthentication:
       type: http

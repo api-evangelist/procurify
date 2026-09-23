@@ -1,23 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Procurify API Documentation account-codes API
-  version: "1.0"
-  description: '
-
-    # Disclaimer
+  title: Procurify API Documentation Account Codes API
+  version: ''
+  description: '# Disclaimer
 
 
-    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
-
-    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
-
-    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
-
-    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
-
-    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
-
-    '
+    - Procurify’s API is evolving and is subject to change at any time.'
 servers:
 - url: https://{user_domain}.procurify.com
   description: Your Procurify domain
@@ -26,7 +14,7 @@ servers:
       default: your-domain
       description: Your procurify domain
 tags:
-- name: account-codes
+- name: Account Codes
 paths:
   /api/v3/account-codes/:
     get:
@@ -38,17 +26,17 @@ paths:
 
         |-------------------|------|
 
-        | ASSETS            | 0    |
+        | ASSETS | 0 |
 
-        | LIABILITY         | 1    |
+        | LIABILITY | 1 |
 
-        | EXPENSE           | 2    |
+        | EXPENSE | 2 |
 
-        | INCOME            | 3    |
+        | INCOME | 3 |
 
-        | EQUITY            | 4    |
+        | EQUITY | 4 |
 
-        | OTHER             | 5    |'
+        | OTHER | 5 |'
       summary: Get Account Codes
       parameters:
       - in: query
@@ -95,7 +83,7 @@ paths:
         schema:
           type: string
       tags:
-      - account-codes
+      - Account Codes
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -120,17 +108,17 @@ paths:
 
         |-------------------|------|
 
-        | ASSETS            | 0    |
+        | ASSETS | 0 |
 
-        | LIABILITY         | 1    |
+        | LIABILITY | 1 |
 
-        | EXPENSE           | 2    |
+        | EXPENSE | 2 |
 
-        | INCOME            | 3    |
+        | INCOME | 3 |
 
-        | EQUITY            | 4    |
+        | EQUITY | 4 |
 
-        | OTHER             | 5    |'
+        | OTHER | 5 |'
       summary: Create Account Codes
       parameters:
       - in: query
@@ -141,7 +129,7 @@ paths:
           - csv
           - json
       tags:
-      - account-codes
+      - Account Codes
       requestBody:
         content:
           application/json:
@@ -185,17 +173,17 @@ paths:
 
         |-------------------|------|
 
-        | ASSETS            | 0    |
+        | ASSETS | 0 |
 
-        | LIABILITY         | 1    |
+        | LIABILITY | 1 |
 
-        | EXPENSE           | 2    |
+        | EXPENSE | 2 |
 
-        | INCOME            | 3    |
+        | INCOME | 3 |
 
-        | EQUITY            | 4    |
+        | EQUITY | 4 |
 
-        | OTHER             | 5    |'
+        | OTHER | 5 |'
       summary: Update Account Code
       parameters:
       - in: query
@@ -212,7 +200,7 @@ paths:
         description: A unique integer value identifying this account code.
         required: true
       tags:
-      - account-codes
+      - Account Codes
       requestBody:
         content:
           application/json:
@@ -275,11 +263,23 @@ components:
         active:
           type: boolean
         parent:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
       required:
       - code
       - description
+    AccountCodeReadSerializerSingleCreate:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/AccountCodeRead'
+      required:
+      - data
     AccountCodeReadSerializerSingleUpdate:
       type: object
       properties:
@@ -291,32 +291,6 @@ components:
           $ref: '#/components/schemas/AccountCodeRead'
       required:
       - data
-    AccountCodeCreateRequest:
-      type: object
-      properties:
-        code:
-          type: string
-          minLength: 1
-          maxLength: 50
-        description:
-          type: string
-          minLength: 1
-          maxLength: 200
-        parent:
-          type: integer
-          nullable: true
-        account_type:
-          allOf:
-          - $ref: '#/components/schemas/AccountTypeEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        departments:
-          type: array
-          items:
-            type: integer
-      required:
-      - code
-      - description
     AccountTypeEnum:
       enum:
       - 0
@@ -350,13 +324,15 @@ components:
                   type: integer
                   example: 10
                 next:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   format: uri
                   example: null
                 previous:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   format: uri
                   example: null
                 page_size:
@@ -380,17 +356,33 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AccountCodeRead'
-    AccountCodeReadSerializerSingleCreate:
+    AccountCodeCreateRequest:
       type: object
       properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/AccountCodeRead'
+        code:
+          type: string
+          minLength: 1
+          maxLength: 50
+        description:
+          type: string
+          minLength: 1
+          maxLength: 200
+        parent:
+          type:
+          - integer
+          - 'null'
+        account_type:
+          allOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        departments:
+          type: array
+          items:
+            type: integer
       required:
-      - data
+      - code
+      - description
     AccountCodeUpdateRequest:
       type: object
       properties:
@@ -408,8 +400,9 @@ components:
           minimum: -2147483648
           maximum: 2147483647
         parent:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
       required:
       - code
       - description

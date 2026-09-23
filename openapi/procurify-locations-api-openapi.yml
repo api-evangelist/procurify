@@ -1,23 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Procurify API Documentation account-codes locations API
-  version: "1.0"
-  description: '
-
-    # Disclaimer
+  title: Procurify API Documentation Locations API
+  version: ''
+  description: '# Disclaimer
 
 
-    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
-
-    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
-
-    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
-
-    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
-
-    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
-
-    '
+    - Procurify’s API is evolving and is subject to change at any time.'
 servers:
 - url: https://{user_domain}.procurify.com
   description: Your Procurify domain
@@ -26,7 +14,7 @@ servers:
       default: your-domain
       description: Your procurify domain
 tags:
-- name: locations
+- name: Locations
 paths:
   /api/v2/locations/:
     get:
@@ -73,7 +61,7 @@ paths:
         schema:
           type: string
       tags:
-      - locations
+      - Locations
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -102,7 +90,7 @@ paths:
           - csv
           - json
       tags:
-      - locations
+      - Locations
       requestBody:
         content:
           application/json:
@@ -154,7 +142,7 @@ paths:
           type: string
         required: true
       tags:
-      - locations
+      - Locations
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -172,6 +160,89 @@ paths:
           description: ''
 components:
   schemas:
+    PaginatedLocationViewList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                previous:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationView'
+    AddressRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 150
+        addressLineOne:
+          type: string
+          minLength: 1
+          title: Address line 1
+          maxLength: 300
+        city:
+          type: string
+          minLength: 1
+          maxLength: 50
+        postalCode:
+          type: string
+          minLength: 1
+          title: Postal Code
+          maxLength: 20
+        state_province:
+          type: string
+          title: State/Province
+          maxLength: 40
+        country:
+          type: string
+          minLength: 1
+          maxLength: 80
+      required:
+      - addressLineOne
+      - city
+      - country
+      - name
+      - postalCode
+    BlankEnum:
+      enum:
+      - ''
     Currency:
       type: object
       properties:
@@ -1525,233 +1596,6 @@ components:
         * `US/Pacific` - US/Pacific
 
         * `UTC` - UTC'
-    BlankEnum:
-      enum:
-      - ''
-    LanguageEnum:
-      enum:
-      - 1
-      type: integer
-      description: '* `1` - English'
-    AddressRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 150
-        addressLineOne:
-          type: string
-          minLength: 1
-          title: Address line 1
-          maxLength: 300
-        city:
-          type: string
-          minLength: 1
-          maxLength: 50
-        postalCode:
-          type: string
-          minLength: 1
-          title: Postal Code
-          maxLength: 20
-        state_province:
-          type: string
-          title: State/Province
-          maxLength: 40
-        country:
-          type: string
-          minLength: 1
-          maxLength: 80
-      required:
-      - addressLineOne
-      - city
-      - country
-      - name
-      - postalCode
-    LocationView:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        url:
-          type: string
-          format: uri
-          nullable: true
-          maxLength: 200
-        logo:
-          type: string
-        currency:
-          $ref: '#/components/schemas/Currency'
-        phoneOne:
-          type: string
-          maxLength: 20
-        fax:
-          type: string
-          nullable: true
-          maxLength: 20
-        email:
-          type: string
-          format: email
-          nullable: true
-          maxLength: 254
-        primary_billing_address:
-          $ref: '#/components/schemas/Address'
-        primary_shipping_address:
-          $ref: '#/components/schemas/Address'
-        shipping_addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
-          readOnly: true
-        language:
-          allOf:
-          - $ref: '#/components/schemas/LanguageEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        locationTimezone:
-          nullable: true
-          oneOf:
-          - $ref: '#/components/schemas/LocationTimezoneEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        headquarter:
-          type: boolean
-          readOnly: true
-        department_count:
-          type: integer
-          readOnly: true
-        active:
-          type: boolean
-        external_id:
-          type: string
-          nullable: true
-          description: External id
-          maxLength: 100
-        legal_entity:
-          allOf:
-          - $ref: '#/components/schemas/LegalEntitySummary'
-          readOnly: true
-          nullable: true
-          type: object
-      required:
-      - currency
-      - name
-      - phoneOne
-      - primary_billing_address
-      - primary_shipping_address
-    LocationCreateUpsertRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 150
-        url:
-          type: string
-          nullable: true
-        logo:
-          type: string
-          nullable: true
-        currency:
-          type: string
-          minLength: 1
-        phoneOne:
-          type: string
-          minLength: 1
-          maxLength: 20
-        fax:
-          type: string
-          nullable: true
-          maxLength: 20
-        email:
-          type: string
-          format: email
-          nullable: true
-          maxLength: 254
-        primary_billing_address:
-          $ref: '#/components/schemas/AddressRequest'
-        primary_shipping_address:
-          $ref: '#/components/schemas/AddressRequest'
-        shipping_addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddressRequest'
-        language:
-          allOf:
-          - $ref: '#/components/schemas/LanguageEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        locationTimezone:
-          nullable: true
-          oneOf:
-          - $ref: '#/components/schemas/LocationTimezoneEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        active:
-          type: boolean
-        external_id:
-          type: string
-          nullable: true
-          description: External id
-          maxLength: 100
-        legal_entity:
-          type: integer
-      required:
-      - currency
-      - name
-      - phoneOne
-      - primary_billing_address
-      - primary_shipping_address
-      - shipping_addresses
-    PaginatedLocationViewList:
-      type: object
-      properties:
-        metadata:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  example: 10
-                next:
-                  type: string
-                  nullable: true
-                  format: uri
-                  example: null
-                previous:
-                  type: string
-                  nullable: true
-                  format: uri
-                  example: null
-                page_size:
-                  type: integer
-                  example: 10
-                num_pages:
-                  type: integer
-                  example: 1
-                current_page:
-                  type: integer
-                  example: 1
-          example:
-            pagination:
-              count: 10
-              next: null
-              previous: null
-              page_size: 10
-              num_pages: 1
-              current_page: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationView'
     LocationViewSerializerSingleRetrieve:
       type: object
       properties:
@@ -1763,22 +1607,6 @@ components:
           $ref: '#/components/schemas/LocationView'
       required:
       - data
-    NullEnum:
-      enum:
-      - null
-    LegalEntitySummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        uuid:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          readOnly: true
     Address:
       type: object
       properties:
@@ -1812,6 +1640,180 @@ components:
       - country
       - name
       - postalCode
+    LocationCreateUpsertRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 150
+        url:
+          type:
+          - string
+          - 'null'
+        logo:
+          type:
+          - string
+          - 'null'
+        currency:
+          type: string
+          minLength: 1
+        phoneOne:
+          type: string
+          minLength: 1
+          maxLength: 20
+        fax:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        primary_billing_address:
+          $ref: '#/components/schemas/AddressRequest'
+        primary_shipping_address:
+          $ref: '#/components/schemas/AddressRequest'
+        shipping_addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressRequest'
+        language:
+          allOf:
+          - $ref: '#/components/schemas/LanguageEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        locationTimezone:
+          oneOf:
+          - $ref: '#/components/schemas/LocationTimezoneEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        active:
+          type: boolean
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        legal_entity:
+          type: integer
+      required:
+      - currency
+      - name
+      - phoneOne
+      - primary_billing_address
+      - primary_shipping_address
+      - shipping_addresses
+    NullEnum:
+      enum:
+      - null
+    LegalEntitySummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+    LocationView:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        logo:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+        phoneOne:
+          type: string
+          maxLength: 20
+        fax:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        primary_billing_address:
+          $ref: '#/components/schemas/Address'
+        primary_shipping_address:
+          $ref: '#/components/schemas/Address'
+        shipping_addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+          readOnly: true
+        language:
+          allOf:
+          - $ref: '#/components/schemas/LanguageEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        locationTimezone:
+          oneOf:
+          - $ref: '#/components/schemas/LocationTimezoneEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        headquarter:
+          type: boolean
+          readOnly: true
+        department_count:
+          type: integer
+          readOnly: true
+        active:
+          type: boolean
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        legal_entity:
+          allOf:
+          - $ref: '#/components/schemas/LegalEntitySummary'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+      required:
+      - currency
+      - name
+      - phoneOne
+      - primary_billing_address
+      - primary_shipping_address
+    LanguageEnum:
+      enum:
+      - 1
+      type: integer
+      description: '* `1` - English'
   securitySchemes:
     BasicAuthentication:
       type: http

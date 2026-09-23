@@ -1,23 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Procurify API Documentation account-codes custom-fields API
-  version: "1.0"
-  description: '
-
-    # Disclaimer
+  title: Procurify API Documentation Custom Fields API
+  version: ''
+  description: '# Disclaimer
 
 
-    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
-
-    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
-
-    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
-
-    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
-
-    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
-
-    '
+    - Procurify’s API is evolving and is subject to change at any time.'
 servers:
 - url: https://{user_domain}.procurify.com
   description: Your Procurify domain
@@ -26,7 +14,7 @@ servers:
       default: your-domain
       description: Your procurify domain
 tags:
-- name: custom-fields
+- name: Custom Fields
 paths:
   /api/v3/custom-fields/{id}/:
     put:
@@ -48,7 +36,7 @@ paths:
         description: A unique integer value identifying this custom field.
         required: true
       tags:
-      - custom-fields
+      - Custom Fields
       requestBody:
         content:
           application/json:
@@ -140,7 +128,7 @@ paths:
         schema:
           type: integer
       tags:
-      - custom-fields
+      - Custom Fields
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -158,6 +146,77 @@ paths:
           description: ''
 components:
   schemas:
+    PaginatedCustomFieldReadList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                previous:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldRead'
+    FieldTypeEnum:
+      enum:
+      - t
+      - a
+      - i
+      - f
+      - b
+      - m
+      - d
+      - h
+      type: string
+      description: '* `t` - Text
+
+        * `a` - Large Text Field
+
+        * `i` - Integer
+
+        * `f` - Floating point decimal
+
+        * `b` - Boolean (Yes/No)
+
+        * `m` - Dropdown Choices
+
+        * `d` - Date
+
+        * `h` - Date Time'
     CustomFieldUpdateRequest:
       type: object
       properties:
@@ -214,32 +273,6 @@ components:
       required:
       - content_type
       - name
-    FieldTypeEnum:
-      enum:
-      - t
-      - a
-      - i
-      - f
-      - b
-      - m
-      - d
-      - h
-      type: string
-      description: '* `t` - Text
-
-        * `a` - Large Text Field
-
-        * `i` - Integer
-
-        * `f` - Floating point decimal
-
-        * `b` - Boolean (Yes/No)
-
-        * `m` - Dropdown Choices
-
-        * `d` - Date
-
-        * `h` - Date Time'
     CustomFieldReadSerializerSingle:
       type: object
       properties:
@@ -251,49 +284,6 @@ components:
           $ref: '#/components/schemas/CustomFieldRead'
       required:
       - data
-    PaginatedCustomFieldReadList:
-      type: object
-      properties:
-        metadata:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  example: 10
-                next:
-                  type: string
-                  nullable: true
-                  format: uri
-                  example: null
-                previous:
-                  type: string
-                  nullable: true
-                  format: uri
-                  example: null
-                page_size:
-                  type: integer
-                  example: 10
-                num_pages:
-                  type: integer
-                  example: 1
-                current_page:
-                  type: integer
-                  example: 1
-          example:
-            pagination:
-              count: 10
-              next: null
-              previous: null
-              page_size: 10
-              num_pages: 1
-              current_page: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomFieldRead'
   securitySchemes:
     BasicAuthentication:
       type: http

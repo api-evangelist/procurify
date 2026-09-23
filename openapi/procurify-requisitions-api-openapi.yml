@@ -1,23 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Procurify API Documentation account-codes requisitions API
-  version: "1.0"
-  description: '
-
-    # Disclaimer
+  title: Procurify API Documentation Requisitions API
+  version: ''
+  description: '# Disclaimer
 
 
-    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
-
-    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
-
-    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
-
-    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
-
-    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
-
-    '
+    - Procurify’s API is evolving and is subject to change at any time.'
 servers:
 - url: https://{user_domain}.procurify.com
   description: Your Procurify domain
@@ -26,7 +14,7 @@ servers:
       default: your-domain
       description: Your procurify domain
 tags:
-- name: requisitions
+- name: Requisitions
 paths:
   /api/v2/global/order_items/:
     get:
@@ -34,27 +22,27 @@ paths:
       description: '**Order Item Status Codes**
 
 
-        | Order Item Type          | Code      | Description                       |
+        | Order Item Type | Code | Description |
 
         |--------------------------|-----------|-----------------------------------|
 
-        | PURCHASE_PENDING         | 0         | Approved but not purchased.       |
+        | PURCHASE_PENDING | 0 | Approved but not purchased. |
 
-        | PURCHASE_INUSE           | 1         | Added to purchaser''s PO list.     |
+        | PURCHASE_INUSE | 1 | Added to purchaser''s PO list. |
 
-        | RECEIVE_PENDING          | 2         | Purchased but not yet received, i.e. receivedPassQty == 0. |
+        | RECEIVE_PENDING | 2 | Purchased but not yet received, i.e. receivedPassQty == 0. |
 
-        | RECEIVED                 | 3         | Fully received, i.e. receivedPassQty == quantity. |
+        | RECEIVED | 3 | Fully received, i.e. receivedPassQty == quantity. |
 
-        | REJECTED_FOR_PURCHASE    | 4         | Rejected at procurement, i.e. denied. |
+        | REJECTED_FOR_PURCHASE | 4 | Rejected at procurement, i.e. denied. |
 
-        | RECEIVE_PARTIAL          | 5         | Partially received, i.e. receivedPassQty != quantity and receivedPassQty > 0. |
+        | RECEIVE_PARTIAL | 5 | Partially received, i.e. receivedPassQty != quantity and receivedPassQty > 0. |
 
-        | FULFILLED                | 6         | Received but unused. |
+        | FULFILLED | 6 | Received but unused. |
 
-        | APPROVAL_DENIED          | 7         | Denied in approval routing (by approver). |
+        | APPROVAL_DENIED | 7 | Denied in approval routing (by approver). |
 
-        | REQUEST_DRAFT            | 8         | Preparing for draft instead of using sessions. |'
+        | REQUEST_DRAFT | 8 | Preparing for draft instead of using sessions. |'
       summary: Get All Order Items
       parameters:
       - in: query
@@ -326,8 +314,9 @@ paths:
       - in: query
         name: status
         schema:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           enum:
           - 0
           - 1
@@ -373,7 +362,7 @@ paths:
         schema:
           type: string
       tags:
-      - requisitions
+      - Requisitions
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -395,23 +384,23 @@ paths:
       description: '**Order Status Codes**
 
 
-        | Order Type          | Code      |
+        | Order Type | Code |
 
         |---------------------|-----------|
 
-        | PENDING             | 0         |
+        | PENDING | 0 |
 
-        | APPROVED            | 1         |
+        | APPROVED | 1 |
 
-        | REJECTED            | 2         |
+        | REJECTED | 2 |
 
-        | PURCHASED           | 3         |
+        | PURCHASED | 3 |
 
-        | CANCELLED (legacy)  | 4         |
+        | CANCELLED (legacy) | 4 |
 
-        | RECEIVED            | 5         |
+        | RECEIVED | 5 |
 
-        | DRAFT               | 6         |'
+        | DRAFT | 6 |'
       summary: Get All Orders
       parameters:
       - in: query
@@ -560,7 +549,7 @@ paths:
         schema:
           type: number
       tags:
-      - requisitions
+      - Requisitions
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -589,7 +578,7 @@ paths:
           - csv
           - json
       tags:
-      - requisitions
+      - Requisitions
       requestBody:
         content:
           application/json:
@@ -625,6 +614,258 @@ paths:
           description: ''
 components:
   schemas:
+    ApprovalWorkflowNextStep:
+      type: object
+      properties:
+        status:
+          type: integer
+        step_number:
+          type: integer
+        group_id:
+          type: integer
+        group_name:
+          type: string
+        options:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+      required:
+      - group_id
+      - group_name
+      - options
+      - status
+      - step_number
+    SimpleUserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        role:
+          allOf:
+          - $ref: '#/components/schemas/MinimalRoleRead'
+          readOnly: true
+        profile_image:
+          type:
+          - string
+          - 'null'
+      required:
+      - email
+    BranchSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+      required:
+      - name
+    OrderRead:
+      type: object
+      properties:
+        num:
+          type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+        branch:
+          $ref: '#/components/schemas/Branch'
+        user:
+          $ref: '#/components/schemas/UserSummary'
+        department:
+          $ref: '#/components/schemas/DepartmentSummary'
+        currency:
+          allOf:
+          - $ref: '#/components/schemas/CurrencySummary'
+          readOnly: true
+        total_cost_in_base_currency:
+          type: number
+          format: float
+          readOnly: true
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/MasterLogger'
+        item_count:
+          type: integer
+          readOnly: true
+        ip_address:
+          type:
+          - string
+          - 'null'
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+        description:
+          type:
+          - string
+          - 'null'
+        dateRequired:
+          type: string
+          format: date-time
+        dateModified:
+          type: string
+          format: date-time
+          readOnly: true
+        lineCount:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+        purchasedCount:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        totalPrice:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,14}(?:\.\d{0,2})?$
+        status:
+          allOf:
+          - $ref: '#/components/schemas/OrderStatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        next_approver:
+          allOf:
+          - $ref: '#/components/schemas/UserSummary'
+          readOnly: true
+        next_approvers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSummary'
+        approval_delegatee:
+          type:
+          - integer
+          - 'null'
+        punchout_group:
+          allOf:
+          - $ref: '#/components/schemas/PunchOutReadDocs'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+        punchout_shipping_address:
+          allOf:
+          - $ref: '#/components/schemas/AddressDocs'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+        punchout_items_rejected:
+          type: boolean
+          readOnly: true
+        punchout_supplier_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        punchout_supplier_icon:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        punchout_vendor_reference:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        punchout_is_retriable:
+          type: boolean
+          readOnly: true
+        punchout_order_purchase_order_id:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        has_blanket_order_items:
+          type: boolean
+          readOnly: true
+        approval_workflow:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalWorkflow'
+          readOnly: true
+        denial_reason:
+          minimum: 0
+          maximum: 4294967295
+          oneOf:
+          - $ref: '#/components/schemas/DenialReasonEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        denial_comment:
+          type:
+          - string
+          - 'null'
+          maxLength: 300
+      required:
+      - branch
+      - dateRequired
+      - department
+      - logs
+      - next_approvers
+      - user
+      - uuid
+    PunchOutReadDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+    DenialReasonEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      type: integer
+      description: '* `1` - Other
+
+        * `2` - Over budget
+
+        * `3` - Unapproved vendor
+
+        * `4` - Duplicate request
+
+        * `5` - Policy violation
+
+        * `6` - Incorrect specs
+
+        * `7` - Per request
+
+        * `8` - Missing information
+
+        * `9` - Incorrect timing
+
+        * `10` - Process not followed'
     PaginatedOrderItemList:
       type: object
       properties:
@@ -638,13 +879,15 @@ components:
                   type: integer
                   example: 10
                 next:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   format: uri
                   example: null
                 previous:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   format: uri
                   example: null
                 page_size:
@@ -679,135 +922,29 @@ components:
           $ref: '#/components/schemas/RequisitionRead'
       required:
       - data
-    OrderItemTypeEnum:
+    SetupStageEnum:
       enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      description: '* `0` - One Time
+      - COMP
+      - DEPT
+      - USER
+      - COA
+      - BDGT
+      - APPR
+      - FIN
+      type: string
+      description: '* `COMP` - Company
 
-        * `1` - Recurring
+        * `DEPT` - Department
 
-        * `2` - Blanket'
-    UserProfileRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        department:
-          allOf:
-          - $ref: '#/components/schemas/SimpleDepartment'
-          nullable: true
-          type: object
-      required:
-      - department
-      - email
-    BranchSummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-      required:
-      - name
-    PaginatedOrderReadList:
-      type: object
-      properties:
-        metadata:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  example: 10
-                next:
-                  type: string
-                  nullable: true
-                  format: uri
-                  example: null
-                previous:
-                  type: string
-                  nullable: true
-                  format: uri
-                  example: null
-                page_size:
-                  type: integer
-                  example: 10
-                num_pages:
-                  type: integer
-                  example: 1
-                current_page:
-                  type: integer
-                  example: 1
-          example:
-            pagination:
-              count: 10
-              next: null
-              previous: null
-              page_size: 10
-              num_pages: 1
-              current_page: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderRead'
-    ApprovalWorkflowCurrentStep:
-      type: object
-      properties:
-        status:
-          type: integer
-        step_number:
-          type: integer
-        group_id:
-          type: integer
-        group_name:
-          type: string
-        approver:
-          $ref: '#/components/schemas/ApprovalWorkflowApproverGroup'
-      required:
-      - approver
-      - group_id
-      - group_name
-      - status
-      - step_number
-    ApprovalWorkflowApproverGroup:
-      type: object
-      properties:
-        approvers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApprovalWorkflowApprover'
-        is_pooled:
-          type: boolean
-        level:
-          type: integer
-        group_id:
-          type: integer
-        group_name:
-          type: string
-      required:
-      - approvers
-      - group_id
-      - group_name
-      - is_pooled
-      - level
+        * `USER` - User
+
+        * `COA` - Chart_of_Accounts
+
+        * `BDGT` - Budget_Control
+
+        * `APPR` - Approver
+
+        * `FIN` - Finished'
     LocationTimezoneEnum:
       enum:
       - Africa/Abidjan
@@ -2127,201 +2264,45 @@ components:
         * `US/Pacific` - US/Pacific
 
         * `UTC` - UTC'
-    LineItemCustomFieldRequest:
-      type: object
-      description: "Serializer used when custom fields are provided in a request. E.g JSON request with:\n\"custom_fields\": [\n    {\n    \"custom_field_name\": \"string\",\n    \"custom_field_value\": \"string\"\n    },\n    ...\n]"
-      properties:
-        custom_field_name:
-          type: string
-          minLength: 1
-        custom_field_value:
-          type: string
-          minLength: 1
-      required:
-      - custom_field_name
-      - custom_field_value
-    RequisitionLineCreateRequest:
+    UserProfileRead:
       type: object
       properties:
-        item_name:
-          type: string
-          minLength: 1
-          maxLength: 255
-        vendor_name:
-          type: string
-          minLength: 1
-        account_code:
-          type: string
-          minLength: 1
-        unit_price:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-        quantity:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-        unit:
-          type: string
-          minLength: 1
-          maxLength: 30
-        currency_code:
-          type: string
-          minLength: 1
-        custom_fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItemCustomFieldRequest'
-      required:
-      - account_code
-      - currency_code
-      - custom_fields
-      - item_name
-      - quantity
-      - unit
-      - unit_price
-      - vendor_name
-    BlankEnum:
-      enum:
-      - ''
-    OrderRead:
-      type: object
-      properties:
-        num:
+        id:
           type: integer
           readOnly: true
-        uuid:
+        firstName:
           type: string
-          format: uuid
-        branch:
-          $ref: '#/components/schemas/Branch'
-        user:
-          $ref: '#/components/schemas/UserSummary'
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
         department:
-          $ref: '#/components/schemas/DepartmentSummary'
-        currency:
           allOf:
-          - $ref: '#/components/schemas/CurrencySummary'
-          readOnly: true
-        total_cost_in_base_currency:
-          type: number
-          format: float
-          readOnly: true
-        logs:
-          type: array
-          items:
-            $ref: '#/components/schemas/MasterLogger'
-        item_count:
-          type: integer
-          readOnly: true
-        ip_address:
-          type: string
-          nullable: true
-        date:
-          type: string
-          format: date-time
-          readOnly: true
-        description:
-          type: string
-          nullable: true
-        dateRequired:
-          type: string
-          format: date-time
-        dateModified:
-          type: string
-          format: date-time
-          readOnly: true
-        lineCount:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-          nullable: true
-        purchasedCount:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        totalPrice:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,14}(?:\.\d{0,2})?$
-          nullable: true
-        status:
-          allOf:
-          - $ref: '#/components/schemas/OrderStatusEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        next_approver:
-          allOf:
-          - $ref: '#/components/schemas/UserSummary'
-          readOnly: true
-        next_approvers:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSummary'
-        approval_delegatee:
-          type: integer
-          nullable: true
-        punchout_group:
-          allOf:
-          - $ref: '#/components/schemas/PunchOutReadDocs'
-          nullable: true
-          readOnly: true
-          type: object
-        punchout_shipping_address:
-          allOf:
-          - $ref: '#/components/schemas/AddressDocs'
-          nullable: true
-          readOnly: true
-          type: object
-        punchout_items_rejected:
-          type: boolean
-          readOnly: true
-        punchout_supplier_name:
-          type: string
-          readOnly: true
-          nullable: true
-        punchout_supplier_icon:
-          type: string
-          readOnly: true
-          nullable: true
-        punchout_vendor_reference:
-          type: integer
-          nullable: true
-          readOnly: true
-        punchout_is_retriable:
-          type: boolean
-          readOnly: true
-        punchout_order_purchase_order_id:
-          type: integer
-          readOnly: true
-          nullable: true
-        has_blanket_order_items:
-          type: boolean
-          readOnly: true
-        approval_workflow:
-          allOf:
-          - $ref: '#/components/schemas/ApprovalWorkflow'
-          readOnly: true
-        denial_reason:
-          nullable: true
-          minimum: 0
-          maximum: 4294967295
-          oneOf:
-          - $ref: '#/components/schemas/DenialReasonEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        denial_comment:
-          type: string
-          nullable: true
-          maxLength: 300
+          - $ref: '#/components/schemas/SimpleDepartment'
+          type:
+          - object
+          - 'null'
       required:
-      - branch
-      - dateRequired
       - department
-      - logs
-      - next_approvers
-      - user
-      - uuid
+      - email
+    SimpleLocation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        headquarter:
+          type: boolean
+          readOnly: true
+      required:
+      - name
     OrderItem:
       type: object
       properties:
@@ -2342,39 +2323,46 @@ components:
         active:
           type: boolean
         approved_currency_rate:
-          type: string
+          type:
+          - string
+          - 'null'
           format: decimal
           pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-          nullable: true
         approved_datetime:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         approved_price:
-          type: string
+          type:
+          - string
+          - 'null'
           format: decimal
           pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
         approved_quantity:
-          type: string
+          type:
+          - string
+          - 'null'
           format: decimal
           pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-          nullable: true
         approved_shipping_amount:
-          type: string
+          type:
+          - string
+          - 'null'
           format: decimal
           pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
         approved_tax_amount:
-          type: string
+          type:
+          - string
+          - 'null'
           format: decimal
           pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
         attachments:
           type: string
         catalog_item:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         created_at:
           type: string
           format: date-time
@@ -2382,9 +2370,10 @@ components:
         currency:
           type: integer
         dateInvoiced:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         external_id:
           type: string
           description: External id of the order item
@@ -2395,8 +2384,9 @@ components:
           type: integer
           readOnly: true
         inventoryItem:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         is_active:
           type: boolean
         item_attachments:
@@ -2404,16 +2394,18 @@ components:
           items:
             type: integer
         last_changed_by:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           title: Last changed by user
         last_modified:
           type: string
           format: date-time
           readOnly: true
         lineComment:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         name:
           type: string
           maxLength: 255
@@ -2421,12 +2413,14 @@ components:
           type: string
           maxLength: 50
         orderNum:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         order_number:
-          type: integer
+          type:
+          - integer
+          - 'null'
           readOnly: true
-          nullable: true
         po_note:
           type: string
           title: Comment
@@ -2441,12 +2435,14 @@ components:
           format: decimal
           pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
         purchase_order:
-          type: integer
+          type:
+          - integer
+          - 'null'
           title: Procurify PO Number
-          nullable: true
         purchaser:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         quantity:
           type: string
           format: decimal
@@ -2462,26 +2458,29 @@ components:
           pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
           title: Received Pass Quantity
         shipping_amount:
-          type: string
+          type:
+          - string
+          - 'null'
           format: decimal
           pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
         sku:
           type: string
           maxLength: 100
         status:
-          nullable: true
           minimum: -2147483648
           maximum: 2147483647
           oneOf:
           - $ref: '#/components/schemas/OrderItemStatusEnum'
           - $ref: '#/components/schemas/NullEnum'
-          type: integer
+          type:
+          - integer
+          - 'null'
         tax_amount:
-          type: string
+          type:
+          - string
+          - 'null'
           format: decimal
           pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-          nullable: true
         total_cost:
           type: string
           format: decimal
@@ -2494,8 +2493,9 @@ components:
           format: date-time
           readOnly: true
         vendor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 100
         receive_method:
           allOf:
@@ -2521,54 +2521,6 @@ components:
       - price
       - quantity
       - unit
-    AddressDocs:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-      required:
-      - id
-      - name
-    LanguageEnum:
-      enum:
-      - 1
-      type: integer
-      description: '* `1` - English'
-    SetupStageEnum:
-      enum:
-      - COMP
-      - DEPT
-      - USER
-      - COA
-      - BDGT
-      - APPR
-      - FIN
-      type: string
-      description: '* `COMP` - Company
-
-        * `DEPT` - Department
-
-        * `USER` - User
-
-        * `COA` - Chart_of_Accounts
-
-        * `BDGT` - Budget_Control
-
-        * `APPR` - Approver
-
-        * `FIN` - Finished'
-    PunchOutReadDocs:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-      required:
-      - id
-      - name
     OrderStatusEnum:
       enum:
       - 0
@@ -2592,6 +2544,67 @@ components:
         * `5` - Received
 
         * `6` - Draft'
+    LanguageEnum:
+      enum:
+      - 1
+      type: integer
+      description: '* `1` - English'
+    RequisitionCreateRequest:
+      type: object
+      properties:
+        required_date:
+          type: string
+          format: date
+        location_name:
+          type: string
+          minLength: 1
+        department_name:
+          type: string
+          minLength: 1
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequisitionLineCreateRequest'
+      required:
+      - department_name
+      - line_items
+      - location_name
+      - required_date
+    BlankEnum:
+      enum:
+      - ''
+    OrderItemTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: '* `0` - One Time
+
+        * `1` - Recurring
+
+        * `2` - Blanket'
+    ApprovalWorkflowApproverGroup:
+      type: object
+      properties:
+        approvers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApprovalWorkflowApprover'
+        is_pooled:
+          type: boolean
+        level:
+          type: integer
+        group_id:
+          type: integer
+        group_name:
+          type: string
+      required:
+      - approvers
+      - group_id
+      - group_name
+      - is_pooled
+      - level
     ActionEnum:
       enum:
       - 0
@@ -2657,32 +2670,124 @@ components:
         * `19` - OrderPurchased
 
         * `20` - RecordPO'
-    SimpleUserProfile:
+    RequisitionLineCreateRequest:
+      type: object
+      properties:
+        item_name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        vendor_name:
+          type: string
+          minLength: 1
+        account_code:
+          type: string
+          minLength: 1
+        unit_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        unit:
+          type: string
+          minLength: 1
+          maxLength: 30
+        currency_code:
+          type: string
+          minLength: 1
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItemCustomFieldRequest'
+      required:
+      - account_code
+      - currency_code
+      - custom_fields
+      - item_name
+      - quantity
+      - unit
+      - unit_price
+      - vendor_name
+    RequisitionRead:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          readOnly: true
+    ReceiveMethodEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - Quantity
+
+        * `1` - Currency amount'
+    BlanketOrderItemRead:
+      type: object
+      properties:
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        quantity:
+          type:
+          - number
+          - 'null'
+          format: double
+          readOnly: true
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+          readOnly: true
+      required:
+      - price
+    ApprovalWorkflowApprover:
       type: object
       properties:
         id:
           type: integer
-          readOnly: true
         firstName:
           type: string
-          maxLength: 100
         lastName:
           type: string
-          maxLength: 100
         email:
           type: string
           format: email
-          maxLength: 254
-        role:
-          allOf:
-          - $ref: '#/components/schemas/MinimalRoleRead'
-          readOnly: true
         profile_image:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
+        approval_delegatee:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalDelegatee'
+          type:
+          - object
+          - 'null'
       required:
       - email
-    SimpleDepartment:
+      - firstName
+      - id
+      - lastName
+    LineItemCustomFieldRequest:
+      type: object
+      description: "Serializer used when custom fields are provided in a request. E.g JSON request with:\n\"custom_fields\": [\n    {\n    \"custom_field_name\": \"string\",\n    \"custom_field_value\": \"string\"\n    },\n    ...\n]"
+      properties:
+        custom_field_name:
+          type: string
+          minLength: 1
+        custom_field_value:
+          type: string
+          minLength: 1
+      required:
+      - custom_field_name
+      - custom_field_value
+    CurrencySummary:
       type: object
       properties:
         id:
@@ -2690,21 +2795,26 @@ components:
           readOnly: true
         name:
           type: string
-          maxLength: 150
-        location:
-          $ref: '#/components/schemas/SimpleLocation'
+          maxLength: 10
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        base:
+          type: boolean
       required:
-      - location
       - name
+      - rate
     ApprovalDelegationRead:
       type: object
       properties:
         approval_delegatee:
           $ref: '#/components/schemas/UserProfileRead'
         expected_return_date:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date
-          nullable: true
         delegator:
           $ref: '#/components/schemas/SimpleUserProfile'
         setter:
@@ -2713,6 +2823,17 @@ components:
       - approval_delegatee
       - delegator
       - setter
+    MinimalRoleRead:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        type:
+          type: integer
+      required:
+      - name
+      - type
     ApprovalDelegateeDocs:
       type: object
       properties:
@@ -2720,8 +2841,9 @@ components:
           type: integer
           readOnly: true
         department:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         firstName:
           type: string
           maxLength: 100
@@ -2734,6 +2856,61 @@ components:
           maxLength: 254
       required:
       - email
+    ApprovalWorkflow:
+      type: object
+      properties:
+        is_complete:
+          type: boolean
+        updated_at:
+          type: string
+          format: date-time
+        can_self_approve:
+          type: boolean
+        can_peer_review:
+          type: boolean
+        current_step:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalWorkflowCurrentStep'
+          type:
+          - object
+          - 'null'
+        next_step:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalWorkflowNextStep'
+          type:
+          - object
+          - 'null'
+      required:
+      - can_peer_review
+      - can_self_approve
+      - current_step
+      - is_complete
+      - next_step
+      - updated_at
+    NullEnum:
+      enum:
+      - null
+    ApprovalDelegatee:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        profile_image:
+          type:
+          - string
+          - 'null'
+      required:
+      - email
+      - firstName
+      - id
+      - lastName
     Branch:
       type: object
       properties:
@@ -2741,17 +2918,19 @@ components:
           type: integer
           readOnly: true
         external_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: External id
           maxLength: 100
         name:
           type: string
           maxLength: 150
         url:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uri
-          nullable: true
           maxLength: 200
         logo:
           type: string
@@ -2763,12 +2942,13 @@ components:
         multipleLocations:
           type: boolean
         locationTimezone:
-          nullable: true
           oneOf:
           - $ref: '#/components/schemas/LocationTimezoneEnum'
           - $ref: '#/components/schemas/BlankEnum'
           - $ref: '#/components/schemas/NullEnum'
-          type: integer
+          type:
+          - integer
+          - 'null'
         userLimit:
           type: integer
           maximum: 4294967295
@@ -2788,41 +2968,48 @@ components:
           type: string
           maxLength: 20
         phoneTwo:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 20
         fax:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           maxLength: 20
         email:
-          type: string
+          type:
+          - string
+          - 'null'
           format: email
-          nullable: true
           maxLength: 254
         fiscalYearEndDay:
-          type: integer
+          type:
+          - integer
+          - 'null'
           maximum: 4294967295
           minimum: 0
           format: int64
-          nullable: true
         fiscalYearEndMonth:
-          type: integer
+          type:
+          - integer
+          - 'null'
           maximum: 4294967295
           minimum: 0
           format: int64
-          nullable: true
         beginDate:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
           readOnly: true
-          nullable: true
         ported:
           type: boolean
         port_date:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         active:
           type: boolean
         activated:
@@ -2832,113 +3019,210 @@ components:
         localCurrency:
           type: integer
         contactPerson:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         buyerAddress:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         shippingAddress:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
       required:
       - localCurrency
       - name
       - phoneOne
-    RequisitionCreateRequest:
-      type: object
-      properties:
-        required_date:
-          type: string
-          format: date
-        location_name:
-          type: string
-          minLength: 1
-        department_name:
-          type: string
-          minLength: 1
-        line_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequisitionLineCreateRequest'
-      required:
-      - department_name
-      - line_items
-      - location_name
-      - required_date
-    ApprovalWorkflow:
-      type: object
-      properties:
-        is_complete:
-          type: boolean
-        updated_at:
-          type: string
-          format: date-time
-        can_self_approve:
-          type: boolean
-        can_peer_review:
-          type: boolean
-        current_step:
-          allOf:
-          - $ref: '#/components/schemas/ApprovalWorkflowCurrentStep'
-          nullable: true
-          type: object
-        next_step:
-          allOf:
-          - $ref: '#/components/schemas/ApprovalWorkflowNextStep'
-          nullable: true
-          type: object
-      required:
-      - can_peer_review
-      - can_self_approve
-      - current_step
-      - is_complete
-      - next_step
-      - updated_at
-    ApprovalDelegatee:
+    UserSummary:
       type: object
       properties:
         id:
           type: integer
+          readOnly: true
+        department:
+          $ref: '#/components/schemas/DepartmentSummary'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
         firstName:
           type: string
+          maxLength: 100
         lastName:
           type: string
+          maxLength: 100
         email:
           type: string
           format: email
+          maxLength: 254
+        position:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        phone:
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+        address:
+          type:
+          - string
+          - 'null'
+        notifications:
+          type: boolean
+        is_active:
+          type: boolean
+        mobile:
+          type: boolean
         profile_image:
+          type:
+          - string
+          - 'null'
+        slack_user_id:
           type: string
-          nullable: true
+          maxLength: 50
+        is_sso_enabled:
+          type: boolean
+        last_changed_by:
+          type:
+          - integer
+          - 'null'
+          title: Last changed by user
+        user:
+          type: integer
+        approval_delegatee:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalDelegateeDocs'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+        expected_return_date:
+          type: string
+          format: date
+          readOnly: true
       required:
+      - department
       - email
-      - firstName
-      - id
-      - lastName
-    ApprovalWorkflowNextStep:
+      - user
+    MasterLogger:
       type: object
       properties:
-        status:
+        id:
           type: integer
-        step_number:
-          type: integer
-        group_id:
-          type: integer
-        group_name:
-          type: string
-        options:
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/UserSummary'
+        next_approver:
+          $ref: '#/components/schemas/UserSummary'
+        next_approvers:
           type: array
           items:
-            type: object
-            additionalProperties: {}
+            type: integer
+        nextApprover:
+          $ref: '#/components/schemas/UserSummary'
+        approval_delegation:
+          allOf:
+          - $ref: '#/components/schemas/ApprovalDelegationRead'
+          type:
+          - object
+          - 'null'
+        dateTime:
+          type: string
+          format: date-time
+          readOnly: true
+        action:
+          minimum: -2147483648
+          maximum: 2147483647
+          oneOf:
+          - $ref: '#/components/schemas/ActionEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        line_qty_pass:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        line_qty_fail:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        order:
+          type:
+          - integer
+          - 'null'
+        lineItem:
+          type:
+          - integer
+          - 'null'
+        PO:
+          type:
+          - integer
+          - 'null'
+          title: Procurify PO Number
+        inventoryItem:
+          type:
+          - integer
+          - 'null'
+        stocking_parent:
+          type:
+          - integer
+          - 'null'
       required:
-      - group_id
-      - group_name
-      - options
-      - status
-      - step_number
-    NullEnum:
-      enum:
-      - null
+      - approval_delegation
+      - nextApprover
+      - next_approver
+      - user
+    AddressDocs:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+    DepartmentSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        branch:
+          $ref: '#/components/schemas/BranchSummary'
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        punchout_email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: PunchOut Email
+          maxLength: 254
+        active:
+          type: boolean
+      required:
+      - branch
+      - name
     OrderItemStatusEnum:
       enum:
       - 0
@@ -2968,302 +3252,84 @@ components:
         * `7` - Approval Denied
 
         * `8` - Request Draft'
-    ReceiveMethodEnum:
-      enum:
-      - 0
-      - 1
-      type: integer
-      description: '* `0` - Quantity
-
-        * `1` - Currency amount'
-    DepartmentSummary:
+    PaginatedOrderReadList:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
-        branch:
-          $ref: '#/components/schemas/BranchSummary'
-        external_id:
-          type: string
-          nullable: true
-          description: External id
-          maxLength: 100
-        name:
-          type: string
-          maxLength: 150
-        punchout_email:
-          type: string
-          format: email
-          nullable: true
-          description: PunchOut Email
-          maxLength: 254
-        active:
-          type: boolean
-      required:
-      - branch
-      - name
-    MinimalRoleRead:
-      type: object
-      properties:
-        name:
-          type: string
-          maxLength: 150
-        type:
-          type: integer
-      required:
-      - name
-      - type
-    DenialReasonEnum:
-      enum:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      - 9
-      - 10
-      type: integer
-      description: '* `1` - Other
-
-        * `2` - Over budget
-
-        * `3` - Unapproved vendor
-
-        * `4` - Duplicate request
-
-        * `5` - Policy violation
-
-        * `6` - Incorrect specs
-
-        * `7` - Per request
-
-        * `8` - Missing information
-
-        * `9` - Incorrect timing
-
-        * `10` - Process not followed'
-    BlanketOrderItemRead:
-      type: object
-      properties:
-        price:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-        quantity:
-          type: number
-          format: double
-          nullable: true
-          readOnly: true
-        amount:
-          type: number
-          format: double
-          nullable: true
-          readOnly: true
-      required:
-      - price
-    ApprovalWorkflowApprover:
-      type: object
-      properties:
-        id:
-          type: integer
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        profile_image:
-          type: string
-          nullable: true
-        approval_delegatee:
-          allOf:
-          - $ref: '#/components/schemas/ApprovalDelegatee'
-          nullable: true
+        metadata:
           type: object
-      required:
-      - email
-      - firstName
-      - id
-      - lastName
-    RequisitionRead:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-          readOnly: true
-    SimpleLocation:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        headquarter:
-          type: boolean
-          readOnly: true
-      required:
-      - name
-    CurrencySummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 10
-        rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-        base:
-          type: boolean
-      required:
-      - name
-      - rate
-    MasterLogger:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        user:
-          $ref: '#/components/schemas/UserSummary'
-        next_approver:
-          $ref: '#/components/schemas/UserSummary'
-        next_approvers:
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                previous:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
           type: array
           items:
-            type: integer
-        nextApprover:
-          $ref: '#/components/schemas/UserSummary'
-        approval_delegation:
-          allOf:
-          - $ref: '#/components/schemas/ApprovalDelegationRead'
-          nullable: true
-          type: object
-        dateTime:
-          type: string
-          format: date-time
-          readOnly: true
-        action:
-          nullable: true
-          minimum: -2147483648
-          maximum: 2147483647
-          oneOf:
-          - $ref: '#/components/schemas/ActionEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type: integer
-        line_qty_pass:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-          nullable: true
-        line_qty_fail:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-          nullable: true
-        order:
-          type: integer
-          nullable: true
-        lineItem:
-          type: integer
-          nullable: true
-        PO:
-          type: integer
-          title: Procurify PO Number
-          nullable: true
-        inventoryItem:
-          type: integer
-          nullable: true
-        stocking_parent:
-          type: integer
-          nullable: true
-      required:
-      - approval_delegation
-      - nextApprover
-      - next_approver
-      - user
-    UserSummary:
+            $ref: '#/components/schemas/OrderRead'
+    SimpleDepartment:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        department:
-          $ref: '#/components/schemas/DepartmentSummary'
-        created_at:
+        name:
           type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        position:
-          type: string
-          nullable: true
-          maxLength: 100
-        phone:
-          type: string
-          nullable: true
-          maxLength: 30
-        address:
-          type: string
-          nullable: true
-        notifications:
-          type: boolean
-        is_active:
-          type: boolean
-        mobile:
-          type: boolean
-        profile_image:
-          type: string
-          nullable: true
-        slack_user_id:
-          type: string
-          maxLength: 50
-        is_sso_enabled:
-          type: boolean
-        last_changed_by:
-          type: integer
-          nullable: true
-          title: Last changed by user
-        user:
-          type: integer
-        approval_delegatee:
-          allOf:
-          - $ref: '#/components/schemas/ApprovalDelegateeDocs'
-          nullable: true
-          readOnly: true
-          type: object
-        expected_return_date:
-          type: string
-          format: date
-          readOnly: true
+          maxLength: 150
+        location:
+          $ref: '#/components/schemas/SimpleLocation'
       required:
-      - department
-      - email
-      - user
+      - location
+      - name
+    ApprovalWorkflowCurrentStep:
+      type: object
+      properties:
+        status:
+          type: integer
+        step_number:
+          type: integer
+        group_id:
+          type: integer
+        group_name:
+          type: string
+        approver:
+          $ref: '#/components/schemas/ApprovalWorkflowApproverGroup'
+      required:
+      - approver
+      - group_id
+      - group_name
+      - status
+      - step_number
   securitySchemes:
     BasicAuthentication:
       type: http

@@ -1,23 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Procurify API Documentation account-codes departments API
-  version: "1.0"
-  description: '
-
-    # Disclaimer
+  title: Procurify API Documentation Departments API
+  version: ''
+  description: '# Disclaimer
 
 
-    - Procurify’s API is evolving and is subject to change at any time. Additionally, aspects of the API are undocumented, including certain methods, events, and properties. Given that both documented and undocumented aspects of the Procurify API may change at any time, the client relies on the API at their own risk.
-
-    - Client (and/or client’s representative) is responsible for building, testing, and maintaining any API connection between Procurify and any other tool.  Procurify’s responsibility strictly involves providing support on clarifications in regards to the issued API document.
-
-    - Procurify’s API is offered on an “as is” and “as available” basis, without warranties of any kind. By accepting this agreement, you agree that you have read the current API documentation, and accept the API functionality in its current state including current limitations. For questions and clarification around the documentation, please contact support@procurify.com.
-
-    - In accordance with Section 2.(b) of our Subscription Services Agreement, Procurify reserves the right to deny access to our API at any time. If your API requests are too large and time out, contact us immediately to avoid possible suspension of access.
-
-    - You may not attempt to reverse engineer or otherwise derive source code, trade secrets, or know-how in the Procurify API or portion thereof. You may not use the Procurify API to replicate or compete with core products or services offered by Procurify.
-
-    '
+    - Procurify’s API is evolving and is subject to change at any time.'
 servers:
 - url: https://{user_domain}.procurify.com
   description: Your Procurify domain
@@ -26,7 +14,7 @@ servers:
       default: your-domain
       description: Your procurify domain
 tags:
-- name: departments
+- name: Departments
 paths:
   /api/v3/departments/:
     get:
@@ -103,7 +91,7 @@ paths:
           type: integer
         description: Filter by user. If this parameter is set, the user must be a superuser or have the add_po_by_department or receive_po_by_department permissions. In isolation, this parameter should only be used in conjunction with the PROCUREMENT_ACCESS and/or RECEIVE_BY_DEPARTMENT feature switches. If used in conjunction with location_perm_override=true and permission query parameter, the result returned will be departments filtered by the provided user and permission values. If used in conjunction with the RECEIVE_BY_DEPARTMENT feature flag, the result will be departments filtered by the user provided and the permission set to 68 (add purchase order); 841 (view report); or 899 (receive purchase order) (see permission query parameter explanation for more information on what these stand for).
       tags:
-      - departments
+      - Departments
       security:
       - RemoteAuthentication: []
       - M2MAuthentication: []
@@ -132,7 +120,7 @@ paths:
           - csv
           - json
       tags:
-      - departments
+      - Departments
       requestBody:
         content:
           application/json:
@@ -186,7 +174,7 @@ paths:
         description: A unique integer value identifying this department.
         required: true
       tags:
-      - departments
+      - Departments
       requestBody:
         content:
           application/json:
@@ -222,6 +210,53 @@ paths:
           description: ''
 components:
   schemas:
+    DepartmentReadSerializerSingleCreate:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/DepartmentRead'
+      required:
+      - data
+    DepartmentUpsertRequest:
+      type: object
+      properties:
+        branch:
+          type: integer
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          minLength: 1
+          maxLength: 150
+        active:
+          type: boolean
+        punchout_email:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      required:
+      - branch
+      - name
+    DepartmentReadSerializerSingleUpdate:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/DepartmentRead'
+      required:
+      - data
     PaginatedDepartmentReadList:
       type: object
       properties:
@@ -235,13 +270,15 @@ components:
                   type: integer
                   example: 10
                 next:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   format: uri
                   example: null
                 previous:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   format: uri
                   example: null
                 page_size:
@@ -274,8 +311,9 @@ components:
         branch:
           $ref: '#/components/schemas/LocationSimple'
         external_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: External id
           maxLength: 100
         name:
@@ -284,8 +322,9 @@ components:
         active:
           type: boolean
         punchout_email:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         is_active_for_account_code:
           type: boolean
           readOnly: true
@@ -306,51 +345,6 @@ components:
           readOnly: true
       required:
       - name
-    DepartmentReadSerializerSingleUpdate:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/DepartmentRead'
-      required:
-      - data
-    DepartmentUpsertRequest:
-      type: object
-      properties:
-        branch:
-          type: integer
-        external_id:
-          type: string
-          nullable: true
-          description: External id
-          maxLength: 100
-        name:
-          type: string
-          minLength: 1
-          maxLength: 150
-        active:
-          type: boolean
-        punchout_email:
-          type: string
-          nullable: true
-          minLength: 1
-      required:
-      - branch
-      - name
-    DepartmentReadSerializerSingleCreate:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/DepartmentRead'
-      required:
-      - data
   securitySchemes:
     BasicAuthentication:
       type: http
