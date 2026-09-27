@@ -22,9 +22,7 @@
     "procurify-users-api-openapi.yml",
     "procurify-vendors-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [
     "procurify-procurify-api-openapi.yml: info.version missing"
@@ -34,8 +32,7 @@
     "procurify-procurify-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "procurify-procurify-api-openapi.yml: declared missing tag: public",
     "procurify-procurify-api-openapi.yml: declared missing tag: receipt",
-    "superseded outputs removed: procurify-o-auth-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 17 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "procurify-account-codes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -46,7 +43,7 @@
     "procurify-custom-fields-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "procurify-departments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "procurify-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "procurify-o-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "procurify-oauth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "procurify-order-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "procurify-permissions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "procurify-public-api-openapi.yml: previously refined output, superseded by openapi/_original/",

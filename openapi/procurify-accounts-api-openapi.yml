@@ -106,6 +106,35 @@ paths:
           description: ''
 components:
   schemas:
+    DepartmentRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        branch:
+          $ref: '#/components/schemas/LocationSimple'
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        active:
+          type: boolean
+        punchout_email:
+          type:
+          - string
+          - 'null'
+        is_active_for_account_code:
+          type: boolean
+          readOnly: true
+      required:
+      - branch
+      - name
     ChartOfAccountsAccount:
       type: object
       properties:
@@ -151,6 +180,20 @@ components:
       required:
       - account_code
       - department
+    LocationSimple:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        headquarter:
+          type: boolean
+          readOnly: true
+      required:
+      - name
     AccountCodeRead:
       type: object
       properties:
@@ -184,35 +227,6 @@ components:
       required:
       - code
       - description
-    DepartmentRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        branch:
-          $ref: '#/components/schemas/LocationSimple'
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: External id
-          maxLength: 100
-        name:
-          type: string
-          maxLength: 150
-        active:
-          type: boolean
-        punchout_email:
-          type:
-          - string
-          - 'null'
-        is_active_for_account_code:
-          type: boolean
-          readOnly: true
-      required:
-      - branch
-      - name
     AccountTypeEnum:
       enum:
       - 0
@@ -233,20 +247,6 @@ components:
         * `4` - Equity
 
         * `5` - Other'
-    LocationSimple:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        headquarter:
-          type: boolean
-          readOnly: true
-      required:
-      - name
     PaginatedChartOfAccountsAccountList:
       type: object
       properties:

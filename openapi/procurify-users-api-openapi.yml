@@ -424,110 +424,6 @@ paths:
           description: ''
 components:
   schemas:
-    InviteFunctionalUserRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          minLength: 1
-        send_invitation_email:
-          type: boolean
-          default: true
-        first_name:
-          type: string
-          default: ''
-        last_name:
-          type: string
-          default: ''
-        phone:
-          type: string
-          default: ''
-        position:
-          type: string
-          default: ''
-        role_id:
-          type: integer
-          minimum: 0
-          default: 0
-        all_locations:
-          type: boolean
-          default: false
-        locations:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationIdValidationSerializersRequest'
-          default: []
-        home_department:
-          type: integer
-          minimum: 0
-          default: 0
-        home_location:
-          type: integer
-          minimum: 0
-          default: 0
-      required:
-      - email
-    SimpleUserProfile:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        role:
-          allOf:
-          - $ref: '#/components/schemas/MinimalRoleRead'
-          readOnly: true
-        profile_image:
-          type:
-          - string
-          - 'null'
-      required:
-      - email
-    UserProfileUnoptimizedSerializerSingle:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/UserProfileUnoptimized'
-      required:
-      - data
-    Currency:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 10
-        description:
-          type: string
-          maxLength: 100
-        rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-        base:
-          type: boolean
-        active:
-          type: boolean
-      required:
-      - name
-      - rate
     DomainSwitching:
       type: object
       properties:
@@ -540,6 +436,113 @@ components:
       required:
       - active
       - procurify_domains
+    SimpleRoleRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        type:
+          type: integer
+      required:
+      - name
+      - type
+    LocationView:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        logo:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+        phoneOne:
+          type: string
+          maxLength: 20
+        fax:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        primary_billing_address:
+          $ref: '#/components/schemas/Address'
+        primary_shipping_address:
+          $ref: '#/components/schemas/Address'
+        shipping_addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+          readOnly: true
+        language:
+          allOf:
+          - $ref: '#/components/schemas/LanguageEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        locationTimezone:
+          oneOf:
+          - $ref: '#/components/schemas/LocationTimezoneEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+          type:
+          - integer
+          - 'null'
+        headquarter:
+          type: boolean
+          readOnly: true
+        department_count:
+          type: integer
+          readOnly: true
+        active:
+          type: boolean
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        legal_entity:
+          allOf:
+          - $ref: '#/components/schemas/LegalEntitySummary'
+          readOnly: true
+          type:
+          - object
+          - 'null'
+      required:
+      - currency
+      - name
+      - phoneOne
+      - primary_billing_address
+      - primary_shipping_address
+    MinimalRoleRead:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        type:
+          type: integer
+      required:
+      - name
+      - type
     RoleEnum:
       enum:
       - 0
@@ -575,37 +578,60 @@ components:
         * `9` - FNG Approver
 
         * `10` - FNG Controller'
-    ProcurifyDomain:
+    UserProfileMeSerializerSingle:
       type: object
       properties:
-        subdomain:
-          type: string
-          maxLength: 200
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/UserProfileMe'
+      required:
+      - data
+    SimpleLocation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
         name:
           type: string
-          maxLength: 300
+          maxLength: 150
+        headquarter:
+          type: boolean
+          readOnly: true
       required:
       - name
-      - subdomain
-    PendingApprovalsCountDocs:
+    SimpleUserProfile:
       type: object
       properties:
-        order:
+        id:
           type: integer
-        expense:
-          type: integer
-        travel:
-          type: integer
-        bill:
-          type: integer
-        payment:
-          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        role:
+          allOf:
+          - $ref: '#/components/schemas/MinimalRoleRead'
+          readOnly: true
+        profile_image:
+          type:
+          - string
+          - 'null'
       required:
-      - bill
-      - expense
-      - order
-      - payment
-      - travel
+      - email
+    NullEnum:
+      enum:
+      - null
     LocationTimezoneEnum:
       enum:
       - Africa/Abidjan
@@ -1925,6 +1951,71 @@ components:
         * `US/Pacific` - US/Pacific
 
         * `UTC` - UTC'
+    UserProfileUpsertRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+        user:
+          type: integer
+        email:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 254
+        firstName:
+          type: string
+          minLength: 1
+        lastName:
+          type: string
+          minLength: 1
+        location:
+          type:
+          - integer
+          - 'null'
+        department:
+          type:
+          - integer
+          - 'null'
+        position:
+          type: string
+          default: ''
+        phone:
+          type: string
+          default: ''
+        profile_image:
+          type:
+          - string
+          - 'null'
+        is_sso_enabled:
+          type: boolean
+          default: false
+        mark_for_skip:
+          type: boolean
+          default: false
+        mark_for_delete:
+          type: boolean
+          default: false
+      required:
+      - department
+      - email
+      - firstName
+      - lastName
+      - location
+    SimpleDepartment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        location:
+          $ref: '#/components/schemas/SimpleLocation'
+      required:
+      - location
+      - name
     Address:
       type: object
       properties:
@@ -1958,116 +2049,136 @@ components:
       - country
       - name
       - postalCode
-    SimpleLocation:
+    LegalEntitySummary:
       type: object
       properties:
         id:
           type: integer
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
-          maxLength: 150
-        headquarter:
-          type: boolean
           readOnly: true
+    PendingApprovalsCountDocs:
+      type: object
+      properties:
+        order:
+          type: integer
+        expense:
+          type: integer
+        travel:
+          type: integer
+        bill:
+          type: integer
+        payment:
+          type: integer
+      required:
+      - bill
+      - expense
+      - order
+      - payment
+      - travel
+    ProcurifyDomain:
+      type: object
+      properties:
+        subdomain:
+          type: string
+          maxLength: 200
+        name:
+          type: string
+          maxLength: 300
       required:
       - name
-    DepartmentLocationRead:
+      - subdomain
+    UserProfileUnoptimized:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        branch:
-          $ref: '#/components/schemas/LocationView'
-        external_id:
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        user:
+          type: integer
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        department:
+          allOf:
+          - $ref: '#/components/schemas/SimpleDepartment'
+          type:
+          - object
+          - 'null'
+        location:
+          allOf:
+          - $ref: '#/components/schemas/SimpleLocation'
+          readOnly: true
+        profile_image:
           type:
           - string
           - 'null'
-          description: External id
+        is_active:
+          type: boolean
+        phone:
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+        position:
+          type:
+          - string
+          - 'null'
           maxLength: 100
+        role:
+          allOf:
+          - $ref: '#/components/schemas/SimpleRoleRead'
+          readOnly: true
+        approval_delegatee:
+          $ref: '#/components/schemas/SimpleUserProfile'
+        pending_approvals_count:
+          allOf:
+          - $ref: '#/components/schemas/PendingApprovalsCountDocs'
+          readOnly: true
+        expected_return_date:
+          type: string
+          format: date
+          readOnly: true
+      required:
+      - approval_delegatee
+      - department
+      - email
+      - user
+    Currency:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
         name:
           type: string
-          maxLength: 150
+          maxLength: 10
+        description:
+          type: string
+          maxLength: 100
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        base:
+          type: boolean
         active:
           type: boolean
-        punchout_email:
-          type:
-          - string
-          - 'null'
-        is_active_for_account_code:
-          type: boolean
-          readOnly: true
-      required:
-      - branch
-      - name
-    LanguageEnum:
-      enum:
-      - 1
-      type: integer
-      description: '* `1` - English'
-    BlankEnum:
-      enum:
-      - ''
-    SimpleRoleRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        type:
-          type: integer
       required:
       - name
-      - type
-    PaginatedUserProfileUnoptimizedList:
-      type: object
-      properties:
-        metadata:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  example: 10
-                next:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                previous:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                page_size:
-                  type: integer
-                  example: 10
-                num_pages:
-                  type: integer
-                  example: 1
-                current_page:
-                  type: integer
-                  example: 1
-          example:
-            pagination:
-              count: 10
-              next: null
-              previous: null
-              page_size: 10
-              num_pages: 1
-              current_page: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserProfileUnoptimized'
+      - rate
     UserProfileMe:
       type: object
       properties:
@@ -2171,17 +2282,61 @@ components:
       - email
       - systemaccess_cache
       - user
-    MinimalRoleRead:
+    InviteFunctionalUserRequest:
       type: object
       properties:
-        name:
+        email:
           type: string
-          maxLength: 150
-        type:
+          format: email
+          minLength: 1
+        send_invitation_email:
+          type: boolean
+          default: true
+        first_name:
+          type: string
+          default: ''
+        last_name:
+          type: string
+          default: ''
+        phone:
+          type: string
+          default: ''
+        position:
+          type: string
+          default: ''
+        role_id:
           type: integer
+          minimum: 0
+          default: 0
+        all_locations:
+          type: boolean
+          default: false
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationIdValidationSerializersRequest'
+          default: []
+        home_department:
+          type: integer
+          minimum: 0
+          default: 0
+        home_location:
+          type: integer
+          minimum: 0
+          default: 0
       required:
-      - name
-      - type
+      - email
+    UserProfileUnoptimizedSerializerSingle:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/UserProfileUnoptimized'
+      required:
+      - data
     UserProfileUnoptimizedSerializerList:
       type: object
       properties:
@@ -2195,6 +2350,70 @@ components:
             $ref: '#/components/schemas/UserProfileUnoptimized'
       required:
       - data
+    LocationIdValidationSerializersRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        all_departments:
+          type: boolean
+          default: false
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/DepartmentIdValidationRequest'
+          default: []
+      required:
+      - id
+    PaginatedUserProfileUnoptimizedList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                previous:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserProfileUnoptimized'
+    BlankEnum:
+      enum:
+      - ''
     ApprovalDelegateeDocs:
       type: object
       properties:
@@ -2217,104 +2436,40 @@ components:
           maxLength: 254
       required:
       - email
-    NullEnum:
+    LanguageEnum:
       enum:
-      - null
-    LegalEntitySummary:
+      - 1
+      type: integer
+      description: '* `1` - English'
+    DepartmentLocationRead:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        uuid:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          readOnly: true
-    LocationView:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          maxLength: 200
-        logo:
-          type: string
-        currency:
-          $ref: '#/components/schemas/Currency'
-        phoneOne:
-          type: string
-          maxLength: 20
-        fax:
-          type:
-          - string
-          - 'null'
-          maxLength: 20
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          maxLength: 254
-        primary_billing_address:
-          $ref: '#/components/schemas/Address'
-        primary_shipping_address:
-          $ref: '#/components/schemas/Address'
-        shipping_addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
-          readOnly: true
-        language:
-          allOf:
-          - $ref: '#/components/schemas/LanguageEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        locationTimezone:
-          oneOf:
-          - $ref: '#/components/schemas/LocationTimezoneEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          type:
-          - integer
-          - 'null'
-        headquarter:
-          type: boolean
-          readOnly: true
-        department_count:
-          type: integer
-          readOnly: true
-        active:
-          type: boolean
+        branch:
+          $ref: '#/components/schemas/LocationView'
         external_id:
           type:
           - string
           - 'null'
           description: External id
           maxLength: 100
-        legal_entity:
-          allOf:
-          - $ref: '#/components/schemas/LegalEntitySummary'
-          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        active:
+          type: boolean
+        punchout_email:
           type:
-          - object
+          - string
           - 'null'
+        is_active_for_account_code:
+          type: boolean
+          readOnly: true
       required:
-      - currency
+      - branch
       - name
-      - phoneOne
-      - primary_billing_address
-      - primary_shipping_address
     DepartmentIdValidationRequest:
       type: object
       properties:
@@ -2323,161 +2478,6 @@ components:
           minimum: 1
       required:
       - id
-    LocationIdValidationSerializersRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          minimum: 1
-        all_departments:
-          type: boolean
-          default: false
-        departments:
-          type: array
-          items:
-            $ref: '#/components/schemas/DepartmentIdValidationRequest'
-          default: []
-      required:
-      - id
-    UserProfileMeSerializerSingle:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/UserProfileMe'
-      required:
-      - data
-    UserProfileUpsertRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-        user:
-          type: integer
-        email:
-          type: string
-          format: email
-          minLength: 1
-          maxLength: 254
-        firstName:
-          type: string
-          minLength: 1
-        lastName:
-          type: string
-          minLength: 1
-        location:
-          type:
-          - integer
-          - 'null'
-        department:
-          type:
-          - integer
-          - 'null'
-        position:
-          type: string
-          default: ''
-        phone:
-          type: string
-          default: ''
-        profile_image:
-          type:
-          - string
-          - 'null'
-        is_sso_enabled:
-          type: boolean
-          default: false
-        mark_for_skip:
-          type: boolean
-          default: false
-        mark_for_delete:
-          type: boolean
-          default: false
-      required:
-      - department
-      - email
-      - firstName
-      - lastName
-      - location
-    UserProfileUnoptimized:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        user:
-          type: integer
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        department:
-          allOf:
-          - $ref: '#/components/schemas/SimpleDepartment'
-          type:
-          - object
-          - 'null'
-        location:
-          allOf:
-          - $ref: '#/components/schemas/SimpleLocation'
-          readOnly: true
-        profile_image:
-          type:
-          - string
-          - 'null'
-        is_active:
-          type: boolean
-        phone:
-          type:
-          - string
-          - 'null'
-          maxLength: 30
-        position:
-          type:
-          - string
-          - 'null'
-          maxLength: 100
-        role:
-          allOf:
-          - $ref: '#/components/schemas/SimpleRoleRead'
-          readOnly: true
-        approval_delegatee:
-          $ref: '#/components/schemas/SimpleUserProfile'
-        pending_approvals_count:
-          allOf:
-          - $ref: '#/components/schemas/PendingApprovalsCountDocs'
-          readOnly: true
-        expected_return_date:
-          type: string
-          format: date
-          readOnly: true
-      required:
-      - approval_delegatee
-      - department
-      - email
-      - user
-    SimpleDepartment:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        location:
-          $ref: '#/components/schemas/SimpleLocation'
-      required:
-      - location
-      - name
   securitySchemes:
     BasicAuthentication:
       type: http

@@ -380,17 +380,17 @@ paths:
           description: ''
 components:
   schemas:
-    OrderItemTypeEnum:
+    ReceiveMethodEnum:
       enum:
       - 0
       - 1
-      - 2
       type: integer
-      description: '* `0` - One Time
+      description: '* `0` - Quantity
 
-        * `1` - Recurring
-
-        * `2` - Blanket'
+        * `1` - Currency amount'
+    NullEnum:
+      enum:
+      - null
     OrderItemStatusEnum:
       enum:
       - 0
@@ -420,59 +420,38 @@ components:
         * `7` - Approval Denied
 
         * `8` - Request Draft'
-    PaginatedOrderItemList:
+    BlanketOrderItemRead:
       type: object
       properties:
-        metadata:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  example: 10
-                next:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                previous:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                page_size:
-                  type: integer
-                  example: 10
-                num_pages:
-                  type: integer
-                  example: 1
-                current_page:
-                  type: integer
-                  example: 1
-          example:
-            pagination:
-              count: 10
-              next: null
-              previous: null
-              page_size: 10
-              num_pages: 1
-              current_page: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItem'
-    ReceiveMethodEnum:
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        quantity:
+          type:
+          - number
+          - 'null'
+          format: double
+          readOnly: true
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+          readOnly: true
+      required:
+      - price
+    OrderItemTypeEnum:
       enum:
       - 0
       - 1
+      - 2
       type: integer
-      description: '* `0` - Quantity
+      description: '* `0` - One Time
 
-        * `1` - Currency amount'
+        * `1` - Recurring
+
+        * `2` - Blanket'
     OrderItem:
       type: object
       properties:
@@ -691,30 +670,51 @@ components:
       - price
       - quantity
       - unit
-    NullEnum:
-      enum:
-      - null
-    BlanketOrderItemRead:
+    PaginatedOrderItemList:
       type: object
       properties:
-        price:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-        quantity:
-          type:
-          - number
-          - 'null'
-          format: double
-          readOnly: true
-        amount:
-          type:
-          - number
-          - 'null'
-          format: double
-          readOnly: true
-      required:
-      - price
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                previous:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
   securitySchemes:
     BasicAuthentication:
       type: http

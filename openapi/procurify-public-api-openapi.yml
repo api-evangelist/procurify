@@ -227,18 +227,15 @@ paths:
           description: ''
 components:
   schemas:
-    PaymentResponseStatusEnum:
+    TransactionCardholderStatusEnum:
       enum:
-      - draft
-      - pending_approval
-      - approved
-      - denied
-      - paid
-      - processing
-      - failed
-      - scheduled
+      - inactive
+      - active
+      - requires_information
+      - deleted
+      - disabled
       type: string
-    PaginatedPaymentResponseList:
+    PaginatedTransactionList:
       type: object
       properties:
         metadata:
@@ -282,102 +279,51 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/PaymentResponse'
-    TransactionCardholder:
-      type: object
-      properties:
-        uuid:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/TransactionCardholderStatusEnum'
-          readOnly: true
-          description: '
-
-            * inactive: Cardholder is still awaiting activation
-
-            * active: Cardholder is ready to use issuing
-
-            * required_information: Cardholder must provide extra information
-
-            * deleted: Cardholder has been deleted and can no longer use issuing
-
-            * disabled: Cardholder has been disabled and can no longer use issuing'
-      required:
-      - first_name
-      - last_name
-      - uuid
+            $ref: '#/components/schemas/Transaction'
     TransactionTypeEnum:
       enum:
       - spend
       - credit
       type: string
-    TransactionAccount:
+    AuthorizationStatusEnum:
+      enum:
+      - reversed
+      - pending
+      - closed
+      type: string
+    TransactionVendor:
       type: object
       properties:
-        account_code:
+        name:
           type: string
-        account_code_description:
+        category:
           type: string
-        department:
+        city:
           type: string
-        department_branch:
+        state:
+          type: string
+        country:
+          type: string
+        postal_code:
           type: string
       required:
-      - account_code
-      - account_code_description
-      - department
-      - department_branch
+      - category
+      - city
+      - country
+      - name
+      - postal_code
+      - state
+    TransactionStatusEnum:
+      enum:
+      - capture
+      - precapture
+      - refund
+      type: string
     ReconciliationStatusEnum:
       enum:
       - pending
       - reviewed
       type: string
-    TransationCardStatusEnum:
-      enum:
-      - pending
-      - active
-      - inactive
-      - canceled
-      - lost
-      - stolen
-      type: string
-    TransactionFund:
-      type: object
-      properties:
-        uuid:
-          type: string
-        title:
-          type: string
-        reason:
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/TransactionFundStatusEnum'
-          readOnly: true
-          description: '
-
-            * open: The fund is open and available for use
-
-            * closed: The fund is closed and no longer available for use'
-        date_created:
-          type: string
-          format: date-time
-        amount:
-          type: string
-          readOnly: true
-        account:
-          $ref: '#/components/schemas/TransactionAccount'
-      required:
-      - account
-      - date_created
-      - reason
-      - title
-      - uuid
     Transaction:
       type: object
       properties:
@@ -510,182 +456,6 @@ components:
       - transaction_datetime
       - vendor
       - vendor_currency
-    PaymentSourceTypeEnum:
-      enum:
-      - direct_debit
-      - financial_account
-      - external
-      type: string
-    TransactionCustomField:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        type:
-          allOf:
-          - $ref: '#/components/schemas/TransactionCustomFieldTypeEnum'
-          readOnly: true
-      required:
-      - name
-      - value
-    TransactionCustomFieldTypeEnum:
-      enum:
-      - text
-      - text_field
-      - integer
-      - float
-      - boolean
-      - dropdown
-      - date
-      - datetime
-      type: string
-    TransationCard:
-      type: object
-      properties:
-        uuid:
-          type: string
-        last_four_digits:
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/TransationCardStatusEnum'
-          readOnly: true
-          description: '
-
-            * pending: Card has been created but is not yet active. It cannot authorize transactions
-
-            * active: Card has been active and is ready for use
-
-            * inactive: Card has been locked and can no longer authorize transactions
-
-            * canceled: Card has been canceled and can no longer authorize transactions
-
-            * lost: Card has been reported lost and can no longer authorize transactions
-
-            * stolen: Card has been reported stolen and no longer authorize transactions'
-          type:
-          - object
-          - 'null'
-      required:
-      - last_four_digits
-      - uuid
-    TransactionFundStatusEnum:
-      enum:
-      - open
-      - closed
-      type: string
-    TransactionVendor:
-      type: object
-      properties:
-        name:
-          type: string
-        category:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        postal_code:
-          type: string
-      required:
-      - category
-      - city
-      - country
-      - name
-      - postal_code
-      - state
-    TransactionStatusEnum:
-      enum:
-      - capture
-      - precapture
-      - refund
-      type: string
-    TransactionCardholderStatusEnum:
-      enum:
-      - inactive
-      - active
-      - requires_information
-      - deleted
-      - disabled
-      type: string
-    PaymentCreator:
-      type: object
-      properties:
-        email:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-      required:
-      - email
-      - first_name
-      - last_name
-    PaginatedTransactionList:
-      type: object
-      properties:
-        metadata:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  example: 10
-                next:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                previous:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                page_size:
-                  type: integer
-                  example: 10
-                num_pages:
-                  type: integer
-                  example: 1
-                current_page:
-                  type: integer
-                  example: 1
-          example:
-            pagination:
-              count: 10
-              next: null
-              previous: null
-              page_size: 10
-              num_pages: 1
-              current_page: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-    AuthorizationStatusEnum:
-      enum:
-      - reversed
-      - pending
-      - closed
-      type: string
-    PaymentCurrencyResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-      required:
-      - id
-      - name
     PaymentResponse:
       type: object
       properties:
@@ -809,6 +579,236 @@ components:
       - id
       - posted_date
       - updated_at
+      - uuid
+    TransactionAccount:
+      type: object
+      properties:
+        account_code:
+          type: string
+        account_code_description:
+          type: string
+        department:
+          type: string
+        department_branch:
+          type: string
+      required:
+      - account_code
+      - account_code_description
+      - department
+      - department_branch
+    TransactionCustomField:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/TransactionCustomFieldTypeEnum'
+          readOnly: true
+      required:
+      - name
+      - value
+    PaymentCreator:
+      type: object
+      properties:
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+      required:
+      - email
+      - first_name
+      - last_name
+    TransactionFundStatusEnum:
+      enum:
+      - open
+      - closed
+      type: string
+    PaymentSourceTypeEnum:
+      enum:
+      - direct_debit
+      - financial_account
+      - external
+      type: string
+    TransationCardStatusEnum:
+      enum:
+      - pending
+      - active
+      - inactive
+      - canceled
+      - lost
+      - stolen
+      type: string
+    TransationCard:
+      type: object
+      properties:
+        uuid:
+          type: string
+        last_four_digits:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TransationCardStatusEnum'
+          readOnly: true
+          description: '
+
+            * pending: Card has been created but is not yet active. It cannot authorize transactions
+
+            * active: Card has been active and is ready for use
+
+            * inactive: Card has been locked and can no longer authorize transactions
+
+            * canceled: Card has been canceled and can no longer authorize transactions
+
+            * lost: Card has been reported lost and can no longer authorize transactions
+
+            * stolen: Card has been reported stolen and no longer authorize transactions'
+          type:
+          - object
+          - 'null'
+      required:
+      - last_four_digits
+      - uuid
+    TransactionFund:
+      type: object
+      properties:
+        uuid:
+          type: string
+        title:
+          type: string
+        reason:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TransactionFundStatusEnum'
+          readOnly: true
+          description: '
+
+            * open: The fund is open and available for use
+
+            * closed: The fund is closed and no longer available for use'
+        date_created:
+          type: string
+          format: date-time
+        amount:
+          type: string
+          readOnly: true
+        account:
+          $ref: '#/components/schemas/TransactionAccount'
+      required:
+      - account
+      - date_created
+      - reason
+      - title
+      - uuid
+    PaginatedPaymentResponseList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                previous:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResponse'
+    PaymentCurrencyResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+    TransactionCustomFieldTypeEnum:
+      enum:
+      - text
+      - text_field
+      - integer
+      - float
+      - boolean
+      - dropdown
+      - date
+      - datetime
+      type: string
+    PaymentResponseStatusEnum:
+      enum:
+      - draft
+      - pending_approval
+      - approved
+      - denied
+      - paid
+      - processing
+      - failed
+      - scheduled
+      type: string
+    TransactionCardholder:
+      type: object
+      properties:
+        uuid:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TransactionCardholderStatusEnum'
+          readOnly: true
+          description: '
+
+            * inactive: Cardholder is still awaiting activation
+
+            * active: Cardholder is ready to use issuing
+
+            * required_information: Cardholder must provide extra information
+
+            * deleted: Cardholder has been deleted and can no longer use issuing
+
+            * disabled: Cardholder has been disabled and can no longer use issuing'
+      required:
+      - first_name
+      - last_name
       - uuid
   securitySchemes:
     BasicAuthentication:

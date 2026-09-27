@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Procurify API Documentation OAUTH API
+  title: Procurify API Documentation OAuth API
   version: ''
   description: '# Disclaimer
 

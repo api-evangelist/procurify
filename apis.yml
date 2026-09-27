@@ -54,7 +54,7 @@ tags:
   - ERP Integration
 apis:
 - aid: procurify:procurify-account-codes-api
-  name: Procurify account-codes API
+  name: Procurify Account Codes API
   description: The account-codes API from Procurify — 2 operation(s) for account-codes.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -72,7 +72,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-accounts-api
-  name: Procurify accounts API
+  name: Procurify Accounts API
   description: The accounts API from Procurify — 1 operation(s) for accounts.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -90,7 +90,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-ap-api
-  name: Procurify ap API
+  name: Procurify Ap API
   description: The ap API from Procurify — 8 operation(s) for ap.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -108,7 +108,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-catalog-api
-  name: Procurify catalog API
+  name: Procurify Catalog API
   description: The catalog API from Procurify — 3 operation(s) for catalog.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -126,7 +126,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-currencies-api
-  name: Procurify currencies API
+  name: Procurify Currencies API
   description: The currencies API from Procurify — 1 operation(s) for currencies.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -144,7 +144,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-custom-fields-api
-  name: Procurify custom-fields API
+  name: Procurify Custom Fields API
   description: The custom-fields API from Procurify — 2 operation(s) for custom-fields.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -162,7 +162,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-departments-api
-  name: Procurify departments API
+  name: Procurify Departments API
   description: The departments API from Procurify — 2 operation(s) for departments.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -180,7 +180,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-locations-api
-  name: Procurify locations API
+  name: Procurify Locations API
   description: The locations API from Procurify — 2 operation(s) for locations.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -198,7 +198,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-order-items-api
-  name: Procurify order-items API
+  name: Procurify Order Items API
   description: The order-items API from Procurify — 1 operation(s) for order-items.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -216,7 +216,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-permissions-api
-  name: Procurify permissions API
+  name: Procurify Permissions API
   description: The permissions API from Procurify — 2 operation(s) for permissions.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -234,7 +234,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-public-api
-  name: Procurify public API
+  name: Procurify Public API
   description: The public API from Procurify — 2 operation(s) for public.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -252,7 +252,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-purchase-orders-api
-  name: Procurify purchase-orders API
+  name: Procurify Purchase Orders API
   description: The purchase-orders API from Procurify — 7 operation(s) for purchase-orders.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -270,7 +270,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-receipt-api
-  name: Procurify receipt API
+  name: Procurify Receipt API
   description: The receipt API from Procurify — 1 operation(s) for receipt.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -288,7 +288,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-requisitions-api
-  name: Procurify requisitions API
+  name: Procurify Requisitions API
   description: The requisitions API from Procurify — 3 operation(s) for requisitions.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -306,7 +306,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-users-api
-  name: Procurify users API
+  name: Procurify Users API
   description: The users API from Procurify — 3 operation(s) for users.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/
@@ -324,7 +324,7 @@ apis:
   - type: Examples
     url: examples/
 - aid: procurify:procurify-vendors-api
-  name: Procurify vendors API
+  name: Procurify Vendors API
   description: The vendors API from Procurify — 2 operation(s) for vendors.
   humanURL: https://developer.procurify.com/
   baseURL: https://api.procurify.com/

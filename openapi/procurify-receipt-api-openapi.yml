@@ -124,40 +124,6 @@ paths:
           description: ''
 components:
   schemas:
-    PaginatedReceiptItemReadList:
-      type: object
-      properties:
-        pagination:
-          type: object
-          properties:
-            count:
-              type: integer
-              example: 10
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-              example: null
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-              example: null
-            page_size:
-              type: integer
-              example: 10
-            num_pages:
-              type: integer
-              example: 1
-            current_page:
-              type: integer
-              example: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReceiptItemRead'
     ReceiptItemRead:
       type: object
       properties:
@@ -198,6 +164,51 @@ components:
       required:
       - created_by
       - order_item
+    MinimalRoleRead:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        type:
+          type: integer
+      required:
+      - name
+      - type
+    PaginatedReceiptItemReadList:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            count:
+              type: integer
+              example: 10
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+              example: null
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+              example: null
+            page_size:
+              type: integer
+              example: 10
+            num_pages:
+              type: integer
+              example: 1
+            current_page:
+              type: integer
+              example: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceiptItemRead'
     SimpleUserProfile:
       type: object
       properties:
@@ -224,17 +235,6 @@ components:
           - 'null'
       required:
       - email
-    MinimalRoleRead:
-      type: object
-      properties:
-        name:
-          type: string
-          maxLength: 150
-        type:
-          type: integer
-      required:
-      - name
-      - type
     ItemWriteRequest:
       type: object
       properties:

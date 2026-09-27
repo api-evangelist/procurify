@@ -197,68 +197,6 @@ paths:
           description: ''
 components:
   schemas:
-    PaginatedPermissionReadList:
-      type: object
-      properties:
-        metadata:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  example: 10
-                next:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                previous:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                page_size:
-                  type: integer
-                  example: 10
-                num_pages:
-                  type: integer
-                  example: 1
-                current_page:
-                  type: integer
-                  example: 1
-          example:
-            pagination:
-              count: 10
-              next: null
-              previous: null
-              page_size: 10
-              num_pages: 1
-              current_page: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PermissionRead'
-    PermissionRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        codename:
-          type: string
-          maxLength: 100
-        tier:
-          type: string
-          description: 'Get the tier for this permission from PermissionMeta.
-
-            Returns "Basic" if PermissionMeta doesn''t exist, otherwise returns the tier label ("Basic" or "Pro").'
-          readOnly: true
-      required:
-      - codename
     PermissionGroupRead:
       type: object
       properties:
@@ -284,6 +222,23 @@ components:
       required:
       - name
       - type
+    PermissionRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        codename:
+          type: string
+          maxLength: 100
+        tier:
+          type: string
+          description: 'Get the tier for this permission from PermissionMeta.
+
+            Returns "Basic" if PermissionMeta doesn''t exist, otherwise returns the tier label ("Basic" or "Pro").'
+          readOnly: true
+      required:
+      - codename
     PaginatedPermissionGroupReadList:
       type: object
       properties:
@@ -329,6 +284,51 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PermissionGroupRead'
+    PaginatedPermissionReadList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                previous:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionRead'
   securitySchemes:
     BasicAuthentication:
       type: http

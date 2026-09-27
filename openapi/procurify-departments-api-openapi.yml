@@ -221,31 +221,6 @@ components:
           $ref: '#/components/schemas/DepartmentRead'
       required:
       - data
-    DepartmentUpsertRequest:
-      type: object
-      properties:
-        branch:
-          type: integer
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: External id
-          maxLength: 100
-        name:
-          type: string
-          minLength: 1
-          maxLength: 150
-        active:
-          type: boolean
-        punchout_email:
-          type:
-          - string
-          - 'null'
-          minLength: 1
-      required:
-      - branch
-      - name
     DepartmentReadSerializerSingleUpdate:
       type: object
       properties:
@@ -257,6 +232,35 @@ components:
           $ref: '#/components/schemas/DepartmentRead'
       required:
       - data
+    DepartmentRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        branch:
+          $ref: '#/components/schemas/LocationSimple'
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        active:
+          type: boolean
+        punchout_email:
+          type:
+          - string
+          - 'null'
+        is_active_for_account_code:
+          type: boolean
+          readOnly: true
+      required:
+      - branch
+      - name
     PaginatedDepartmentReadList:
       type: object
       properties:
@@ -302,14 +306,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DepartmentRead'
-    DepartmentRead:
+    DepartmentUpsertRequest:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
         branch:
-          $ref: '#/components/schemas/LocationSimple'
+          type: integer
         external_id:
           type:
           - string
@@ -318,6 +319,7 @@ components:
           maxLength: 100
         name:
           type: string
+          minLength: 1
           maxLength: 150
         active:
           type: boolean
@@ -325,9 +327,7 @@ components:
           type:
           - string
           - 'null'
-        is_active_for_account_code:
-          type: boolean
-          readOnly: true
+          minLength: 1
       required:
       - branch
       - name
