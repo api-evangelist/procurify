@@ -106,80 +106,6 @@ paths:
           description: ''
 components:
   schemas:
-    DepartmentRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        branch:
-          $ref: '#/components/schemas/LocationSimple'
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: External id
-          maxLength: 100
-        name:
-          type: string
-          maxLength: 150
-        active:
-          type: boolean
-        punchout_email:
-          type:
-          - string
-          - 'null'
-        is_active_for_account_code:
-          type: boolean
-          readOnly: true
-      required:
-      - branch
-      - name
-    ChartOfAccountsAccount:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        account_code:
-          $ref: '#/components/schemas/AccountCodeRead'
-        department:
-          $ref: '#/components/schemas/DepartmentRead'
-        start_datetime:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        end_datetime:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        budget:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        budget_used_approved:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        budget_used_purchased:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        balance_approved:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        balance_purchased:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        active:
-          type: boolean
-      required:
-      - account_code
-      - department
     LocationSimple:
       type: object
       properties:
@@ -292,6 +218,80 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChartOfAccountsAccount'
+    DepartmentRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        branch:
+          $ref: '#/components/schemas/LocationSimple'
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 150
+        active:
+          type: boolean
+        punchout_email:
+          type:
+          - string
+          - 'null'
+        is_active_for_account_code:
+          type: boolean
+          readOnly: true
+      required:
+      - branch
+      - name
+    ChartOfAccountsAccount:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        account_code:
+          $ref: '#/components/schemas/AccountCodeRead'
+        department:
+          $ref: '#/components/schemas/DepartmentRead'
+        start_datetime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_datetime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        budget:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        budget_used_approved:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        budget_used_purchased:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        balance_approved:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        balance_purchased:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        active:
+          type: boolean
+      required:
+      - account_code
+      - department
   securitySchemes:
     BasicAuthentication:
       type: http

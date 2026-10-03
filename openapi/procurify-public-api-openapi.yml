@@ -227,6 +227,15 @@ paths:
           description: ''
 components:
   schemas:
+    TransationCardStatusEnum:
+      enum:
+      - pending
+      - active
+      - inactive
+      - canceled
+      - lost
+      - stolen
+      type: string
     TransactionCardholderStatusEnum:
       enum:
       - inactive
@@ -235,6 +244,36 @@ components:
       - deleted
       - disabled
       type: string
+    TransationCard:
+      type: object
+      properties:
+        uuid:
+          type: string
+        last_four_digits:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TransationCardStatusEnum'
+          readOnly: true
+          description: '
+
+            * pending: Card has been created but is not yet active. It cannot authorize transactions
+
+            * active: Card has been active and is ready for use
+
+            * inactive: Card has been locked and can no longer authorize transactions
+
+            * canceled: Card has been canceled and can no longer authorize transactions
+
+            * lost: Card has been reported lost and can no longer authorize transactions
+
+            * stolen: Card has been reported stolen and no longer authorize transactions'
+          type:
+          - object
+          - 'null'
+      required:
+      - last_four_digits
+      - uuid
     PaginatedTransactionList:
       type: object
       properties:
@@ -280,17 +319,73 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Transaction'
-    TransactionTypeEnum:
-      enum:
-      - spend
-      - credit
-      type: string
-    AuthorizationStatusEnum:
-      enum:
-      - reversed
-      - pending
-      - closed
-      type: string
+    PaymentCurrencyResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+    PaymentCreator:
+      type: object
+      properties:
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+      required:
+      - email
+      - first_name
+      - last_name
+    TransactionAccount:
+      type: object
+      properties:
+        account_code:
+          type: string
+        account_code_description:
+          type: string
+        department:
+          type: string
+        department_branch:
+          type: string
+      required:
+      - account_code
+      - account_code_description
+      - department
+      - department_branch
+    TransactionCardholder:
+      type: object
+      properties:
+        uuid:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TransactionCardholderStatusEnum'
+          readOnly: true
+          description: '
+
+            * inactive: Cardholder is still awaiting activation
+
+            * active: Cardholder is ready to use issuing
+
+            * required_information: Cardholder must provide extra information
+
+            * deleted: Cardholder has been deleted and can no longer use issuing
+
+            * disabled: Cardholder has been disabled and can no longer use issuing'
+      required:
+      - first_name
+      - last_name
+      - uuid
     TransactionVendor:
       type: object
       properties:
@@ -313,17 +408,197 @@ components:
       - name
       - postal_code
       - state
-    TransactionStatusEnum:
+    PaymentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        uuid:
+          type: string
+        payment_source_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        payment_source_type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentSourceTypeEnum'
+          readOnly: true
+          description: '
+
+            * direct_debit: Payment is paid from a direct debit account
+
+            * financial_account: Payment is paid from a financial account
+
+            * external: Payment is paid outside of Procurify'
+          type:
+          - object
+          - 'null'
+        external_payment_source_id:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+          description: External bank account ID
+        creator:
+          $ref: '#/components/schemas/PaymentCreator'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,19}(?:\.\d{0,2})?$
+        currency:
+          $ref: '#/components/schemas/PaymentCurrencyResponse'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/PaymentResponseStatusEnum'
+          readOnly: true
+          description: '
+
+            * draft: Payment has been created but not yet submitted for approval.
+
+            * pending_approval: Payment is waiting for approval.
+
+            * approved: Payment has been approved and is awaiting processing.
+
+            * denied: Payment has been denied by an approver.
+
+            * paid: Payment has been successfully completed.
+
+            * processing: Payment is currently being processed.
+
+            * failed: Payment processing has failed.
+
+            * scheduled: Payment is scheduled for a future processing date.'
+          type:
+          - object
+          - 'null'
+        processing_date:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        direct_debit_bank_account_mask:
+          type:
+          - string
+          - 'null'
+          description: Last 4 digits of direct debit account.
+        vendor_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        posted_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        gl_code:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: Payment source's GL code.
+        vendor_payment_method_country_code:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: ISO 3166 country codes
+        vendor_payment_method_rail:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: 'Rails supported: ACH, FEDWIRE, PAPER_CHECK, LOCAL, etc.'
+        bill_groups:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+          description: List of bill group IDs associated with the payment.
+      required:
+      - amount
+      - created_at
+      - creator
+      - currency
+      - direct_debit_bank_account_mask
+      - id
+      - posted_date
+      - updated_at
+      - uuid
+    TransactionTypeEnum:
       enum:
-      - capture
-      - precapture
-      - refund
+      - spend
+      - credit
       type: string
+    PaymentResponseStatusEnum:
+      enum:
+      - draft
+      - pending_approval
+      - approved
+      - denied
+      - paid
+      - processing
+      - failed
+      - scheduled
+      type: string
+    TransactionFund:
+      type: object
+      properties:
+        uuid:
+          type: string
+        title:
+          type: string
+        reason:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TransactionFundStatusEnum'
+          readOnly: true
+          description: '
+
+            * open: The fund is open and available for use
+
+            * closed: The fund is closed and no longer available for use'
+        date_created:
+          type: string
+          format: date-time
+        amount:
+          type: string
+          readOnly: true
+        account:
+          $ref: '#/components/schemas/TransactionAccount'
+      required:
+      - account
+      - date_created
+      - reason
+      - title
+      - uuid
     ReconciliationStatusEnum:
       enum:
       - pending
       - reviewed
       type: string
+    TransactionCustomField:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/TransactionCustomFieldTypeEnum'
+          readOnly: true
+      required:
+      - name
+      - value
     Transaction:
       type: object
       properties:
@@ -456,177 +731,16 @@ components:
       - transaction_datetime
       - vendor
       - vendor_currency
-    PaymentResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-        uuid:
-          type: string
-        payment_source_name:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        payment_source_type:
-          allOf:
-          - $ref: '#/components/schemas/PaymentSourceTypeEnum'
-          readOnly: true
-          description: '
-
-            * direct_debit: Payment is paid from a direct debit account
-
-            * financial_account: Payment is paid from a financial account
-
-            * external: Payment is paid outside of Procurify'
-          type:
-          - object
-          - 'null'
-        external_payment_source_id:
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-          description: External bank account ID
-        creator:
-          $ref: '#/components/schemas/PaymentCreator'
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,19}(?:\.\d{0,2})?$
-        currency:
-          $ref: '#/components/schemas/PaymentCurrencyResponse'
-        status:
-          allOf:
-          - $ref: '#/components/schemas/PaymentResponseStatusEnum'
-          readOnly: true
-          description: '
-
-            * draft: Payment has been created but not yet submitted for approval.
-
-            * pending_approval: Payment is waiting for approval.
-
-            * approved: Payment has been approved and is awaiting processing.
-
-            * denied: Payment has been denied by an approver.
-
-            * paid: Payment has been successfully completed.
-
-            * processing: Payment is currently being processed.
-
-            * failed: Payment processing has failed.
-
-            * scheduled: Payment is scheduled for a future processing date.'
-          type:
-          - object
-          - 'null'
-        processing_date:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        direct_debit_bank_account_mask:
-          type:
-          - string
-          - 'null'
-          description: Last 4 digits of direct debit account.
-        vendor_name:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        posted_date:
-          type:
-          - string
-          - 'null'
-          format: date
-        gl_code:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          description: Payment source's GL code.
-        vendor_payment_method_country_code:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          description: ISO 3166 country codes
-        vendor_payment_method_rail:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          description: 'Rails supported: ACH, FEDWIRE, PAPER_CHECK, LOCAL, etc.'
-        bill_groups:
-          type: array
-          items:
-            type: integer
-          readOnly: true
-          description: List of bill group IDs associated with the payment.
-      required:
-      - amount
-      - created_at
-      - creator
-      - currency
-      - direct_debit_bank_account_mask
-      - id
-      - posted_date
-      - updated_at
-      - uuid
-    TransactionAccount:
-      type: object
-      properties:
-        account_code:
-          type: string
-        account_code_description:
-          type: string
-        department:
-          type: string
-        department_branch:
-          type: string
-      required:
-      - account_code
-      - account_code_description
-      - department
-      - department_branch
-    TransactionCustomField:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        type:
-          allOf:
-          - $ref: '#/components/schemas/TransactionCustomFieldTypeEnum'
-          readOnly: true
-      required:
-      - name
-      - value
-    PaymentCreator:
-      type: object
-      properties:
-        email:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-      required:
-      - email
-      - first_name
-      - last_name
-    TransactionFundStatusEnum:
+    TransactionCustomFieldTypeEnum:
       enum:
-      - open
-      - closed
+      - text
+      - text_field
+      - integer
+      - float
+      - boolean
+      - dropdown
+      - date
+      - datetime
       type: string
     PaymentSourceTypeEnum:
       enum:
@@ -634,77 +748,12 @@ components:
       - financial_account
       - external
       type: string
-    TransationCardStatusEnum:
+    AuthorizationStatusEnum:
       enum:
+      - reversed
       - pending
-      - active
-      - inactive
-      - canceled
-      - lost
-      - stolen
+      - closed
       type: string
-    TransationCard:
-      type: object
-      properties:
-        uuid:
-          type: string
-        last_four_digits:
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/TransationCardStatusEnum'
-          readOnly: true
-          description: '
-
-            * pending: Card has been created but is not yet active. It cannot authorize transactions
-
-            * active: Card has been active and is ready for use
-
-            * inactive: Card has been locked and can no longer authorize transactions
-
-            * canceled: Card has been canceled and can no longer authorize transactions
-
-            * lost: Card has been reported lost and can no longer authorize transactions
-
-            * stolen: Card has been reported stolen and no longer authorize transactions'
-          type:
-          - object
-          - 'null'
-      required:
-      - last_four_digits
-      - uuid
-    TransactionFund:
-      type: object
-      properties:
-        uuid:
-          type: string
-        title:
-          type: string
-        reason:
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/TransactionFundStatusEnum'
-          readOnly: true
-          description: '
-
-            * open: The fund is open and available for use
-
-            * closed: The fund is closed and no longer available for use'
-        date_created:
-          type: string
-          format: date-time
-        amount:
-          type: string
-          readOnly: true
-        account:
-          $ref: '#/components/schemas/TransactionAccount'
-      required:
-      - account
-      - date_created
-      - reason
-      - title
-      - uuid
     PaginatedPaymentResponseList:
       type: object
       properties:
@@ -750,66 +799,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PaymentResponse'
-    PaymentCurrencyResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-      required:
-      - id
-      - name
-    TransactionCustomFieldTypeEnum:
+    TransactionFundStatusEnum:
       enum:
-      - text
-      - text_field
-      - integer
-      - float
-      - boolean
-      - dropdown
-      - date
-      - datetime
+      - open
+      - closed
       type: string
-    PaymentResponseStatusEnum:
+    TransactionStatusEnum:
       enum:
-      - draft
-      - pending_approval
-      - approved
-      - denied
-      - paid
-      - processing
-      - failed
-      - scheduled
+      - capture
+      - precapture
+      - refund
       type: string
-    TransactionCardholder:
-      type: object
-      properties:
-        uuid:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/TransactionCardholderStatusEnum'
-          readOnly: true
-          description: '
-
-            * inactive: Cardholder is still awaiting activation
-
-            * active: Cardholder is ready to use issuing
-
-            * required_information: Cardholder must provide extra information
-
-            * deleted: Cardholder has been deleted and can no longer use issuing
-
-            * disabled: Cardholder has been disabled and can no longer use issuing'
-      required:
-      - first_name
-      - last_name
-      - uuid
   securitySchemes:
     BasicAuthentication:
       type: http

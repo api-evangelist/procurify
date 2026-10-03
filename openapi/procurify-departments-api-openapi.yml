@@ -210,56 +210,19 @@ paths:
           description: ''
 components:
   schemas:
-    DepartmentReadSerializerSingleCreate:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/DepartmentRead'
-      required:
-      - data
-    DepartmentReadSerializerSingleUpdate:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/DepartmentRead'
-      required:
-      - data
-    DepartmentRead:
+    LocationSimple:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        branch:
-          $ref: '#/components/schemas/LocationSimple'
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: External id
-          maxLength: 100
         name:
           type: string
           maxLength: 150
-        active:
-          type: boolean
-        punchout_email:
-          type:
-          - string
-          - 'null'
-        is_active_for_account_code:
+        headquarter:
           type: boolean
           readOnly: true
       required:
-      - branch
       - name
     PaginatedDepartmentReadList:
       type: object
@@ -331,20 +294,57 @@ components:
       required:
       - branch
       - name
-    LocationSimple:
+    DepartmentRead:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
+        branch:
+          $ref: '#/components/schemas/LocationSimple'
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
         name:
           type: string
           maxLength: 150
-        headquarter:
+        active:
+          type: boolean
+        punchout_email:
+          type:
+          - string
+          - 'null'
+        is_active_for_account_code:
           type: boolean
           readOnly: true
       required:
+      - branch
       - name
+    DepartmentReadSerializerSingleUpdate:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/DepartmentRead'
+      required:
+      - data
+    DepartmentReadSerializerSingleCreate:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/DepartmentRead'
+      required:
+      - data
   securitySchemes:
     BasicAuthentication:
       type: http

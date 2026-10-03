@@ -257,6 +257,335 @@ paths:
           description: ''
 components:
   schemas:
+    CategoryEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: '* `0` - Physical
+
+        * `1` - Virtual'
+    CustomFieldValueRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        value:
+          oneOf:
+          - type: string
+          - type: boolean
+          description: 'Given the *incoming* primitive data, return the value for this field
+
+            that should be validated and transformed to a native value.'
+          readOnly: true
+        field:
+          $ref: '#/components/schemas/CustomFieldRead'
+      required:
+      - field
+    VendorTypeEnum:
+      enum:
+      - 2
+      - 3
+      - 4
+      - 6
+      - 7
+      type: integer
+      description: '* `2` - amazon punchout
+
+        * `3` - preferred
+
+        * `4` - regular
+
+        * `6` - credit card provider
+
+        * `7` - checkout'
+    CatalogItemRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        image:
+          type: string
+        unitType:
+          type: string
+          maxLength: 30
+        pref_vendor:
+          $ref: '#/components/schemas/VendorRead'
+        account_code:
+          $ref: '#/components/schemas/AccountCodeRead'
+        internalSKU:
+          type: string
+          maxLength: 50
+        description:
+          type:
+          - string
+          - 'null'
+        product_url:
+          type:
+          - string
+          - 'null'
+        currency:
+          $ref: '#/components/schemas/CurrencySummary'
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
+        rfo_lock:
+          type: boolean
+        departments:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldValueRead'
+          readOnly: true
+        requested_count:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        last_requested_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        selected_account:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+      required:
+      - account_code
+      - currency
+      - name
+      - pref_vendor
+    CreditCardStatusEnum:
+      enum:
+      - pending
+      - active
+      - inactive
+      - canceled
+      - lost
+      - stolen
+      type: string
+      description: '* `pending` - Pending
+
+        * `active` - Active
+
+        * `inactive` - Inactive
+
+        * `canceled` - Canceled
+
+        * `lost` - Lost
+
+        * `stolen` - Stolen'
+    CatalogItemReadSerializerSingleUpdate:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/CatalogItemRead'
+      required:
+      - data
+    PaginatedCatalogItemBundleReadList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                previous:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogItemBundleRead'
+    ShippingMethod:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+      required:
+      - name
+    FieldTypeEnum:
+      enum:
+      - t
+      - a
+      - i
+      - f
+      - b
+      - m
+      - d
+      - h
+      type: string
+      description: '* `t` - Text
+
+        * `a` - Large Text Field
+
+        * `i` - Integer
+
+        * `f` - Floating point decimal
+
+        * `b` - Boolean (Yes/No)
+
+        * `m` - Dropdown Choices
+
+        * `d` - Date
+
+        * `h` - Date Time'
+    AccountCodeRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        applied_accounts_count:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          maxLength: 50
+        code_length:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        description:
+          type: string
+          maxLength: 200
+        account_type:
+          allOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        active:
+          type: boolean
+        parent:
+          type:
+          - integer
+          - 'null'
+      required:
+      - code
+      - description
+    CustomFieldRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        content_type:
+          type: integer
+        default_value:
+          type: string
+          maxLength: 5000
+        is_required:
+          type: boolean
+        field_choices:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        field_type:
+          $ref: '#/components/schemas/FieldTypeEnum'
+        field_label:
+          type: string
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
+      required:
+      - content_type
+      - name
+    CatalogItemReadSerializerSingleCreate:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/CatalogItemRead'
+      required:
+      - data
+    CatalogItemBundleRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 250
+        image:
+          type: string
+        active:
+          type: boolean
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogItemReadSerializerWithQuantity'
+          readOnly: true
+        items_count:
+          type: integer
+          readOnly: true
+      required:
+      - name
     CreditCard:
       type: object
       properties:
@@ -366,7 +695,7 @@ components:
       - currency
       - uuid
       - vendor
-    ShippingTerm:
+    PaymentMethodRead:
       type: object
       properties:
         id:
@@ -374,42 +703,26 @@ components:
           readOnly: true
         name:
           type: string
-          maxLength: 100
-        description:
-          type:
-          - string
-          - 'null'
-        active:
-          type: boolean
-      required:
-      - name
-    PaymentTerm:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
+          maxLength: 255
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
+          title: Payment Method
+          minimum: 0
+          maximum: 4294967295
+        data: {}
+        currency:
+          $ref: '#/components/schemas/Currency'
+        payment_rail:
           type: string
-          maxLength: 100
-        description:
+          readOnly: true
+        bank_account_country_code:
           type:
           - string
           - 'null'
-        active:
-          type: boolean
+          readOnly: true
       required:
-      - name
-    CatalogItemReadSerializerSingleUpdate:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/CatalogItemRead'
-      required:
+      - currency
       - data
     CatalogItemUpsertRequest:
       type: object
@@ -465,109 +778,7 @@ components:
       - currency
       - custom_fields
       - name
-    CreditCardStatusEnum:
-      enum:
-      - pending
-      - active
-      - inactive
-      - canceled
-      - lost
-      - stolen
-      type: string
-      description: '* `pending` - Pending
-
-        * `active` - Active
-
-        * `inactive` - Inactive
-
-        * `canceled` - Canceled
-
-        * `lost` - Lost
-
-        * `stolen` - Stolen'
-    CategoryEnum:
-      enum:
-      - 0
-      - 1
-      type: integer
-      description: '* `0` - Physical
-
-        * `1` - Virtual'
-    NullEnum:
-      enum:
-      - null
-    CreditCardTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      type: integer
-      description: '* `0` - other-credit-card
-
-        * `1` - Visa
-
-        * `2` - Mastercard
-
-        * `3` - American Express
-
-        * `4` - Discover
-
-        * `5` - JCB
-
-        * `6` - Diner''s Club
-
-        * `7` - Procurify'
-    PaginatedCatalogItemBundleReadList:
-      type: object
-      properties:
-        metadata:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  example: 10
-                next:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                previous:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                page_size:
-                  type: integer
-                  example: 10
-                num_pages:
-                  type: integer
-                  example: 1
-                current_page:
-                  type: integer
-                  example: 1
-          example:
-            pagination:
-              count: 10
-              next: null
-              previous: null
-              page_size: 10
-              num_pages: 1
-              current_page: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogItemBundleRead'
-    CatalogItemBundleRead:
+    ShippingTerm:
       type: object
       properties:
         id:
@@ -577,138 +788,14 @@ components:
           type: string
           maxLength: 100
         description:
-          type: string
-          maxLength: 250
-        image:
-          type: string
+          type:
+          - string
+          - 'null'
         active:
           type: boolean
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogItemReadSerializerWithQuantity'
-          readOnly: true
-        items_count:
-          type: integer
-          readOnly: true
       required:
       - name
-    AccountCodeRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        applied_accounts_count:
-          type: integer
-          readOnly: true
-        code:
-          type: string
-          maxLength: 50
-        code_length:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        description:
-          type: string
-          maxLength: 200
-        account_type:
-          allOf:
-          - $ref: '#/components/schemas/AccountTypeEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        active:
-          type: boolean
-        parent:
-          type:
-          - integer
-          - 'null'
-      required:
-      - code
-      - description
-    PaginatedCatalogItemReadList:
-      type: object
-      properties:
-        metadata:
-          type: object
-          properties:
-            pagination:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  example: 10
-                next:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                previous:
-                  type:
-                  - string
-                  - 'null'
-                  format: uri
-                  example: null
-                page_size:
-                  type: integer
-                  example: 10
-                num_pages:
-                  type: integer
-                  example: 1
-                current_page:
-                  type: integer
-                  example: 1
-          example:
-            pagination:
-              count: 10
-              next: null
-              previous: null
-              page_size: 10
-              num_pages: 1
-              current_page: 1
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogItemRead'
-    CatalogItemReadSerializerSingleCreate:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/CatalogItemRead'
-      required:
-      - data
-    FieldTypeEnum:
-      enum:
-      - t
-      - a
-      - i
-      - f
-      - b
-      - m
-      - d
-      - h
-      type: string
-      description: '* `t` - Text
-
-        * `a` - Large Text Field
-
-        * `i` - Integer
-
-        * `f` - Floating point decimal
-
-        * `b` - Boolean (Yes/No)
-
-        * `m` - Dropdown Choices
-
-        * `d` - Date
-
-        * `h` - Date Time'
-    CatalogItemRead:
+    PaymentMethod:
       type: object
       properties:
         id:
@@ -716,63 +803,72 @@ components:
           readOnly: true
         name:
           type: string
-          maxLength: 255
-        image:
-          type: string
-        unitType:
-          type: string
-          maxLength: 30
-        pref_vendor:
-          $ref: '#/components/schemas/VendorRead'
-        account_code:
-          $ref: '#/components/schemas/AccountCodeRead'
-        internalSKU:
-          type: string
-          maxLength: 50
+          maxLength: 100
         description:
           type:
           - string
           - 'null'
-        product_url:
+        active:
+          type: boolean
+      required:
+      - name
+    PaymentTerm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
           type:
           - string
           - 'null'
-        currency:
-          $ref: '#/components/schemas/CurrencySummary'
-        price:
+        active:
+          type: boolean
+      required:
+      - name
+    CreditCardAssignee:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        profile_image:
+          type:
+          - string
+          - 'null'
+      required:
+      - email
+    CurrencySummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        rate:
           type: string
           format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,8})?$
-        rfo_lock:
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        base:
           type: boolean
-        departments:
-          type: array
-          items:
-            type: integer
-          readOnly: true
-        custom_fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomFieldValueRead'
-          readOnly: true
-        requested_count:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        last_requested_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        selected_account:
-          type: object
-          additionalProperties: {}
-          readOnly: true
       required:
-      - account_code
-      - currency
       - name
-      - pref_vendor
+      - rate
     CatalogItemReadSerializerWithQuantity:
       type: object
       properties:
@@ -842,6 +938,129 @@ components:
       - name
       - pref_vendor
       - quantity
+    BlankEnum:
+      enum:
+      - ''
+    PaginatedCatalogItemReadList:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            pagination:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  example: 10
+                next:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                previous:
+                  type:
+                  - string
+                  - 'null'
+                  format: uri
+                  example: null
+                page_size:
+                  type: integer
+                  example: 10
+                num_pages:
+                  type: integer
+                  example: 1
+                current_page:
+                  type: integer
+                  example: 1
+          example:
+            pagination:
+              count: 10
+              next: null
+              previous: null
+              page_size: 10
+              num_pages: 1
+              current_page: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogItemRead'
+    AccountTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: '* `0` - Assets
+
+        * `1` - Liability
+
+        * `2` - Expense
+
+        * `3` - Income
+
+        * `4` - Equity
+
+        * `5` - Other'
+    CreditCardTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      type: integer
+      description: '* `0` - other-credit-card
+
+        * `1` - Visa
+
+        * `2` - Mastercard
+
+        * `3` - American Express
+
+        * `4` - Discover
+
+        * `5` - JCB
+
+        * `6` - Diner''s Club
+
+        * `7` - Procurify'
+    PaymentMethodTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      type: integer
+      description: '* `0` - OTHER
+
+        * `1` - CHECK
+
+        * `2` - ACH
+
+        * `3` - EFT
+
+        * `4` - WIRE
+
+        * `5` - PROCURIFY_CHECK
+
+        * `6` - PROCURIFY_ACH
+
+        * `7` - PROCURIFY_WIRE
+
+        * `8` - AIRWALLEX'
     VendorRead:
       type: object
       properties:
@@ -1039,182 +1258,9 @@ components:
       required:
       - name
       - rate
-    CreditCardAssignee:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        profile_image:
-          type:
-          - string
-          - 'null'
-      required:
-      - email
-    CustomFieldRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 200
-        content_type:
-          type: integer
-        default_value:
-          type: string
-          maxLength: 5000
-        is_required:
-          type: boolean
-        field_choices:
-          type: array
-          items:
-            type: string
-          readOnly: true
-        field_type:
-          $ref: '#/components/schemas/FieldTypeEnum'
-        field_label:
-          type: string
-          readOnly: true
-        is_active:
-          type: boolean
-          readOnly: true
-      required:
-      - content_type
-      - name
-    CustomFieldValueRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        value:
-          oneOf:
-          - type: string
-          - type: boolean
-          description: 'Given the *incoming* primitive data, return the value for this field
-
-            that should be validated and transformed to a native value.'
-          readOnly: true
-        field:
-          $ref: '#/components/schemas/CustomFieldRead'
-      required:
-      - field
-    VendorTypeEnum:
+    NullEnum:
       enum:
-      - 2
-      - 3
-      - 4
-      - 6
-      - 7
-      type: integer
-      description: '* `2` - amazon punchout
-
-        * `3` - preferred
-
-        * `4` - regular
-
-        * `6` - credit card provider
-
-        * `7` - checkout'
-    CurrencySummary:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 10
-        rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-        base:
-          type: boolean
-      required:
-      - name
-      - rate
-    PaymentMethodRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 255
-        type:
-          allOf:
-          - $ref: '#/components/schemas/PaymentMethodTypeEnum'
-          title: Payment Method
-          minimum: 0
-          maximum: 4294967295
-        data: {}
-        currency:
-          $ref: '#/components/schemas/Currency'
-        payment_rail:
-          type: string
-          readOnly: true
-        bank_account_country_code:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      required:
-      - currency
-      - data
-    ShippingMethod:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type:
-          - string
-          - 'null'
-        active:
-          type: boolean
-      required:
-      - name
-    BlankEnum:
-      enum:
-      - ''
-    AccountTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      type: integer
-      description: '* `0` - Assets
-
-        * `1` - Liability
-
-        * `2` - Expense
-
-        * `3` - Income
-
-        * `4` - Equity
-
-        * `5` - Other'
+      - null
     EmailConfiguration:
       type: object
       properties:
@@ -1222,52 +1268,6 @@ components:
           type: boolean
         payment_remittance:
           type: boolean
-    PaymentMethod:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type:
-          - string
-          - 'null'
-        active:
-          type: boolean
-      required:
-      - name
-    PaymentMethodTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      type: integer
-      description: '* `0` - OTHER
-
-        * `1` - CHECK
-
-        * `2` - ACH
-
-        * `3` - EFT
-
-        * `4` - WIRE
-
-        * `5` - PROCURIFY_CHECK
-
-        * `6` - PROCURIFY_ACH
-
-        * `7` - PROCURIFY_WIRE
-
-        * `8` - AIRWALLEX'
   securitySchemes:
     BasicAuthentication:
       type: http

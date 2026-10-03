@@ -259,6 +259,108 @@ components:
       required:
       - code
       - description
+    AccountCodeReadSerializerSingleCreate:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/AccountCodeRead'
+      required:
+      - data
+    AccountCodeCreateRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 50
+        description:
+          type: string
+          minLength: 1
+          maxLength: 200
+        parent:
+          type:
+          - integer
+          - 'null'
+        account_type:
+          allOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        departments:
+          type: array
+          items:
+            type: integer
+      required:
+      - code
+      - description
+    AccountCodeRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        applied_accounts_count:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          maxLength: 50
+        code_length:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        description:
+          type: string
+          maxLength: 200
+        account_type:
+          allOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        active:
+          type: boolean
+        parent:
+          type:
+          - integer
+          - 'null'
+      required:
+      - code
+      - description
+    AccountTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: '* `0` - Assets
+
+        * `1` - Liability
+
+        * `2` - Expense
+
+        * `3` - Income
+
+        * `4` - Equity
+
+        * `5` - Other'
+    AccountCodeReadSerializerSingleUpdate:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties: {}
+          default: {}
+        data:
+          $ref: '#/components/schemas/AccountCodeRead'
+      required:
+      - data
     PaginatedAccountCodeReadList:
       type: object
       properties:
@@ -304,108 +406,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AccountCodeRead'
-    AccountCodeReadSerializerSingleUpdate:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/AccountCodeRead'
-      required:
-      - data
-    AccountCodeCreateRequest:
-      type: object
-      properties:
-        code:
-          type: string
-          minLength: 1
-          maxLength: 50
-        description:
-          type: string
-          minLength: 1
-          maxLength: 200
-        parent:
-          type:
-          - integer
-          - 'null'
-        account_type:
-          allOf:
-          - $ref: '#/components/schemas/AccountTypeEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        departments:
-          type: array
-          items:
-            type: integer
-      required:
-      - code
-      - description
-    AccountCodeReadSerializerSingleCreate:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties: {}
-          default: {}
-        data:
-          $ref: '#/components/schemas/AccountCodeRead'
-      required:
-      - data
-    AccountTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      type: integer
-      description: '* `0` - Assets
-
-        * `1` - Liability
-
-        * `2` - Expense
-
-        * `3` - Income
-
-        * `4` - Equity
-
-        * `5` - Other'
-    AccountCodeRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        applied_accounts_count:
-          type: integer
-          readOnly: true
-        code:
-          type: string
-          maxLength: 50
-        code_length:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        description:
-          type: string
-          maxLength: 200
-        account_type:
-          allOf:
-          - $ref: '#/components/schemas/AccountTypeEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        active:
-          type: boolean
-        parent:
-          type:
-          - integer
-          - 'null'
-      required:
-      - code
-      - description
   securitySchemes:
     BasicAuthentication:
       type: http

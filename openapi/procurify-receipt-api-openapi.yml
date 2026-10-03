@@ -124,6 +124,61 @@ paths:
           description: ''
 components:
   schemas:
+    ItemWriteRequest:
+      type: object
+      properties:
+        order_item:
+          type: integer
+          description: The ID of an order item that you wish to create a receipt for. This will be the id property found in the PO or Order Items responses for this item.
+        pass_quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+        fail_quantity:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
+      required:
+      - fail_quantity
+      - order_item
+      - pass_quantity
+    MinimalRoleRead:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        type:
+          type: integer
+      required:
+      - name
+      - type
+    SimpleUserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 100
+        lastName:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        role:
+          allOf:
+          - $ref: '#/components/schemas/MinimalRoleRead'
+          readOnly: true
+        profile_image:
+          type:
+          - string
+          - 'null'
+      required:
+      - email
     ReceiptItemRead:
       type: object
       properties:
@@ -164,17 +219,6 @@ components:
       required:
       - created_by
       - order_item
-    MinimalRoleRead:
-      type: object
-      properties:
-        name:
-          type: string
-          maxLength: 150
-        type:
-          type: integer
-      required:
-      - name
-      - type
     PaginatedReceiptItemReadList:
       type: object
       properties:
@@ -209,50 +253,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ReceiptItemRead'
-    SimpleUserProfile:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        firstName:
-          type: string
-          maxLength: 100
-        lastName:
-          type: string
-          maxLength: 100
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        role:
-          allOf:
-          - $ref: '#/components/schemas/MinimalRoleRead'
-          readOnly: true
-        profile_image:
-          type:
-          - string
-          - 'null'
-      required:
-      - email
-    ItemWriteRequest:
-      type: object
-      properties:
-        order_item:
-          type: integer
-          description: The ID of an order item that you wish to create a receipt for. This will be the id property found in the PO or Order Items responses for this item.
-        pass_quantity:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-        fail_quantity:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,5})?$
-      required:
-      - fail_quantity
-      - order_item
-      - pass_quantity
   securitySchemes:
     BasicAuthentication:
       type: http

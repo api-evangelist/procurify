@@ -91,6 +91,29 @@ paths:
           description: ''
 components:
   schemas:
+    Currency:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        description:
+          type: string
+          maxLength: 100
+        rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
+        base:
+          type: boolean
+        active:
+          type: boolean
+      required:
+      - name
+      - rate
     PaginatedCurrencyList:
       type: object
       properties:
@@ -136,29 +159,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Currency'
-    Currency:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 10
-        description:
-          type: string
-          maxLength: 100
-        rate:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,9}(?:\.\d{0,6})?$
-        base:
-          type: boolean
-        active:
-          type: boolean
-      required:
-      - name
-      - rate
   securitySchemes:
     BasicAuthentication:
       type: http
