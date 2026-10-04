@@ -380,17 +380,6 @@ paths:
           description: ''
 components:
   schemas:
-    OrderItemTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      description: '* `0` - One Time
-
-        * `1` - Recurring
-
-        * `2` - Blanket'
     OrderItem:
       type: object
       properties:
@@ -654,6 +643,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrderItem'
+    OrderItemTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: '* `0` - One Time
+
+        * `1` - Recurring
+
+        * `2` - Blanket'
     OrderItemStatusEnum:
       enum:
       - 0
@@ -691,6 +691,9 @@ components:
       description: '* `0` - Quantity
 
         * `1` - Currency amount'
+    NullEnum:
+      enum:
+      - null
     BlanketOrderItemRead:
       type: object
       properties:
@@ -712,9 +715,6 @@ components:
           readOnly: true
       required:
       - price
-    NullEnum:
-      enum:
-      - null
   securitySchemes:
     BasicAuthentication:
       type: http

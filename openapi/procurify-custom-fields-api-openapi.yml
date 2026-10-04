@@ -191,56 +191,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomFieldRead'
-    FieldTypeEnum:
-      enum:
-      - t
-      - a
-      - i
-      - f
-      - b
-      - m
-      - d
-      - h
-      type: string
-      description: '* `t` - Text
-
-        * `a` - Large Text Field
-
-        * `i` - Integer
-
-        * `f` - Floating point decimal
-
-        * `b` - Boolean (Yes/No)
-
-        * `m` - Dropdown Choices
-
-        * `d` - Date
-
-        * `h` - Date Time'
-    CustomFieldUpdateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 200
-        default_value:
-          type: string
-          maxLength: 5000
-        is_required:
-          type: boolean
-        field_type:
-          type: string
-          minLength: 1
-        field_choices:
-          type: array
-          items:
-            type: string
-            minLength: 1
-          default: []
-      required:
-      - field_type
-      - name
     CustomFieldRead:
       type: object
       properties:
@@ -273,6 +223,30 @@ components:
       required:
       - content_type
       - name
+    CustomFieldUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+        default_value:
+          type: string
+          maxLength: 5000
+        is_required:
+          type: boolean
+        field_type:
+          type: string
+          minLength: 1
+        field_choices:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          default: []
+      required:
+      - field_type
+      - name
     CustomFieldReadSerializerSingle:
       type: object
       properties:
@@ -284,6 +258,32 @@ components:
           $ref: '#/components/schemas/CustomFieldRead'
       required:
       - data
+    FieldTypeEnum:
+      enum:
+      - t
+      - a
+      - i
+      - f
+      - b
+      - m
+      - d
+      - h
+      type: string
+      description: '* `t` - Text
+
+        * `a` - Large Text Field
+
+        * `i` - Integer
+
+        * `f` - Floating point decimal
+
+        * `b` - Boolean (Yes/No)
+
+        * `m` - Dropdown Choices
+
+        * `d` - Date
+
+        * `h` - Date Time'
   securitySchemes:
     BasicAuthentication:
       type: http

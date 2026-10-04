@@ -106,73 +106,35 @@ paths:
           description: ''
 components:
   schemas:
-    LocationSimple:
+    DepartmentRead:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
+        branch:
+          $ref: '#/components/schemas/LocationSimple'
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External id
+          maxLength: 100
         name:
           type: string
           maxLength: 150
-        headquarter:
-          type: boolean
-          readOnly: true
-      required:
-      - name
-    AccountCodeRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        applied_accounts_count:
-          type: integer
-          readOnly: true
-        code:
-          type: string
-          maxLength: 50
-        code_length:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        description:
-          type: string
-          maxLength: 200
-        account_type:
-          allOf:
-          - $ref: '#/components/schemas/AccountTypeEnum'
-          minimum: -2147483648
-          maximum: 2147483647
         active:
           type: boolean
-        parent:
+        punchout_email:
           type:
-          - integer
+          - string
           - 'null'
+        is_active_for_account_code:
+          type: boolean
+          readOnly: true
       required:
-      - code
-      - description
-    AccountTypeEnum:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      type: integer
-      description: '* `0` - Assets
-
-        * `1` - Liability
-
-        * `2` - Expense
-
-        * `3` - Income
-
-        * `4` - Equity
-
-        * `5` - Other'
+      - branch
+      - name
     PaginatedChartOfAccountsAccountList:
       type: object
       properties:
@@ -218,35 +180,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChartOfAccountsAccount'
-    DepartmentRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        branch:
-          $ref: '#/components/schemas/LocationSimple'
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: External id
-          maxLength: 100
-        name:
-          type: string
-          maxLength: 150
-        active:
-          type: boolean
-        punchout_email:
-          type:
-          - string
-          - 'null'
-        is_active_for_account_code:
-          type: boolean
-          readOnly: true
-      required:
-      - branch
-      - name
     ChartOfAccountsAccount:
       type: object
       properties:
@@ -292,6 +225,73 @@ components:
       required:
       - account_code
       - department
+    LocationSimple:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        headquarter:
+          type: boolean
+          readOnly: true
+      required:
+      - name
+    AccountTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: '* `0` - Assets
+
+        * `1` - Liability
+
+        * `2` - Expense
+
+        * `3` - Income
+
+        * `4` - Equity
+
+        * `5` - Other'
+    AccountCodeRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        applied_accounts_count:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          maxLength: 50
+        code_length:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        description:
+          type: string
+          maxLength: 200
+        account_type:
+          allOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        active:
+          type: boolean
+        parent:
+          type:
+          - integer
+          - 'null'
+      required:
+      - code
+      - description
   securitySchemes:
     BasicAuthentication:
       type: http

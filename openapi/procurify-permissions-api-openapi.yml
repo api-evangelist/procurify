@@ -197,6 +197,31 @@ paths:
           description: ''
 components:
   schemas:
+    PermissionGroupRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        user_count:
+          type: integer
+          readOnly: true
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionRead'
+          readOnly: true
+        type:
+          type: integer
+        tier:
+          type: string
+          readOnly: true
+      required:
+      - name
+      - type
     PaginatedPermissionGroupReadList:
       type: object
       properties:
@@ -242,6 +267,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PermissionGroupRead'
+    PermissionRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        codename:
+          type: string
+          maxLength: 100
+        tier:
+          type: string
+          description: 'Get the tier for this permission from PermissionMeta.
+
+            Returns "Basic" if PermissionMeta doesn''t exist, otherwise returns the tier label ("Basic" or "Pro").'
+          readOnly: true
+      required:
+      - codename
     PaginatedPermissionReadList:
       type: object
       properties:
@@ -287,48 +329,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PermissionRead'
-    PermissionGroupRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        user_count:
-          type: integer
-          readOnly: true
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PermissionRead'
-          readOnly: true
-        type:
-          type: integer
-        tier:
-          type: string
-          readOnly: true
-      required:
-      - name
-      - type
-    PermissionRead:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        codename:
-          type: string
-          maxLength: 100
-        tier:
-          type: string
-          description: 'Get the tier for this permission from PermissionMeta.
-
-            Returns "Basic" if PermissionMeta doesn''t exist, otherwise returns the tier label ("Basic" or "Pro").'
-          readOnly: true
-      required:
-      - codename
   securitySchemes:
     BasicAuthentication:
       type: http
